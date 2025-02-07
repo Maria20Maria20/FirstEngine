@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Shaders\\MyVeryFirstShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine.vcxproj|solutionrelative:Shaders\\MyVeryFirstShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MyVeryFirstShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Shaders\\MyVeryFirstShader.hlsl",
+              "RelativeDocumentMoniker": "Shaders\\MyVeryFirstShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Shaders\\MyVeryFirstShader.hlsl",
+              "RelativeToolTip": "Shaders\\MyVeryFirstShader.hlsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-07T20:02:51.299Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
