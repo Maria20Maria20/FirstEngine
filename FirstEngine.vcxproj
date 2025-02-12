@@ -135,6 +135,9 @@
   <ItemGroup>
     <ClCompile Include="CPP\MySuper3DApp.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CPP\MySuper3DApp.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

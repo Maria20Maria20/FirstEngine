@@ -1,3 +1,8 @@
-﻿  compilation object save succeeded; see C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\MyVeryFirstShader.cso
-  MySuper3DApp.cpp
+﻿  MySuper3DApp.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\CPP\MySuper3DApp.cpp(359,54): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+      C:\Users\123\Desktop\Github Projects\FirstEngine\CPP\MySuper3DApp.cpp(359,54):
+      the template instantiation context (the oldest one first) is
+          C:\Users\123\Desktop\Github Projects\FirstEngine\CPP\MySuper3DApp.cpp(51,2):
+          see reference to function template instantiation 'void CreateVertexAndIndexBuffers<8>(DirectX::XMFLOAT4 (&)[8])' being compiled
+  
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.exe
