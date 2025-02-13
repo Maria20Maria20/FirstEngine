@@ -295,7 +295,9 @@ int CompileShaders(HRESULT& res, bool& retFlag)
 		return 0;
 	}
 
-	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
+	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr }; 
+	//"TEST" - use TEST define from hlsl file
+	//float4(0.0f, 1.0f, 0.0f, 1.0f) - color for square right
 
 	res = D3DCompileFromFile(L"./Shaders/MyVeryFirstShader.hlsl", //create pixel shaders from hlsl file
 		Shader_Macros /*macros*/, //macros shaders
@@ -365,7 +367,7 @@ void CreateVertexAndIndexBuffers(DirectX::XMFLOAT4(&points)[N])
 
 	device->CreateBuffer(&vertexBufDesc, &vertexData, &vb);
 
-	int indeces[] = { 0,1,2, 1,0,3 };
+	int indeces[] = { 0,1,2, 1,0,3 }; //for show square
 	D3D11_BUFFER_DESC indexBufDesc = {};
 	indexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
 	indexBufDesc.BindFlags = D3D11_BIND_INDEX_BUFFER; //way to bind a buffer to a pipeline

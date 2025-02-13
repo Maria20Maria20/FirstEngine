@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+# Custom
+DirectXTK-main/
+*.ipch
+.vs/
+.vs/FirstEngine/v17/Browse.VC.db
+/.vs/FirstEngine/v17
