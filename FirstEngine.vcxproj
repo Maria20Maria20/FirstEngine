@@ -137,10 +137,18 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CPP\DisplayWin32.cpp" />
+    <ClCompile Include="CPP\Game.cpp" />
+    <ClCompile Include="CPP\InputDevice.cpp" />
     <ClCompile Include="CPP\MySuper3DApp.cpp" />
+    <ClCompile Include="CPP\TriangleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CPP\DisplayWin32.h" />
+    <ClInclude Include="CPP\Game.h" />
+    <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\MySuper3DApp.h" />
+    <ClInclude Include="CPP\TriangleComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTK-main\DirectXTK_Desktop_2022_Win10.vcxproj">
