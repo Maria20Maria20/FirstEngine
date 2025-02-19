@@ -5,73 +5,59 @@ TriangleComponent::TriangleComponent(ID3D11Device* device, ID3D11DeviceContext* 
 {
     this->device = device;
     this->context = context;
+}
 
-    vertices[0] = DirectX::XMFLOAT4(0.0f, 0.5f, 0.0f, 1.0f);
-    vertices[1] = DirectX::XMFLOAT4(-0.5f, -0.5f, 0.0f, 1.0f);
-    vertices[2] = DirectX::XMFLOAT4(0.5f, -0.5f, 0.0f, 1.0f);
-
-    colors[0] = DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
-    colors[1] = DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
-    colors[2] = DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
-
-    CreateVertexBuffer();
+void TriangleComponent::DrawShape(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)
+{
+    CreateVertexBuffer(points, count, offset);
     CreateIndexBuffer();
 }
 
-void TriangleComponent::CreateVertexBuffer()
+
+void TriangleComponent::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)
 {
-    struct Vertex
+    // Allocate a temporary array for transformed vertices
+    std::vector<DirectX::XMFLOAT4> transformedPoints(count);
+
+    // Apply the offset
+    for (int i = 0; i < count; ++i)
     {
-        DirectX::XMFLOAT4 position;
-        DirectX::XMFLOAT4 color;
-    };
+        transformedPoints[i] = points[i];
+        transformedPoints[i].x += offset.x;
+        transformedPoints[i].y += offset.y;
+    }
 
-    Vertex vertexData[3] = {
-        {vertices[0], colors[0]},
-        {vertices[1], colors[1]},
-        {vertices[2], colors[2]}
-    };
+    D3D11_BUFFER_DESC vertexBufDesc = {};
+    vertexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+    vertexBufDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER; //way to bind a buffer to a pipeline
+    vertexBufDesc.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
+    vertexBufDesc.MiscFlags = 0; //optional parameters
+    vertexBufDesc.StructureByteStride = 0; //size per element in buffer structure
+    vertexBufDesc.ByteWidth = sizeof(DirectX::XMFLOAT4) * count;
 
-    D3D11_BUFFER_DESC bufferDesc = {};
-    bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    bufferDesc.ByteWidth = sizeof(vertexData);
-    bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+    D3D11_SUBRESOURCE_DATA vertexData = {};
+    vertexData.pSysMem = transformedPoints.data();
+    vertexData.SysMemPitch = 0;
+    vertexData.SysMemSlicePitch = 0;
 
-    D3D11_SUBRESOURCE_DATA initData = {};
-    initData.pSysMem = vertexData;
-
-    /*HRESULT res = device->CreateBuffer(&bufferDesc, &initData, &vb);
-    if (FAILED(res))
-    {
-        throw std::runtime_error("Failed to create vertex buffer");
-    }*/
+    device->CreateBuffer(&vertexBufDesc, &vertexData, &vb);
 }
 
 void TriangleComponent::CreateIndexBuffer()
 {
-    uint16_t indices[3] = { 0, 1, 2 };
+    int indeces[] = { 0,1,2, 1,0,3 }; //for show square
+    D3D11_BUFFER_DESC indexBufDesc = {};
+    indexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+    indexBufDesc.BindFlags = D3D11_BIND_INDEX_BUFFER; //way to bind a buffer to a pipeline
+    indexBufDesc.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
+    indexBufDesc.MiscFlags = 0; //optional parameters
+    indexBufDesc.StructureByteStride = 0; //size per element in buffer structure
+    indexBufDesc.ByteWidth = sizeof(int) * std::size(indeces);
 
-    D3D11_BUFFER_DESC bufferDesc = {};
-    bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    bufferDesc.ByteWidth = sizeof(indices);
-    bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+    D3D11_SUBRESOURCE_DATA indexData = {};
+    indexData.pSysMem = indeces;
+    indexData.SysMemPitch = 0;
+    indexData.SysMemSlicePitch = 0;
 
-    D3D11_SUBRESOURCE_DATA initData = {};
-    initData.pSysMem = indices;
-
-    /*HRESULT res = device->CreateBuffer(&bufferDesc, &initData, &ib);
-    if (FAILED(res))
-    {
-        throw std::runtime_error("Failed to create index buffer");
-    }*/
-}
-
-void TriangleComponent::Draw()
-{
-    UINT stride = sizeof(DirectX::XMFLOAT4) * 2;
-    UINT offset = 0;
-
-    context->IASetVertexBuffers(0, 1, vb.GetAddressOf(), &stride, &offset);
-    context->IASetIndexBuffer(ib.Get(), DXGI_FORMAT_R16_UINT, 0);
-    context->DrawIndexed(3, 0, 0);
+    device->CreateBuffer(&indexBufDesc, &indexData, &ib);
 }

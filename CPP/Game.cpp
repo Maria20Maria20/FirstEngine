@@ -8,15 +8,35 @@ Game::Game()
 int Game::Initialize()
 {
 	display = DisplayWin32();
-	triangle = new TriangleComponent(device, context);
 	display.InitWindow();
 	res = InitSwapChain();
 	GetBackBufferAndCreateRTV();
 	retVal = CompileShaders();
 	if (retFlag) return retVal;
 	CreateInputLayout();
-	CreateVertexBuffers();
-	CreateIndexBuffers();
+	triangleComponent = new TriangleComponent(device, context);
+	DirectX::XMFLOAT4 triangle[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
+DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+//DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+	};
+
+	DirectX::XMFLOAT4 square[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
+DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+	};
+
+
+	DirectX::XMFLOAT2 offset1 = { 0.0f, 0.0f }; //смещение ВЕРШИН, не объекта целиком
+	DirectX::XMFLOAT2 offset2 = { -0.5f, 0.1f };
+
+	// Отрисовываем два треугольника с разными смещениями
+	triangleComponent->DrawShape(triangle, std::size(triangle), offset1);
+	triangleComponent->DrawShape(square, std::size(square), offset2);
+	//triangle->DrawTriangle();
 	SetupRasterizerStage();
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
@@ -24,42 +44,6 @@ int Game::Initialize()
 	WindowLoop(PrevTime, totalTime, frameCount);
 	return 0;
 }
-void Game::CreateVertexBuffers()
-{
-	D3D11_BUFFER_DESC vertexBufDesc = {};
-	vertexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
-	vertexBufDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER; //way to bind a buffer to a pipeline
-	vertexBufDesc.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
-	vertexBufDesc.MiscFlags = 0; //optional parameters
-	vertexBufDesc.StructureByteStride = 0; //size per element in buffer structure
-	vertexBufDesc.ByteWidth = sizeof(DirectX::XMFLOAT4) * std::size(points);
-
-	D3D11_SUBRESOURCE_DATA vertexData = {};
-	vertexData.pSysMem = points;
-	vertexData.SysMemPitch = 0;
-	vertexData.SysMemSlicePitch = 0;
-
-	device->CreateBuffer(&vertexBufDesc, &vertexData, &vb);
-}
-void Game::CreateIndexBuffers()
-{
-	int indeces[] = { 0,1,2, 1,0,3 }; //for show square
-	D3D11_BUFFER_DESC indexBufDesc = {};
-	indexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
-	indexBufDesc.BindFlags = D3D11_BIND_INDEX_BUFFER; //way to bind a buffer to a pipeline
-	indexBufDesc.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
-	indexBufDesc.MiscFlags = 0; //optional parameters
-	indexBufDesc.StructureByteStride = 0; //size per element in buffer structure
-	indexBufDesc.ByteWidth = sizeof(int) * std::size(indeces);
-
-	D3D11_SUBRESOURCE_DATA indexData = {};
-	indexData.pSysMem = indeces;
-	indexData.SysMemPitch = 0;
-	indexData.SysMemSlicePitch = 0;
-
-	device->CreateBuffer(&indexBufDesc, &indexData, &ib);
-}
-
 void Game::SetupRasterizerStage()
 {
 	rastDesc.CullMode = D3D11_CULL_NONE; //triangles in the specified direction do not need to be drawn
@@ -149,8 +133,8 @@ void Game::SetupIAStage(UINT strides[1], UINT offsets[1])
 {
 	context->IASetInputLayout(layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->IASetIndexBuffer(ib, DXGI_FORMAT_R32_UINT, 0);
-	context->IASetVertexBuffers(0, 1, &vb, strides, offsets);
+	context->IASetIndexBuffer(triangleComponent->ib, DXGI_FORMAT_R32_UINT, 0);
+	context->IASetVertexBuffers(0, 1, &triangleComponent->vb, strides, offsets);
 }
 
 void Game::SetVertexAndPixelShaders()

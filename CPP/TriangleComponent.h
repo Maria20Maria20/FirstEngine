@@ -4,24 +4,27 @@
 #include <directxmath.h>
 #include <d3dcompiler.h>
 #include <stdexcept>
+#include <vector>
 
 class TriangleComponent
 {
 public:
     TriangleComponent(ID3D11Device* device, ID3D11DeviceContext* context);
-    void Draw();
+    void DrawShape(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset);
 
+    ID3D11Buffer* vb;  // Вершинный буфер
+    ID3D11Buffer* ib;  // Индексный буфер
 private:
-    Microsoft::WRL::ComPtr<ID3D11Device> device;
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
+    DirectX::XMFLOAT4 points[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
+    DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+    DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+    DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+    //DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+    };
 
-    Microsoft::WRL::ComPtr<ID3D11Buffer> vb;  // Вершинный буфер
-    Microsoft::WRL::ComPtr<ID3D11Buffer> ib;  // Индексный буфер
-    Microsoft::WRL::ComPtr<ID3D11InputLayout> layout; // Описание входных данных
+    ID3D11Device* device;
+    ID3D11DeviceContext* context;
 
-    DirectX::XMFLOAT4 vertices[3]; // Вершины треугольника
-    DirectX::XMFLOAT4 colors[3];   // Цвета вершин
-
-    void CreateVertexBuffer();
+    void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset);
     void CreateIndexBuffer();
 };
