@@ -16,27 +16,32 @@ int Game::Initialize()
 	CreateInputLayout();
 	triangleComponent = new TriangleComponent(device, context);
 	DirectX::XMFLOAT4 triangle[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
-DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
-DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
-DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
-//DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+	DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
 	};
 
-	DirectX::XMFLOAT4 square[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
-DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
-DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
-DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
-DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
-	};
+	/*DirectX::XMFLOAT4 square[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
+	DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+	DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+	};*/
 
 
-	DirectX::XMFLOAT2 offset1 = { 0.0f, 0.0f }; //смещение ¬≈–Ў»Ќ, не объекта целиком
-	DirectX::XMFLOAT2 offset2 = { -0.5f, 0.1f };
+	DirectX::XMFLOAT2 offset1 = { 0.0f, 0.0f }; //displacement of vertices, not object
+	//DirectX::XMFLOAT2 offset2 = { -0.5f, 0.1f };
 
-	// ќтрисовываем два треугольника с разными смещени€ми
+	DirectX::XMFLOAT4 shape[4]; // Create an array of vertices (4 so that itТs enough for a square)
+	int vertexCount = 0;
+
+	triangleComponent->SetupShape(shape, vertexCount, ShapeType::Triangle, 0.5f, { 0.0f, 0.0f }); // Set triangle
 	triangleComponent->DrawShape(triangle, std::size(triangle), offset1);
-	triangleComponent->DrawShape(square, std::size(square), offset2);
-	//triangle->DrawTriangle();
+	//triangleComponent->DrawShape(shape, vertexCount, ShapeType::Square);
+	//triangleComponent->DrawShape(square, std::size(square), offset2);
+	
+
+	
 	SetupRasterizerStage();
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
@@ -107,6 +112,11 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 
 		float color[] = { totalTime, 0.1f, 0.1f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
+		
+		triangleComponent->MoveShape(triangleComponent->MoveSpeed
+			* deltaTime * triangleComponent->DirectionX, 
+			triangleComponent->MoveSpeed
+			* deltaTime * triangleComponent->DirectionY,0);
 
 		context->DrawIndexed(6, 0, 0);
 

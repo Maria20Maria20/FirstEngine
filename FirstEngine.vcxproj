@@ -148,6 +148,7 @@
     <ClInclude Include="CPP\Game.h" />
     <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\MySuper3DApp.h" />
+    <ClInclude Include="CPP\ShapeType.h" />
     <ClInclude Include="CPP\TriangleComponent.h" />
   </ItemGroup>
   <ItemGroup>
