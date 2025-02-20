@@ -1,8 +1,8 @@
 #include "Game.h"
 
-
 Game::Game()
 {
+
 }
 
 int Game::Initialize()
@@ -13,35 +13,57 @@ int Game::Initialize()
 	GetBackBufferAndCreateRTV();
 	retVal = CompileShaders();
 	if (retFlag) return retVal;
-	CreateInputLayout();
-	triangleComponent = new TriangleComponent(device, context);
-	DirectX::XMFLOAT4 triangle[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
-	DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
-	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
-	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+	//CreateInputLayout();
+	//triangleComponent = new TriangleComponent(device, context);
+
+	DirectX::XMFLOAT4 VertexPositions[3] = {
+	DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),
+	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),
+	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),
+	};
+	DirectX::XMFLOAT4 VertexPositionsSquare[4] = {
+	DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f),
+	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),
+	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),
+	DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),
 	};
 
-	/*DirectX::XMFLOAT4 square[8] = { //set points for show it (right = color, left = vertex position) (four line because need square)
-	DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
-	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
-	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
-	DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
-	};*/
+	DirectX::XMFLOAT4 Colors[3] = {
+	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+	DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+	};
+	DirectX::XMFLOAT4 ColorsSquare[4] = {
+	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+	DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+	DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+	};
 
+	DirectX::XMFLOAT2 StartPosition = { 0.0f, 0.0f };
+	DirectX::XMFLOAT2 StartPositionSquare = { 0.5f, 0.5f };
 
-	DirectX::XMFLOAT2 offset1 = { 0.0f, 0.0f }; //displacement of vertices, not object
-	//DirectX::XMFLOAT2 offset2 = { -0.5f, 0.1f };
+	//square = new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout);
+	//squares.push_back(*square);
+	squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPosition, device, context, vertexBC));
+	squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, vertexBC));
+	triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
+	triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
+	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout));
 
-	DirectX::XMFLOAT4 shape[4]; // Create an array of vertices (4 so that it’s enough for a square)
-	int vertexCount = 0;
+	//triangleComponent->DrawShape(triangle.VertexPositions, triangle.Colors, std::size(triangle.VertexPositions), triangle.StartPosition);
+	//square->DrawShape(std::size(square->VertexPositions));
+	for (auto& currentSquare : squares)
+	{
+		currentSquare.DrawShape(std::size(currentSquare.VertexPositions));
+	}
+	for (auto& currentTriangle : triangles)
+	{
+		currentTriangle.DrawShape(std::size(currentTriangle.VertexPositions));
+	}
 
-	triangleComponent->SetupShape(shape, vertexCount, ShapeType::Triangle, 0.5f, { 0.0f, 0.0f }); // Set triangle
-	triangleComponent->DrawShape(triangle, std::size(triangle), offset1);
-	//triangleComponent->DrawShape(shape, vertexCount, ShapeType::Square);
-	//triangleComponent->DrawShape(square, std::size(square), offset2);
-	
+	//triangleComponent->DrawShape(square.VertexPositions, square.Colors, std::size(square.VertexPositions), square.StartPosition);
 
-	
 	SetupRasterizerStage();
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
@@ -75,20 +97,6 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 			isExitRequested = true;
 		}
 
-		context->ClearState();
-
-		context->RSSetState(rastState);
-
-		SetupViewport();
-
-
-		UINT strides[] = { 32 };
-		UINT offsets[] = { 0 };
-
-		SetupIAStage(strides, offsets);
-		SetVertexAndPixelShaders();
-
-
 		auto	curTime = std::chrono::steady_clock::now();
 		float	deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(curTime - PrevTime).count() / 1000000.0f;
 		PrevTime = curTime;
@@ -108,17 +116,57 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 			frameCount = 0;
 		}
 
-		SetBackBufferOutput(1, &rtv, nullptr);
+
+		context->ClearState();
+
+
+
+		UINT strides[] = { 32 };
+		UINT offsets[] = { 0 };
 
 		float color[] = { totalTime, 0.1f, 0.1f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
-		
-		triangleComponent->MoveShape(triangleComponent->MoveSpeed
-			* deltaTime * triangleComponent->DirectionX, 
-			triangleComponent->MoveSpeed
-			* deltaTime * triangleComponent->DirectionY,0);
+		for (auto& currentSquare : squares)
+		{
+			currentSquare.SetupIAStage(strides, offsets);
+			context->RSSetState(rastState);
 
-		context->DrawIndexed(6, 0, 0);
+			SetupViewport();
+
+			//square->SetupIAStage(strides, offsets);
+			SetVertexAndPixelShaders();
+
+			SetBackBufferOutput(1, &rtv, nullptr);
+
+
+			currentSquare.MoveShape(currentSquare.MoveSpeed
+				* deltaTime * currentSquare.DirectionX,
+				currentSquare.MoveSpeed
+				* deltaTime * currentSquare.DirectionY, 0);
+
+			context->DrawIndexed(6, 0, 0);
+		}
+		for (auto& currentTriangle : triangles)
+		{
+			currentTriangle.SetupIAStage(strides, offsets);
+			context->RSSetState(rastState);
+
+			SetupViewport();
+
+			//square->SetupIAStage(strides, offsets);
+			SetVertexAndPixelShaders();
+
+			SetBackBufferOutput(1, &rtv, nullptr);
+
+
+			currentTriangle.MoveShape(currentTriangle.MoveSpeed
+				* deltaTime * currentTriangle.DirectionX,
+				currentTriangle.MoveSpeed
+				* deltaTime * currentTriangle.DirectionY, 0);
+
+			context->DrawIndexed(6, 0, 0);
+		}
+
 
 		SetBackBufferOutput(0, nullptr, nullptr);
 
@@ -139,13 +187,13 @@ void Game::SetupViewport()
 	context->RSSetViewports(1, &viewport);
 }
 
-void Game::SetupIAStage(UINT strides[1], UINT offsets[1])
+/*void Game::SetupIAStage(UINT strides[1], UINT offsets[1])
 {
 	context->IASetInputLayout(layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->IASetIndexBuffer(triangleComponent->ib, DXGI_FORMAT_R32_UINT, 0);
-	context->IASetVertexBuffers(0, 1, &triangleComponent->vb, strides, offsets);
-}
+	context->IASetIndexBuffer(square->ib, DXGI_FORMAT_R32_UINT, 0);
+	context->IASetVertexBuffers(0, 1, &square->vb, strides, offsets);
+}*/
 
 void Game::SetVertexAndPixelShaders()
 {
@@ -261,31 +309,31 @@ int Game::CompileShaders()
 	retFlag = false;
 	return {};
 }
-void Game::CreateInputLayout()
-{
-	D3D11_INPUT_ELEMENT_DESC inputElements[] = {
-	D3D11_INPUT_ELEMENT_DESC{
-		"POSITION", //parameter name from hlsl file
-		0, //need if we have more one element with same semantic
-		DXGI_FORMAT_R32G32B32A32_FLOAT,
-		0, //vertex index (between 0 and 15)
-		0, //offset from beginning vertex
-		D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
-		0 },
-		D3D11_INPUT_ELEMENT_DESC{
-		"COLOR",
-		0,
-		DXGI_FORMAT_R32G32B32A32_FLOAT,
-		0,
-		D3D11_APPEND_ALIGNED_ELEMENT,
-		D3D11_INPUT_PER_VERTEX_DATA,
-		0 }
-	};
-
-	device->CreateInputLayout(
-		inputElements,
-		2,
-		vertexBC->GetBufferPointer(),
-		vertexBC->GetBufferSize(),
-		&layout);
-}
+//void Game::CreateInputLayout()
+//{
+//	D3D11_INPUT_ELEMENT_DESC inputElements[] = {
+//	D3D11_INPUT_ELEMENT_DESC{
+//		"POSITION", //parameter name from hlsl file
+//		0, //need if we have more one element with same semantic
+//		DXGI_FORMAT_R32G32B32A32_FLOAT,
+//		0, //vertex index (between 0 and 15)
+//		0, //offset from beginning vertex
+//		D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
+//		0 },
+//		D3D11_INPUT_ELEMENT_DESC{
+//		"COLOR",
+//		0,
+//		DXGI_FORMAT_R32G32B32A32_FLOAT,
+//		0,
+//		D3D11_APPEND_ALIGNED_ELEMENT,
+//		D3D11_INPUT_PER_VERTEX_DATA,
+//		0 }
+//	};
+//
+//	device->CreateInputLayout(
+//		inputElements,
+//		2,
+//		vertexBC->GetBufferPointer(),
+//		vertexBC->GetBufferSize(),
+//		&layout);
+//}

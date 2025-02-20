@@ -141,6 +141,8 @@
     <ClCompile Include="CPP\Game.cpp" />
     <ClCompile Include="CPP\InputDevice.cpp" />
     <ClCompile Include="CPP\MySuper3DApp.cpp" />
+    <ClCompile Include="CPP\Square.cpp" />
+    <ClCompile Include="CPP\Triangle.cpp" />
     <ClCompile Include="CPP\TriangleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,8 @@
     <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\MySuper3DApp.h" />
     <ClInclude Include="CPP\ShapeType.h" />
+    <ClInclude Include="CPP\Square.h" />
+    <ClInclude Include="CPP\Triangle.h" />
     <ClInclude Include="CPP\TriangleComponent.h" />
   </ItemGroup>
   <ItemGroup>

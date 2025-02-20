@@ -9,6 +9,8 @@
 #include <directxmath.h>
 #include "TriangleComponent.h"
 #include "ShapeType.h"
+#include "Triangle.h"
+#include "Square.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -22,7 +24,10 @@ public:
 	int Initialize();
 private:
 	DisplayWin32 display;
-	TriangleComponent* triangleComponent;
+	std::vector<Square> squares;
+	std::vector<Triangle> triangles;
+	//Square* square;
+	//TriangleComponent* triangleComponent;
 	HRESULT res;
 	IDXGISwapChain* swapChain;
 	DXGI_SWAP_CHAIN_DESC swapDesc;
@@ -36,7 +41,7 @@ private:
 	ID3DBlob* errorPixelCode;
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
-	ID3D11InputLayout* layout;
+	//ID3D11InputLayout* layout;
 	bool retFlag;
 	int retVal;
 	CD3D11_RASTERIZER_DESC rastDesc = {};
@@ -44,11 +49,11 @@ private:
 	HRESULT InitSwapChain();
 	void GetBackBufferAndCreateRTV();
 	int CompileShaders();
-	void CreateInputLayout();
+	//void CreateInputLayout();
 	void SetupRasterizerStage();
 	void WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 	void SetupViewport();
-	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);
+	//void SetupIAStage(UINT  strides[1], UINT  offsets[1]);
 	void SetVertexAndPixelShaders();
 	void SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);
 };

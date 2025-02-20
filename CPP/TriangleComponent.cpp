@@ -1,39 +1,35 @@
 #include "TriangleComponent.h"
 
 
-TriangleComponent::TriangleComponent(ID3D11Device* device, ID3D11DeviceContext* context)
+/*TriangleComponent::TriangleComponent(ID3D11Device* device, ID3D11DeviceContext* context)
 {
     this->device = device;
     this->context = context;
 }
-
-void TriangleComponent::DrawShape(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)
+void TriangleComponent::DrawShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& offset)
 {
-    currentShape.assign(points, points + count);
-    vertexCount = count;
+    //Shape newShape;
+    //newShape.vertices = vertices;
+    std::vector<DirectX::XMFLOAT4> pointsAndColors(count * 2); //*2 = multiply on color for vertex positions
 
-    CreateVertexBuffer(points, count, offset);
+    for (int i = 0; i < count; i++)
+    {
+        pointsAndColors[i * 2] = DirectX::XMFLOAT4(
+            points[i].x + offset.x,
+            points[i].y + offset.y,
+            points[i].z,
+            points[i].w
+        );
+
+        pointsAndColors[i * 2 + 1] = colors[i];
+    }
+
+    currentShape.assign(pointsAndColors.begin(), pointsAndColors.end());
+    //shapes.push_back(pointsAndColors);
+    vertexCount = count * 2;
+
+    CreateVertexBuffer(pointsAndColors.data(), vertexCount, offset);
     CreateIndexBuffer();
-}
-void TriangleComponent::SetupShape(DirectX::XMFLOAT4* shape, int& vertexCount, ShapeType shapeType, float size, DirectX::XMFLOAT2 offset)
-{
-    if (shapeType == ShapeType::Triangle)
-    {
-        vertexCount = 3; // A triangle consists of 3 vertices
-
-        shape[0] = DirectX::XMFLOAT4(0.0f + offset.x, size + offset.y, 0.5f, 1.0f);  // top vertex
-        shape[1] = DirectX::XMFLOAT4(-size + offset.x, -size + offset.y, 0.5f, 1.0f); // down left vertex
-        shape[2] = DirectX::XMFLOAT4(size + offset.x, -size + offset.y, 0.5f, 1.0f);  // down right vertex
-    }
-    else if (shapeType == ShapeType::Square)
-    {
-        vertexCount = 4; // A triangle consists of 4 vertices
-
-        shape[0] = DirectX::XMFLOAT4(-size + offset.x, size + offset.y, 0.5f, 1.0f); // top left vertex
-        shape[1] = DirectX::XMFLOAT4(size + offset.x, size + offset.y, 0.5f, 1.0f);  // top right vertex
-        shape[2] = DirectX::XMFLOAT4(-size + offset.x, -size + offset.y, 0.5f, 1.0f); // down left vertex
-        shape[3] = DirectX::XMFLOAT4(size + offset.x, -size + offset.y, 0.5f, 1.0f);  // down right vertex
-    }
 }
 
 void TriangleComponent::MoveShape(float dx, float dy, float dz)
@@ -45,7 +41,7 @@ void TriangleComponent::MoveShape(float dx, float dy, float dz)
     }
 
     // offset vertices
-    for (auto& vertex : currentShape)
+    for (auto& vertex : currentShape) //all vertices one shape
     {
         vertex.x += dx;
         vertex.y += dy;
@@ -59,7 +55,6 @@ void TriangleComponent::MoveShape(float dx, float dy, float dz)
     {
         throw std::runtime_error("Failed to map vertex buffer for updating.");
     }
-
     memcpy(mappedResource.pData, currentShape.data(), sizeof(DirectX::XMFLOAT4) * vertexCount);
     context->Unmap(vb, 0);
 }
@@ -115,3 +110,4 @@ void TriangleComponent::CreateIndexBuffer()
 
     device->CreateBuffer(&indexBufDesc, &indexData, &ib);
 }
+*/
