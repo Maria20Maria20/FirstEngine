@@ -13,6 +13,17 @@ Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
     this->device = device;
     this->context = context;
     this->vertexBC = vertexBC;
+
+    D3D11_BUFFER_DESC constantBufferDesc = {};
+    constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+    constantBufferDesc.ByteWidth = sizeof(CBTransform);
+    constantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    constantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    constantBufferDesc.StructureByteStride = 0;
+
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = &transformData;
+    device->CreateBuffer(&constantBufferDesc, &initData, &cbTransform);
     CreateInputLayout();
 	for (int i = 0; i < 4; i++)
 	{
@@ -43,6 +54,7 @@ void Square::DrawShape(int count)
     currentShape.assign(pointsAndColors.begin(), pointsAndColors.end());
     vertexCount = count * 2;
 
+
     CreateVertexBuffer(pointsAndColors.data(), vertexCount, StartPosition);
     CreateIndexBuffer();
 }
@@ -55,22 +67,22 @@ void Square::MoveShape(float dx, float dy, float dz)
     }
 
     // offset vertices
-    for (auto& vertex : currentShape) //all vertices one shape
-    {
-        vertex.x += dx;
-        vertex.y += dy;
-        vertex.z += dz;
-    }
+    transformData.offset.x += dx;
+    transformData.offset.y += dy;
+    transformData.offset.z += dz;
 
     // update data in GPU
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    HRESULT hr = context->Map(vb, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+    HRESULT hr = context->Map(cbTransform, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource); //move with constant buffer
     if (FAILED(hr))
     {
         throw std::runtime_error("Failed to map vertex buffer for updating.");
     }
-    memcpy(mappedResource.pData, currentShape.data(), sizeof(DirectX::XMFLOAT4) * vertexCount);
-    context->Unmap(vb, 0);
+    memcpy(mappedResource.pData, &transformData, sizeof(CBTransform));
+    context->Unmap(cbTransform, 0);
+
+    context->VSSetConstantBuffers(0, 1, &cbTransform);
+    context->DrawIndexed(6, 0, 0);
 }
 
 void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)

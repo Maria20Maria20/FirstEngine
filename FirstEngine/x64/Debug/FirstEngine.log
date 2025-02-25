@@ -1,7 +1,3 @@
 ﻿  Game.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\CPP\Game.cpp(58,36): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\CPP\Game.cpp(62,38): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  MySuper3DApp.cpp
-  Triangle.cpp
-  Generating Code...
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.exe

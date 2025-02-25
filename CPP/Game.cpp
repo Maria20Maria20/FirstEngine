@@ -47,8 +47,8 @@ int Game::Initialize()
 	//squares.push_back(*square);
 	squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPosition, device, context, vertexBC));
 	squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, vertexBC));
-	triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
-	triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
+	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
+	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
 	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout));
 
 	//triangleComponent->DrawShape(triangle.VertexPositions, triangle.Colors, std::size(triangle.VertexPositions), triangle.StartPosition);
@@ -57,10 +57,10 @@ int Game::Initialize()
 	{
 		currentSquare.DrawShape(std::size(currentSquare.VertexPositions));
 	}
-	for (auto& currentTriangle : triangles)
-	{
-		currentTriangle.DrawShape(std::size(currentTriangle.VertexPositions));
-	}
+	//for (auto& currentTriangle : triangles)
+	//{
+	//	currentTriangle.DrawShape(std::size(currentTriangle.VertexPositions));
+	//}
 
 	//triangleComponent->DrawShape(square.VertexPositions, square.Colors, std::size(square.VertexPositions), square.StartPosition);
 
@@ -144,7 +144,7 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 				currentSquare.MoveSpeed
 				* deltaTime * currentSquare.DirectionY, 0);
 
-			context->DrawIndexed(6, 0, 0);
+			//context->DrawIndexed(6, 0, 0);
 		}
 		for (auto& currentTriangle : triangles)
 		{

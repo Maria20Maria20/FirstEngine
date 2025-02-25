@@ -5,6 +5,10 @@
 #include <wrl.h>
 #include <stdexcept>
 
+struct CBTransform { //constant buffer transform
+	DirectX::XMFLOAT4 offset;
+};
+
 class Square
 {
 public:
@@ -32,10 +36,12 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 	ID3D11Buffer* vb;  // vertex buffer
 	ID3D11Buffer* ib;  // index buffer
+	ID3D11Buffer* cbTransform = nullptr; //constant buffer for transform
 	ID3D11InputLayout* layout;
 	int vertexCount = 0;
 	ID3DBlob* vertexBC = nullptr;
 	std::vector<DirectX::XMFLOAT4> currentShape;
+	CBTransform transformData = { {0,0,0,0} };
 	void CreateInputLayout();
 	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset);
 	void CreateIndexBuffer();
