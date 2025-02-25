@@ -1,3 +1,2 @@
-﻿  Game.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\CPP\Game.cpp(58,36): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  Square.cpp
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.exe

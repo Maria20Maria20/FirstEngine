@@ -11,6 +11,7 @@
 #include "ShapeType.h"
 #include "Triangle.h"
 #include "Square.h"
+#include "NPCPaddle.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -26,6 +27,8 @@ private:
 	DisplayWin32 display;
 	std::vector<Square> squares;
 	std::vector<Triangle> triangles;
+
+	NPCPaddle* npcPaddle = nullptr;
 	//Square* square;
 	//TriangleComponent* triangleComponent;
 	HRESULT res;

@@ -16,7 +16,7 @@ public:
 	DirectX::XMFLOAT4 VertexPositions[3];
 	DirectX::XMFLOAT4 Colors[3];
 	DirectX::XMFLOAT2 StartPosition;
-	void DrawShape(int count);
+	void InitializeShape(int count);
 	void MoveShape(float dx, float dy, float dz);
 
 	float MoveSpeed = 0.1f;

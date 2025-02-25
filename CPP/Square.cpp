@@ -15,7 +15,7 @@ Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
     this->vertexBC = vertexBC;
 
     D3D11_BUFFER_DESC constantBufferDesc = {};
-    constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+    constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC; //0 = CPU don't need, D3D11_USAGE_DYNAMIC = CPU need
     constantBufferDesc.ByteWidth = sizeof(CBTransform);
     constantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
     constantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -35,15 +35,15 @@ Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
 	}
 	this->StartPosition = startPosition;
 }
-void Square::DrawShape(int count)
+void Square::InitializeShape(int count)
 {
     std::vector<DirectX::XMFLOAT4> pointsAndColors(count * 2); //*2 = multiply on color for vertex positions
 
     for (int i = 0; i < count; i++)
     {
         pointsAndColors[i * 2] = DirectX::XMFLOAT4(
-            VertexPositions[i].x + StartPosition.x,
-            VertexPositions[i].y + StartPosition.y,
+            VertexPositions[i].x,
+            VertexPositions[i].y,
             VertexPositions[i].z,
             VertexPositions[i].w
         );
@@ -99,11 +99,9 @@ void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const Dir
     }
 
     D3D11_BUFFER_DESC vertexBufDesc = {};
-    //vertexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
-    vertexBufDesc.Usage = D3D11_USAGE_DYNAMIC; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+    vertexBufDesc.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
     vertexBufDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER; //way to bind a buffer to a pipeline
-    //vertexBufDesc.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
-    vertexBufDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE; //0 = CPU don't need, 1 = CPU need
+    vertexBufDesc.CPUAccessFlags = 0; //0 = CPU don't need, D3D11_CPU_ACCESS_WRITE = CPU need
     vertexBufDesc.MiscFlags = 0; //optional parameters
     vertexBufDesc.StructureByteStride = 0; //size per element in buffer structure
     vertexBufDesc.ByteWidth = sizeof(DirectX::XMFLOAT4) * count;
@@ -139,6 +137,13 @@ void Square::SetupIAStage(UINT strides[1], UINT offsets[1])
     context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     context->IASetIndexBuffer(ib, DXGI_FORMAT_R32_UINT, 0);
     context->IASetVertexBuffers(0, 1, &vb, strides, offsets);
+}
+DirectX::XMFLOAT2 Square::GetPosition() const
+{
+    return DirectX::XMFLOAT2(
+        StartPosition.x + transformData.offset.x,
+        StartPosition.y + transformData.offset.y
+    );
 }
 void Square::CreateInputLayout()
 {

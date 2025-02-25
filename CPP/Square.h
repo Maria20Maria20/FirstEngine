@@ -18,22 +18,23 @@ public:
 		DirectX::XMFLOAT2 startPosition,
 		Microsoft::WRL::ComPtr<ID3D11Device> device,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
-
 		ID3DBlob* vertexBC);
 	DirectX::XMFLOAT4 VertexPositions[4];
 	DirectX::XMFLOAT4 Colors[4];
 	DirectX::XMFLOAT2 StartPosition;
-	void DrawShape(int count);
+	void InitializeShape(int count);
 	void MoveShape(float dx, float dy, float dz);
 
 	float MoveSpeed = 0.1f;
 	float DirectionX = -1.0f;
 	float DirectionY = 0.0f;
 	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);
-
+	DirectX::XMFLOAT2 GetPosition() const;
+protected:
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
+	ID3D11RasterizerState* rastState;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 	ID3D11Buffer* vb;  // vertex buffer
 	ID3D11Buffer* ib;  // index buffer
 	ID3D11Buffer* cbTransform = nullptr; //constant buffer for transform

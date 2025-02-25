@@ -9,7 +9,7 @@ class TriangleComponent
 {
 public:
     TriangleComponent(ID3D11Device* device, ID3D11DeviceContext* context);
-    void DrawShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& offset);
+    void InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& offset);
     void MoveShape(float dx, float dy, float dz);
 
     float MoveSpeed = 0.1f;

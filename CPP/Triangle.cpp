@@ -26,7 +26,7 @@ Triangle::Triangle(DirectX::XMFLOAT4 vertexPositions[3],
     }
     this->StartPosition = startPosition;
 }
-void Triangle::DrawShape(int count)
+void Triangle::InitializeShape(int count)
 {
     std::vector<DirectX::XMFLOAT4> pointsAndColors(count * 2); //*2 = multiply on color for vertex positions
 

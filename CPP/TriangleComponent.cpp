@@ -6,7 +6,7 @@
     this->device = device;
     this->context = context;
 }
-void TriangleComponent::DrawShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& offset)
+void TriangleComponent::InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& offset)
 {
     //Shape newShape;
     //newShape.vertices = vertices;

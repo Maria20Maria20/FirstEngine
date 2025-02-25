@@ -43,26 +43,48 @@ int Game::Initialize()
 	DirectX::XMFLOAT2 StartPosition = { 0.0f, 0.0f };
 	DirectX::XMFLOAT2 StartPositionSquare = { 0.5f, 0.5f };
 
+	DirectX::XMFLOAT4 paddleVertices[4] = {
+		{-0.05f, 0.2f, 0.5f, 1.0f}, //0 point
+		{0.05f, -0.2f, 0.5f, 1.0f}, //1 point
+		{-0.05f, -0.2f, 0.5f, 1.0f}, //2 point
+		{0.05f, 0.2f, 0.5f, 1.0f}, //3 point
+	};
+
+	DirectX::XMFLOAT4 paddleColors[4] = {
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f}
+	};
+
+	DirectX::XMFLOAT2 startPosition = { 0.9f, 0.0f }; // Левый край экрана
+
+	npcPaddle = new NPCPaddle(paddleVertices, paddleColors, startPosition,
+		-0.8f, 0.8f, device, context, vertexBC, rtv, vertexShader, pixelShader,
+		display);
+	npcPaddle->InitializeShape(4);
+
 	//square = new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout);
 	//squares.push_back(*square);
-	squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPosition, device, context, vertexBC));
-	squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, vertexBC));
+	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPosition, device, context, vertexBC));
+	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, vertexBC));
+	//squares.push_back(*npcPaddle);
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
 	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout));
 
-	//triangleComponent->DrawShape(triangle.VertexPositions, triangle.Colors, std::size(triangle.VertexPositions), triangle.StartPosition);
-	//square->DrawShape(std::size(square->VertexPositions));
+	//triangleComponent->InitializeShape(triangle.VertexPositions, triangle.Colors, std::size(triangle.VertexPositions), triangle.StartPosition);
+	//square->InitializeShape(std::size(square->VertexPositions));
 	for (auto& currentSquare : squares)
 	{
-		currentSquare.DrawShape(std::size(currentSquare.VertexPositions));
+		currentSquare.InitializeShape(std::size(currentSquare.VertexPositions));
 	}
 	//for (auto& currentTriangle : triangles)
 	//{
-	//	currentTriangle.DrawShape(std::size(currentTriangle.VertexPositions));
+	//	currentTriangle.InitializeShape(std::size(currentTriangle.VertexPositions));
 	//}
 
-	//triangleComponent->DrawShape(square.VertexPositions, square.Colors, std::size(square.VertexPositions), square.StartPosition);
+	//triangleComponent->InitializeShape(square.VertexPositions, square.Colors, std::size(square.VertexPositions), square.StartPosition);
 
 	SetupRasterizerStage();
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
@@ -166,6 +188,7 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 
 			context->DrawIndexed(6, 0, 0);
 		}
+		npcPaddle->Update(deltaTime);
 
 
 		SetBackBufferOutput(0, nullptr, nullptr);
