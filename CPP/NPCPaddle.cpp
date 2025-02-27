@@ -74,7 +74,7 @@ DirectX::BoundingBox NPCPaddle::GetNPCBoundingBox() const
         position.y,
         position.z, 1.0f);
     DirectX::XMFLOAT3 extents(width * 0.5f,
-        height * 0.5f,
+        height * 0.5,
         0.0f);
     DirectX::XMStoreFloat3(&(bbox.Center), DirectX::XMVector4Transform(center, transformData.offset));
 

@@ -25,7 +25,7 @@ public:
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
     DisplayWin32 Display;
-    const DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(-0.05f, -0.2f, 0.5f, 1.0f);
+    const DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
     float width = 0.1;
     float height = 0.4;
     float directionX; // 1 = right, -1 = left

@@ -53,7 +53,7 @@ void PlayerPaddle::Update(float deltaTime)
     }
 
     // Двигаем ракетку
-    MoveShape(0, directionY * speed * deltaTime, 0);
+    MoveShape(directionX * speed * deltaTime, directionY * speed * deltaTime, 0);
 }
 void PlayerPaddle::SetupViewport()
 {

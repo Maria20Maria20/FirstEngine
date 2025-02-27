@@ -46,6 +46,6 @@ private:
     bool hitPlayer, hitNPC;
     float defaultSpeed = 0.5f;
     float speed;
-    float upgradeSpeed = 0.5f;
+    float upgradeSpeed = 0.1f;
 };
 

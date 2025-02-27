@@ -12,7 +12,7 @@ Ball::Ball(DirectX::XMFLOAT4 vertexPositions[4],
 	ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32 display,
 	DirectX::XMFLOAT4 startPos, PlayerPaddle* player, NPCPaddle* npc)
 	: Square(vertexPositions, colors, startPos, device, context, vertexBC),
-	minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(0.5f), speed(0.5f), renderTargetView(rtv),
+	minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(-0.5f), speed(0.5f), renderTargetView(rtv),
 	vertexShader(vs), pixelShader(ps), Display(display), position(startPos), player(player), npc(npc),
 	Flicker(0.1f)
 {
@@ -41,12 +41,12 @@ void Ball::Update(float deltaTime)
 
 		DirectX::XMMATRIX pushBack = DirectX::XMMatrixIdentity();
 
-		if (hitNPC)
+		if (hitNPC && directionX > 0) //&& directionX > 0 for limit reflections inside object (paddle)
 		{
 			directionX *= -1;
 			pushBack = DirectX::XMMatrixTranslation(pushBackDistance * directionX, 0, 0);
 		}
-		if (hitPlayer)
+		if (hitPlayer && directionX < 0)
 		{
 			directionX *= -1;
 			pushBack = DirectX::XMMatrixTranslation(pushBackDistance * directionX, 0, 0);
@@ -57,7 +57,7 @@ void Ball::Update(float deltaTime)
 			pushBack = DirectX::XMMatrixTranslation(0, pushBackDistance * directionY, 0);
 		}
 
-		// Применяем смещение для выхода из коллизии
+		// Смещение для выхода из коллизии
 		transformData.offset = DirectX::XMMatrixMultiply(transformData.offset, pushBack);
 	}
 }
@@ -117,12 +117,16 @@ bool Ball::CheckBorderCollision()
 		Flicker = 0.1f;
 		std::cout << "NPC score count = " << npc->ScoreCount << std::endl;
 		transformData.offset = DirectX::XMMatrixIdentity();
-	}if (hitXNPC)
+	}
+	if (hitPlayer || hitNPC)
 	{
-		player->ScoreCount++;
+		speed += upgradeSpeed;
 		npc->speed += upgradeSpeed;
 		player->speed += upgradeSpeed;
-		speed += upgradeSpeed;
+	}
+	if (hitXNPC)
+	{
+		player->ScoreCount++;
 		Flicker += 0.3f;
 		std::cout << "Player score count = " << player->ScoreCount << std::endl;
 		transformData.offset = DirectX::XMMatrixIdentity();

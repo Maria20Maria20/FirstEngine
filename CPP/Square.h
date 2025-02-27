@@ -27,8 +27,6 @@ public:
 	void MoveShape(float dx, float dy, float dz);
 
 	float MoveSpeed = 0.1f;
-	float DirectionX = -1.0f;
-	float DirectionY = 0.0f;
 	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);	
 protected:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
@@ -43,6 +41,8 @@ private:
 	int vertexCount = 0;
 	ID3DBlob* vertexBC = nullptr;
 	std::vector<DirectX::XMFLOAT4> currentShape;
+	float DirectionX = -1.0f;
+	float DirectionY = 0.0f;
 	void CreateInputLayout();
 	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& offset);
 	void CreateIndexBuffer();
