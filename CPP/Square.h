@@ -4,9 +4,10 @@
 #include <vector>
 #include <wrl.h>
 #include <stdexcept>
+#include <DirectXCollision.h>
 
 struct CBTransform { //constant buffer transform
-	DirectX::XMFLOAT4 offset;
+	DirectX::XMMATRIX offset = DirectX::XMMatrixIdentity();
 };
 
 class Square
@@ -15,24 +16,24 @@ public:
 	Square();
 	Square(DirectX::XMFLOAT4 vertexPositions[4],
 		DirectX::XMFLOAT4 colors[4],
-		DirectX::XMFLOAT2 startPosition,
+		DirectX::XMFLOAT4 startPosition,
 		Microsoft::WRL::ComPtr<ID3D11Device> device,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
 		ID3DBlob* vertexBC);
 	DirectX::XMFLOAT4 VertexPositions[4];
 	DirectX::XMFLOAT4 Colors[4];
-	DirectX::XMFLOAT2 StartPosition;
+	DirectX::XMFLOAT4 StartPosition;
 	void InitializeShape(int count);
 	void MoveShape(float dx, float dy, float dz);
 
 	float MoveSpeed = 0.1f;
 	float DirectionX = -1.0f;
 	float DirectionY = 0.0f;
-	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);
-	DirectX::XMFLOAT2 GetPosition() const;
+	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);	
 protected:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 	ID3D11RasterizerState* rastState;
+	CBTransform transformData;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11Buffer* vb;  // vertex buffer
@@ -42,8 +43,7 @@ private:
 	int vertexCount = 0;
 	ID3DBlob* vertexBC = nullptr;
 	std::vector<DirectX::XMFLOAT4> currentShape;
-	CBTransform transformData = { {0,0,0,0} };
 	void CreateInputLayout();
-	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset);
+	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& offset);
 	void CreateIndexBuffer();
 };

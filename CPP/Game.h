@@ -12,6 +12,8 @@
 #include "Triangle.h"
 #include "Square.h"
 #include "NPCPaddle.h"
+#include "PlayerPaddle.h"
+#include "Ball.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -25,12 +27,12 @@ public:
 	int Initialize();
 private:
 	DisplayWin32 display;
-	std::vector<Square> squares;
 	std::vector<Triangle> triangles;
 
+	Ball* ball;
 	NPCPaddle* npcPaddle = nullptr;
-	//Square* square;
-	//TriangleComponent* triangleComponent;
+	PlayerPaddle* playerPaddle = nullptr;
+
 	HRESULT res;
 	IDXGISwapChain* swapChain;
 	DXGI_SWAP_CHAIN_DESC swapDesc;
@@ -59,4 +61,6 @@ private:
 	//void SetupIAStage(UINT  strides[1], UINT  offsets[1]);
 	void SetVertexAndPixelShaders();
 	void SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);
+
+
 };

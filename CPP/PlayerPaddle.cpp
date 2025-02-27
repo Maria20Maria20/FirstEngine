@@ -1,10 +1,10 @@
-#include "NPCPaddle.h"
+#include "PlayerPaddle.h"
 
-NPCPaddle::NPCPaddle()
+PlayerPaddle::PlayerPaddle()
 {
 }
 
-NPCPaddle::NPCPaddle(DirectX::XMFLOAT4 vertexPositions[4],
+PlayerPaddle::PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     DirectX::XMFLOAT4 colors[4],
     Microsoft::WRL::ComPtr<ID3D11Device> device,
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
@@ -12,40 +12,50 @@ NPCPaddle::NPCPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32 display,
     DirectX::XMFLOAT4 startPos)
     : Square(vertexPositions, colors, startPos, device, context, vertexBC),
-    directionY(1.0f), directionX(0.0f), speed(0.5f), renderTargetView(rtv),
+    minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(0.0f), speed(0.5f), renderTargetView(rtv),
     vertexShader(vs), pixelShader(ps), Display(display), position(startPos)
 {
 }
 
-void NPCPaddle::Update(float deltaTime)
+void PlayerPaddle::Update(float deltaTime)
 {
     UINT strides[] = { 32 };
     UINT offsets[] = { 0 };
 
     SetupIAStage(strides, offsets);
     context->RSSetState(rastState);
-
     SetupViewport();
-
-    //square->SetupIAStage(strides, offsets);
     SetVertexAndPixelShaders();
-
     SetBackBufferOutput(1, &renderTargetView, nullptr);
 
-    // Двигаем ракетку
-    MoveShape(directionX * speed * deltaTime, directionY * speed * deltaTime, 0);
-    if (CheckBorderCollision())
+
+    // Считываем ввод
+    bool upPressed = GetAsyncKeyState(VK_UP) & 0x8000;
+    bool downPressed = GetAsyncKeyState(VK_DOWN) & 0x8000;
+
+    // Обновляем статус столкновения
+    if (upPressed || downPressed)
     {
-        if (hitX)
-        {
-            directionX *= -1;
-        }if (hitY)
-        {
-            directionY *= -1;
-        }
+        CheckBorderCollision();
     }
+    // Определяем направление движения
+    if (upPressed && !hitYUp)
+    {
+        directionY = 1;
+    }
+    else if (downPressed && !hitYDown)
+    {
+        directionY = -1;
+    }
+    else
+    {
+        directionY = 0;
+    }
+
+    // Двигаем ракетку
+    MoveShape(0, directionY * speed * deltaTime, 0);
 }
-void NPCPaddle::SetupViewport()
+void PlayerPaddle::SetupViewport()
 {
     D3D11_VIEWPORT viewport = {};
     viewport.Width = static_cast<float>(Display.ScreenWidth);
@@ -57,16 +67,16 @@ void NPCPaddle::SetupViewport()
 
     context->RSSetViewports(1, &viewport);
 }
-void NPCPaddle::SetVertexAndPixelShaders()
+void PlayerPaddle::SetVertexAndPixelShaders()
 {
     context->VSSetShader(vertexShader, nullptr, 0);
     context->PSSetShader(pixelShader, nullptr, 0);
 }
-void NPCPaddle::SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView)
+void PlayerPaddle::SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView)
 {
     context->OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView);
 }
-DirectX::BoundingBox NPCPaddle::GetNPCBoundingBox() const
+DirectX::BoundingBox PlayerPaddle::GetPlayerBoundingBox() const
 {
     DirectX::BoundingBox bbox;
 
@@ -81,13 +91,13 @@ DirectX::BoundingBox NPCPaddle::GetNPCBoundingBox() const
     bbox.Extents = extents;
     return bbox;
 }
-bool NPCPaddle::CheckBorderCollision()
+bool PlayerPaddle::CheckBorderCollision()
 {
     DirectX::BoundingBox* screenBox = Display.GetScreenBorders();
-    DirectX::BoundingBox paddleBox = GetNPCBoundingBox();
-    hitY = screenBox[0].Intersects(paddleBox) || screenBox[1].Intersects(paddleBox);
-    hitX = screenBox[2].Intersects(paddleBox) || screenBox[3].Intersects(paddleBox);
-    return hitX || hitY;
+    DirectX::BoundingBox paddleBox = GetPlayerBoundingBox();
+    hitYUp = screenBox[0].Intersects(paddleBox);
+    hitYDown = screenBox[1].Intersects(paddleBox);
+    return hitYUp || hitYDown;
 }
 
 

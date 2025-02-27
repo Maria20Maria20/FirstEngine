@@ -5,7 +5,7 @@ Square::Square()
 }
 
 Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
-	DirectX::XMFLOAT4 colors[4], DirectX::XMFLOAT2 startPosition,
+	DirectX::XMFLOAT4 colors[4], DirectX::XMFLOAT4 startPosition,
     Microsoft::WRL::ComPtr<ID3D11Device> device,
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
     ID3DBlob* vertexBC)
@@ -66,10 +66,8 @@ void Square::MoveShape(float dx, float dy, float dz)
         return;
     }
 
-    // offset vertices
-    transformData.offset.x += dx;
-    transformData.offset.y += dy;
-    transformData.offset.z += dz;
+    DirectX::XMMATRIX moveMat = DirectX::XMMatrixTranslation(dx, dy, 0);
+    transformData.offset *= moveMat;
 
     // update data in GPU
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -85,7 +83,7 @@ void Square::MoveShape(float dx, float dy, float dz)
     context->DrawIndexed(6, 0, 0);
 }
 
-void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)
+void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& offset)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
@@ -138,13 +136,6 @@ void Square::SetupIAStage(UINT strides[1], UINT offsets[1])
     context->IASetIndexBuffer(ib, DXGI_FORMAT_R32_UINT, 0);
     context->IASetVertexBuffers(0, 1, &vb, strides, offsets);
 }
-DirectX::XMFLOAT2 Square::GetPosition() const
-{
-    return DirectX::XMFLOAT2(
-        StartPosition.x + transformData.offset.x,
-        StartPosition.y + transformData.offset.y
-    );
-}
 void Square::CreateInputLayout()
 {
     D3D11_INPUT_ELEMENT_DESC inputElements[] = {
@@ -173,5 +164,4 @@ void Square::CreateInputLayout()
         vertexBC->GetBufferSize(),
         &layout);
 }
-
 

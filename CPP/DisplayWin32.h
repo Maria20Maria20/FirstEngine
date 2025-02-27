@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <WinUser.h>
 #include <wrl.h>
+#include <DirectXCollision.h>
 
 class DisplayWin32 
 {
@@ -18,4 +19,5 @@ public:
 	WNDCLASSEX wc;
 	LPCWSTR applicationName;
 	static LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
+	DirectX::BoundingBox* GetScreenBorders();
 };

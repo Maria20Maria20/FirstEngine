@@ -9,29 +9,35 @@ class NPCPaddle : public Square
 public:
     NPCPaddle();
     NPCPaddle(DirectX::XMFLOAT4 vertexPositions[4],
-        DirectX::XMFLOAT4 colors[4], DirectX::XMFLOAT2 startPosition,
-        float minClamp, float maxClamp,
+        DirectX::XMFLOAT4 colors[4],
         Microsoft::WRL::ComPtr<ID3D11Device> device,
         Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
         ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
         ID3D11VertexShader* vs,
         ID3D11PixelShader* ps,
-        DisplayWin32 display);
+        DisplayWin32 display,
+        DirectX::XMFLOAT4 startPos);
 
     void Update(float deltaTime); // Метод обновления движения
-
-private:
-    float minClamp;
-    float maxClamp;
-    float direction; // 1 = вверх, -1 = вниз
     float speed;
+    float DefaultSpeed = 0.5f;
     ID3D11RenderTargetView* renderTargetView;
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
     DisplayWin32 Display;
+    DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(-0.05f, -0.2f, 0.5f, 1.0f);
+    float width = 0.1;
+    float height = 0.4;
+    float directionX; // 1 = right, -1 = left
+    float directionY; // 1 = up, -1 = down
     void SetupViewport();
     void SetVertexAndPixelShaders();
     void SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);
+    DirectX::BoundingBox GetNPCBoundingBox() const;
+    bool CheckBorderCollision();
+    int ScoreCount;
+private:
+    bool hitX, hitY;
 };
 
 #endif

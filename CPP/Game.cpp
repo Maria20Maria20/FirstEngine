@@ -43,12 +43,20 @@ int Game::Initialize()
 	DirectX::XMFLOAT2 StartPosition = { 0.0f, 0.0f };
 	DirectX::XMFLOAT2 StartPositionSquare = { 0.5f, 0.5f };
 
-	DirectX::XMFLOAT4 paddleVertices[4] = {
-		{-0.05f, 0.2f, 0.5f, 1.0f}, //0 point
-		{0.05f, -0.2f, 0.5f, 1.0f}, //1 point
-		{-0.05f, -0.2f, 0.5f, 1.0f}, //2 point
-		{0.05f, 0.2f, 0.5f, 1.0f}, //3 point
+	DirectX::XMFLOAT4 ballVertices[4] = {
+		{-0.05f, 0.05f, 0.5f, 1.0f}, //0 point
+		{0.05f, -0.05f, 0.5f, 1.0f}, //1 point
+		{-0.05f, -0.05f, 0.5f, 1.0f}, //2 point
+		{0.05f, 0.05f, 0.5f, 1.0f}, //3 point
 	};
+
+	DirectX::XMFLOAT4 paddleVertices[4] = {
+	{-0.05f, 0.2f, 0.5f, 1.0f}, //0 point
+	{0.05f, -0.2f, 0.5f, 1.0f}, //1 point
+	{-0.05f, -0.2f, 0.5f, 1.0f}, //2 point
+	{0.05f, 0.2f, 0.5f, 1.0f}, //3 point
+	};
+
 
 	DirectX::XMFLOAT4 paddleColors[4] = {
 		{1.0f, 1.0f, 1.0f, 1.0f},
@@ -58,27 +66,25 @@ int Game::Initialize()
 	};
 
 	DirectX::XMFLOAT2 startPosition = { 0.9f, 0.0f }; // Левый край экрана
+	DirectX::XMFLOAT4 startPosition2 = { 0.9f, 0.0f, 0, 1 }; // right screen side
+	DirectX::XMFLOAT4 startPosition3 = { -0.9f, 0.0f, 0, 1 }; // left screen side
+	DirectX::XMFLOAT4 startPosition4 = { 0.0f, 0.0f, 0, 1 }; // middle screen side
 
-	npcPaddle = new NPCPaddle(paddleVertices, paddleColors, startPosition,
-		-0.8f, 0.8f, device, context, vertexBC, rtv, vertexShader, pixelShader,
-		display);
+	npcPaddle = new NPCPaddle(paddleVertices, paddleColors, device, context, vertexBC, rtv, vertexShader, pixelShader,
+		display, startPosition2);
 	npcPaddle->InitializeShape(4);
+	playerPaddle = new PlayerPaddle(paddleVertices, paddleColors, device, context, vertexBC, rtv, vertexShader, pixelShader,
+		display, startPosition3);
+	playerPaddle->InitializeShape(4);
+	ball = new Ball(ballVertices, paddleColors, device, context, vertexBC, rtv, vertexShader, pixelShader,
+		display, startPosition4, playerPaddle, npcPaddle);
+	ball->InitializeShape(4);
 
-	//square = new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout);
-	//squares.push_back(*square);
-	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPosition, device, context, vertexBC));
-	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, vertexBC));
-	//squares.push_back(*npcPaddle);
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
-	//squares.push_back(*new Square(VertexPositionsSquare, ColorsSquare, StartPositionSquare, device, context, layout));
 
 	//triangleComponent->InitializeShape(triangle.VertexPositions, triangle.Colors, std::size(triangle.VertexPositions), triangle.StartPosition);
 	//square->InitializeShape(std::size(square->VertexPositions));
-	for (auto& currentSquare : squares)
-	{
-		currentSquare.InitializeShape(std::size(currentSquare.VertexPositions));
-	}
 	//for (auto& currentTriangle : triangles)
 	//{
 	//	currentTriangle.InitializeShape(std::size(currentTriangle.VertexPositions));
@@ -129,7 +135,8 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 		if (totalTime > 1.0f) {
 			float fps = frameCount / totalTime;
 
-			totalTime -= 1.0f;
+			totalTime -= 1/ball->Flicker;
+			//totalTime -= 1.0f;
 
 			WCHAR text[256];
 			swprintf_s(text, TEXT("FPS: %f"), fps);
@@ -146,28 +153,8 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 		UINT strides[] = { 32 };
 		UINT offsets[] = { 0 };
 
-		float color[] = { totalTime, 0.1f, 0.1f, 1.0f };
+		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
-		for (auto& currentSquare : squares)
-		{
-			currentSquare.SetupIAStage(strides, offsets);
-			context->RSSetState(rastState);
-
-			SetupViewport();
-
-			//square->SetupIAStage(strides, offsets);
-			SetVertexAndPixelShaders();
-
-			SetBackBufferOutput(1, &rtv, nullptr);
-
-
-			currentSquare.MoveShape(currentSquare.MoveSpeed
-				* deltaTime * currentSquare.DirectionX,
-				currentSquare.MoveSpeed
-				* deltaTime * currentSquare.DirectionY, 0);
-
-			//context->DrawIndexed(6, 0, 0);
-		}
 		for (auto& currentTriangle : triangles)
 		{
 			currentTriangle.SetupIAStage(strides, offsets);
@@ -189,6 +176,8 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 			context->DrawIndexed(6, 0, 0);
 		}
 		npcPaddle->Update(deltaTime);
+		playerPaddle->Update(deltaTime);
+		ball->Update(deltaTime);
 
 
 		SetBackBufferOutput(0, nullptr, nullptr);
@@ -196,7 +185,6 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
 }
-
 void Game::SetupViewport()
 {
 	D3D11_VIEWPORT viewport = {};
@@ -332,31 +320,3 @@ int Game::CompileShaders()
 	retFlag = false;
 	return {};
 }
-//void Game::CreateInputLayout()
-//{
-//	D3D11_INPUT_ELEMENT_DESC inputElements[] = {
-//	D3D11_INPUT_ELEMENT_DESC{
-//		"POSITION", //parameter name from hlsl file
-//		0, //need if we have more one element with same semantic
-//		DXGI_FORMAT_R32G32B32A32_FLOAT,
-//		0, //vertex index (between 0 and 15)
-//		0, //offset from beginning vertex
-//		D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
-//		0 },
-//		D3D11_INPUT_ELEMENT_DESC{
-//		"COLOR",
-//		0,
-//		DXGI_FORMAT_R32G32B32A32_FLOAT,
-//		0,
-//		D3D11_APPEND_ALIGNED_ELEMENT,
-//		D3D11_INPUT_PER_VERTEX_DATA,
-//		0 }
-//	};
-//
-//	device->CreateInputLayout(
-//		inputElements,
-//		2,
-//		vertexBC->GetBufferPointer(),
-//		vertexBC->GetBufferSize(),
-//		&layout);
-//}

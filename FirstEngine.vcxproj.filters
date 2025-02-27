@@ -50,15 +50,15 @@
     <ClCompile Include="CPP\Racket.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\PlayerPaddle.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP\MySuper3DApp.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CPP\DisplayWin32.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="CPP\Game.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CPP\InputDevice.h">
@@ -83,6 +83,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CPP\NPCPaddle.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\PlayerPaddle.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\Game.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

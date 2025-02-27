@@ -1,6 +1,7 @@
-cbuffer ConstantBufferTransform : register(b0)
+
+cbuffer ConstantBuffer
 {
-    float4 offset;
+    row_major float4x4 offset;
 };
 
 struct VS_IN
@@ -19,7 +20,7 @@ PS_IN VSMain( VS_IN input )
 {
 	PS_IN output = (PS_IN)0;
 	
-	output.pos = input.pos + offset;
+    output.pos = mul(input.pos, offset);
 	output.col = input.col;
 	
 	return output;
@@ -28,8 +29,8 @@ PS_IN VSMain( VS_IN input )
 float4 PSMain( PS_IN input ) : SV_Target
 {
 	float4 col = input.col;
-#ifdef TEST
-	if (input.pos.x > 400) col = TCOLOR;
-#endif
+//#ifdef TEST
+//	if (input.pos.x > 400) col = TCOLOR;
+//#endif
 	return col;
 }

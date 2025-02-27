@@ -64,3 +64,26 @@ LRESULT CALLBACK DisplayWin32::WndProc(HWND hwnd, UINT umessage, WPARAM wparam, 
         return DefWindowProc(hwnd, umessage, wparam, lparam);
     }
 }
+DirectX::BoundingBox* DisplayWin32::GetScreenBorders()
+{
+    static DirectX::BoundingBox borders[4];
+
+    // Top Border
+    borders[0].Center = DirectX::XMFLOAT3(0.0f, 1.5f, 0.0f); // top border points
+    borders[0].Extents = DirectX::XMFLOAT3(1.0f, 0.5f, 0.0f); // extents = margin from center (borders[0].Center) 
+
+    // Bottom Border
+    borders[1].Center = DirectX::XMFLOAT3(0.0f, -1.5f, 0.0f);
+    borders[1].Extents = DirectX::XMFLOAT3(1.0f, 0.5f, 0.0f); // extents = margin from center (borders[1].Center)
+
+
+    // Right Border
+    borders[2].Center = DirectX::XMFLOAT3(1.5f, 0.0f, 0.0f); // right border points
+    borders[2].Extents = DirectX::XMFLOAT3(0.3f, 1.0f, 0.0f); // extents = margin from center (borders[2].Center) 
+
+    // Left Border
+    borders[3].Center = DirectX::XMFLOAT3(-1.5f, 0.0f, 0.0f);
+    borders[3].Extents = DirectX::XMFLOAT3(0.3f, 1.0f, 0.0f); // extents = margin from center (borders[3].Center)
+
+    return borders;
+}
