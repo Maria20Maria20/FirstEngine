@@ -1,8 +1,8 @@
 #ifndef PLAYER_PADDLE_H
 #define PLAYER_PADDLE_H
 
-#include "../CPP/Square.h"
-#include "../CPP/DisplayWin32.h"
+#include <CPP/Square.h>
+#include <CPP/DisplayWin32.h>
 
 class PlayerPaddle : public Square
 {

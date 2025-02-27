@@ -15,24 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Racket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NPCPaddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerPaddle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MySuper3DApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Racket.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NPCPaddle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPaddle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MySuper3DApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,7 +8,7 @@
 #include <d3dcompiler.h>
 #include <directxmath.h>
 #include <chrono>
-#include "DisplayWin32.h"
+#include <CPP/DisplayWin32.h>
 #include "Game.h"
 
 class MySuper3DApp 

@@ -1,12 +1,66 @@
 ﻿  Ball.cpp
-  NPCPaddle.cpp
-  Racket.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
+  
+  Game.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+  MySuper3DApp.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'MySuper3DApp.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'MySuper3DApp.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'MySuper3DApp.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'MySuper3DApp.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'MySuper3DApp.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'MySuper3DApp.cpp')
+  
+  PlayerPaddle.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'PlayerPaddle.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'PlayerPaddle.cpp')
+  
   Generating Code...
-NPCPaddle.obj : error LNK2019: unresolved external symbol "public: __cdecl Square::Square(void)" (??0Square@@QEAA@XZ) referenced in function "public: __cdecl NPCPaddle::NPCPaddle(void)" (??0NPCPaddle@@QEAA@XZ)
-NPCPaddle.obj : error LNK2019: unresolved external symbol "public: __cdecl Square::Square(struct DirectX::XMFLOAT4 * const,struct DirectX::XMFLOAT4 * const,struct DirectX::XMFLOAT2,class Microsoft::WRL::ComPtr<struct ID3D11Device>,class Microsoft::WRL::ComPtr<struct ID3D11DeviceContext>,struct ID3D10Blob *)" (??0Square@@QEAA@QEAUXMFLOAT4@DirectX@@0UXMFLOAT2@2@V?$ComPtr@UID3D11Device@@@WRL@Microsoft@@V?$ComPtr@UID3D11DeviceContext@@@56@PEAUID3D10Blob@@@Z) referenced in function "public: __cdecl NPCPaddle::NPCPaddle(struct DirectX::XMFLOAT4 * const,struct DirectX::XMFLOAT4 * const,struct DirectX::XMFLOAT2,float,float,class Microsoft::WRL::ComPtr<struct ID3D11Device>,class Microsoft::WRL::ComPtr<struct ID3D11DeviceContext>,struct ID3D10Blob *,struct ID3D11RenderTargetView *,struct ID3D11VertexShader *,struct ID3D11PixelShader *,class DisplayWin32)" (??0NPCPaddle@@QEAA@QEAUXMFLOAT4@DirectX@@0UXMFLOAT2@2@MMV?$ComPtr@UID3D11Device@@@WRL@Microsoft@@V?$ComPtr@UID3D11DeviceContext@@@56@PEAUID3D10Blob@@PEAUID3D11RenderTargetView@@PEAUID3D11VertexShader@@PEAUID3D11PixelShader@@VDisplayWin32@@@Z)
-NPCPaddle.obj : error LNK2019: unresolved external symbol "public: void __cdecl Square::MoveShape(float,float,float)" (?MoveShape@Square@@QEAAXMMM@Z) referenced in function "public: void __cdecl NPCPaddle::Update(float)" (?Update@NPCPaddle@@QEAAXM@Z)
-NPCPaddle.obj : error LNK2019: unresolved external symbol "public: void __cdecl Square::SetupIAStage(unsigned int * const,unsigned int * const)" (?SetupIAStage@Square@@QEAAXQEAI0@Z) referenced in function "public: void __cdecl NPCPaddle::Update(float)" (?Update@NPCPaddle@@QEAAXM@Z)
-NPCPaddle.obj : error LNK2019: unresolved external symbol "public: struct DirectX::XMFLOAT2 __cdecl Square::GetPosition(void)const " (?GetPosition@Square@@QEBA?AUXMFLOAT2@DirectX@@XZ) referenced in function "public: void __cdecl NPCPaddle::Update(float)" (?Update@NPCPaddle@@QEAAXM@Z)
-NPCPaddle.obj : error LNK2019: unresolved external symbol "public: __cdecl DisplayWin32::DisplayWin32(void)" (??0DisplayWin32@@QEAA@XZ) referenced in function "public: __cdecl NPCPaddle::NPCPaddle(void)" (??0NPCPaddle@@QEAA@XZ)
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Pong.exe : fatal error LNK1120: 7 unresolved externals
+  Pong.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Pong.exe
