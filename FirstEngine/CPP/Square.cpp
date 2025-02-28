@@ -66,8 +66,8 @@ void Square::MoveShape(float dx, float dy, float dz)
         return;
     }
 
-    DirectX::XMMATRIX moveMat = DirectX::XMMatrixTranslation(dx, dy, 0);
-    transformData.offset *= moveMat;
+    DirectX::XMMATRIX moveMatrix = DirectX::XMMatrixTranslation(dx, dy, 0);
+    transformData.translation *= moveMatrix;
 
     // update data in GPU
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -83,17 +83,37 @@ void Square::MoveShape(float dx, float dy, float dz)
     context->DrawIndexed(6, 0, 0);
 }
 
-void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& offset)
+void Square::RotateShape(FXMVECTOR Axis, FLOAT Angle)
+{
+    XMVECTOR normalizedAxis = XMVector3Normalize(Axis); // Используем новую переменную
+
+    // Проверяем, что вектор не нулевой
+    if (XMVector3Equal(normalizedAxis, XMVectorZero()))
+    {
+        return; // Если ось некорректна, не выполняем вращение
+    }
+
+    XMMATRIX rotateMatrix = XMMatrixRotationAxis(normalizedAxis, XMConvertToRadians(Angle));
+    transformData.translation *= rotateMatrix;
+}
+
+void Square::ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFactorZ)
+{
+    XMMATRIX scalingMatrix = XMMatrixScaling(scaleFactorX, scaleFactorY, scaleFactorZ);
+    transformData.translation *= scalingMatrix;
+}
+
+void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& translation)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
 
-    // Apply the offset
+    // Apply the translation
     for (int i = 0; i < count; ++i)
     {
         transformedPoints[i] = points[i];
-        transformedPoints[i].x += offset.x;
-        transformedPoints[i].y += offset.y;
+        transformedPoints[i].x += translation.x;
+        transformedPoints[i].y += translation.y;
     }
 
     D3D11_BUFFER_DESC vertexBufDesc = {};
@@ -144,7 +164,7 @@ void Square::CreateInputLayout()
         0, //need if we have more one element with same semantic
         DXGI_FORMAT_R32G32B32A32_FLOAT,
         0, //vertex index (between 0 and 15)
-        0, //offset from beginning vertex
+        0, //translation from beginning vertex
         D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
         0 },
         D3D11_INPUT_ELEMENT_DESC{

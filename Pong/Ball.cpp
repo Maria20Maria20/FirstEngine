@@ -16,6 +16,8 @@ Ball::Ball(DirectX::XMFLOAT4 vertexPositions[4],
 	vertexShader(vs), pixelShader(ps), Display(display), position(startPos), player(player), npc(npc),
 	Flicker(0.1f)
 {
+	ScalingShape(2.1f,2.1f,0);
+	RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), 30); // Вращение вокруг Z-оси
 }
 
 void Ball::Update(float deltaTime)
@@ -58,7 +60,7 @@ void Ball::Update(float deltaTime)
 		}
 
 		// Смещение для выхода из коллизии
-		transformData.offset = DirectX::XMMatrixMultiply(transformData.offset, pushBack);
+		transformData.translation = DirectX::XMMatrixMultiply(transformData.translation, pushBack);
 	}
 }
 void Ball::SetupViewport()
@@ -92,7 +94,7 @@ DirectX::BoundingBox Ball::GetBallBoundingBox() const
 	DirectX::XMFLOAT3 extents(width * 0.5f,
 		height * 0.5f,
 		0.0f);
-	DirectX::XMStoreFloat3(&(bbox.Center), DirectX::XMVector4Transform(center, transformData.offset));
+	DirectX::XMStoreFloat3(&(bbox.Center), DirectX::XMVector4Transform(center, transformData.translation));
 
 	bbox.Extents = extents;
 	return bbox;
@@ -116,7 +118,7 @@ bool Ball::CheckBorderCollision()
 		speed = defaultSpeed;
 		Flicker = 0.1f;
 		std::cout << "NPC score count = " << npc->ScoreCount << std::endl;
-		transformData.offset = DirectX::XMMatrixIdentity();
+		transformData.translation = DirectX::XMMatrixIdentity();
 	}
 	if (hitPlayer || hitNPC)
 	{
@@ -129,7 +131,7 @@ bool Ball::CheckBorderCollision()
 		player->ScoreCount++;
 		Flicker += 0.3f;
 		std::cout << "Player score count = " << player->ScoreCount << std::endl;
-		transformData.offset = DirectX::XMMatrixIdentity();
+		transformData.translation = DirectX::XMMatrixIdentity();
 	}
 	return hitY || hitPlayer || hitNPC;
 }

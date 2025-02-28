@@ -5,26 +5,28 @@
 #include <wrl.h>
 #include <stdexcept>
 #include <DirectXCollision.h>
+using namespace DirectX;
 
 struct CBTransform { //constant buffer transform
-	DirectX::XMMATRIX offset = DirectX::XMMatrixIdentity();
+	XMMATRIX translation = XMMatrixIdentity();
+	XMMATRIX rotation = XMMatrixIdentity();
+	XMMATRIX scale = XMMatrixIdentity();
 };
 
 class Square
 {
 public:
 	Square();
-	Square(DirectX::XMFLOAT4 vertexPositions[4],
-		DirectX::XMFLOAT4 colors[4],
-		DirectX::XMFLOAT4 startPosition,
+	Square(XMFLOAT4 vertexPositions[4],
+		XMFLOAT4 colors[4],
+		XMFLOAT4 startPosition,
 		Microsoft::WRL::ComPtr<ID3D11Device> device,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
 		ID3DBlob* vertexBC);
-	DirectX::XMFLOAT4 VertexPositions[4];
-	DirectX::XMFLOAT4 Colors[4];
-	DirectX::XMFLOAT4 StartPosition;
+	XMFLOAT4 VertexPositions[4];
+	XMFLOAT4 Colors[4];
+	XMFLOAT4 StartPosition;
 	void InitializeShape(int count);
-	void MoveShape(float dx, float dy, float dz);
 
 	float MoveSpeed = 0.1f;
 	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);	
@@ -32,6 +34,9 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 	ID3D11RasterizerState* rastState;
 	CBTransform transformData;
+	void MoveShape(float dx, float dy, float dz);
+	void RotateShape(FXMVECTOR Axis, FLOAT Angle);
+	void ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFactorZ);
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11Buffer* vb;  // vertex buffer
@@ -40,10 +45,10 @@ private:
 	ID3D11InputLayout* layout;
 	int vertexCount = 0;
 	ID3DBlob* vertexBC = nullptr;
-	std::vector<DirectX::XMFLOAT4> currentShape;
+	std::vector<XMFLOAT4> currentShape;
 	float DirectionX = -1.0f;
 	float DirectionY = 0.0f;
 	void CreateInputLayout();
-	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& offset);
+	void CreateVertexBuffer(XMFLOAT4 points[], int count, const XMFLOAT4& translation);
 	void CreateIndexBuffer();
 };

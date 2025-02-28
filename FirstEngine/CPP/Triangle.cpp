@@ -56,7 +56,7 @@ void Triangle::MoveShape(float dx, float dy, float dz)
         return;
     }
 
-    // offset vertices
+    // translation vertices
     for (auto& vertex : currentShape) //all vertices one shape
     {
         vertex.x += dx;
@@ -75,17 +75,17 @@ void Triangle::MoveShape(float dx, float dy, float dz)
     context->Unmap(vb, 0);
 }
 
-void Triangle::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)
+void Triangle::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
 
-    // Apply the offset
+    // Apply the translation
     for (int i = 0; i < count; ++i)
     {
         transformedPoints[i] = points[i];
-        transformedPoints[i].x += offset.x;
-        transformedPoints[i].y += offset.y;
+        transformedPoints[i].x += translation.x;
+        transformedPoints[i].y += translation.y;
     }
 
     D3D11_BUFFER_DESC vertexBufDesc = {};
@@ -138,7 +138,7 @@ void Triangle::CreateInputLayout()
         0, //need if we have more one element with same semantic
         DXGI_FORMAT_R32G32B32A32_FLOAT,
         0, //vertex index (between 0 and 15)
-        0, //offset from beginning vertex
+        0, //translation from beginning vertex
         D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
         0 },
         D3D11_INPUT_ELEMENT_DESC{

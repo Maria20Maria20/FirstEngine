@@ -34,6 +34,6 @@ private:
 	ID3DBlob* vertexBC = nullptr;
 	std::vector<DirectX::XMFLOAT4> currentShape;
 	void CreateInputLayout();
-	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset);
+	void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation);
 	void CreateIndexBuffer();
 };

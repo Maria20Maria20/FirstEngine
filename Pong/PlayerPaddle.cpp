@@ -86,7 +86,7 @@ DirectX::BoundingBox PlayerPaddle::GetPlayerBoundingBox() const
     DirectX::XMFLOAT3 extents(width * 0.5f,
         height * 0.5f,
         0.0f);
-    DirectX::XMStoreFloat3(&(bbox.Center), DirectX::XMVector4Transform(center, transformData.offset));
+    DirectX::XMStoreFloat3(&(bbox.Center), DirectX::XMVector4Transform(center, transformData.translation));
 
     bbox.Extents = extents;
     return bbox;

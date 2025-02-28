@@ -1,7 +1,2 @@
-﻿  DisplayWin32.cpp
-  InputDevice.cpp
-  Square.cpp
-  Triangle.cpp
-  TriangleComponent.cpp
-  Generating Code...
+﻿  Square.cpp
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

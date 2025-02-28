@@ -3,12 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PlayerPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Ball.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\Shaders\\MyVeryFirstShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\Shaders\\MyVeryFirstShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Square.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Square.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PlayerPaddle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\NPCPaddle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\NPCPaddle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\NPCPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\NPCPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PlayerPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\MySuper3DApp.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -17,10 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Ball.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +58,115 @@
       "DocumentGroups": [
         {
           "DockedWidth": 190,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Game.cpp",
+              "RelativeDocumentMoniker": "Pong\\Game.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Game.cpp",
+              "RelativeToolTip": "Pong\\Game.cpp",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAkwA4BAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-02-28T07:48:42.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyVeryFirstShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\Shaders\\MyVeryFirstShader.hlsl",
+              "RelativeDocumentMoniker": "FirstEngine\\Shaders\\MyVeryFirstShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\Shaders\\MyVeryFirstShader.hlsl",
+              "RelativeToolTip": "FirstEngine\\Shaders\\MyVeryFirstShader.hlsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-28T07:37:52.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Square.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.h",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Square.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.h",
+              "RelativeToolTip": "FirstEngine\\CPP\\Square.h",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCYAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-02-28T07:11:09.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerPaddle.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.cpp",
+              "RelativeDocumentMoniker": "Pong\\PlayerPaddle.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.cpp",
+              "RelativeToolTip": "Pong\\PlayerPaddle.cpp",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAQwFgAAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-02-28T07:12:54.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NPCPaddle.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\NPCPaddle.cpp",
+              "RelativeDocumentMoniker": "Pong\\NPCPaddle.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\NPCPaddle.cpp",
+              "RelativeToolTip": "Pong\\NPCPaddle.cpp",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAhwE4AAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-02-28T07:12:46.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Ball.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp",
+              "RelativeDocumentMoniker": "Pong\\Ball.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp",
+              "RelativeToolTip": "Pong\\Ball.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABMAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-02-28T07:12:26.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Square.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Square.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.cpp",
+              "RelativeToolTip": "FirstEngine\\CPP\\Square.cpp",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAgwF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-02-28T07:11:04.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "PlayerPaddle.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.h",
               "RelativeDocumentMoniker": "Pong\\PlayerPaddle.h",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.h",
               "RelativeToolTip": "Pong\\PlayerPaddle.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-02-27T20:22:58.756Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "NPCPaddle.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\NPCPaddle.h",
               "RelativeDocumentMoniker": "Pong\\NPCPaddle.h",
@@ -60,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "MySuper3DApp.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\MySuper3DApp.h",
               "RelativeDocumentMoniker": "Pong\\MySuper3DApp.h",
@@ -68,12 +187,11 @@
               "RelativeToolTip": "Pong\\MySuper3DApp.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-02-27T20:22:05.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T20:22:05.04Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "Game.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Game.h",
               "RelativeDocumentMoniker": "Pong\\Game.h",
@@ -81,18 +199,17 @@
               "RelativeToolTip": "Pong\\Game.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-02-27T20:20:47.903Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-27T20:20:47.903Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Ball.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.h",
               "RelativeDocumentMoniker": "Pong\\Ball.h",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.h",
               "RelativeToolTip": "Pong\\Ball.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAkwBwAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-02-27T20:06:27.188Z",
               "EditorCaption": ""

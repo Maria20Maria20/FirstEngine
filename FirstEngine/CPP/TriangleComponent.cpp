@@ -6,7 +6,7 @@
     this->device = device;
     this->context = context;
 }
-void TriangleComponent::InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& offset)
+void TriangleComponent::InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMFLOAT4 colors[], int count, const DirectX::XMFLOAT2& translation)
 {
     //Shape newShape;
     //newShape.vertices = vertices;
@@ -15,8 +15,8 @@ void TriangleComponent::InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMF
     for (int i = 0; i < count; i++)
     {
         pointsAndColors[i * 2] = DirectX::XMFLOAT4(
-            points[i].x + offset.x,
-            points[i].y + offset.y,
+            points[i].x + translation.x,
+            points[i].y + translation.y,
             points[i].z,
             points[i].w
         );
@@ -28,7 +28,7 @@ void TriangleComponent::InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMF
     //shapes.push_back(pointsAndColors);
     vertexCount = count * 2;
 
-    CreateVertexBuffer(pointsAndColors.data(), vertexCount, offset);
+    CreateVertexBuffer(pointsAndColors.data(), vertexCount, translation);
     CreateIndexBuffer();
 }
 
@@ -40,7 +40,7 @@ void TriangleComponent::MoveShape(float dx, float dy, float dz)
         return;
     }
 
-    // offset vertices
+    // translation vertices
     for (auto& vertex : currentShape) //all vertices one shape
     {
         vertex.x += dx;
@@ -61,17 +61,17 @@ void TriangleComponent::MoveShape(float dx, float dy, float dz)
 
 
 
-void TriangleComponent::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& offset)
+void TriangleComponent::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
 
-    // Apply the offset
+    // Apply the translation
     for (int i = 0; i < count; ++i)
     {
         transformedPoints[i] = points[i];
-        transformedPoints[i].x += offset.x;
-        transformedPoints[i].y += offset.y;
+        transformedPoints[i].x += translation.x;
+        transformedPoints[i].y += translation.y;
     }
 
     D3D11_BUFFER_DESC vertexBufDesc = {};
