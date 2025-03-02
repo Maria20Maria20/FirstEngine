@@ -3,6 +3,7 @@
 
 #include <CPP/Square.h>
 #include <CPP/DisplayWin32.h>
+#include <CPP/InputDevice.h>
 
 class PlayerPaddle : public Square
 {
@@ -37,6 +38,7 @@ public:
     bool CheckBorderCollision();
     int ScoreCount;
 private:
+    InputDevice* inputDevice = nullptr;
     float minClamp;
     float maxClamp;
     bool hitYUp, hitYDown;

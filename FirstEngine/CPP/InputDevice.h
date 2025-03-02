@@ -1,10 +1,14 @@
 #pragma once
 #include <d3d11.h>
-class InputDevice 
+#include <Windows.h>
+
+class InputDevice
 {
 public:
-	InputDevice();
+    InputDevice();
 
-private:
+    void Update();
 
+    bool upPressed = false;
+    bool downPressed = false;
 };

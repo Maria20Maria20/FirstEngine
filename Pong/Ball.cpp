@@ -16,7 +16,7 @@ Ball::Ball(DirectX::XMFLOAT4 vertexPositions[4],
 	vertexShader(vs), pixelShader(ps), Display(display), position(startPos), player(player), npc(npc),
 	Flicker(0.1f)
 {
-	ScalingShape(2.1f,2.1f,0);
+	ScalingShape(changedScaleX,changedScaleY,0);
 	RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), 30); // Вращение вокруг Z-оси
 }
 
@@ -88,11 +88,11 @@ DirectX::BoundingBox Ball::GetBallBoundingBox() const
 {
 	DirectX::BoundingBox bbox;
 
-	DirectX::XMVECTOR center = DirectX::XMVectorSet(position.x,
-		position.y,
+	DirectX::XMVECTOR center = DirectX::XMVectorSet(position.x * changedScaleX,
+		position.y * changedScaleY,
 		position.z, 1.0f);
-	DirectX::XMFLOAT3 extents(width * 0.5f,
-		height * 0.5f,
+	DirectX::XMFLOAT3 extents(width * 0.5f * changedScaleX,
+		height * 0.5f * changedScaleY,
 		0.0f);
 	DirectX::XMStoreFloat3(&(bbox.Center), DirectX::XMVector4Transform(center, transformData.translation));
 
@@ -117,6 +117,8 @@ bool Ball::CheckBorderCollision()
 		player->speed = player->DefaultSpeed;
 		speed = defaultSpeed;
 		Flicker = 0.1f;
+		changedScaleX = 1;
+		changedScaleY = 1;
 		std::cout << "NPC score count = " << npc->ScoreCount << std::endl;
 		transformData.translation = DirectX::XMMatrixIdentity();
 	}

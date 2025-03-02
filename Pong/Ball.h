@@ -47,5 +47,7 @@ private:
     float defaultSpeed = 0.5f;
     float speed;
     float upgradeSpeed = 0.1f;
+    float changedScaleX = 2.1f;
+    float changedScaleY = 2.1f;
 };
 

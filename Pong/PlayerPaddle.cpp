@@ -15,6 +15,8 @@ PlayerPaddle::PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(0.0f), speed(0.5f), renderTargetView(rtv),
     vertexShader(vs), pixelShader(ps), Display(display), position(startPos)
 {
+    inputDevice = new InputDevice();
+    //RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), 30);
 }
 
 void PlayerPaddle::Update(float deltaTime)
@@ -28,10 +30,10 @@ void PlayerPaddle::Update(float deltaTime)
     SetVertexAndPixelShaders();
     SetBackBufferOutput(1, &renderTargetView, nullptr);
 
-
+    inputDevice->Update();
     // Считываем ввод
-    bool upPressed = GetAsyncKeyState(VK_UP) & 0x8000;
-    bool downPressed = GetAsyncKeyState(VK_DOWN) & 0x8000;
+    bool upPressed = inputDevice->upPressed;
+    bool downPressed = inputDevice->downPressed;
 
     // Обновляем статус столкновения
     if (upPressed || downPressed)

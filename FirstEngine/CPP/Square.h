@@ -9,8 +9,6 @@ using namespace DirectX;
 
 struct CBTransform { //constant buffer transform
 	XMMATRIX translation = XMMatrixIdentity();
-	XMMATRIX rotation = XMMatrixIdentity();
-	XMMATRIX scale = XMMatrixIdentity();
 };
 
 class Square
