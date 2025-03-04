@@ -14,20 +14,21 @@
 #include "NPCPaddle.h"
 #include "PlayerPaddle.h"
 #include "Ball.h"
+#include <CPP/Game.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "dxguid.lib")
 
-class Game
+class PongGame
 {
 public:
-	Game();
+	PongGame();
 	int Initialize();
+	DisplayWin32 display = DisplayWin32();
 private:
-	DisplayWin32 display;
-	std::vector<Triangle> triangles;
+	//std::vector<Triangle> triangles;
 
 	Ball* ball;
 	NPCPaddle* npcPaddle = nullptr;

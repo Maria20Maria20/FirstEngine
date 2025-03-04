@@ -1,13 +1,12 @@
-#include "Game.h"
+#include "PongGame.h"
 
-Game::Game()
+PongGame::PongGame()
 {
 
 }
 
-int Game::Initialize()
+int PongGame::Initialize()
 {
-	display = DisplayWin32();
 	display.InitWindow();
 	res = InitSwapChain();
 	GetBackBufferAndCreateRTV();
@@ -99,7 +98,7 @@ int Game::Initialize()
 	WindowLoop(PrevTime, totalTime, frameCount);
 	return 0;
 }
-void Game::SetupRasterizerStage()
+void PongGame::SetupRasterizerStage()
 {
 	rastDesc.CullMode = D3D11_CULL_NONE; //triangles in the specified direction do not need to be drawn
 	rastDesc.FillMode = D3D11_FILL_SOLID; //fill mode (solid or wireframe)
@@ -109,7 +108,7 @@ void Game::SetupRasterizerStage()
 	context->RSSetState(rastState);
 }
 
-void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount)
+void PongGame::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount)
 {
 	MSG msg = {};
 	bool isExitRequested = false;
@@ -155,26 +154,26 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
-		for (auto& currentTriangle : triangles)
-		{
-			currentTriangle.SetupIAStage(strides, offsets);
-			context->RSSetState(rastState);
+		//for (auto& currentTriangle : triangles)
+		//{
+		//	currentTriangle.SetupIAStage(strides, offsets);
+		//	context->RSSetState(rastState);
 
-			SetupViewport();
+		//	SetupViewport();
 
-			//square->SetupIAStage(strides, offsets);
-			SetVertexAndPixelShaders();
+		//	//square->SetupIAStage(strides, offsets);
+		//	SetVertexAndPixelShaders();
 
-			SetBackBufferOutput(1, &rtv, nullptr);
+		//	SetBackBufferOutput(1, &rtv, nullptr);
 
 
-			currentTriangle.MoveShape(currentTriangle.MoveSpeed
-				* deltaTime * currentTriangle.DirectionX,
-				currentTriangle.MoveSpeed
-				* deltaTime * currentTriangle.DirectionY, 0);
+		//	currentTriangle.MoveShape(currentTriangle.MoveSpeed
+		//		* deltaTime * currentTriangle.DirectionX,
+		//		currentTriangle.MoveSpeed
+		//		* deltaTime * currentTriangle.DirectionY, 0);
 
-			context->DrawIndexed(6, 0, 0);
-		}
+		//	context->DrawIndexed(6, 0, 0);
+		//}
 		npcPaddle->Update(deltaTime);
 		playerPaddle->Update(deltaTime);
 		ball->Update(deltaTime);
@@ -185,7 +184,7 @@ void Game::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& to
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
 }
-void Game::SetupViewport()
+void PongGame::SetupViewport()
 {
 	D3D11_VIEWPORT viewport = {};
 	viewport.Width = static_cast<float>(display.ScreenWidth);
@@ -198,7 +197,7 @@ void Game::SetupViewport()
 	context->RSSetViewports(1, &viewport);
 }
 
-/*void Game::SetupIAStage(UINT strides[1], UINT offsets[1])
+/*void PongGame::SetupIAStage(UINT strides[1], UINT offsets[1])
 {
 	context->IASetInputLayout(layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -206,18 +205,18 @@ void Game::SetupViewport()
 	context->IASetVertexBuffers(0, 1, &square->vb, strides, offsets);
 }*/
 
-void Game::SetVertexAndPixelShaders()
+void PongGame::SetVertexAndPixelShaders()
 {
 	context->VSSetShader(vertexShader, nullptr, 0);
 	context->PSSetShader(pixelShader, nullptr, 0);
 }
 
-void Game::SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView)
+void PongGame::SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView)
 {
 	context->OMSetRenderTargets(NumViews, ppRenderTargetViews, pDepthStencilView);
 }
 
-HRESULT Game::InitSwapChain() //swap between back and front buffers
+HRESULT PongGame::InitSwapChain() //swap between back and front buffers
 {
 	D3D_FEATURE_LEVEL featureLevel[] = { D3D_FEATURE_LEVEL_11_1 };
 
@@ -260,12 +259,12 @@ HRESULT Game::InitSwapChain() //swap between back and front buffers
 	return res;
 }
 
-void Game::GetBackBufferAndCreateRTV() //with help back buffer create render target view (RTV) (usually texture) for show anything
+void PongGame::GetBackBufferAndCreateRTV() //with help back buffer create render target view (RTV) (usually texture) for show anything
 {
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
 	res = device->CreateRenderTargetView(backTex, nullptr, &rtv);
 }
-int Game::CompileShaders()
+int PongGame::CompileShaders()
 {
 	retFlag = true;
 	res = D3DCompileFromFile(L"./Shaders/MyVeryFirstShader.hlsl", //create vertex shader from  hlsl file

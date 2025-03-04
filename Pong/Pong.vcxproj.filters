@@ -24,7 +24,7 @@
     <ClInclude Include="PlayerPaddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="PongGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MySuper3DApp.h">
@@ -41,7 +41,7 @@
     <ClCompile Include="PlayerPaddle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="PongGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MySuper3DApp.cpp">

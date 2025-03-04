@@ -134,22 +134,42 @@
     <FxCompile Include="Shaders\MyVeryFirstShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CPP\Delegates.cpp" />
     <ClCompile Include="CPP\DisplayWin32.cpp" />
+    <ClCompile Include="CPP\Game.cpp" />
     <ClCompile Include="CPP\InputDevice.cpp" />
     <ClCompile Include="CPP\Square.cpp" />
     <ClCompile Include="CPP\Triangle.cpp" />
     <ClCompile Include="CPP\TriangleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CPP\Delegates.h" />
     <ClInclude Include="CPP\DisplayWin32.h" />
+    <ClInclude Include="CPP\Game.h" />
     <ClInclude Include="CPP\InputDevice.h" />
+    <ClInclude Include="CPP\Keys.h" />
     <ClInclude Include="CPP\ShapeType.h" />
     <ClInclude Include="CPP\Square.h" />
     <ClInclude Include="CPP\Triangle.h" />
     <ClInclude Include="CPP\TriangleComponent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DirectXTK-main\DirectXTK_Desktop_2022_Win10.vcxproj">
+      <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

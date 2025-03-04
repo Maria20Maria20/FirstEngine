@@ -6,19 +6,67 @@ PlayerPaddle::PlayerPaddle()
 
 PlayerPaddle::PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     DirectX::XMFLOAT4 colors[4],
-    Microsoft::WRL::ComPtr<ID3D11Device> device,
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
+    ID3D11Device* device,
+    ID3D11DeviceContext* context,
     ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
-    ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32 display,
+    ID3D11VertexShader* vs,
+    ID3D11PixelShader* ps,
+    DisplayWin32 display,
     DirectX::XMFLOAT4 startPos)
     : Square(vertexPositions, colors, startPos, device, context, vertexBC),
     minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(0.0f), speed(0.5f), renderTargetView(rtv),
     vertexShader(vs), pixelShader(ps), Display(display), position(startPos)
 {
-    inputDevice = new InputDevice();
+    //inputDevice = new InputDevice();
     //RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), 30);
+    // Подписываемся на события клавиш
+    //moveUpHandle = inputDevice->MouseMove.AddRaw(
+    //    this,
+    //    &PlayerPaddle::HandleMoveUp
+    //);
+
+    //moveDownHandle = inputDevice->OnKeyPressed.AddRaw(
+    //    this,
+    //    &PlayerPaddle::HandleMoveDown
+    //);
+    InputDevice::getInstance().MouseMove.AddRaw(this, &PlayerPaddle::OnMouseMoved);
+    //InputDevice::getInstance().OnMouseMove({
+    //    raw->data.mouse.usFlags,
+    //    raw->data.mouse.usButtonFlags,
+    //    static_cast<int>(raw->data.mouse.ulExtraInformation),
+    //    static_cast<int>(raw->data.mouse.ulRawButtons),
+    //    static_cast<short>(raw->data.mouse.usButtonData),
+    //    raw->data.mouse.lLastX,
+    //    raw->data.mouse.lLastY
+    //    });
+
+}
+void PlayerPaddle::OnMouseMoved(const InputDevice::MouseMoveEventArgs& args)
+{
+    // Двигаем ракетку только по оси Y
+    std::cout << "Offset: " << args.Offset.y << std::endl;
+    MoveShape(0, args.Offset.y * speed, 0);
 }
 
+void PlayerPaddle::OnKeyDown(KeyboardInputEventArgs args)
+{
+    std::cout << "My key: " << args.VKey << std::endl;
+}
+
+
+void PlayerPaddle::HandleMoveUp(Keys key) {
+    std::cout << "Up";
+    if (key == Keys::Up && !hitYUp) {
+        directionY = 1.0f;
+    }
+}
+
+void PlayerPaddle::HandleMoveDown(Keys key) {
+    std::cout << "Down";
+    if (key == Keys::Down && !hitYDown) {
+        directionY = -1.0f;
+    }
+}
 void PlayerPaddle::Update(float deltaTime)
 {
     UINT strides[] = { 32 };
@@ -30,32 +78,34 @@ void PlayerPaddle::Update(float deltaTime)
     SetVertexAndPixelShaders();
     SetBackBufferOutput(1, &renderTargetView, nullptr);
 
-    inputDevice->Update();
-    // Считываем ввод
-    bool upPressed = inputDevice->upPressed;
-    bool downPressed = inputDevice->downPressed;
+    //inputDevice->Update();
+    //// Считываем ввод
+    //bool upPressed = inputDevice->upPressed;
+    //bool downPressed = inputDevice->downPressed;
 
     // Обновляем статус столкновения
-    if (upPressed || downPressed)
-    {
-        CheckBorderCollision();
-    }
-    // Определяем направление движения
-    if (upPressed && !hitYUp)
-    {
-        directionY = 1;
-    }
-    else if (downPressed && !hitYDown)
-    {
-        directionY = -1;
-    }
-    else
-    {
-        directionY = 0;
-    }
+    //if (upPressed || downPressed)
+    //{
+    //    CheckBorderCollision();
+    //}
+    //// Определяем направление движения
+    //if (upPressed && !hitYUp)
+    //{
+    //    directionY = 1;
+    //}
+    //else if (downPressed && !hitYDown)
+    //{
+    //    directionY = -1;
+    //}
+    //else
+    //{
+    //    directionY = 0;
+    //}
 
     // Двигаем ракетку
     MoveShape(directionX * speed * deltaTime, directionY * speed * deltaTime, 0);
+    directionY = 0; // Сброс направления после движения
+    CheckBorderCollision();
 }
 void PlayerPaddle::SetupViewport()
 {

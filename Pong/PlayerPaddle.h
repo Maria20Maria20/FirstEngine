@@ -3,6 +3,7 @@
 
 #include <CPP/Square.h>
 #include <CPP/DisplayWin32.h>
+#include <CPP/Delegates.h>
 #include <CPP/InputDevice.h>
 
 class PlayerPaddle : public Square
@@ -11,14 +12,16 @@ public:
     PlayerPaddle();
     PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
         DirectX::XMFLOAT4 colors[4],
-        Microsoft::WRL::ComPtr<ID3D11Device> device,
-        Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
+        ID3D11Device* device,
+        ID3D11DeviceContext* context,
         ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
         ID3D11VertexShader* vs,
         ID3D11PixelShader* ps,
         DisplayWin32 display,
         DirectX::XMFLOAT4 startPos);
 
+    void HandleMoveUp(Keys key);
+    void HandleMoveDown(Keys key);
     void Update(float deltaTime); // Метод обновления движения
     float speed;
     float DefaultSpeed = 0.5f;
@@ -38,10 +41,13 @@ public:
     bool CheckBorderCollision();
     int ScoreCount;
 private:
-    InputDevice* inputDevice = nullptr;
     float minClamp;
     float maxClamp;
     bool hitYUp, hitYDown;
+    DelegateHandle moveUpHandle;
+    DelegateHandle moveDownHandle;
+    void OnMouseMoved(const InputDevice::MouseMoveEventArgs& args);
+    void OnKeyDown(KeyboardInputEventArgs args);
 };
 
 #endif

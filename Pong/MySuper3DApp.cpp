@@ -1,30 +1,15 @@
 // MySuper3DApp.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <windows.h>
-#include <WinUser.h>
-#include <wrl.h>
-#pragma once
-#include <iostream>
-#include <d3d.h>
-#include <d3d11.h>
-#include <d3dcompiler.h>
-#include <directxmath.h>
-#include <chrono>
 #include "MySuper3DApp.h"
 
-
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "d3dcompiler.lib")
-#pragma comment(lib, "dxguid.lib")
 MySuper3DApp::MySuper3DApp()
 {
 
 }
 int main()
 {
-	Game game = Game();
+	PongGame game = PongGame();
 	game.Initialize();
 
 	std::cout << "Hello World!\n";
