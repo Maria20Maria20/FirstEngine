@@ -9,7 +9,7 @@ NPCPaddle::NPCPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     Microsoft::WRL::ComPtr<ID3D11Device> device,
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
     ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
-    ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32 display,
+    ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32* display,
     DirectX::XMFLOAT4 startPos)
     : Square(vertexPositions, colors, startPos, device, context, vertexBC),
     directionY(1.0f), directionX(0.0f), speed(0.5f), renderTargetView(rtv),
@@ -48,8 +48,8 @@ void NPCPaddle::Update(float deltaTime)
 void NPCPaddle::SetupViewport()
 {
     D3D11_VIEWPORT viewport = {};
-    viewport.Width = static_cast<float>(Display.ScreenWidth);
-    viewport.Height = static_cast<float>(Display.ScreenHeight);
+    viewport.Width = static_cast<float>(Display->ScreenWidth);
+    viewport.Height = static_cast<float>(Display->ScreenHeight);
     viewport.TopLeftX = 0;
     viewport.TopLeftY = 0;
     viewport.MinDepth = 0;
@@ -83,7 +83,7 @@ DirectX::BoundingBox NPCPaddle::GetNPCBoundingBox() const
 }
 bool NPCPaddle::CheckBorderCollision()
 {
-    DirectX::BoundingBox* screenBox = Display.GetScreenBorders();
+    DirectX::BoundingBox* screenBox = Display->GetScreenBorders();
     DirectX::BoundingBox paddleBox = GetNPCBoundingBox();
     hitY = screenBox[0].Intersects(paddleBox) || screenBox[1].Intersects(paddleBox);
     hitX = screenBox[2].Intersects(paddleBox) || screenBox[3].Intersects(paddleBox);

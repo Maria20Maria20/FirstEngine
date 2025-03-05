@@ -15,7 +15,7 @@ public:
         ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
         ID3D11VertexShader* vs,
         ID3D11PixelShader* ps,
-        DisplayWin32 display,
+        DisplayWin32* display,
         DirectX::XMFLOAT4 startPos);
 
     void Update(float deltaTime); // Метод обновления движения
@@ -24,7 +24,7 @@ public:
     ID3D11RenderTargetView* renderTargetView;
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
-    DisplayWin32 Display;
+    DisplayWin32* Display;
     DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(-0.05f, -0.2f, 0.5f, 1.0f);
     float width = 0.1;
     float height = 0.4;

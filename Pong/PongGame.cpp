@@ -1,13 +1,13 @@
 #include "PongGame.h"
 
-PongGame::PongGame()
+PongGame::PongGame(DisplayWin32* display)
 {
-
+	this->display = display;
 }
 
 int PongGame::Initialize()
 {
-	display.InitWindow();
+	display->InitWindow();
 	res = InitSwapChain();
 	GetBackBufferAndCreateRTV();
 	retVal = CompileShaders();
@@ -139,7 +139,7 @@ void PongGame::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float
 
 			WCHAR text[256];
 			swprintf_s(text, TEXT("FPS: %f"), fps);
-			SetWindowText(display.hWnd, text);
+			SetWindowText(display->hWnd, text);
 
 			frameCount = 0;
 		}
@@ -187,8 +187,8 @@ void PongGame::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float
 void PongGame::SetupViewport()
 {
 	D3D11_VIEWPORT viewport = {};
-	viewport.Width = static_cast<float>(display.ScreenWidth);
-	viewport.Height = static_cast<float>(display.ScreenHeight);
+	viewport.Width = static_cast<float>(display->ScreenWidth);
+	viewport.Height = static_cast<float>(display->ScreenHeight);
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0;
@@ -222,15 +222,15 @@ HRESULT PongGame::InitSwapChain() //swap between back and front buffers
 
 	swapDesc = {}; //description for creating swap chain
 	swapDesc.BufferCount = 2; //windows count (back and front window)
-	swapDesc.BufferDesc.Width = display.ScreenWidth;
-	swapDesc.BufferDesc.Height = display.ScreenHeight;
+	swapDesc.BufferDesc.Width = display->ScreenWidth;
+	swapDesc.BufferDesc.Height = display->ScreenHeight;
 	swapDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapDesc.BufferDesc.RefreshRate.Numerator = 60; //update rate 
 	swapDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapDesc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED; //sweep drawing mode
 	swapDesc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED; //scaling mode
 	swapDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; //parameter buffer usage (here create back and front buffer)
-	swapDesc.OutputWindow = display.hWnd; //show window
+	swapDesc.OutputWindow = display->hWnd; //show window
 	swapDesc.Windowed = true; //show mode (window or full screen)
 	swapDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; //options for working with the buffer after its output
 	swapDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; //switch between window and full screen mode
@@ -287,7 +287,7 @@ int PongGame::CompileShaders()
 		// If there was  nothing in the error message then it simply could not find the shader file itself.
 		else
 		{
-			MessageBox(display.hWnd, L"MyVeryFirstShader.hlsl", L"Missing Shader File", MB_OK);
+			MessageBox(display->hWnd, L"MyVeryFirstShader.hlsl", L"Missing Shader File", MB_OK);
 		}
 
 		return 0;

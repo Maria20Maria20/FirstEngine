@@ -1,8 +1,2 @@
 ﻿  DisplayWin32.cpp
-  InputDevice.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,53): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,48): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

@@ -4,6 +4,7 @@ PlayerPaddle::PlayerPaddle()
 {
 }
 
+
 PlayerPaddle::PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     DirectX::XMFLOAT4 colors[4],
     ID3D11Device* device,
@@ -11,60 +12,39 @@ PlayerPaddle::PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
     ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
     ID3D11VertexShader* vs,
     ID3D11PixelShader* ps,
-    DisplayWin32 display,
+    DisplayWin32* display,
     DirectX::XMFLOAT4 startPos)
     : Square(vertexPositions, colors, startPos, device, context, vertexBC),
     minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(0.0f), speed(0.5f), renderTargetView(rtv),
     vertexShader(vs), pixelShader(ps), Display(display), position(startPos)
 {
-    //inputDevice = new InputDevice();
     //RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), 30);
-    // Подписываемся на события клавиш
-    //moveUpHandle = inputDevice->MouseMove.AddRaw(
-    //    this,
-    //    &PlayerPaddle::HandleMoveUp
-    //);
-
-    //moveDownHandle = inputDevice->OnKeyPressed.AddRaw(
-    //    this,
-    //    &PlayerPaddle::HandleMoveDown
-    //);
-    InputDevice::getInstance().MouseMove.AddRaw(this, &PlayerPaddle::OnMouseMoved);
-    //InputDevice::getInstance().OnMouseMove({
-    //    raw->data.mouse.usFlags,
-    //    raw->data.mouse.usButtonFlags,
-    //    static_cast<int>(raw->data.mouse.ulExtraInformation),
-    //    static_cast<int>(raw->data.mouse.ulRawButtons),
-    //    static_cast<short>(raw->data.mouse.usButtonData),
-    //    raw->data.mouse.lLastX,
-    //    raw->data.mouse.lLastY
-    //    });
-
+    InputDevice::getInstance().OnKeyPressed.AddRaw(this, &PlayerPaddle::HandleMoveDown);
+    InputDevice::getInstance().OnKeyReleased.AddRaw(this, &PlayerPaddle::HandleMoveUp);
+    //InputDevice::getInstance().MouseMove.AddRaw(this, &PlayerPaddle::OnMouseMoved);
+    directionY = 0;
 }
 void PlayerPaddle::OnMouseMoved(const InputDevice::MouseMoveEventArgs& args)
 {
     // Двигаем ракетку только по оси Y
-    std::cout << "Offset: " << args.Offset.y << std::endl;
-    MoveShape(0, args.Offset.y * speed, 0);
+    //std::cout << "Offset: " << args.Offset.y << std::endl;
+    directionY = args.Offset.y;
 }
-
-void PlayerPaddle::OnKeyDown(KeyboardInputEventArgs args)
-{
-    std::cout << "My key: " << args.VKey << std::endl;
-}
-
 
 void PlayerPaddle::HandleMoveUp(Keys key) {
-    std::cout << "Up";
-    if (key == Keys::Up && !hitYUp) {
-        directionY = 1.0f;
-    }
+    directionY = 0;
 }
 
 void PlayerPaddle::HandleMoveDown(Keys key) {
-    std::cout << "Down";
-    if (key == Keys::Down && !hitYDown) {
+    if (key == Keys::Up && !hitYUp) {
+        directionY = 1.0f;
+    }
+    else if (key == Keys::Down && !hitYDown) {
         directionY = -1.0f;
+    }
+    else
+    {
+        directionY = 0;
     }
 }
 void PlayerPaddle::Update(float deltaTime)
@@ -78,40 +58,15 @@ void PlayerPaddle::Update(float deltaTime)
     SetVertexAndPixelShaders();
     SetBackBufferOutput(1, &renderTargetView, nullptr);
 
-    //inputDevice->Update();
-    //// Считываем ввод
-    //bool upPressed = inputDevice->upPressed;
-    //bool downPressed = inputDevice->downPressed;
-
-    // Обновляем статус столкновения
-    //if (upPressed || downPressed)
-    //{
-    //    CheckBorderCollision();
-    //}
-    //// Определяем направление движения
-    //if (upPressed && !hitYUp)
-    //{
-    //    directionY = 1;
-    //}
-    //else if (downPressed && !hitYDown)
-    //{
-    //    directionY = -1;
-    //}
-    //else
-    //{
-    //    directionY = 0;
-    //}
-
     // Двигаем ракетку
     MoveShape(directionX * speed * deltaTime, directionY * speed * deltaTime, 0);
-    directionY = 0; // Сброс направления после движения
     CheckBorderCollision();
 }
 void PlayerPaddle::SetupViewport()
 {
     D3D11_VIEWPORT viewport = {};
-    viewport.Width = static_cast<float>(Display.ScreenWidth);
-    viewport.Height = static_cast<float>(Display.ScreenHeight);
+    viewport.Width = static_cast<float>(Display->ScreenWidth);
+    viewport.Height = static_cast<float>(Display->ScreenHeight);
     viewport.TopLeftX = 0;
     viewport.TopLeftY = 0;
     viewport.MinDepth = 0;
@@ -145,11 +100,16 @@ DirectX::BoundingBox PlayerPaddle::GetPlayerBoundingBox() const
 }
 bool PlayerPaddle::CheckBorderCollision()
 {
-    DirectX::BoundingBox* screenBox = Display.GetScreenBorders();
+    DirectX::BoundingBox* screenBox = Display->GetScreenBorders();
     DirectX::BoundingBox paddleBox = GetPlayerBoundingBox();
     hitYUp = screenBox[0].Intersects(paddleBox);
     hitYDown = screenBox[1].Intersects(paddleBox);
     return hitYUp || hitYDown;
+}
+PlayerPaddle::~PlayerPaddle()
+{
+    InputDevice::getInstance().OnKeyPressed.RemoveAll();
+    InputDevice::getInstance().OnKeyReleased.RemoveAll();
 }
 
 

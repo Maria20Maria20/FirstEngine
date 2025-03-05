@@ -24,12 +24,11 @@
 class PongGame
 {
 public:
-	PongGame();
+	PongGame(DisplayWin32* display);
 	int Initialize();
-	DisplayWin32 display = DisplayWin32();
 private:
 	//std::vector<Triangle> triangles;
-
+	DisplayWin32* display;
 	Ball* ball;
 	NPCPaddle* npcPaddle = nullptr;
 	PlayerPaddle* playerPaddle = nullptr;

@@ -9,7 +9,7 @@ Ball::Ball(DirectX::XMFLOAT4 vertexPositions[4],
 	Microsoft::WRL::ComPtr<ID3D11Device> device,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
 	ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
-	ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32 display,
+	ID3D11VertexShader* vs, ID3D11PixelShader* ps, DisplayWin32* display,
 	DirectX::XMFLOAT4 startPos, PlayerPaddle* player, NPCPaddle* npc)
 	: Square(vertexPositions, colors, startPos, device, context, vertexBC),
 	minClamp(minClamp), maxClamp(maxClamp), directionY(1.0f), directionX(-0.5f), speed(0.5f), renderTargetView(rtv),
@@ -66,8 +66,8 @@ void Ball::Update(float deltaTime)
 void Ball::SetupViewport()
 {
 	D3D11_VIEWPORT viewport = {};
-	viewport.Width = static_cast<float>(Display.ScreenWidth);
-	viewport.Height = static_cast<float>(Display.ScreenHeight);
+	viewport.Width = static_cast<float>(Display->ScreenWidth);
+	viewport.Height = static_cast<float>(Display->ScreenHeight);
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0;
@@ -101,7 +101,7 @@ DirectX::BoundingBox Ball::GetBallBoundingBox() const
 }
 bool Ball::CheckBorderCollision()
 {
-	DirectX::BoundingBox* screenBox = Display.GetScreenBorders();
+	DirectX::BoundingBox* screenBox = Display->GetScreenBorders();
 	DirectX::BoundingBox playerBox = player->GetPlayerBoundingBox();
 	DirectX::BoundingBox npcBox = npc->GetNPCBoundingBox();
 	DirectX::BoundingBox ballBox = GetBallBoundingBox();

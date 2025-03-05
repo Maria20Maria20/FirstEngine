@@ -10,6 +10,7 @@ class PlayerPaddle : public Square
 {
 public:
     PlayerPaddle();
+    ~PlayerPaddle();
     PlayerPaddle(DirectX::XMFLOAT4 vertexPositions[4],
         DirectX::XMFLOAT4 colors[4],
         ID3D11Device* device,
@@ -17,18 +18,16 @@ public:
         ID3DBlob* vertexBC, ID3D11RenderTargetView* rtv,
         ID3D11VertexShader* vs,
         ID3D11PixelShader* ps,
-        DisplayWin32 display,
+        DisplayWin32* display,
         DirectX::XMFLOAT4 startPos);
 
-    void HandleMoveUp(Keys key);
-    void HandleMoveDown(Keys key);
     void Update(float deltaTime); // Метод обновления движения
     float speed;
     float DefaultSpeed = 0.5f;
     ID3D11RenderTargetView* renderTargetView;
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
-    DisplayWin32 Display;
+    DisplayWin32* Display;
     const DirectX::XMFLOAT4 position = DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
     float width = 0.1;
     float height = 0.4;
@@ -47,7 +46,8 @@ private:
     DelegateHandle moveUpHandle;
     DelegateHandle moveDownHandle;
     void OnMouseMoved(const InputDevice::MouseMoveEventArgs& args);
-    void OnKeyDown(KeyboardInputEventArgs args);
+    void HandleMoveUp(Keys key);
+    void HandleMoveDown(Keys key);
 };
 
 #endif
