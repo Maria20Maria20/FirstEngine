@@ -1,6 +1,4 @@
 #include "Cube.h"
-#include <d3dcompiler.h>
-#include <iostream>
 
 using namespace DirectX;
 
@@ -28,10 +26,10 @@ void Cube::InitializeBuffers(ID3D11Device* device)
         XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f),
         XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f),
         XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f),
-        XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
+        XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
+        XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
     };
-    for (size_t i = 0; i < 16; i++) //16 = vertecies and colors
+    for (size_t i = 0; i < 8; i++) //8 vertecies (vertex = position + color)
     {
         vertices[i] = _vertices[i];
     }
@@ -187,11 +185,6 @@ void Cube::Update(float dt)
 
 void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
 {
-    for (size_t i = 0; i < 4; i++)
-    {
-        std::cout << vertices[2*i].position.x << " " << vertices[2*i].position.y << " " << vertices[2 * i].position.z << " ";
-    }
-    std::cout <<  "\n";
 
     // Установка вершинного буфера
     UINT stride[] = { 32 };

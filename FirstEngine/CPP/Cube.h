@@ -3,6 +3,7 @@
 #include <DirectXMath.h>
 #include <wrl/client.h>
 #include <memory>
+#include <d3dcompiler.h>
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
