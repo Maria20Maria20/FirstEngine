@@ -1,4 +1,5 @@
 #include "Square.h"
+#include <iostream>
 
 Square::Square()
 {
@@ -25,6 +26,7 @@ Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
     initData.pSysMem = &transformData;
     device->CreateBuffer(&constantBufferDesc, &initData, &cbTransform);
     CreateInputLayout();
+    std::cout << "MMM\n";
 	for (int i = 0; i < 4; i++)
 	{
 		VertexPositions[i] = vertexPositions[i];

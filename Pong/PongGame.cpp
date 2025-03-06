@@ -1,5 +1,5 @@
 #include "PongGame.h"
-
+#include <CPP/Cube.h>
 PongGame::PongGame(DisplayWin32* display)
 {
 	this->display = display;
@@ -78,6 +78,33 @@ int PongGame::Initialize()
 	ball = new Ball(ballVertices, paddleColors, device, context, vertexBC, rtv, vertexShader, pixelShader,
 		display, startPosition4, playerPaddle, npcPaddle);
 	ball->InitializeShape(4);
+
+	DirectX::XMFLOAT4 cubeVertices[8] = {
+	{-0.5f, -0.5f, -0.5f, 1.0f}, // 0
+	{ 0.5f, -0.5f, -0.5f, 1.0f}, // 1
+	{-0.5f,  0.5f, -0.5f, 1.0f}, // 2
+	{ 0.5f,  0.5f, -0.5f, 1.0f}, // 3
+	{-0.5f, -0.5f,  0.5f, 1.0f}, // 4
+	{ 0.5f, -0.5f,  0.5f, 1.0f}, // 5
+	{-0.5f,  0.5f,  0.5f, 1.0f}, // 6
+	{ 0.5f,  0.5f,  0.5f, 1.0f}  // 7
+		};
+	// Цвета для каждой вершины (RGBA)
+	DirectX::XMFLOAT4 cubeColors[8] = {
+		{1.0f, 0.0f, 0.0f, 1.0f}, // Красный
+		{0.0f, 1.0f, 0.0f, 1.0f}, // Зеленый
+		{0.0f, 0.0f, 1.0f, 1.0f}, // Синий
+		{1.0f, 1.0f, 0.0f, 1.0f}, // Желтый
+		{1.0f, 0.0f, 1.0f, 1.0f}, // Пурпурный
+		{0.0f, 1.0f, 1.0f, 1.0f}, // Голубой
+		{0.5f, 0.5f, 0.5f, 1.0f}, // Серый
+		{1.0f, 1.0f, 1.0f, 1.0f}  // Белый
+	};
+
+	// Начальная позиция куба
+	DirectX::XMFLOAT4 startPos = { 0.0f, 0.0f, 0.0f, 1.0f };
+	mCube = std::make_unique<Cube>(device, vertexBC, vertexShader, pixelShader, rtv);
+
 
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
@@ -177,6 +204,11 @@ void PongGame::WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float
 		npcPaddle->Update(deltaTime);
 		playerPaddle->Update(deltaTime);
 		ball->Update(deltaTime);
+		mCube->Update(deltaTime);
+		XMMATRIX nXMMATRIX = XMMatrixIdentity();
+		mCube->Draw(context, nXMMATRIX);
+		
+		//cube.MoveShape(0.0f, 0.0f, 0.0f);
 
 
 		SetBackBufferOutput(0, nullptr, nullptr);

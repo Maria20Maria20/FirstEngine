@@ -15,6 +15,9 @@
 #include "PlayerPaddle.h"
 #include "Ball.h"
 #include <CPP/Game.h>
+#include <CPP/Cube.h>
+#include "../SolarSystem/Sun.h"
+
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -26,6 +29,8 @@ class PongGame
 public:
 	PongGame(DisplayWin32* display);
 	int Initialize();
+
+	std::unique_ptr<Cube> mCube;
 private:
 	//std::vector<Triangle> triangles;
 	DisplayWin32* display;

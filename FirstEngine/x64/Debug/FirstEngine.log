@@ -1,2 +1,4 @@
-﻿  DisplayWin32.cpp
+﻿  Cube.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(178,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(179,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

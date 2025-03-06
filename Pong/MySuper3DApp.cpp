@@ -2,6 +2,7 @@
 //
 
 #include "MySuper3DApp.h"
+#include <CPP/Cube.h>
 
 MySuper3DApp::MySuper3DApp()
 {
@@ -11,7 +12,6 @@ int main()
 {
 	PongGame game = PongGame(Game::getInstance().display);
 	game.Initialize();
-
 	std::cout << "Hello World!\n";
 }
 

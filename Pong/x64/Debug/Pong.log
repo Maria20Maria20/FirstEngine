@@ -1,23 +1,4 @@
-﻿  Ball.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(32,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(33,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
-  
-  MySuper3DApp.cpp
+﻿  MySuper3DApp.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'MySuper3DApp.cpp')
   
@@ -35,13 +16,6 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C43
   
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'MySuper3DApp.cpp')
-  
-  PlayerPaddle.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(32,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'PlayerPaddle.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PlayerPaddle.h(33,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'PlayerPaddle.cpp')
   
   PongGame.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
