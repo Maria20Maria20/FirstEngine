@@ -18,9 +18,15 @@
     <ClInclude Include="Sun.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StartSolarSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sun.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartSolarSystem.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

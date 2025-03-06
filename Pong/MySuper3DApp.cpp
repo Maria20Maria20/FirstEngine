@@ -10,9 +10,11 @@ MySuper3DApp::MySuper3DApp()
 }
 int main()
 {
-	PongGame game = PongGame(Game::getInstance().display);
-	game.Initialize();
-	std::cout << "Hello World!\n";
+	PongGame* game = new PongGame();
+	game->InstanceObjects();
+	//StartSolarSystem* game = new StartSolarSystem();
+	//game->InstanceObjects();
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

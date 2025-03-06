@@ -139,10 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="StartSolarSystem.h" />
     <ClInclude Include="Sun.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="StartSolarSystem.cpp" />
     <ClCompile Include="Sun.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FirstEngine\FirstEngine.vcxproj">
+      <Project>{485dacbb-e0e9-440a-a7d5-bb3d2e7f7845}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

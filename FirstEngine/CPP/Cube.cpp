@@ -208,10 +208,10 @@ void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
     context->RSSetViewports(1, &viewport);
 
     // Установка шейдеров и ресурсов
-    context->VSSetShader(mVertexShader, nullptr, 0);
-    context->PSSetShader(mPixelShader, nullptr, 0);
-    
-    context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
+    //context->VSSetShader(mVertexShader, nullptr, 0);
+    //context->PSSetShader(mPixelShader, nullptr, 0);
+    //
+    //context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
     // Обновление константного буфера
     //cb.worldViewProj = XMMatrixTranspose(mWorldMatrix * viewProj);
