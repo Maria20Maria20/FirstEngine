@@ -5,11 +5,14 @@
 using namespace DirectX;
 
 Cube::Cube(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
-    ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv)
+    ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView)
     : mRotationAngle(0.0f), vsBlob(vertexBC), mVertexShader(vs), mPixelShader(ps), 
-    renderTargetView(rtv)
+    renderTargetView(rtv), depthStencilView(depthStencilView)
 {
-    mWorldMatrix = XMMatrixIdentity();
+    mWorldMatrix = XMMatrixIdentity(); // каждый раз инициализировать, а не домножать на её предыдущее
+
+    mRotationMatrix = XMMatrixIdentity();
+    mScaleMatrix = XMMatrixIdentity();
     InitializeBuffers(device);
     InitializeShaders(device, vs, ps);
 }
@@ -19,16 +22,16 @@ void Cube::InitializeBuffers(ID3D11Device* device)
     
 
     Vertex _vertices[8] = {
-        XMFLOAT4(-0.1f, -0.1f, 0.4f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(-0.1f, +0.1f, 0.4f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(+0.1f, +0.1f, 0.4f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(+0.1f, -0.1f, 0.4f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(-0.1f, -0.1f, 0.6f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(-0.1f, +0.1f, 0.6f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(+0.1f, +0.1f, 0.6f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(+0.1f, -0.1f, 0.6f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
+        XMFLOAT4(-0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f),
+        XMFLOAT4(-0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f),
+        XMFLOAT4(+0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f),
+        XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f),
+        XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f),
+        XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f),
+        XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
+        XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f),
     };
-    for (size_t i = 0; i < 8; i++)
+    for (size_t i = 0; i < 16; i++) //16 = vertecies and colors
     {
         vertices[i] = _vertices[i];
     }
@@ -174,11 +177,12 @@ void Cube::Update(float dt)
 {
     //mRotationAngle += 1.0f * dt;
     //auto rotation = XMMatrixRotationX(1.); 
-    //mWorldMatrix = rotation * XMMatrixRotationY(mRotationAngle);
 
     RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .1, dt);
     RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .1, dt);
     //mWorldMatrix = mWorldMatrix * DirectX::XMMatrixTranslation(0, 0, 0.3);
+
+    mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
 }
 
 void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
@@ -214,7 +218,7 @@ void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
     context->VSSetShader(mVertexShader, nullptr, 0);
     context->PSSetShader(mPixelShader, nullptr, 0);
     
-    context->OMSetRenderTargets(1, &renderTargetView, nullptr);
+    context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
     // Обновление константного буфера
     //cb.worldViewProj = XMMatrixTranspose(mWorldMatrix * viewProj);
@@ -241,10 +245,10 @@ void Cube::RotateShape(FXMVECTOR Axis, FLOAT Angle, float deltaTime)
         return; // Если ось некорректна, не выполняем вращение
     }
     XMMATRIX rotateMatrix = XMMatrixRotationAxis(normalizedAxis, XMConvertToRadians(Angle));
-    mWorldMatrix *= rotateMatrix;
+    mRotationMatrix *= rotateMatrix;
 }
 void Cube::ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFactorZ)
 {
     XMMATRIX scalingMatrix = XMMatrixScaling(scaleFactorX, scaleFactorY, scaleFactorZ);
-    mWorldMatrix *= scalingMatrix;
+    mScaleMatrix *= scalingMatrix;
 }

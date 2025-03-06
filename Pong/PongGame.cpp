@@ -103,7 +103,7 @@ int PongGame::Initialize()
 
 	// Начальная позиция куба
 	DirectX::XMFLOAT4 startPos = { 0.0f, 0.0f, 0.0f, 1.0f };
-	mCube = std::make_unique<Cube>(device, vertexBC, vertexShader, pixelShader, rtv);
+	mCube = std::make_unique<Cube>(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView);
 
 
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));

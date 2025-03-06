@@ -11,12 +11,15 @@ class Cube
 {
 public:
     Cube(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
-        ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv);
+        ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
+        ID3D11DepthStencilView* depthStencilView);
     void Update(float dt);
     void Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj);
 
     ID3D11RenderTargetView* renderTargetView;
     ID3D11RasterizerState* rastState;
+    ID3D11DepthStencilView* depthStencilView;
+
 
     struct Vertex
     {
@@ -50,5 +53,7 @@ private:
     ConstantBuffer cb;
 
     XMMATRIX mWorldMatrix;
+    XMMATRIX mRotationMatrix;
+    XMMATRIX mScaleMatrix;
     float mRotationAngle;
 };

@@ -1,4 +1,6 @@
 ﻿  Cube.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(179,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(180,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(181,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(182,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(185,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(185,61): warning C4305: 'argument': truncation from 'double' to 'float'
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib
