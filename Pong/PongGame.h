@@ -51,6 +51,7 @@ private:
 	ID3DBlob* errorPixelCode;
 	ID3D11VertexShader* vertexShader;
 	ID3D11PixelShader* pixelShader;
+	ID3D11DepthStencilView* depthStencilView;
 	//ID3D11InputLayout* layout;
 	bool retFlag;
 	int retVal;

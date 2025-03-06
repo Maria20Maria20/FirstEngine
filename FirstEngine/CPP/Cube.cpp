@@ -110,7 +110,7 @@ void Cube::InitializeBuffers(ID3D11Device* device)
     D3D11_INPUT_ELEMENT_DESC{
         "POSITION", //parameter name from hlsl file
         0, //need if we have more one element with same semantic
-        DXGI_FORMAT_R32G32B32A32_FLOAT,
+        DXGI_FORMAT_R32G32B32A32_FLOAT, //parameter for create 3D object
         0, //vertex index (between 0 and 15)
         0, //translation from beginning vertex
         D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
@@ -175,8 +175,10 @@ void Cube::Update(float dt)
     //mRotationAngle += 1.0f * dt;
     //auto rotation = XMMatrixRotationX(1.); 
     //mWorldMatrix = rotation * XMMatrixRotationY(mRotationAngle);
+
     RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .1, dt);
     RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .1, dt);
+    //mWorldMatrix = mWorldMatrix * DirectX::XMMatrixTranslation(0, 0, 0.3);
 }
 
 void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
