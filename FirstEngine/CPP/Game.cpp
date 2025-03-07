@@ -157,10 +157,9 @@ void Game::GetBackBufferAndCreateRTV()
 	depthStencilDesc.DepthEnable = TRUE;
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
-	ID3D11DepthStencilState* depthStencilState;
 	device->CreateDepthStencilState(&depthStencilDesc, &depthStencilState);
 	context->OMSetDepthStencilState(depthStencilState, 1u);
-	ID3D11Texture2D* pDepthStencil;
+
 	D3D11_TEXTURE2D_DESC descDepth = {};
 	descDepth.Width = 800;
 	descDepth.Height = 800;
@@ -172,11 +171,13 @@ void Game::GetBackBufferAndCreateRTV()
 	descDepth.Usage = D3D11_USAGE_DEFAULT;
 	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	device->CreateTexture2D(&descDepth, nullptr, &pDepthStencil);
+
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
 	descDSV.Format = DXGI_FORMAT_D32_FLOAT;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0u;
 	device->CreateDepthStencilView(pDepthStencil, &descDSV, &depthStencilView);
+
 	SetBackBufferOutput(1u, &rtv, depthStencilView);
 }
 

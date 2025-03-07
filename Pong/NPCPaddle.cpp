@@ -19,12 +19,6 @@ NPCPaddle::NPCPaddle(DirectX::XMFLOAT4 vertexPositions[4],
 
 void NPCPaddle::Update(float deltaTime)
 {
-    UINT strides[] = { 32 };
-    UINT offsets[] = { 0 };
-
-    SetupIAStage(strides, offsets);
-    context->RSSetState(rastState);
-
     SetupViewport();
 
     //square->SetupIAStage(strides, offsets);

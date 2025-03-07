@@ -2,38 +2,38 @@
 #include <CPP/Cube.h>
 PongGame::PongGame()
 {
+	Initialize();
 }
 
 int PongGame::InstanceObjects()
 {
-	Initialize();
 
-	DirectX::XMFLOAT4 VertexPositions[3] = {
-	DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),
-	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),
-	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),
-	};
-	DirectX::XMFLOAT4 VertexPositionsSquare[4] = {
-	DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f),
-	DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),
-	DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),
-	DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),
-	};
+	//DirectX::XMFLOAT4 VertexPositions[3] = {
+	//DirectX::XMFLOAT4(0.0f, 0.5f, 0.5f, 1.0f),
+	//DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),
+	//DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),
+	//};
+	//DirectX::XMFLOAT4 VertexPositionsSquare[4] = {
+	//DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f),
+	//DirectX::XMFLOAT4(-0.5f, -0.5f, 0.5f, 1.0f),
+	//DirectX::XMFLOAT4(0.5f, -0.5f, 0.5f, 1.0f),
+	//DirectX::XMFLOAT4(-0.5f, 0.5f, 0.5f, 1.0f),
+	//};
 
-	DirectX::XMFLOAT4 Colors[3] = {
-	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
-	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
-	DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
-	};
-	DirectX::XMFLOAT4 ColorsSquare[4] = {
-	DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
-	DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
-	DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
-	DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
-	};
+	//DirectX::XMFLOAT4 Colors[3] = {
+	//DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+	//DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+	//DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+	//};
+	//DirectX::XMFLOAT4 ColorsSquare[4] = {
+	//DirectX::XMFLOAT4(0.7f, 0.08f, 0.9f, 1.0f),
+	//DirectX::XMFLOAT4(0.3f, 0.06f, 0.9f, 0.5f),
+	//DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 0.0f),
+	//DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+	//};
 
-	DirectX::XMFLOAT2 StartPosition = { 0.0f, 0.0f };
-	DirectX::XMFLOAT2 StartPositionSquare = { 0.5f, 0.5f };
+	//DirectX::XMFLOAT2 StartPosition = { 0.0f, 0.0f };
+	//DirectX::XMFLOAT2 StartPositionSquare = { 0.5f, 0.5f };
 
 	DirectX::XMFLOAT4 ballVertices[4] = {
 		{-0.05f, 0.05f, 0.5f, 1.0f}, //0 point
@@ -74,7 +74,7 @@ int PongGame::InstanceObjects()
 
 	// Начальная позиция куба
 	DirectX::XMFLOAT4 startPos = { 0.0f, 0.0f, 0.0f, 1.0f };
-	mCube = std::make_unique<Cube>(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView);
+	mCube = new Cube(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView, context);
 
 
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
@@ -123,8 +123,7 @@ void PongGame::PongWindowLoop(std::chrono::steady_clock::time_point& PrevTime, f
 		if (totalTime > 1.0f) {
 			float fps = frameCount / totalTime;
 
-			totalTime -= 1/ball->Flicker;
-			//totalTime -= 1.0f;
+			totalTime -= 1.0f;
 
 			WCHAR text[256];
 			swprintf_s(text, TEXT("FPS: %f"), fps);
@@ -167,8 +166,9 @@ void PongGame::PongWindowLoop(std::chrono::steady_clock::time_point& PrevTime, f
 		npcPaddle->Update(deltaTime);
 		playerPaddle->Update(deltaTime);
 		ball->Update(deltaTime);
-		mCube->Update(deltaTime);
 
+
+		mCube->Update(deltaTime);
 		XMMATRIX projection = XMMatrixIdentity();
 		mCube->Draw(context, projection);
 		

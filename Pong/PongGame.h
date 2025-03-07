@@ -29,7 +29,7 @@ public:
 	PongGame();
 	int InstanceObjects();
 
-	std::unique_ptr<Cube> mCube;
+	Cube* mCube;
 private:
 	Ball* ball;
 	NPCPaddle* npcPaddle = nullptr;

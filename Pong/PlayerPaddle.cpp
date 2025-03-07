@@ -49,11 +49,6 @@ void PlayerPaddle::HandleMoveDown(Keys key) {
 }
 void PlayerPaddle::Update(float deltaTime)
 {
-    UINT strides[] = { 32 };
-    UINT offsets[] = { 0 };
-
-    SetupIAStage(strides, offsets);
-    context->RSSetState(rastState);
     SetupViewport();
     SetVertexAndPixelShaders();
     SetBackBufferOutput(1, &renderTargetView, nullptr);

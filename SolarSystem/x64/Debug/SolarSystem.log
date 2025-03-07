@@ -1,0 +1,19 @@
+﻿  RunSolarSystem.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'RunSolarSystem.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'RunSolarSystem.cpp')
+  
+  StartSolarSystem.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'StartSolarSystem.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(30,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'StartSolarSystem.cpp')
+  
+  Sun.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\SolarSystem\Sun.cpp(12,48): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+C:\Users\123\Desktop\Github Projects\FirstEngine\SolarSystem\Sun.cpp(13,48): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+  Generating Code...
+  SolarSystem.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SolarSystem.exe

@@ -55,6 +55,9 @@ private:
     CD3D11_RASTERIZER_DESC rastDesc = {};
     ID3D11RasterizerState* rastState;
 
+    ID3D11DepthStencilState* depthStencilState;
+    ID3D11Texture2D* pDepthStencil;
+
     HRESULT InitSwapChain();
     void GetBackBufferAndCreateRTV();
     int CompileShaders();

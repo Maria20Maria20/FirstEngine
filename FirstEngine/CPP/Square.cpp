@@ -8,12 +8,23 @@ Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
 	DirectX::XMFLOAT4 colors[4], DirectX::XMFLOAT4 startPosition,
     Microsoft::WRL::ComPtr<ID3D11Device> device,
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context,
-    ID3DBlob* vertexBC)
+    ID3DBlob* vertexBC) : device(device), context(context),
+    vertexBC(vertexBC)
 {
-    this->device = device;
-    this->context = context;
-    this->vertexBC = vertexBC;
-
+	for (int i = 0; i < 4; i++)
+	{
+		VertexPositions[i] = vertexPositions[i];
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		Colors[i] = colors[i];
+	}
+	this->StartPosition = startPosition;
+    CreateConstantBuffer();
+    CreateInputLayout();
+}
+void Square::CreateConstantBuffer()
+{
     D3D11_BUFFER_DESC constantBufferDesc = {};
     constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC; //0 = CPU don't need, D3D11_USAGE_DYNAMIC = CPU need
     constantBufferDesc.ByteWidth = sizeof(CBTransform);
@@ -24,17 +35,6 @@ Square::Square(DirectX::XMFLOAT4 vertexPositions[4],
     D3D11_SUBRESOURCE_DATA initData = {};
     initData.pSysMem = &transformData;
     device->CreateBuffer(&constantBufferDesc, &initData, &cbTransform);
-    CreateInputLayout();
-
-	for (int i = 0; i < 4; i++)
-	{
-		VertexPositions[i] = vertexPositions[i];
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		Colors[i] = colors[i];
-	}
-	this->StartPosition = startPosition;
 }
 void Square::InitializeShape(int count)
 {
@@ -52,7 +52,6 @@ void Square::InitializeShape(int count)
         pointsAndColors[i * 2 + 1] = Colors[i];
     }
 
-    currentShape.assign(pointsAndColors.begin(), pointsAndColors.end());
     vertexCount = count * 2;
 
 
@@ -61,11 +60,14 @@ void Square::InitializeShape(int count)
 }
 void Square::MoveShape(float dx, float dy, float dz)
 {
-    if (currentShape.empty()) return;
     if (!vb) {
         throw std::runtime_error("Vertex buffer is not initialized.");
         return;
     }
+    UINT strides[] = { 32 };
+    UINT offsets[] = { 0 };
+
+    SetupIAStage(strides, offsets);
 
     DirectX::XMMATRIX moveMatrix = DirectX::XMMatrixTranslation(dx, dy, 0);
     transformData.translation *= moveMatrix;
@@ -82,6 +84,18 @@ void Square::MoveShape(float dx, float dy, float dz)
 
     context->VSSetConstantBuffers(0, 1, &cbTransform);
     context->DrawIndexed(6, 0, 0);
+}
+void Square::SetupViewport()
+{
+    D3D11_VIEWPORT viewport = {};
+    viewport.Width = static_cast<float>(Game::getInstance().display->ScreenWidth);
+    viewport.Height = static_cast<float>(Game::getInstance().display->ScreenHeight);
+    viewport.TopLeftX = 0;
+    viewport.TopLeftY = 0;
+    viewport.MinDepth = 0;
+    viewport.MaxDepth = 1.0f;
+
+    context->RSSetViewports(1, &viewport);
 }
 
 void Square::RotateShape(FXMVECTOR Axis, FLOAT Angle)
@@ -185,4 +199,5 @@ void Square::CreateInputLayout()
         vertexBC->GetBufferSize(),
         &layout);
 }
+
 

@@ -5,6 +5,8 @@
 #include <wrl.h>
 #include <stdexcept>
 #include <DirectXCollision.h>
+#include "Game.h"
+
 using namespace DirectX;
 
 struct CBTransform { //constant buffer transform
@@ -27,7 +29,6 @@ public:
 	void InitializeShape(int count);
 
 	float MoveSpeed = 0.1f;
-	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);	
 protected:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 	ID3D11RasterizerState* rastState;
@@ -35,6 +36,8 @@ protected:
 	void MoveShape(float dx, float dy, float dz);
 	void RotateShape(FXMVECTOR Axis, FLOAT Angle);
 	void ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFactorZ);
+	void SetupIAStage(UINT  strides[1], UINT  offsets[1]);	
+	void SetupViewport();
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11Buffer* vb;  // vertex buffer
@@ -43,10 +46,10 @@ private:
 	ID3D11InputLayout* layout;
 	int vertexCount = 0;
 	ID3DBlob* vertexBC = nullptr;
-	std::vector<XMFLOAT4> currentShape;
 	float DirectionX = -1.0f;
 	float DirectionY = 0.0f;
 	void CreateInputLayout();
+	void CreateConstantBuffer();
 	void CreateVertexBuffer(XMFLOAT4 points[], int count, const XMFLOAT4& translation);
 	void CreateIndexBuffer();
 };

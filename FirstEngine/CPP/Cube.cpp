@@ -2,32 +2,51 @@
 
 using namespace DirectX;
 
-Cube::Cube(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
-    ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView)
+Cube::Cube(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
+    ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
+    ID3D11DepthStencilView* depthStencilView, Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
     : mRotationAngle(0.0f), vsBlob(vertexBC), mVertexShader(vs), mPixelShader(ps), 
-    renderTargetView(rtv), depthStencilView(depthStencilView)
+    renderTargetView(rtv), depthStencilView(depthStencilView), device(device),
+    context(context)
 {
-    mWorldMatrix = XMMatrixIdentity(); // каждый раз инициализировать, а не домножать на её предыдущее
-
-    mRotationMatrix = XMMatrixIdentity();
-    mScaleMatrix = XMMatrixIdentity();
-    InitializeBuffers(device);
-    InitializeShaders(device, vs, ps);
+    InitializeBuffers();
+    InitializeShaders(vs, ps);
 }
 
-void Cube::InitializeBuffers(ID3D11Device* device)
+void Cube::InitializeBuffers()
 {
-    
+    mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
+    CreateConstantBuffer();
+    CreateVertexBuffer();
+    CreateIndexBuffer();
+    CreateInputLayout();
+}
 
+void Cube::CreateConstantBuffer()
+{
+    D3D11_BUFFER_DESC constantBufferDesc = {};
+    constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC; //0 = CPU don't need, D3D11_USAGE_DYNAMIC = CPU need
+    constantBufferDesc.ByteWidth = sizeof(ConstantBuffer);
+    constantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    constantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    constantBufferDesc.StructureByteStride = 0;
+
+    D3D11_SUBRESOURCE_DATA initData = {};
+    initData.pSysMem = &cb;
+    device->CreateBuffer(&constantBufferDesc, &initData, &mConstantBuffer);
+}
+
+void Cube::CreateVertexBuffer()
+{
     Vertex _vertices[8] = {
-        XMFLOAT4(-0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f),
-        XMFLOAT4(-0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f),
-        XMFLOAT4(+0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f),
-        XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f),
-        XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f),
-        XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f),
-        XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
-        XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
+    XMFLOAT4(-0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f),
+    XMFLOAT4(-0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f),
+    XMFLOAT4(+0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f),
+    XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f),
+    XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f),
+    XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f),
+    XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
+    XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
     };
     for (size_t i = 0; i < 8; i++) //8 vertecies (vertex = position + color)
     {
@@ -43,14 +62,18 @@ void Cube::InitializeBuffers(ID3D11Device* device)
     vbd.StructureByteStride = 0; //size per element in buffer structure
 
     D3D11_SUBRESOURCE_DATA vinitData = {};
+    //vinitData.pSysMem = vertices;
     vinitData.pSysMem = vertices;
     vinitData.SysMemPitch = 0;
     vinitData.SysMemSlicePitch = 0;
 
     device->CreateBuffer(&vbd, &vinitData, &mVertexBuffer);
+}
 
+void Cube::CreateIndexBuffer()
+{
     // Индексный буфер (как в BoxDemo)
-    UINT _indices[36] = {
+    UINT _indices[] = {
         // Front Face
         0, 1, 2,
         0, 2, 3,
@@ -82,7 +105,7 @@ void Cube::InitializeBuffers(ID3D11Device* device)
     }
 
     D3D11_BUFFER_DESC ibd = {};
-    ibd.ByteWidth = sizeof(UINT) * 36;
+    ibd.ByteWidth = sizeof(UINT) * std::size(_indices);
     ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
     ibd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
     ibd.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
@@ -95,46 +118,9 @@ void Cube::InitializeBuffers(ID3D11Device* device)
     iinitData.SysMemSlicePitch = 0;
 
     device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
-
-    D3D11_BUFFER_DESC constantBufferDesc = {};
-    constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC; //0 = CPU don't need, D3D11_USAGE_DYNAMIC = CPU need
-    constantBufferDesc.ByteWidth = sizeof(ConstantBuffer);
-    constantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-    constantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-    constantBufferDesc.StructureByteStride = 0;
-
-    D3D11_SUBRESOURCE_DATA initData = {};
-    initData.pSysMem = &cb;
-    device->CreateBuffer(&constantBufferDesc, &initData, &mConstantBuffer);
-
-    D3D11_INPUT_ELEMENT_DESC inputElements[] = {
-    D3D11_INPUT_ELEMENT_DESC{
-        "POSITION", //parameter name from hlsl file
-        0, //need if we have more one element with same semantic
-        DXGI_FORMAT_R32G32B32A32_FLOAT, //parameter for create 3D object
-        0, //vertex index (between 0 and 15)
-        0, //translation from beginning vertex
-        D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
-        0 },
-        D3D11_INPUT_ELEMENT_DESC{
-        "COLOR",
-        0,
-        DXGI_FORMAT_R32G32B32A32_FLOAT,
-        0,
-        D3D11_APPEND_ALIGNED_ELEMENT,
-        D3D11_INPUT_PER_VERTEX_DATA,
-        0 }
-    };
-
-    device->CreateInputLayout(
-        inputElements,
-        2,
-        vsBlob->GetBufferPointer(),
-        vsBlob->GetBufferSize(),
-        &mInputLayout);
 }
 
-void Cube::InitializeShaders(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* ps)
+void Cube::InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps)
 {
     auto res = D3DCompileFromFile(L"./Shaders/CubeShader.hlsl", //create vertex shader from  hlsl file
         nullptr /*macros*/,
@@ -171,6 +157,59 @@ void Cube::InitializeShaders(ID3D11Device* device, ID3D11VertexShader* vs, ID3D1
         nullptr, &mPixelShader);
 }
 
+void Cube::CreateInputLayout()
+{
+    D3D11_INPUT_ELEMENT_DESC inputElements[] = {
+D3D11_INPUT_ELEMENT_DESC{
+    "POSITION", //parameter name from hlsl file
+    0, //need if we have more one element with same semantic
+    DXGI_FORMAT_R32G32B32A32_FLOAT, //parameter for create 3D object
+    0, //vertex index (between 0 and 15)
+    0, //translation from beginning vertex
+    D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
+    0 },
+    D3D11_INPUT_ELEMENT_DESC{
+    "COLOR",
+    0,
+    DXGI_FORMAT_R32G32B32A32_FLOAT,
+    0,
+    D3D11_APPEND_ALIGNED_ELEMENT,
+    D3D11_INPUT_PER_VERTEX_DATA,
+    0 }
+    };
+
+    device->CreateInputLayout(
+        inputElements,
+        2,
+        vsBlob->GetBufferPointer(),
+        vsBlob->GetBufferSize(),
+        &mInputLayout);
+}
+
+void Cube::SetupIAStage()
+{
+    // Установка вершинного буфера
+    UINT stride[] = { 32 };
+    UINT offset = 0;
+    context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
+    context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+    context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    context->IASetInputLayout(mInputLayout);
+}
+
+void Cube::SetupViewport()
+{
+    D3D11_VIEWPORT viewport = {};
+    viewport.Width = static_cast<float>(Game::getInstance().display->ScreenWidth);
+    viewport.Height = static_cast<float>(Game::getInstance().display->ScreenHeight);
+    viewport.TopLeftX = 0;
+    viewport.TopLeftY = 0;
+    viewport.MinDepth = 0;
+    viewport.MaxDepth = 1.0f;
+
+    context->RSSetViewports(1, &viewport);
+}
+
 void Cube::Update(float dt)
 {
     //mRotationAngle += 1.0f * dt;
@@ -186,32 +225,14 @@ void Cube::Update(float dt)
 void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
 {
 
-    // Установка вершинного буфера
-    UINT stride[] = { 32 };
-    UINT offset = 0;
-    context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
-    context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-    context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    context->IASetInputLayout(mInputLayout);
-
-    //context->RSSetState(rastState);
-
-
-    D3D11_VIEWPORT viewport = {};
-    viewport.Width = static_cast<float>(800); // screenWidth
-    viewport.Height = static_cast<float>(800); // screenHeight
-    viewport.TopLeftX = 0;
-    viewport.TopLeftY = 0;
-    viewport.MinDepth = 0;
-    viewport.MaxDepth = 1.0f;
-
-    context->RSSetViewports(1, &viewport);
+    SetupViewport();
+    SetupIAStage();
 
     // Установка шейдеров и ресурсов
-    //context->VSSetShader(mVertexShader, nullptr, 0);
-    //context->PSSetShader(mPixelShader, nullptr, 0);
+    context->VSSetShader(mVertexShader, nullptr, 0);
+    context->PSSetShader(mPixelShader, nullptr, 0);
     //
-    //context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
+    context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
     // Обновление константного буфера
     //cb.worldViewProj = XMMatrixTranspose(mWorldMatrix * viewProj);

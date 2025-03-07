@@ -2,21 +2,13 @@
 
 StartSolarSystem::StartSolarSystem()
 {
+	Initialize();
 }
-//int main()
-//{
-//	StartSolarSystem* game = new StartSolarSystem();
-//	game->InstanceObjects();
-//}
 
 int StartSolarSystem::InstanceObjects()
 {
-	Initialize();
-
-	// Начальная позиция куба
-	DirectX::XMFLOAT4 startPos = { 0.0f, 0.0f, 0.0f, 1.0f };
-	mCube = std::make_unique<Cube>(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView);
-
+	mCube = new Cube(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context);
 
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
@@ -104,10 +96,10 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 
 		//	context->DrawIndexed(6, 0, 0);
 		//}
-		mCube->Update(deltaTime);
 
 		XMMATRIX projection = XMMatrixIdentity();
 		mCube->Draw(context, projection);
+		mCube->Update(deltaTime);
 
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}

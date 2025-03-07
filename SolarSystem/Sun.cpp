@@ -1,7 +1,9 @@
 #include "Sun.h"
 
 Sun::Sun(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs, ID3D11PixelShader* ps,
-	ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView): Cube(device,vertexBC,vs,ps,rtv, depthStencilView)
+	ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context): Cube(device,
+		vertexBC,vs,ps,rtv, depthStencilView, context)
 {
 }
 

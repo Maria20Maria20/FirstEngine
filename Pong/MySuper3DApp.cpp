@@ -12,9 +12,6 @@ int main()
 {
 	PongGame* game = new PongGame();
 	game->InstanceObjects();
-	//StartSolarSystem* game = new StartSolarSystem();
-	//game->InstanceObjects();
-
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
