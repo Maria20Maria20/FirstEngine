@@ -7,22 +7,9 @@ StartSolarSystem::StartSolarSystem()
 
 int StartSolarSystem::InstanceObjects()
 {
+
 	mCube = new Cube(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context);
-
-	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
-	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
-
-	//triangleComponent->InitializeShape(triangle.VertexPositions, triangle.Colors, std::size(triangle.VertexPositions), triangle.StartPosition);
-	//square->InitializeShape(std::size(square->VertexPositions));
-	//for (auto& currentTriangle : triangles)
-	//{
-	//	currentTriangle.InitializeShape(std::size(currentTriangle.VertexPositions));
-	//}
-
-	//triangleComponent->InitializeShape(square.VertexPositions, square.Colors, std::size(square.VertexPositions), square.StartPosition);
-
-	//SetupRasterizerStage();
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
 	unsigned int frameCount = 0;
@@ -66,40 +53,23 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		}
 
 
-		context->ClearState();
-
-
-
-		UINT strides[] = { 32 };
-		UINT offsets[] = { 0 };
+		mCube->Update(deltaTime);
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
 		context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1, 0);
-		//for (auto& currentTriangle : triangles)
-		//{
-		//	currentTriangle.SetupIAStage(strides, offsets);
-		//	context->RSSetState(rastState);
 
-		//	SetupViewport();
-
-		//	//square->SetupIAStage(strides, offsets);
-		//	SetVertexAndPixelShaders();
-
-		//	SetBackBufferOutput(1, &rtv, nullptr);
-
-
-		//	currentTriangle.MoveShape(currentTriangle.MoveSpeed
-		//		* deltaTime * currentTriangle.DirectionX,
-		//		currentTriangle.MoveSpeed
-		//		* deltaTime * currentTriangle.DirectionY, 0);
-
-		//	context->DrawIndexed(6, 0, 0);
-		//}
+		D3D11_VIEWPORT viewport = {};
+		viewport.Width = static_cast<float>(Game::getInstance().display->ScreenWidth);
+		viewport.Height = static_cast<float>(Game::getInstance().display->ScreenHeight);
+		viewport.TopLeftX = 0;
+		viewport.TopLeftY = 0;
+		viewport.MinDepth = 0;
+		viewport.MaxDepth = 1.0f;
+		context->RSSetViewports(1, &viewport);
 
 		XMMATRIX projection = XMMatrixIdentity();
 		mCube->Draw(context, projection);
-		mCube->Update(deltaTime);
 
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}

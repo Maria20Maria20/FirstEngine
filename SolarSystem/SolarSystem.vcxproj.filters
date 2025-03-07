@@ -23,14 +23,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sun.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="RunSolarSystem.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StartSolarSystem.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RunSolarSystem.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="Sun.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\CubeShader.hlsl">
+      <Filter>Resource Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

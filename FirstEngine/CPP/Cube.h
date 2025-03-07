@@ -20,11 +20,6 @@ public:
     void Update(float dt);
     void Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj);
 
-    ID3D11RenderTargetView* renderTargetView;
-    ID3D11RasterizerState* rastState;
-    ID3D11DepthStencilView* depthStencilView;
-
-
     struct Vertex
     {
         XMFLOAT4 position;
@@ -40,6 +35,8 @@ public:
     ID3DBlob* errorVertexCode;
     ID3DBlob* errorPixelCode;
     ID3D11InputLayout* mInputLayout;
+    ID3D11RenderTargetView* renderTargetView;
+    ID3D11DepthStencilView* depthStencilView;
     void RotateShape(XMVECTOR Axis, FLOAT Angle, float deltaTime);
     void ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFactorZ);
 private:

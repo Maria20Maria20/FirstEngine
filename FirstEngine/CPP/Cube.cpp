@@ -15,11 +15,11 @@ Cube::Cube(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D
 
 void Cube::InitializeBuffers()
 {
-    mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
+    //mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
     CreateConstantBuffer();
     CreateVertexBuffer();
     CreateIndexBuffer();
-    CreateInputLayout();
+    CreateInputLayout(); // не как у меня, мб переместить. Равиль
 }
 
 void Cube::CreateConstantBuffer()
@@ -132,6 +132,10 @@ void Cube::InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps)
         &vsBlob,
         &errorVertexCode);
 
+    if (FAILED(res)) {
+        std::cout << "nu_kapec!\n";
+    }
+
     D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
     //"TEST" - use TEST define from hlsl file
     //float4(0.0f, 1.0f, 0.0f, 1.0f) - color for square right
@@ -145,6 +149,11 @@ void Cube::InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps)
         0, //parameters for compile effects (if 0, then don't compile them)
         &psBlob,
         &errorPixelCode);
+
+
+    if (FAILED(res)) {
+        std::cout << "zdraste_mordaste!\n";
+    }
 
     device->CreateVertexShader(
         vsBlob->GetBufferPointer(),
@@ -188,26 +197,18 @@ D3D11_INPUT_ELEMENT_DESC{
 
 void Cube::SetupIAStage()
 {
+    context->IASetInputLayout(mInputLayout);
+    context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     // Установка вершинного буфера
     UINT stride[] = { 32 };
     UINT offset = 0;
-    context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
     context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-    context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    context->IASetInputLayout(mInputLayout);
+    context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
 }
 
 void Cube::SetupViewport()
 {
-    D3D11_VIEWPORT viewport = {};
-    viewport.Width = static_cast<float>(Game::getInstance().display->ScreenWidth);
-    viewport.Height = static_cast<float>(Game::getInstance().display->ScreenHeight);
-    viewport.TopLeftX = 0;
-    viewport.TopLeftY = 0;
-    viewport.MinDepth = 0;
-    viewport.MaxDepth = 1.0f;
-
-    context->RSSetViewports(1, &viewport);
+    
 }
 
 void Cube::Update(float dt)
@@ -215,37 +216,33 @@ void Cube::Update(float dt)
     //mRotationAngle += 1.0f * dt;
     //auto rotation = XMMatrixRotationX(1.); 
 
-    RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .1, dt);
-    RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .1, dt);
-    //mWorldMatrix = mWorldMatrix * DirectX::XMMatrixTranslation(0, 0, 0.3);
+    RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, dt);
+    RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .5, dt);
 
     mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
+
+    // Обновление константного буфера
+    cb.worldViewProj = mWorldMatrix; // *viewProj;
 }
 
 void Cube::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
 {
 
-    SetupViewport();
     SetupIAStage();
 
-    // Установка шейдеров и ресурсов
-    context->VSSetShader(mVertexShader, nullptr, 0);
-    context->PSSetShader(mPixelShader, nullptr, 0);
-    //
-    context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
-
-    // Обновление константного буфера
-    //cb.worldViewProj = XMMatrixTranspose(mWorldMatrix * viewProj);
-    cb.worldViewProj = mWorldMatrix * viewProj;
-    //cb.worldViewProj = XMMatrixIdentity();
 
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     context->Map(mConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
     memcpy(mappedResource.pData, &cb, sizeof(ConstantBuffer));
     context->Unmap(mConstantBuffer, 0);
 
-    context->VSSetConstantBuffers(0, 1, &mConstantBuffer);
+    context->VSSetConstantBuffers(0u, 1u, &mConstantBuffer);
 
+    // Установка шейдеров и ресурсов
+    context->VSSetShader(mVertexShader, nullptr, 0);
+    context->PSSetShader(mPixelShader, nullptr, 0);
+
+    context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
     // Отрисовка
     context->DrawIndexed(36, 0, 0);
 }

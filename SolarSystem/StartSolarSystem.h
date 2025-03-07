@@ -1,7 +1,6 @@
 #pragma once
 #include <CPP/Game.h>
 #include <CPP/Cube.h>
-#include "../Pong/NPCPaddle.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -13,7 +12,7 @@ class StartSolarSystem: public Game
 public:
 	StartSolarSystem();
 	int InstanceObjects();
-	Cube* mCube;
+	Cube* mCube = nullptr;
 private:
 	void SolarSystemWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 };

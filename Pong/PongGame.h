@@ -28,8 +28,6 @@ class PongGame : public Game
 public:
 	PongGame();
 	int InstanceObjects();
-
-	Cube* mCube;
 private:
 	Ball* ball;
 	NPCPaddle* npcPaddle = nullptr;

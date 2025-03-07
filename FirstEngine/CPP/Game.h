@@ -22,12 +22,13 @@ protected:
 
     ID3D11DeviceContext* context;
     ID3D11Device* device;
-    ID3D11RenderTargetView* rtv;
     ID3DBlob* vertexBC = nullptr;
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
+    ID3D11RenderTargetView* rtv;
     ID3D11DepthStencilView* depthStencilView;
     IDXGISwapChain* swapChain;
+
     int Initialize();
     void WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 

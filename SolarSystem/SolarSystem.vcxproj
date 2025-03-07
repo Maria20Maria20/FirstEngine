@@ -105,6 +105,10 @@
       <AdditionalLibraryDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>FirstEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <EntryPointName>VSMain</EntryPointName>
+      <ShaderType>Vertex</ShaderType>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -141,6 +145,10 @@
       <AdditionalLibraryDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>FirstEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <EntryPointName>VSMain</EntryPointName>
+      <ShaderType>Vertex</ShaderType>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="StartSolarSystem.h" />
@@ -158,6 +166,14 @@
     <ProjectReference Include="..\FirstEngine\FirstEngine.vcxproj">
       <Project>{485dacbb-e0e9-440a-a7d5-bb3d2e7f7845}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\CubeShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VSMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -72,11 +72,6 @@ int PongGame::InstanceObjects()
 		display, startPosition4, playerPaddle, npcPaddle);
 	ball->InitializeShape(4);
 
-	// Начальная позиция куба
-	DirectX::XMFLOAT4 startPos = { 0.0f, 0.0f, 0.0f, 1.0f };
-	mCube = new Cube(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView, context);
-
-
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPosition, device, context, vertexBC));
 	//triangles.push_back(*new Triangle(VertexPositions, Colors, StartPositionSquare, device, context, vertexBC));
 
@@ -166,11 +161,6 @@ void PongGame::PongWindowLoop(std::chrono::steady_clock::time_point& PrevTime, f
 		npcPaddle->Update(deltaTime);
 		playerPaddle->Update(deltaTime);
 		ball->Update(deltaTime);
-
-
-		mCube->Update(deltaTime);
-		XMMATRIX projection = XMMatrixIdentity();
-		mCube->Draw(context, projection);
 		
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}

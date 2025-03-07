@@ -1,0 +1,6 @@
+﻿  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Game.cpp(16): warning C4715: 'Game::Initialize': not all control paths return a value
+  All 542 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Pong.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Release\Pong.exe

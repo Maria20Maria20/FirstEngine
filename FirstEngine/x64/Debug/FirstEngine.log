@@ -1,10 +1,8 @@
-﻿  Cube.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(18,66): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(18,61): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(218,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(219,51): warning C4305: 'argument': truncation from 'double' to 'FLOAT'
+﻿  compilation object save succeeded; see C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\CubeShader.cso
+  Cube.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(222,66): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(222,61): warning C4305: 'argument': truncation from 'double' to 'float'
+  Delegates.cpp
   DisplayWin32.cpp
   Game.cpp
   InputDevice.cpp
@@ -14,6 +12,7 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Square.cpp
   Triangle.cpp
+  TriangleComponent.cpp
   Generating Code...
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Game.cpp(16,1): warning C4715: 'Game::Initialize': not all control paths return a value
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

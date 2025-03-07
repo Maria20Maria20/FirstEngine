@@ -1,0 +1,16 @@
+﻿  compilation object save succeeded; see C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Release\CubeShader.cso
+  Cube.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(222,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(222,61): warning C4305: 'argument': truncation from 'double' to 'float'
+  Delegates.cpp
+  DisplayWin32.cpp
+  Game.cpp
+  InputDevice.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,53): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,48): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Square.cpp
+  Triangle.cpp
+  TriangleComponent.cpp
+  FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Release\FirstEngine.lib
