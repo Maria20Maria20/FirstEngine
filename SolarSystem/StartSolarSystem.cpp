@@ -10,6 +10,10 @@ int StartSolarSystem::InstanceObjects()
 
 	mCube = new Cube(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context);
+	mCube2 = new Cube(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context);
+	mSphere = new Sphere(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context);
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
 	unsigned int frameCount = 0;
@@ -54,6 +58,8 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 
 
 		mCube->Update(deltaTime);
+		mCube2->Update(deltaTime);
+		mSphere->Update(deltaTime);
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
@@ -70,6 +76,14 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 
 		XMMATRIX projection = XMMatrixIdentity();
 		mCube->Draw(context, projection);
+		mCube->RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .5, deltaTime);
+		mCube->RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, deltaTime);
+		mCube2->Draw(context, projection);
+		mCube2->RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, deltaTime);
+		mCube2->RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), .5, deltaTime);
+		mSphere->Draw(context, projection);
+		mSphere->RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, deltaTime);
+		mSphere->RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), .5, deltaTime);
 
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}

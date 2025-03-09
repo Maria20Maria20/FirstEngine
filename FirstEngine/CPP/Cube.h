@@ -61,10 +61,9 @@ private:
     void CreateConstantBuffer();
     void CreateVertexBuffer();
     void CreateIndexBuffer();
-    void InitializeBuffers();  // Добавлено объявление
-    void InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps);  // Добавлено объявление
+    void InitializeBuffers();  
+    void InitializeShaders(); 
     void CreateInputLayout();
 protected:
     void SetupIAStage();
-    void SetupViewport();
 };

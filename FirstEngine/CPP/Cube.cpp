@@ -10,16 +10,16 @@ Cube::Cube(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D
     context(context)
 {
     InitializeBuffers();
-    InitializeShaders(vs, ps);
+    InitializeShaders();
 }
 
 void Cube::InitializeBuffers()
 {
-    //mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
+    mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
     CreateConstantBuffer();
     CreateVertexBuffer();
     CreateIndexBuffer();
-    CreateInputLayout(); // не как у меня, мб переместить. Равиль
+    CreateInputLayout();
 }
 
 void Cube::CreateConstantBuffer()
@@ -72,7 +72,6 @@ void Cube::CreateVertexBuffer()
 
 void Cube::CreateIndexBuffer()
 {
-    // Индексный буфер (как в BoxDemo)
     UINT _indices[] = {
         // Front Face
         0, 1, 2,
@@ -120,7 +119,7 @@ void Cube::CreateIndexBuffer()
     device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
 }
 
-void Cube::InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps)
+void Cube::InitializeShaders()
 {
     auto res = D3DCompileFromFile(L"./Shaders/CubeShader.hlsl", //create vertex shader from  hlsl file
         nullptr /*macros*/,
@@ -133,7 +132,7 @@ void Cube::InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps)
         &errorVertexCode);
 
     if (FAILED(res)) {
-        std::cout << "nu_kapec!\n";
+        std::cout << "failed res load!\n";
     }
 
     D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
@@ -152,7 +151,7 @@ void Cube::InitializeShaders(ID3D11VertexShader* vs, ID3D11PixelShader* ps)
 
 
     if (FAILED(res)) {
-        std::cout << "zdraste_mordaste!\n";
+        std::cout << "failed res load!\n";
     }
 
     device->CreateVertexShader(
@@ -199,16 +198,10 @@ void Cube::SetupIAStage()
 {
     context->IASetInputLayout(mInputLayout);
     context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    // Установка вершинного буфера
     UINT stride[] = { 32 };
     UINT offset = 0;
     context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
     context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
-}
-
-void Cube::SetupViewport()
-{
-    
 }
 
 void Cube::Update(float dt)
@@ -216,8 +209,9 @@ void Cube::Update(float dt)
     //mRotationAngle += 1.0f * dt;
     //auto rotation = XMMatrixRotationX(1.); 
 
-    RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, dt);
-    RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .5, dt);
+    //RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, dt);
+    //RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .5, dt);
+    //ScalingShape(3, 3, 3);
 
     mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
 

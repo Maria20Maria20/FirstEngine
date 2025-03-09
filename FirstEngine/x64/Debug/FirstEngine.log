@@ -1,18 +1,15 @@
-﻿  compilation object save succeeded; see C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\CubeShader.cso
-  Cube.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(222,66): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(222,61): warning C4305: 'argument': truncation from 'double' to 'float'
-  Delegates.cpp
-  DisplayWin32.cpp
-  Game.cpp
-  InputDevice.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,53): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,48): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Square.cpp
-  Triangle.cpp
-  TriangleComponent.cpp
-  Generating Code...
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Game.cpp(16,1): warning C4715: 'Game::Initialize': not all control paths return a value
+﻿  Sphere.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.h(46,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'CPP/Sphere.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(16,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(16,58): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(52,24): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(54,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(91,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(101,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(104,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(118,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(146,67): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(146,61): warning C4305: 'argument': truncation from 'double' to 'float'
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

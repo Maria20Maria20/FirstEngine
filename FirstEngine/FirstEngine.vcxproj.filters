@@ -39,6 +39,9 @@
     <ClCompile Include="CPP\Cube.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\Sphere.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP\DisplayWin32.h">
@@ -69,6 +72,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CPP\Cube.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\Sphere.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
