@@ -1,15 +1,13 @@
 ﻿  Sphere.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.h(46,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.h(44,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'CPP/Sphere.cpp')
   
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(16,63): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(16,58): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(52,24): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(54,28): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(91,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(101,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(104,28): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(118,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(146,67): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(146,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(52,21): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(54,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(91,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(101,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(104,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(126,21): warning C4018: '<': signed/unsigned mismatch
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

@@ -35,8 +35,6 @@ public:
     ID3D11InputLayout* mInputLayout;
     ID3D11RenderTargetView* renderTargetView;
     ID3D11DepthStencilView* depthStencilView;
-    void RotateShape(XMVECTOR Axis, FLOAT Angle, float deltaTime);
-    void ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFactorZ);
 private:
     int verticesNum = 5;
     int sliceCount = 20;
@@ -57,12 +55,7 @@ private:
     {
         XMMATRIX worldViewProj = XMMatrixIdentity();
     };
-    ConstantBuffer cb;
 
-    XMMATRIX mWorldMatrix = XMMatrixIdentity();
-    XMMATRIX mRotationMatrix = XMMatrixIdentity();
-    XMMATRIX mScaleMatrix = XMMatrixIdentity();
-    float mRotationAngle;
 
     void CreateConstantBuffer();
     void CreateVertexBuffer();
@@ -71,5 +64,12 @@ private:
     void InitializeShaders();
     void CreateInputLayout();
 protected:
+    XMMATRIX mWorldMatrix = XMMatrixIdentity();
+    XMMATRIX mRotationMatrix = XMMatrixIdentity();
+    XMMATRIX mScaleMatrix = XMMatrixIdentity();
+    float mRotationAngle;
+    ConstantBuffer cb;
     void SetupIAStage();
+    void RotateShape(XMVECTOR Axis, FLOAT Angle, float deltaTime);
+    void ScalingShape(float scaleFactor);
 };

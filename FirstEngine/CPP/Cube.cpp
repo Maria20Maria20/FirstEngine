@@ -198,7 +198,7 @@ void Cube::SetupIAStage()
 {
     context->IASetInputLayout(mInputLayout);
     context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    UINT stride[] = { 32 };
+    UINT stride[] = { sizeof(Vertex)};
     UINT offset = 0;
     context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
     context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
