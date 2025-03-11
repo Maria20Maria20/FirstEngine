@@ -5,12 +5,6 @@
 #include "Planet.h"
 #include "Camera.h"
 
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "d3dcompiler.lib")
-#pragma comment(lib, "dxguid.lib")
-
-using namespace DirectX::SimpleMath;
 
 class StartSolarSystem: public Game
 {
@@ -24,5 +18,7 @@ public:
 
 	Camera camera;
 private:
+	Planet* focusedBody = nullptr;
 	void SolarSystemWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
+	void HandleMoveDown(Keys key);
 };

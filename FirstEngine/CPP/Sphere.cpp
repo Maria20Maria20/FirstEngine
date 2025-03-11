@@ -13,7 +13,7 @@ Sphere::Sphere(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, 
 
 void Sphere::InitializeBuffers()
 {
-	mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, 0.3, 0.3);
+	mWorldMatrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, 0.3, 0.3);
 	CreateVertexBuffer();
 	CreateIndexBuffer();
 	CreateConstantBuffer();
@@ -151,13 +151,13 @@ void Sphere::CreateIndexBuffer()
 void Sphere::Update(float dt)
 {
 
-	//mWorldMatrix = mRotationMatrix * XMMatrixTranslation(0, -0.3, 0.3);
+	//mWorldMatrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, -0.3, 0.3);
 
 	//// Обновление константного буфера
 	//cb.worldViewProj = mWorldMatrix; // *viewProj;
 }
 
-void Sphere::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
+void Sphere::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj)
 {
 	SetupIAStage();
 
@@ -178,22 +178,22 @@ void Sphere::Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj)
 	context->DrawIndexed(indicesNum, 0, 0);
 }
 
-void Sphere::RotateShape(XMVECTOR Axis, FLOAT Angle, float deltaTime)
+void Sphere::RotateShape(DirectX::XMVECTOR Axis, FLOAT Angle, float deltaTime)
 {
-	XMVECTOR normalizedAxis = XMVector3Normalize(Axis); // Используем новую переменную
+	DirectX::XMVECTOR normalizedAxis = DirectX::XMVector3Normalize(Axis); // Используем новую переменную
 
 	// Проверяем, что вектор не нулевой
-	if (XMVector3Equal(normalizedAxis, XMVectorZero()))
+	if (DirectX::XMVector3Equal(normalizedAxis, DirectX::XMVectorZero()))
 	{
 		return; // Если ось некорректна, не выполняем вращение
 	}
-	XMMATRIX rotateMatrix = XMMatrixRotationAxis(normalizedAxis, XMConvertToRadians(Angle * deltaTime));
+	DirectX::XMMATRIX rotateMatrix = DirectX::XMMatrixRotationAxis(normalizedAxis, DirectX::XMConvertToRadians(Angle * deltaTime));
 	mRotationMatrix *= rotateMatrix;
 }
 
 void Sphere::ScalingShape(float scaleFactor)
 {
-	XMMATRIX scalingMatrix = XMMatrixScaling(scaleFactor, scaleFactor, scaleFactor);
+	DirectX::XMMATRIX scalingMatrix = DirectX::XMMatrixScaling(scaleFactor, scaleFactor, scaleFactor);
 	cb.worldViewProj *= scalingMatrix;
 }
 

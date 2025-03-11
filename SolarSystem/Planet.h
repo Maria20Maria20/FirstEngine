@@ -4,8 +4,8 @@
 #include "SimpleMath.h"
 #include "Camera.h"
 
+using namespace DirectX;
 using namespace DirectX::SimpleMath;
-
 
 class Planet : public Sphere 
 {
@@ -15,15 +15,15 @@ public:
 		ID3D11DepthStencilView* depthStencilView,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition, float changedScale = 1, Planet* parentPlanet = nullptr);
 	void Update(float deltaTime);
+	Vector3 GetCenterLocation();
+	float orbitRadius = 1.1f;
 	Camera* camera;
 private:
 	Planet* parentPlanet;
 	float orbitAngle;
 	float moveSpeed = 1;
-	float orbitRadius = 1.1f;
 	float changedScale = 1;
 	XMFLOAT3 position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	Matrix GetParentTransform();
-	Vector3 GetCenterLocation();
 };
 #endif

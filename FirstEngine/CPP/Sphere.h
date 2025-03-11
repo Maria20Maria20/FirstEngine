@@ -6,9 +6,6 @@
 #include <d3dcompiler.h>
 #include <iostream>
 
-using namespace DirectX;
-using namespace Microsoft::WRL;
-
 class Sphere
 {
 public:
@@ -17,12 +14,12 @@ public:
         ID3D11DepthStencilView* depthStencilView,
         Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
     void Update(float dt);
-    void Draw(ID3D11DeviceContext* context, const XMMATRIX& viewProj);
+    void Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj);
 
     struct Vertex
     {
-        XMFLOAT4 position;
-        XMFLOAT4 color;
+        DirectX::XMFLOAT4 position;
+        DirectX::XMFLOAT4 color;
     };
     Vertex* vertices;
     UINT* indices;
@@ -42,8 +39,8 @@ private:
     int indicesNum;
 
     float radius = 0.3;
-    XMFLOAT4 sphere_color_1 = XMFLOAT4(0.0f, 0.3f, 0.0f, 1.0f);
-    XMFLOAT4 sphere_color_2 = XMFLOAT4(0.0f, 0.9f, 0.0f, 1.0f);
+    DirectX::XMFLOAT4 sphere_color_1 = DirectX::XMFLOAT4(0.0f, 0.3f, 0.0f, 1.0f);
+    DirectX::XMFLOAT4 sphere_color_2 = DirectX::XMFLOAT4(0.0f, 0.9f, 0.0f, 1.0f);
 
     ID3D11Buffer* mVertexBuffer;
     ID3D11Buffer* mIndexBuffer;
@@ -53,7 +50,7 @@ private:
 
     struct ConstantBuffer
     {
-        XMMATRIX worldViewProj = XMMatrixIdentity();
+        DirectX::XMMATRIX worldViewProj = DirectX::XMMatrixIdentity();
     };
 
 
@@ -64,12 +61,12 @@ private:
     void InitializeShaders();
     void CreateInputLayout();
 protected:
-    XMMATRIX mWorldMatrix = XMMatrixIdentity();
-    XMMATRIX mRotationMatrix = XMMatrixIdentity();
-    XMMATRIX mScaleMatrix = XMMatrixIdentity();
+    DirectX::XMMATRIX mWorldMatrix = DirectX::XMMatrixIdentity();
+    DirectX::XMMATRIX mRotationMatrix = DirectX::XMMatrixIdentity();
+    DirectX::XMMATRIX mScaleMatrix = DirectX::XMMatrixIdentity();
     float mRotationAngle;
     ConstantBuffer cb;
     void SetupIAStage();
-    void RotateShape(XMVECTOR Axis, FLOAT Angle, float deltaTime);
+    void RotateShape(DirectX::XMVECTOR Axis, FLOAT Angle, float deltaTime);
     void ScalingShape(float scaleFactor);
 };

@@ -167,6 +167,8 @@
     </ProjectReference>
     <ProjectReference Include="..\FirstEngine\FirstEngine.vcxproj">
       <Project>{485dacbb-e0e9-440a-a7d5-bb3d2e7f7845}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

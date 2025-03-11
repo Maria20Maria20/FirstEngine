@@ -3,12 +3,12 @@
 StartSolarSystem::StartSolarSystem()
 {
 	Initialize();
+	InputDevice::getInstance().OnKeyPressed.AddRaw(this, &StartSolarSystem::HandleMoveDown);
 }
 
 int StartSolarSystem::InstanceObjects()
 {
 	camera = Camera();
-
 	/*mCube = new Cube(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context);
 	mCube2 = new Cube(device, vertexBC, vertexShader,
@@ -97,8 +97,30 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 
 		satellite->Draw(context, projection);
 
+		if (focusedBody)
+		{
+			camera.SwitchToOrbitalMode(focusedBody->GetCenterLocation(), Vector3(0.0f, 1.0f, 0.0f), focusedBody->orbitRadius * 5);
+		}
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
 
+}
+
+
+void StartSolarSystem::HandleMoveDown(Keys key)
+{
+	if (key == Keys::W) {
+		camera.MoveForward(.5f);
+	}
+	if (key == Keys::S) {
+		camera.MoveBackward(.5f);
+	}
+	if (key == Keys::D1) {
+		focusedBody = sun;
+	}
+	if (key == Keys::D2)
+	{
+		focusedBody = satellite;
+	}
 }
 

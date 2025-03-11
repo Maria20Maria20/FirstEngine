@@ -2,7 +2,7 @@
 
 Camera::Camera()
     : position(0.0f, 0.0f, -5.0f), target(0.0f, 0.0f, 1.0f), up(0.0f, 1.0f, 0.0f),
-    fov(XM_PIDIV4), aspectRatio(1.0f), nearZ(0.1f), farZ(1000.0f),
+    fov(DirectX::XM_PIDIV4), aspectRatio(1.0f), nearZ(0.1f), farZ(1000.0f),
     orthZ(10.0f), isPerspective(true),
     isOrbitalMode(false), orbitalTarget(0.0f, 0.0f, 0.0f),
     orbitalDistance(5.0f), defaultOrbitalDistance(5.0f),
@@ -27,17 +27,17 @@ Camera::~Camera()
 {
 }
 
-void Camera::SetPosition(Vector3 position)
+void Camera::SetPosition(DirectX::SimpleMath::Vector3 position)
 {
     this->position = position;
 }
 
-void Camera::SetTarget(Vector3 target)
+void Camera::SetTarget(DirectX::SimpleMath::Vector3 target)
 {
     this->target = target;
 }
 
-void Camera::SetUp(Vector3 up)
+void Camera::SetUp(DirectX::SimpleMath::Vector3 up)
 {
     this->up = up;
 }
@@ -62,7 +62,7 @@ void Camera::SetFarZ(float farZ)
     this->farZ = farZ;
 }
 
-void Camera::Update(float deltaTime, const Matrix targetTransform = Matrix::Identity)
+void Camera::Update(float deltaTime, const DirectX::SimpleMath::Matrix targetTransform = DirectX::SimpleMath::Matrix::Identity)
 {
     if (isOrbitalMode)
     {
@@ -72,11 +72,11 @@ void Camera::Update(float deltaTime, const Matrix targetTransform = Matrix::Iden
         position.y = orbitalDistance * sinf(orbitalPitch);
         position.z = orbitalDistance * cosf(orbitalPitch) * sinf(orbitalYaw);
 
-        position = Vector3::Transform(position, targetTransform);
+        position = DirectX::SimpleMath::Vector3::Transform(position, targetTransform);
 
-        orbitalTarget = Vector3::Transform(Vector3::Zero, targetTransform);
+        orbitalTarget = DirectX::SimpleMath::Vector3::Transform(DirectX::SimpleMath::Vector3::Zero, targetTransform);
 
-        up = Vector3::Transform(orbitalAxis, targetTransform) - orbitalTarget;
+        up = DirectX::SimpleMath::Vector3::Transform(orbitalAxis, targetTransform) - orbitalTarget;
 
         target = orbitalTarget;
 
@@ -99,17 +99,17 @@ void Camera::Update(float deltaTime, const Matrix targetTransform = Matrix::Iden
     }
 }
 
-XMMATRIX Camera::GetViewMatrix() const
+DirectX::XMMATRIX Camera::GetViewMatrix() const
 {
     return XMMatrixLookAtLH(position, target, up);
 }
 
-XMMATRIX Camera::GetProjectionMatrix() const
+DirectX::XMMATRIX Camera::GetProjectionMatrix() const
 {
     if (isPerspective)
-        return XMMatrixPerspectiveFovLH(fov, aspectRatio, nearZ, farZ);
+        return DirectX::XMMatrixPerspectiveFovLH(fov, aspectRatio, nearZ, farZ);
     else
-        return XMMatrixOrthographicLH(aspectRatio * 2.0f * tanf(0.5f * fov) * orthZ, 2.0f * tanf(0.5f * fov) * orthZ, nearZ, farZ);
+        return DirectX::XMMatrixOrthographicLH(aspectRatio * 2.0f * tanf(0.5f * fov) * orthZ, 2.0f * tanf(0.5f * fov) * orthZ, nearZ, farZ);
 }
 
 void Camera::MoveForward(float speed)
@@ -120,14 +120,14 @@ void Camera::MoveForward(float speed)
     }
     else
     {
-        XMVECTOR forward = XMVectorSubtract(XMLoadFloat3(&target), XMLoadFloat3(&position));
-        forward = XMVector3Normalize(forward);
-        position.x += speed * XMVectorGetX(forward);
-        position.y += speed * XMVectorGetY(forward);
-        position.z += speed * XMVectorGetZ(forward);
-        target.x += speed * XMVectorGetX(forward);
-        target.y += speed * XMVectorGetY(forward);
-        target.z += speed * XMVectorGetZ(forward);
+        DirectX::XMVECTOR forward = DirectX::XMVectorSubtract(XMLoadFloat3(&target), XMLoadFloat3(&position));
+        forward = DirectX::XMVector3Normalize(forward);
+        position.x += speed * DirectX::XMVectorGetX(forward);
+        position.y += speed * DirectX::XMVectorGetY(forward);
+        position.z += speed * DirectX::XMVectorGetZ(forward);
+        target.x += speed * DirectX::XMVectorGetX(forward);
+        target.y += speed * DirectX::XMVectorGetY(forward);
+        target.z += speed * DirectX::XMVectorGetZ(forward);
     }
 }
 
@@ -142,17 +142,17 @@ void Camera::MoveLeft(float speed)
         orbitalYaw += speed;
     }
     else {
-        XMVECTOR right = XMVector3Cross(
-            XMVectorSubtract(XMLoadFloat3(&target), XMLoadFloat3(&position)),
+        DirectX::XMVECTOR right = DirectX::XMVector3Cross(
+            DirectX::XMVectorSubtract(XMLoadFloat3(&target), XMLoadFloat3(&position)),
             XMLoadFloat3(&up)
         );
-        right = XMVector3Normalize(right);
-        position.x += speed * XMVectorGetX(right);
-        position.y += speed * XMVectorGetY(right);
-        position.z += speed * XMVectorGetZ(right);
-        target.x += speed * XMVectorGetX(right);
-        target.y += speed * XMVectorGetY(right);
-        target.z += speed * XMVectorGetZ(right);
+        right = DirectX::XMVector3Normalize(right);
+        position.x += speed * DirectX::XMVectorGetX(right);
+        position.y += speed * DirectX::XMVectorGetY(right);
+        position.z += speed * DirectX::XMVectorGetZ(right);
+        target.x += speed * DirectX::XMVectorGetX(right);
+        target.y += speed * DirectX::XMVectorGetY(right);
+        target.z += speed * DirectX::XMVectorGetZ(right);
     }
 }
 
@@ -164,7 +164,7 @@ void Camera::MoveRight(float speed)
 void Camera::MoveUp(float speed)
 {
     if (isOrbitalMode) {
-        orbitalPitch = min(orbitalPitch + speed, XM_PIDIV4 - 0.01f);
+        //orbitalPitch = min(orbitalPitch + speed, XM_PIDIV4 - 0.01f);
     }
     else {
         position.y += speed;
@@ -201,16 +201,16 @@ void Camera::RotatePitch(float angle)
     }
 }
 
-void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget)
+void Camera::SwitchToOrbitalMode(DirectX::SimpleMath::Vector3 orbitalTarget)
 {
-    SwitchToOrbitalMode(orbitalTarget, Vector3(0.0f, 1.0f, 0.0f), 0.0f);
+    SwitchToOrbitalMode(orbitalTarget, DirectX::SimpleMath::Vector3(0.0f, 1.0f, 0.0f), 0.0f);
 }
 
-void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 rotAxis)
+void Camera::SwitchToOrbitalMode(DirectX::SimpleMath::Vector3 orbitalTarget, DirectX::SimpleMath::Vector3 rotAxis)
 {
     SwitchToOrbitalMode(orbitalTarget, rotAxis, 0.0f);
 }
-void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 rotAxis, float orbitalDistance)
+void Camera::SwitchToOrbitalMode(DirectX::SimpleMath::Vector3 orbitalTarget, DirectX::SimpleMath::Vector3 rotAxis, float orbitalDistance)
 {
     orbitalAngleSpeed = 0.0f;
     isOrbitalMode = true;

@@ -5,6 +5,8 @@
 #include <d3dcompiler.h>
 #include "DisplayWin32.h"
 #include <chrono>
+#include "InputDevice.h"
+#include "Delegates.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")

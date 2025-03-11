@@ -1,13 +1,17 @@
-﻿  Sphere.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.h(44,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'CPP/Sphere.cpp')
-  
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(16,63): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(16,58): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(52,21): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(54,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(91,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(101,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(104,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Sphere.cpp(126,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Cube.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(18,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(18,61): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(216,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Cube.cpp(216,61): warning C4305: 'argument': truncation from 'double' to 'float'
+  DisplayWin32.cpp
+  Game.cpp
+  InputDevice.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,53): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,48): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Square.cpp
+  Triangle.cpp
+  Generating Code...
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Game.cpp(16,1): warning C4715: 'Game::Initialize': not all control paths return a value
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib
