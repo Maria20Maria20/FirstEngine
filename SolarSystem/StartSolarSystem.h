@@ -1,9 +1,9 @@
 #pragma once
 #include <CPP/Game.h>
-#include <CPP/Cube.h>
-#include <CPP/Sphere.h>
+#include <CPP/GameObject.h>
 #include "Planet.h"
 #include "Camera.h"
+#include "PlanetSystem.h"
 
 
 class StartSolarSystem: public Game
@@ -11,10 +11,12 @@ class StartSolarSystem: public Game
 public:
 	StartSolarSystem();
 	int InstanceObjects();
-	Cube* mCube = nullptr;
-	Cube* mCube2 = nullptr;
 	Planet* sun = nullptr;
 	Planet* satellite = nullptr;
+	Planet* earth = nullptr;
+	Planet* moon = nullptr;
+
+	PlanetSystem planetSystem;
 
 	Camera camera;
 private:

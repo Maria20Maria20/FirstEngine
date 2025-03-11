@@ -131,25 +131,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CPP\Cube.cpp" />
     <ClCompile Include="CPP\Delegates.cpp" />
     <ClCompile Include="CPP\DisplayWin32.cpp" />
     <ClCompile Include="CPP\Game.cpp" />
     <ClCompile Include="CPP\InputDevice.cpp" />
-    <ClCompile Include="CPP\Sphere.cpp" />
+    <ClCompile Include="CPP\GameObject.cpp" />
     <ClCompile Include="CPP\Square.cpp" />
     <ClCompile Include="CPP\Triangle.cpp" />
     <ClCompile Include="CPP\TriangleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CPP\Cube.h" />
     <ClInclude Include="CPP\Delegates.h" />
     <ClInclude Include="CPP\DisplayWin32.h" />
     <ClInclude Include="CPP\Game.h" />
     <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\Keys.h" />
     <ClInclude Include="CPP\ShapeType.h" />
-    <ClInclude Include="CPP\Sphere.h" />
+    <ClInclude Include="CPP\GameObject.h" />
     <ClInclude Include="CPP\Square.h" />
     <ClInclude Include="CPP\Triangle.h" />
     <ClInclude Include="CPP\TriangleComponent.h" />

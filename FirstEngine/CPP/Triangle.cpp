@@ -45,8 +45,8 @@ void Triangle::InitializeShape(int count)
     currentShape.assign(pointsAndColors.begin(), pointsAndColors.end());
     vertexCount = count * 2;
 
-    CreateVertexBuffer(pointsAndColors.data(), vertexCount, StartPosition);
-    CreateIndexBuffer();
+    CreateCubeVertexBuffer(pointsAndColors.data(), vertexCount, StartPosition);
+    CreateCubeIndexBuffer();
 }
 void Triangle::MoveShape(float dx, float dy, float dz)
 {
@@ -75,7 +75,7 @@ void Triangle::MoveShape(float dx, float dy, float dz)
     context->Unmap(vb, 0);
 }
 
-void Triangle::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation)
+void Triangle::CreateCubeVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
@@ -105,7 +105,7 @@ void Triangle::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const D
 
     device->CreateBuffer(&vertexBufDesc, &vertexData, &vb);
 }
-void Triangle::CreateIndexBuffer()
+void Triangle::CreateCubeIndexBuffer()
 {
     int indeces[] = { 0,1,2, 1,0,3 }; //for show square
     D3D11_BUFFER_DESC indexBufDesc = {};

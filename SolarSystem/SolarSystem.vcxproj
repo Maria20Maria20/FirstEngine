@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="PlanetSystem.h" />
     <ClInclude Include="StartSolarSystem.h" />
     <ClInclude Include="Planet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="PlanetSystem.cpp" />
     <ClCompile Include="RunSolarSystem.cpp" />
     <ClCompile Include="StartSolarSystem.cpp" />
     <ClCompile Include="Planet.cpp" />

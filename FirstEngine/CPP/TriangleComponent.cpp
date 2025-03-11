@@ -28,8 +28,8 @@ void TriangleComponent::InitializeShape(DirectX::XMFLOAT4 points[], DirectX::XMF
     //shapes.push_back(pointsAndColors);
     vertexCount = count * 2;
 
-    CreateVertexBuffer(pointsAndColors.data(), vertexCount, translation);
-    CreateIndexBuffer();
+    CreateCubeVertexBuffer(pointsAndColors.data(), vertexCount, translation);
+    CreateCubeIndexBuffer();
 }
 
 void TriangleComponent::MoveShape(float dx, float dy, float dz)
@@ -61,7 +61,7 @@ void TriangleComponent::MoveShape(float dx, float dy, float dz)
 
 
 
-void TriangleComponent::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation)
+void TriangleComponent::CreateCubeVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
@@ -92,7 +92,7 @@ void TriangleComponent::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count
     device->CreateBuffer(&vertexBufDesc, &vertexData, &vb);
 }
 
-void TriangleComponent::CreateIndexBuffer()
+void TriangleComponent::CreateCubeIndexBuffer()
 {
     int indeces[] = { 0,1,2, 1,0,3 }; //for show square
     D3D11_BUFFER_DESC indexBufDesc = {};

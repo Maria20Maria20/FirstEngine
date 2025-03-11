@@ -1,7 +1,8 @@
 #include "Camera.h"
 
 Camera::Camera()
-    : position(0.0f, 0.0f, -5.0f), target(0.0f, 0.0f, 1.0f), up(0.0f, 1.0f, 0.0f),
+    //: position(0.0f, 0.0f, -5.0f), target(0.0f, 0.0f, 1.0f), up(0.0f, 1.0f, 0.0f),
+    : position(0.0f, 5.0f, 0.0f), target(0.0f, 0.0f, 0.0f), up(0.0f, 0.0f, 1.0f),
     fov(DirectX::XM_PIDIV4), aspectRatio(1.0f), nearZ(0.1f), farZ(1000.0f),
     orthZ(10.0f), isPerspective(true),
     isOrbitalMode(false), orbitalTarget(0.0f, 0.0f, 0.0f),
@@ -9,18 +10,6 @@ Camera::Camera()
     orbitalPitch(0.0f), orbitalYaw(0.0f),
     orbitalAxis(0.0f, 1.0f, 0.0f), orbitalAngleSpeed(0.0f)
 {
-
-    //Matrix lookAt = XMMatrixLookAtLH(
-    //    position, // Input camera position Q
-    //    target, // Input target point T
-    //    up); // Input world up vector j
-
-    //Matrix proj = XMMatrixPerspectiveFovLH( // returns projection matrix
-    //    fov, // vertical field of view angle in radians
-    //    aspectRatio, // aspect ratio = width / height
-    //    nearZ, // distance to near plane
-    //    farZ); // distance to far plane
-
 }
 
 Camera::~Camera()

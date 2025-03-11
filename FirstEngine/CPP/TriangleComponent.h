@@ -21,6 +21,6 @@ private:
     ID3D11Device* device;
     ID3D11DeviceContext* context;
 
-    void CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation);
-    void CreateIndexBuffer();
+    void CreateCubeVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT2& translation);
+    void CreateCubeIndexBuffer();
 };*/

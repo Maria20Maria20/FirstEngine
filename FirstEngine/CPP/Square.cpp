@@ -55,8 +55,8 @@ void Square::InitializeShape(int count)
     vertexCount = count * 2;
 
 
-    CreateVertexBuffer(pointsAndColors.data(), vertexCount, StartPosition);
-    CreateIndexBuffer();
+    CreateCubeVertexBuffer(pointsAndColors.data(), vertexCount, StartPosition);
+    CreateCubeIndexBuffer();
 }
 void Square::MoveShape(float dx, float dy, float dz)
 {
@@ -118,7 +118,7 @@ void Square::ScalingShape(float scaleFactorX, float scaleFactorY, float scaleFac
     transformData.translation *= scalingMatrix;
 }
 
-void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& translation)
+void Square::CreateCubeVertexBuffer(DirectX::XMFLOAT4 points[], int count, const DirectX::XMFLOAT4& translation)
 {
     // Allocate a temporary array for transformed vertices
     std::vector<DirectX::XMFLOAT4> transformedPoints(count);
@@ -146,7 +146,7 @@ void Square::CreateVertexBuffer(DirectX::XMFLOAT4 points[], int count, const Dir
 
     device->CreateBuffer(&vertexBufDesc, &vertexData, &vb);
 }
-void Square::CreateIndexBuffer()
+void Square::CreateCubeIndexBuffer()
 {
     int indeces[] = { 0,1,2, 1,0,3 }; //for show square
     D3D11_BUFFER_DESC indexBufDesc = {};

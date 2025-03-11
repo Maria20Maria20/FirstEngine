@@ -50,6 +50,6 @@ private:
 	float DirectionY = 0.0f;
 	void CreateInputLayout();
 	void CreateConstantBuffer();
-	void CreateVertexBuffer(XMFLOAT4 points[], int count, const XMFLOAT4& translation);
-	void CreateIndexBuffer();
+	void CreateCubeVertexBuffer(XMFLOAT4 points[], int count, const XMFLOAT4& translation);
+	void CreateCubeIndexBuffer();
 };

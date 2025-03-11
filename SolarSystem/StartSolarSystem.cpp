@@ -9,17 +9,22 @@ StartSolarSystem::StartSolarSystem()
 int StartSolarSystem::InstanceObjects()
 {
 	camera = Camera();
-	/*mCube = new Cube(device, vertexBC, vertexShader,
-		pixelShader, rtv, depthStencilView, context);
-	mCube2 = new Cube(device, vertexBC, vertexShader,
-		pixelShader, rtv, depthStencilView, context);*/
 
 	sun = new Planet(device, vertexBC, vertexShader,
-		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, .7f));
-	sun->camera = &camera;
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 1, GameObject::ObjectType::SPHERE);
 	satellite = new Planet(device, vertexBC, vertexShader,
-		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), .5f, sun);
-	satellite->camera = &camera;
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
+		GameObject::ObjectType::SPHERE, .5f, sun, 0.75f);
+	earth = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 2, 
+		GameObject::ObjectType::CUBE, 3, sun, 1.5f);
+	moon = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -4,
+		GameObject::ObjectType::CUBE, .7f, earth, 0.5f);
+
+	//planetSystem.Initialize(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView, context, &camera);
+	//planetSystem.GenerateRandom(10);
+
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
 	unsigned int frameCount = 0;
@@ -63,17 +68,11 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		}
 
 
-		/*mCube->RotateShape(DirectX::XMVectorSet(1, 0, 0, 1), .5, deltaTime);
-		mCube->RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, deltaTime);
-		mCube2->RotateShape(DirectX::XMVectorSet(0, 1, 0, 1), .5, deltaTime);
-		mCube2->RotateShape(DirectX::XMVectorSet(0, 0, 1, 1), .5, deltaTime);*/
-
-		//mCube->Update(deltaTime);
-		//mCube2->Update(deltaTime);
-
 		sun->Update(deltaTime);
-
 		satellite->Update(deltaTime);
+		earth->Update(deltaTime);
+		moon->Update(deltaTime);
+		//planetSystem.Update(deltaTime);
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
@@ -89,16 +88,16 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		context->RSSetViewports(1, &viewport);
 
 		XMMATRIX projection = XMMatrixIdentity();
-		//mCube->Draw(context, projection);
-
-		//mCube2->Draw(context, projection);
 
 		sun->Draw(context, projection);
-
 		satellite->Draw(context, projection);
+		earth->Draw(context, projection);
+		moon->Draw(context, projection);
+		//planetSystem.Draw(context, projection);
 
 		if (focusedBody)
 		{
+			//follow to planet
 			camera.SwitchToOrbitalMode(focusedBody->GetCenterLocation(), Vector3(0.0f, 1.0f, 0.0f), focusedBody->orbitRadius * 5);
 		}
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
@@ -122,5 +121,10 @@ void StartSolarSystem::HandleMoveDown(Keys key)
 	{
 		focusedBody = satellite;
 	}
+	if (key == Keys::D3)
+	{
+		camera.SwitchProjection();
+	}
+
 }
 

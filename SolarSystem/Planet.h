@@ -1,29 +1,33 @@
 #ifndef SUN_H
 #define SUN_H
-#include <CPP/Sphere.h>
+#include <CPP/GameObject.h>
 #include "SimpleMath.h"
 #include "Camera.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-class Planet : public Sphere 
+class Planet : public GameObject 
 {
 public:
 	Planet(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 		ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
 		ID3D11DepthStencilView* depthStencilView,
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition, float changedScale = 1, Planet* parentPlanet = nullptr);
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition,
+		Camera* camera,
+		XMVECTOR rotateDirection, float rotateMove, ObjectType objectType,
+		float changedScale = 1, Planet* parentPlanet = nullptr, float orbitRadius = 0.0f);
 	void Update(float deltaTime);
 	Vector3 GetCenterLocation();
-	float orbitRadius = 1.1f;
+	float orbitRadius = 1;
 	Camera* camera;
-private:
 	Planet* parentPlanet;
+private:
 	float orbitAngle;
-	float moveSpeed = 1;
+	float moveSpeed = .7f;
 	float changedScale = 1;
 	XMFLOAT3 position = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	XMVECTOR rotationDirection;
 	Matrix GetParentTransform();
 };
 #endif
