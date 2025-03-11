@@ -49,7 +49,7 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		}
 
 		auto	curTime = std::chrono::steady_clock::now();
-		float	deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(curTime - PrevTime).count() / 1000000.0f;
+		deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(curTime - PrevTime).count() / 1000000.0f;
 		PrevTime = curTime;
 
 		totalTime += deltaTime;
@@ -109,10 +109,22 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 void StartSolarSystem::HandleMoveDown(Keys key)
 {
 	if (key == Keys::W) {
-		camera.MoveForward(.5f);
+		camera.MoveForward(deltaTime);
 	}
 	if (key == Keys::S) {
-		camera.MoveBackward(.5f);
+		camera.MoveBackward(deltaTime);
+	}
+	if (key == Keys::A) {
+		camera.MoveLeft(deltaTime);
+	}
+	if (key == Keys::D) {
+		camera.MoveRight(deltaTime);
+	}
+	if (key == Keys::Q) {
+		camera.RotatePitch(deltaTime);
+	}
+	if (key == Keys::E) {
+		camera.RotatePitch(-deltaTime);
 	}
 	if (key == Keys::D1) {
 		focusedBody = sun;

@@ -23,4 +23,5 @@ private:
 	Planet* focusedBody = nullptr;
 	void SolarSystemWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 	void HandleMoveDown(Keys key);
+	float	deltaTime;
 };

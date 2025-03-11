@@ -3,7 +3,10 @@
 
 #include <DirectXMath.h>
 #include <SimpleMath.h>
-#include <iostream>
+
+using namespace DirectX;
+using namespace DirectX::SimpleMath;
+
 
 class Camera
 {
@@ -11,19 +14,19 @@ public:
     Camera();
     ~Camera();
 
-    void SetPosition(DirectX::SimpleMath::Vector3 position);
-    void SetTarget(DirectX::SimpleMath::Vector3 target);
-    void SetUp(DirectX::SimpleMath::Vector3 up);
+    void SetPosition(Vector3 position);
+    void SetTarget(Vector3 target);
+    void SetUp(Vector3 up);
 
     void SetFOV(float fov);
     void SetAspectRatio(float aspectRatio);
     void SetNearZ(float nearZ);
     void SetFarZ(float farZ);
 
-    void Update(float deltaTime, const DirectX::SimpleMath::Matrix targetTransform);
+    void Update(float deltaTime, const Matrix targetTransform);
 
-    DirectX::XMMATRIX GetViewMatrix() const;
-    DirectX::XMMATRIX GetProjectionMatrix() const;
+    XMMATRIX GetViewMatrix() const;
+    XMMATRIX GetProjectionMatrix() const;
 
     void MoveForward(float speed);
     void MoveBackward(float speed);
@@ -35,18 +38,18 @@ public:
     void RotateYaw(float angle);
     void RotatePitch(float angle);
 
-    void SwitchToOrbitalMode(DirectX::SimpleMath::Vector3 orbitalTarget);
-    void SwitchToOrbitalMode(DirectX::SimpleMath::Vector3 orbitalTarget, DirectX::SimpleMath::Vector3 rotAxis);
-    void SwitchToOrbitalMode(DirectX::SimpleMath::Vector3 orbitalTarget, DirectX::SimpleMath::Vector3 rotAxis, float orbitalDistance);
+    void SwitchToOrbitalMode(Vector3 orbitalTarget);
+    void SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis);
+    void SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis, float referenceLen);
 
     void SwitchToFPSMode();
 
     void SwitchProjection();
 
 private:
-    DirectX::SimpleMath::Vector3 position;
-    DirectX::SimpleMath::Vector3 target;
-    DirectX::SimpleMath::Vector3 up;
+    Vector3 position;
+    Vector3 target;
+    Vector3 up;
 
     float fov;
     float aspectRatio;
@@ -56,14 +59,14 @@ private:
     float orthZ;
 
     bool isOrbitalMode;
-    DirectX::SimpleMath::Vector3 orbitalTarget;
+    Vector3 orbitalTarget;
     float defaultOrbitalDistance;
     float orbitalDistance;
     float orbitalYaw;
     float orbitalPitch;
 
     float orbitalAngleSpeed;
-    DirectX::SimpleMath::Vector3 orbitalAxis;
+    Vector3 spinAxis;
 
     bool isPerspective = true;
 };
