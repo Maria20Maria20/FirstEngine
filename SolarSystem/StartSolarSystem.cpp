@@ -11,16 +11,34 @@ int StartSolarSystem::InstanceObjects()
 	camera = Camera();
 
 	sun = new Planet(device, vertexBC, vertexShader,
-		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 1, GameObject::ObjectType::SPHERE);
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 1, GameObject::ObjectType::SPHERE, 3);
 	satellite = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
-		GameObject::ObjectType::SPHERE, .5f, sun, 0.75f);
+		GameObject::ObjectType::SPHERE, .5f, sun, 1.3f);
+	satellite2 = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -3,
+		GameObject::ObjectType::SPHERE, .5f, sun, 2.3f);
+	satellite3 = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
+		GameObject::ObjectType::SPHERE, .5f, sun, 3.3f);
+	satellite4 = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -3,
+		GameObject::ObjectType::SPHERE, .5f, sun, 4.3f);
+	satellite5 = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
+		GameObject::ObjectType::SPHERE, .5f, sun, 5.3f);
 	earth = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 2, 
-		GameObject::ObjectType::CUBE, 3, sun, 1.5f);
+		GameObject::ObjectType::CUBE, 2, sun, 2.5f);
 	moon = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -4,
 		GameObject::ObjectType::CUBE, .7f, earth, 0.5f);
+	cubeEarth = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -2, 
+		GameObject::ObjectType::CUBE, 2, sun, 4.5f);
+	cubeMoon = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 4,
+		GameObject::ObjectType::CUBE, .7f, cubeEarth, 0.5f);
 
 	//planetSystem.Initialize(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView, context, &camera);
 	//planetSystem.GenerateRandom(10);
@@ -70,8 +88,14 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 
 		sun->Update(deltaTime);
 		satellite->Update(deltaTime);
+		satellite2->Update(deltaTime);
+		satellite3->Update(deltaTime);
+		satellite4->Update(deltaTime);
+		satellite5->Update(deltaTime);
 		earth->Update(deltaTime);
 		moon->Update(deltaTime);
+		cubeEarth->Update(deltaTime);
+		cubeMoon->Update(deltaTime);
 		//planetSystem.Update(deltaTime);
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
@@ -91,8 +115,14 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 
 		sun->Draw(context, projection);
 		satellite->Draw(context, projection);
+		satellite2->Draw(context, projection);
+		satellite3->Draw(context, projection);
+		satellite4->Draw(context, projection);
+		satellite5->Draw(context, projection);
 		earth->Draw(context, projection);
 		moon->Draw(context, projection);
+		cubeEarth->Draw(context, projection);
+		cubeMoon->Draw(context, projection);
 		//planetSystem.Draw(context, projection);
 
 		if (focusedBody)
@@ -109,22 +139,22 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 void StartSolarSystem::HandleMoveDown(Keys key)
 {
 	if (key == Keys::W) {
-		camera.MoveForward(deltaTime);
+		camera.MoveForward(deltaTime * 5);
 	}
 	if (key == Keys::S) {
-		camera.MoveBackward(deltaTime);
+		camera.MoveBackward(deltaTime * 5);
 	}
 	if (key == Keys::A) {
-		camera.MoveLeft(deltaTime);
+		camera.MoveLeft(deltaTime * 5);
 	}
 	if (key == Keys::D) {
-		camera.MoveRight(deltaTime);
+		camera.MoveRight(deltaTime * 5);
 	}
 	if (key == Keys::Q) {
-		camera.RotatePitch(deltaTime);
+		camera.RotatePitch(deltaTime * 5);
 	}
 	if (key == Keys::E) {
-		camera.RotatePitch(-deltaTime);
+		camera.RotatePitch(-deltaTime * 5);
 	}
 	if (key == Keys::D1) {
 		focusedBody = sun;

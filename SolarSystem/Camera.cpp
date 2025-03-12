@@ -3,6 +3,7 @@
 
 Camera::Camera()
     : position(0.0f, 0.0f, -5.0f), target(0.0f, 0.0f, 1.0f), up(0.0f, 1.0f, 0.0f),
+    //: position(0.0f, 5.0f, 0.0f), target(0.0f, 0.0f, 0.0f), up(0.0f, 0.0f, 1.0f),
     fov(XM_PIDIV4), aspectRatio(1.0f), nearZ(0.1f), farZ(1000.0f),
     orthZ(10.0f), isPerspective(true),
     isOrbitalMode(false), orbitalTarget(0.0f, 0.0f, 0.0f),

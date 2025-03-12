@@ -13,8 +13,14 @@ public:
 	int InstanceObjects();
 	Planet* sun = nullptr;
 	Planet* satellite = nullptr;
+	Planet* satellite2 = nullptr;
+	Planet* satellite3 = nullptr;
+	Planet* satellite4 = nullptr;
+	Planet* satellite5 = nullptr;
 	Planet* earth = nullptr;
 	Planet* moon = nullptr;
+	Planet* cubeEarth = nullptr;
+	Planet* cubeMoon = nullptr;
 
 	PlanetSystem planetSystem;
 
