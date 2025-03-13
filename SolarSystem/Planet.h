@@ -16,7 +16,7 @@ public:
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition,
 		Camera* camera,
 		XMVECTOR rotateDirection, float rotateMove, ObjectType objectType,
-		float changedScale = 1, Planet* parentPlanet = nullptr, float orbitRadius = 0.0f);
+		float changedScale = 1, Planet* parentPlanet = nullptr, float orbitRadius = 0.0f, LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl");
 	void Update(float deltaTime);
 	Vector3 GetCenterLocation();
 	float orbitRadius = 1;

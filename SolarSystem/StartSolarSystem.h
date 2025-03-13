@@ -21,6 +21,8 @@ public:
 	Planet* moon = nullptr;
 	Planet* cubeEarth = nullptr;
 	Planet* cubeMoon = nullptr;
+	Planet* skyBox = nullptr;
+	GameObject* grid = nullptr;
 
 	PlanetSystem planetSystem;
 
@@ -29,5 +31,6 @@ private:
 	Planet* focusedBody = nullptr;
 	void SolarSystemWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 	void HandleMoveDown(Keys key);
-	float	deltaTime;
+	void HandleMouseMove(const InputDevice::MouseMoveEventArgs& args);
+	float deltaTime;
 };

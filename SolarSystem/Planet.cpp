@@ -5,9 +5,9 @@ Planet::Planet(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition, Camera* camera,
 	XMVECTOR rotationDirection, float rotateMove, ObjectType objectType,
 	float changedScale, Planet* parentPlanet,
-	float orbitRadius
+	float orbitRadius, LPCWSTR shaderFilePath
 	) : GameObject(device,
-		vertexBC, vs, ps, rtv, depthStencilView, context, objectType)
+		vertexBC, vs, ps, rtv, depthStencilView, context, objectType, shaderFilePath)
 {
 	position = startPosition;
 	this->parentPlanet = parentPlanet;

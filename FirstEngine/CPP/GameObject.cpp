@@ -2,10 +2,10 @@
 
 GameObject::GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 	ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType objectType)
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType objectType, LPCWSTR shaderFilePath)
 	: mRotationAngle(0.0f), vsBlob(vertexBC), mVertexShader(vs), mPixelShader(ps),
 	renderTargetView(rtv), depthStencilView(depthStencilView), device(device),
-	context(context), currentObject(objectType)
+	context(context), currentObject(objectType), shaderFilePath(shaderFilePath)
 {
 	InitializeBuffers();
 	InitializeShaders();
@@ -23,6 +23,12 @@ void GameObject::InitializeBuffers()
 	{
 		CreateCubeVertexBuffer();
 		CreateCubeIndexBuffer();
+	}
+	if (currentObject == ObjectType::GRID)
+	{
+		CreateGridVertexBuffer();
+		CreateGridIndexBuffer();
+		mWorldMatrix = DirectX::XMMatrixIdentity();
 	}
 	CreateConstantBuffer();
 	CreateInputLayout();
@@ -92,7 +98,7 @@ void GameObject::CreateSphereIndexBuffer()
 {
 	indicesNum = 6 * sliceCount + 2 * 6 * elevationCount * sliceCount;
 	//std::cout << *indicesNum << " << \n";
-	indices = (UINT*)malloc(indicesNum * sizeof(int));
+	indices = (UINT*)malloc(indicesNum * sizeof(UINT));
 
 	size_t indexIndex = 0;
 
@@ -194,7 +200,7 @@ void GameObject::CreateCubeVertexBuffer()
 void GameObject::CreateCubeIndexBuffer()
 {
 	indicesNum = 36;
-	indices = (UINT*)malloc(indicesNum * sizeof(int));
+	indices = (UINT*)malloc(indicesNum * sizeof(UINT));
 	UINT _indices[] = {
 		// Front Face
 		0, 1, 2,
@@ -241,7 +247,87 @@ void GameObject::CreateCubeIndexBuffer()
 
 	device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
 }
+void GameObject::CreateGridVertexBuffer() {
+	const int gridSize = 30;  
+	const float spacing = 3.0f;  
+	const float halfSize = (gridSize * spacing) / 2.0f;
 
+	verticesNum = (gridSize + 1) * (gridSize + 1) * 2 * 3; 
+	vertices = (Vertex*)malloc(verticesNum * sizeof(Vertex));
+
+	int vertexIndex = 0;
+
+	for (int i = 0; i <= gridSize; ++i) {
+		for (int j = 0; j <= gridSize; ++j) {
+			float pos_u = -halfSize + i * spacing;
+			float pos_v = -halfSize + j * spacing;
+
+			vertices[vertexIndex++] = { XMFLOAT4(-halfSize, pos_u, pos_v, 1.0f), gridColor };
+			vertices[vertexIndex++] = { XMFLOAT4(halfSize, pos_u, pos_v, 1.0f), gridColor };
+
+			vertices[vertexIndex++] = { XMFLOAT4(pos_v, -halfSize, pos_u, 1.0f), gridColor };
+			vertices[vertexIndex++] = { XMFLOAT4(pos_v, halfSize, pos_u, 1.0f), gridColor };
+
+			vertices[vertexIndex++] = { XMFLOAT4(pos_u, pos_v, -halfSize, 1.0f), gridColor };
+			vertices[vertexIndex++] = { XMFLOAT4(pos_u, pos_v, halfSize, 1.0f), gridColor };
+		}
+	}
+
+	D3D11_BUFFER_DESC vbd = {};
+	vbd.ByteWidth = sizeof(Vertex) * verticesNum;
+	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vbd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	vbd.CPUAccessFlags = 0; //0 = CPU don't need, D3D11_CPU_ACCESS_WRITE = CPU need
+	vbd.MiscFlags = 0; //optional parameters
+	vbd.StructureByteStride = 0; //size per element in buffer structure
+
+	D3D11_SUBRESOURCE_DATA vinitData = {};
+	//vinitData.pSysMem = vertices;
+	vinitData.pSysMem = vertices;
+	vinitData.SysMemPitch = 0;
+	vinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&vbd, &vinitData, &mVertexBuffer);
+}
+void GameObject::CreateGridIndexBuffer() {
+	const int gridSize = 30;  
+	indicesNum = (gridSize + 1) * (gridSize + 1) * 2 * 3;
+	//std::cout << *indicesNum << " << \n";
+	indices = (UINT*)malloc(indicesNum * sizeof(UINT));
+
+	size_t indexIndex = 0;
+
+	int vertexIndex = 0;
+
+	for (int i = 0; i <= gridSize; ++i) {
+		for (int j = 0; j <= gridSize; ++j) {
+
+			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j);
+			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 1;
+
+			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 2;
+			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 3;
+indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 4;
+indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 5;
+		}
+	}
+
+
+	D3D11_BUFFER_DESC ibd = {};
+	ibd.ByteWidth = sizeof(UINT) * indicesNum;
+	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	ibd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	ibd.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
+	ibd.MiscFlags = 0; //optional parameters
+	ibd.StructureByteStride = 0; //size per element in buffer structure
+
+	D3D11_SUBRESOURCE_DATA iinitData = {};
+	iinitData.pSysMem = indices;
+	iinitData.SysMemPitch = 0;
+	iinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
+}
 void GameObject::Update(float dt)
 {
 
@@ -254,6 +340,11 @@ void GameObject::Update(float dt)
 void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj)
 {
 	SetupIAStage();
+
+	if (currentObject == ObjectType::GRID)
+	{
+		cb.worldViewProj = mWorldMatrix * viewProj;
+	}
 
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -268,7 +359,6 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 	context->PSSetShader(mPixelShader, nullptr, 0);
 
 	context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
-	// Отрисовка
 	context->DrawIndexed(indicesNum, 0, 0);
 }
 
@@ -302,7 +392,7 @@ void GameObject::ScalingShape(float scaleFactor)
 
 void GameObject::InitializeShaders()
 {
-	auto res = D3DCompileFromFile(L"./Shaders/CubeShader.hlsl", //create vertex shader from  hlsl file
+	auto res = D3DCompileFromFile(shaderFilePath, //create vertex shader from  hlsl file
 		nullptr /*macros*/,
 		nullptr /*include*/,
 		"VSMain", //function name from hlsl file for run it
@@ -320,7 +410,7 @@ void GameObject::InitializeShaders()
 	//"TEST" - use TEST define from hlsl file
 	//float4(0.0f, 1.0f, 0.0f, 1.0f) - color for square right
 
-	res = D3DCompileFromFile(L"./Shaders/CubeShader.hlsl", //create pixel shaders from hlsl file
+	res = D3DCompileFromFile(shaderFilePath, //create pixel shaders from hlsl file
 		Shader_Macros /*macros*/, //macros shaders
 		nullptr /*include*/,
 		"PSMain", //function name from hlsl file for run it
@@ -378,8 +468,14 @@ D3D11_INPUT_ELEMENT_DESC{
 void GameObject::SetupIAStage()
 {
 	context->IASetInputLayout(mInputLayout);
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	// Установка вершинного буфера
+	if (currentObject == ObjectType::GRID)
+	{
+		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+	}
+	else
+	{
+		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	}	// Установка вершинного буфера
 	UINT stride[] = { sizeof(Vertex) };
 	UINT offset = 0;
 	context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);

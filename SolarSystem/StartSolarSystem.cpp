@@ -4,6 +4,7 @@ StartSolarSystem::StartSolarSystem()
 {
 	Initialize();
 	InputDevice::getInstance().OnKeyPressed.AddRaw(this, &StartSolarSystem::HandleMoveDown);
+	InputDevice::getInstance().MouseMove.AddRaw(this, &StartSolarSystem::HandleMouseMove);
 }
 
 int StartSolarSystem::InstanceObjects()
@@ -39,7 +40,12 @@ int StartSolarSystem::InstanceObjects()
 	cubeMoon = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 4,
 		GameObject::ObjectType::CUBE, .7f, cubeEarth, 0.5f);
-
+	skyBox = new Planet(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 0,
+		GameObject::ObjectType::SPHERE, 300.5f, nullptr, 0.0f, L"./Shaders/SkyBoxShader.hlsl");
+	grid = new GameObject(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, 
+		GameObject::ObjectType::GRID);
 	//planetSystem.Initialize(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView, context, &camera);
 	//planetSystem.GenerateRandom(10);
 
@@ -96,6 +102,8 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		moon->Update(deltaTime);
 		cubeEarth->Update(deltaTime);
 		cubeMoon->Update(deltaTime);
+		skyBox->Update(deltaTime);
+		grid->Update(deltaTime);
 		//planetSystem.Update(deltaTime);
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
@@ -123,12 +131,14 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		moon->Draw(context, projection);
 		cubeEarth->Draw(context, projection);
 		cubeMoon->Draw(context, projection);
+		skyBox->Draw(context, projection);
+		grid->Draw(context, camera.GetViewMatrix() * camera.GetProjectionMatrix());
 		//planetSystem.Draw(context, projection);
 
 		if (focusedBody)
 		{
 			//follow to planet
-			camera.SwitchToOrbitalMode(focusedBody->GetCenterLocation(), Vector3(0.0f, 1.0f, 0.0f), focusedBody->orbitRadius * 5);
+			camera.Update(deltaTime, focusedBody->mWorldMatrix);
 		}
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
@@ -139,34 +149,54 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 void StartSolarSystem::HandleMoveDown(Keys key)
 {
 	if (key == Keys::W) {
-		camera.MoveForward(deltaTime * 5);
+		camera.MoveForward(deltaTime * 50);
 	}
 	if (key == Keys::S) {
-		camera.MoveBackward(deltaTime * 5);
+		camera.MoveBackward(deltaTime * 50);
 	}
 	if (key == Keys::A) {
-		camera.MoveLeft(deltaTime * 5);
+		camera.MoveLeft(deltaTime * 50);
 	}
 	if (key == Keys::D) {
-		camera.MoveRight(deltaTime * 5);
+		camera.MoveRight(deltaTime * 50);
 	}
 	if (key == Keys::Q) {
-		camera.RotatePitch(deltaTime * 5);
+		camera.RotatePitch(deltaTime * 50);
 	}
 	if (key == Keys::E) {
-		camera.RotatePitch(-deltaTime * 5);
+		camera.RotatePitch(-deltaTime * 50);
 	}
 	if (key == Keys::D1) {
 		focusedBody = sun;
+		camera.SwitchToOrbitalMode(focusedBody->GetCenterLocation(), Vector3(0.0f, 1.0f, 0.0f), focusedBody->orbitRadius * 5);
 	}
 	if (key == Keys::D2)
 	{
 		focusedBody = satellite;
+		camera.SwitchToOrbitalMode(focusedBody->GetCenterLocation(), Vector3(0.0f, 1.0f, 0.0f), focusedBody->orbitRadius * 5);
 	}
 	if (key == Keys::D3)
 	{
 		camera.SwitchProjection();
 	}
-
+	if (key == Keys::Down) {
+		camera.RotatePitch(deltaTime * 50);
+	}
+	if (key == Keys::Up) {
+		camera.RotatePitch(-deltaTime * 50);
+	}
+	if (key == Keys::Right)
+	{
+		camera.RotateYaw(deltaTime * 30);
+	}
+	if (key == Keys::Left)
+	{
+		camera.RotateYaw(-deltaTime * 30);
+	}
 }
 
+void StartSolarSystem::HandleMouseMove(const InputDevice::MouseMoveEventArgs& args)
+{
+	camera.RotateYaw(deltaTime * args.Offset.x);
+	camera.RotatePitch(deltaTime * args.Offset.y);
+}

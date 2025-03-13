@@ -9,6 +9,9 @@
     <ContentFile>
       <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\CubeShader.cso</FullPath>
     </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SkyBoxShader.cso</FullPath>
+    </ContentFile>
   </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />

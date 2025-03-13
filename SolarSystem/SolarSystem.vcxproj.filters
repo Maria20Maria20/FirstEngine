@@ -49,5 +49,8 @@
     <FxCompile Include="Shaders\CubeShader.hlsl">
       <Filter>Resource Files</Filter>
     </FxCompile>
+    <FxCompile Include="Shaders\SkyBoxShader.hlsl">
+      <Filter>Resource Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
