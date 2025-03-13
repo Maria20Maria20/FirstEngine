@@ -18,7 +18,8 @@ public:
     enum class ObjectType {
         CUBE = 0, 
         SPHERE = 1,
-        GRID = 2
+        GRID = 2,
+        SKYBOX = 3,
     };
     GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
         ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
@@ -86,6 +87,8 @@ private:
 
     void CreateGridVertexBuffer();
     void CreateGridIndexBuffer();
+    
+    void CreateSkyVertexBuffer();
 
     void InitializeBuffers();
     void InitializeShaders();

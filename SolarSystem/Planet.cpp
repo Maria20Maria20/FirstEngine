@@ -25,7 +25,7 @@ Planet::Planet(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 
 void Planet::Update(float deltaTime)
 {
-	RotateShape(rotationDirection, 20, deltaTime);
+	RotateShape(rotationDirection, speedRotation, deltaTime);
 	mWorldMatrix = mRotationMatrix * XMMatrixTranslation(position.x, position.y, position.z);
 
 	if (parentPlanet) //if parentPlanet not nullptr

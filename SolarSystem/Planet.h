@@ -22,9 +22,10 @@ public:
 	float orbitRadius = 1;
 	Camera* camera;
 	Planet* parentPlanet;
+	float speedRotation = 20;
 private:
-	float orbitAngle;
 	float moveSpeed = .7f;
+	float orbitAngle;
 	float changedScale = 1;
 	XMFLOAT3 position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	XMVECTOR rotationDirection;

@@ -119,16 +119,18 @@ PS_IN VSMain(VS_IN input)
 
     // output.pos = input.pos;
     output.pos = mul(input.pos, world);
-    output.col = input.col;
-
+    
+    float r = length(input.pos);
+    float theta = acos(input.pos.z / r) + 3.15;
+    float phi = sign(input.pos.y) * acos(input.pos.x / length(input.pos.xy)) + 3.15;
+    output.col = cnoise(float2(100000 * theta / 6.30, 100000 * phi / 6.30));
     return output;
 }
 
 
 float4 PSMain(PS_IN input) : SV_Target
 {
-    float val = cnoise(float2(input.pos.x, input.pos.y));
-    float4 col = val > 0.9f ? 1 : 0;
-
+    float4 col = input.col;
+    col = col > 0.8f ? 1 : 0;
     return col;
 }

@@ -19,6 +19,11 @@ void GameObject::InitializeBuffers()
 		CreateSphereVertexBuffer();
 		CreateSphereIndexBuffer();
 	}
+	if (currentObject == ObjectType::SKYBOX)
+	{
+		CreateSkyVertexBuffer();
+		CreateSphereIndexBuffer();
+	}
 	if (currentObject == ObjectType::CUBE)
 	{
 		CreateCubeVertexBuffer();
@@ -94,6 +99,57 @@ void GameObject::CreateSphereVertexBuffer()
 
 	device->CreateBuffer(&vbd, &vinitData, &mVertexBuffer);
 }
+
+void GameObject::CreateSkyVertexBuffer()
+{
+	//sliceCount = max(sliceCount, 4);
+	//elevationCount = max(elevationCount, 1);
+	sliceCount = 1000;
+	elevationCount = 1000;
+	verticesNum = 2 + (2 * elevationCount + 1) * sliceCount;
+	vertices = (Vertex*)malloc(verticesNum * sizeof(Vertex));
+
+	float sliceStep = DirectX::XM_2PI / sliceCount;
+	float elevationStep = DirectX::XM_PIDIV2 / (elevationCount + 1);
+
+
+	UINT _offsetVertexIdx = 0;
+	// top vertex
+	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, radius, 0.0f, 1.0f),
+		sphere_color_1 };
+	// other vertices
+	for (UINT i = 1; i <= 2 * elevationCount + 1; ++i)
+	{
+		for (UINT j = 0; j < sliceCount; ++j) {
+			vertices[_offsetVertexIdx++] =
+			{ DirectX::XMFLOAT4(
+				radius * sinf(elevationStep * i) * cosf(sliceStep * j),
+				radius * cosf(elevationStep * i),
+				radius * sinf(elevationStep * i) * sinf(sliceStep * j),
+				1.0f
+			), (_offsetVertexIdx % 2 == 0 ? sphere_color_1 : sphere_color_2) };
+		}
+	}
+	// bottom vertex
+	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, -radius, 0.0f, 1.0f), sphere_color_1 };
+
+	D3D11_BUFFER_DESC vbd = {};
+	vbd.ByteWidth = sizeof(Vertex) * verticesNum;
+	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vbd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	vbd.CPUAccessFlags = 0; //0 = CPU don't need, D3D11_CPU_ACCESS_WRITE = CPU need
+	vbd.MiscFlags = 0; //optional parameters
+	vbd.StructureByteStride = 0; //size per element in buffer structure
+
+	D3D11_SUBRESOURCE_DATA vinitData = {};
+	//vinitData.pSysMem = vertices;
+	vinitData.pSysMem = vertices;
+	vinitData.SysMemPitch = 0;
+	vinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&vbd, &vinitData, &mVertexBuffer);
+}
+
 void GameObject::CreateSphereIndexBuffer()
 {
 	indicesNum = 6 * sliceCount + 2 * 6 * elevationCount * sliceCount;

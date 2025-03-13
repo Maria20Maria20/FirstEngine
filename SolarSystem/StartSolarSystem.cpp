@@ -42,10 +42,11 @@ int StartSolarSystem::InstanceObjects()
 		GameObject::ObjectType::CUBE, .7f, cubeEarth, 0.5f);
 	skyBox = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 0,
-		GameObject::ObjectType::SPHERE, 300.5f, nullptr, 0.0f, L"./Shaders/SkyBoxShader.hlsl");
-	grid = new GameObject(device, vertexBC, vertexShader,
-		pixelShader, rtv, depthStencilView, context, 
-		GameObject::ObjectType::GRID);
+		GameObject::ObjectType::SKYBOX, 100.5f, nullptr, 0.0f, L"./Shaders/SkyBoxShader.hlsl");
+	skyBox->speedRotation = 2;
+	//grid = new GameObject(device, vertexBC, vertexShader,
+	//	pixelShader, rtv, depthStencilView, context, 
+	//	GameObject::ObjectType::GRID);
 	//planetSystem.Initialize(device, vertexBC, vertexShader, pixelShader, rtv, depthStencilView, context, &camera);
 	//planetSystem.GenerateRandom(10);
 
@@ -103,7 +104,7 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		cubeEarth->Update(deltaTime);
 		cubeMoon->Update(deltaTime);
 		skyBox->Update(deltaTime);
-		grid->Update(deltaTime);
+		//grid->Update(deltaTime);
 		//planetSystem.Update(deltaTime);
 
 		float color[] = { 0.0f, 0.1f, totalTime, 1.0f };
@@ -132,7 +133,7 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		cubeEarth->Draw(context, projection);
 		cubeMoon->Draw(context, projection);
 		skyBox->Draw(context, projection);
-		grid->Draw(context, camera.GetViewMatrix() * camera.GetProjectionMatrix());
+		//grid->Draw(context, camera.GetViewMatrix() * camera.GetProjectionMatrix());
 		//planetSystem.Draw(context, projection);
 
 		if (focusedBody)
