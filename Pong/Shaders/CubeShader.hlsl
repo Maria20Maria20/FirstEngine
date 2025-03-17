@@ -2,6 +2,7 @@
 cbuffer ConstantBuffer : register(b0)
 {
     row_major float4x4 world; // Мировые преоьразования
+    row_major float4x4 worldViewProj; // Мировые преоьразования
 };
 
 struct VS_IN
@@ -21,7 +22,7 @@ PS_IN VSMain( VS_IN input )
     PS_IN output = (PS_IN) 0;
 
     // output.pos = input.pos;
-    output.pos = mul(input.pos, world);
+    output.pos = mul(input.pos, worldViewProj);
     output.col = input.col;
 
     return output;

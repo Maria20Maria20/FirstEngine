@@ -239,6 +239,7 @@ int Game::CompileShaders()
 
 void Game::SetupRasterizerStage()
 {
+	 //rastDesc.CullMode = D3D11_CULL_NONE; //triangles in the specified direction do not need to be drawn
 	rastDesc.CullMode = D3D11_CULL_NONE; //triangles in the specified direction do not need to be drawn
 	rastDesc.FillMode = D3D11_FILL_SOLID; //fill mode (solid or wireframe)
 

@@ -42,8 +42,8 @@ int StartSolarSystem::InstanceObjects()
 		GameObject::ObjectType::CUBE, .7f, cubeEarth, 0.5f);
 	skyBox = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 0,
-		GameObject::ObjectType::SKYBOX, 100.5f, nullptr, 0.0f, L"./Shaders/SkyBoxShader.hlsl");
-	skyBox->speedRotation = 2;
+		GameObject::ObjectType::SKYBOX, 300.0f, nullptr, 0.0f, L"./Shaders/SkyBoxShader.hlsl");
+	skyBox->speedRotation = 0;
 	//grid = new GameObject(device, vertexBC, vertexShader,
 	//	pixelShader, rtv, depthStencilView, context, 
 	//	GameObject::ObjectType::GRID);
@@ -162,10 +162,20 @@ void StartSolarSystem::HandleMoveDown(Keys key)
 		camera.MoveRight(deltaTime * 50);
 	}
 	if (key == Keys::Q) {
-		camera.RotatePitch(deltaTime * 50);
+		camera.RotatePitch(deltaTime * 5);
 	}
 	if (key == Keys::E) {
-		camera.RotatePitch(-deltaTime * 50);
+		camera.RotatePitch(-deltaTime * 5);
+	}
+	if (key == Keys::Space) {
+		camera.MoveUp(deltaTime * 50);
+	}
+	if (key == Keys::LeftControl) {
+		camera.MoveDown(deltaTime * 50);
+	}
+	if (key == Keys::D0) {
+		focusedBody = nullptr;
+		camera.SwitchToFPSMode();
 	}
 	if (key == Keys::D1) {
 		focusedBody = sun;

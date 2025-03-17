@@ -69,22 +69,6 @@ void Camera::Update(float deltaTime, const Matrix targetTransform = Matrix::Iden
         target = orbitalTarget;
 
         up = Vector3::Transform(spinAxis, targetTransform) - orbitalTarget;
-
-        // Обновление позиции камеры в орбитальном режиме
-
-        /*position.x = orbitalTarget.x + orbitalDistance * cos(orbitalYaw) * cos(orbitalPitch);
-        position.y = orbitalTarget.y + orbitalDistance * sin(orbitalPitch);
-        position.z = orbitalTarget.z + orbitalDistance * sin(orbitalYaw) * cos(orbitalPitch);
-
-        up = spinAxis;
-
-        target = orbitalTarget;*/
-        //Matrix::CreateFromQuaternion(Quaternion::CreateFromAxisAngle())
-        //Vector3::Transform((), Matrix::CreateFromAxisAngle(spinAxis, orbitalAngleSpeed * deltaTime);
-
-        //XMMatrixLookAtLH()
-
-        //position = Vector3::Transform(orbitalTarget, Matrix::CreateFromYawPitchRoll(orbitalYaw, orbitalPitch) )
     }
 }
 

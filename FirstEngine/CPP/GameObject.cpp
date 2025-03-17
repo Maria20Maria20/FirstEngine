@@ -23,6 +23,14 @@ void GameObject::InitializeBuffers()
 	{
 		CreateSkyVertexBuffer();
 		CreateSphereIndexBuffer();
+
+		for (size_t i = 0; i < indicesNum; i += 3)
+		{
+			UINT _t = indices[i + 2];
+			indices[i + 2] = indices[i + 1];
+			indices[i + 1] = _t;
+		}
+
 	}
 	if (currentObject == ObjectType::CUBE)
 	{
@@ -104,8 +112,8 @@ void GameObject::CreateSkyVertexBuffer()
 {
 	//sliceCount = max(sliceCount, 4);
 	//elevationCount = max(elevationCount, 1);
-	sliceCount = 1000;
-	elevationCount = 1000;
+	sliceCount = 10;
+	elevationCount = 5;
 	verticesNum = 2 + (2 * elevationCount + 1) * sliceCount;
 	vertices = (Vertex*)malloc(verticesNum * sizeof(Vertex));
 
