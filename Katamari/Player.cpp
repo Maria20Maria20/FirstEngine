@@ -1,31 +1,92 @@
 #include "Player.h"
 
+
 Player::Player(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs, ID3D11PixelShader* ps,
 	ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition, Camera* camera,
-	XMVECTOR rotationDirection, float rotateMove, ObjectType objectType,
+	ObjectType objectType,
 	float changedScale, LPCWSTR shaderFilePath
 ) : GameObject(device,
 	vertexBC, vs, ps, rtv, depthStencilView, context, objectType, shaderFilePath)
 {
+	initRandomRotation = GetRandomRotateTransform();
 	position = startPosition;
-	this->changedScale = changedScale;
+	position.y = radius;
+	this->scale = changedScale;
 	this->camera = camera;
-	this->rotationDirection = rotationDirection;
-	moveSpeed = rotateMove;
 }
 
 void Player::Update(float deltaTime)
 {
+	Move(deltaTime);
 	//RotateShape(rotationDirection, speedRotation, deltaTime);
-	mWorldMatrix = mRotationMatrix * XMMatrixTranslation(position.x, position.y, position.z);
+	Matrix rotTransform = Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f);
+	Matrix spinTransform = Matrix::CreateFromYawPitchRoll(0.0f, currentSpin, 0.0f);
 
+	mmWorldMatrixrix = Matrix::CreateScale(scale)
+		* initRandomRotation
+		* spinTransform * rotTransform
+		* Matrix::CreateTranslation(position);
 
 	Matrix viewMat = camera->GetViewMatrix();
 	Matrix projMat = camera->GetProjectionMatrix();
 
-
 	// Update constant buffer
-	cb.worldViewProj = XMMatrixScaling(changedScale, changedScale, changedScale) * mWorldMatrix * (XMMATRIX)(viewMat * projMat);
+	cb.worldViewProj = mmWorldMatrixrix * (XMMATRIX)(viewMat * projMat);
 
+}
+
+void Player::Move(float deltaTime)
+{
+	SlowDown(deltaTime);
+	position.y = radius;
+	position = position + deltaTime * velocity * GetMoveDir();
+	currentSpin += spinSpeed * deltaTime;
+}
+
+Vector3 Player::GetMoveDir()
+{
+	return Vector3::Transform(Vector3(0.0f, 0.0f, 1.0f), Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f));
+}
+
+void Player::AddTurn(float direction, float deltaTime)
+{
+	currentRotation += direction * deltaTime * rotationSpeed;
+	//currentRotation = max(-XM_PI, min(currentRotation, XM_PI));
+	if (currentRotation > XM_PI) {
+		currentRotation -= XM_2PI;
+	}
+	else if (currentRotation < -XM_PI) {
+		currentRotation += XM_2PI;
+	}
+}
+
+void Player::PushForward(float deltaTime)
+{
+	velocity = min(maxVelocity, velocity + deltaTime * 2 * acceleration);
+	spinSpeed = velocity / radius;
+}
+
+void Player::SlowDown(float deltaTime)
+{
+	velocity = max(0.0, velocity - deltaTime * acceleration);
+	spinSpeed = velocity / radius;
+}
+
+Matrix GetRandomRotateTransform() {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dis(0.0f, XM_PI * 2);
+
+	float angleX = dis(gen);
+	float angleY = dis(gen);
+	float angleZ = dis(gen);
+
+	Matrix rotationX = Matrix::CreateRotationX(angleX);
+	Matrix rotationY = Matrix::CreateRotationY(angleY);
+	Matrix rotationZ = Matrix::CreateRotationZ(angleZ);
+
+	Matrix rotation = rotationX * rotationY * rotationZ;
+
+	return rotation;
 }

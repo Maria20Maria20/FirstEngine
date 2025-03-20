@@ -137,7 +137,7 @@ void StartSolarSystem::SolarSystemWindowLoop(std::chrono::steady_clock::time_poi
 		if (focusedBody)
 		{
 			//follow to planet
-			camera.Update(deltaTime, focusedBody->mWorldMatrix);
+			camera.Update(deltaTime, focusedBody->mmWorldMatrixrix);
 		}
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
@@ -207,5 +207,5 @@ void StartSolarSystem::HandleMoveDown(Keys key)
 void StartSolarSystem::HandleMouseMove(const InputDevice::MouseMoveEventArgs& args)
 {
 	camera.RotateYaw(deltaTime * args.Offset.x);
-	camera.RotatePitch(deltaTime * args.Offset.y);
+	camera.RotatePitch(-deltaTime * args.Offset.y);
 }

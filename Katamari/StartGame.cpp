@@ -3,10 +3,18 @@
 StartGame::StartGame()
 {
 	Initialize();
+	InputDevice::getInstance().OnKeyPressed.AddRaw(this, &StartGame::HandleMoveDown);
+	InputDevice::getInstance().MouseMove.AddRaw(this, &StartGame::HandleMouseMove);
+
+	plane = new Ground(device, vertexBC, vertexShader,
+		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f),
+		&camera, GameObject::ObjectType::PLANE, 1);
 	player = new Player(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), 
-		&camera, DirectX::XMVectorSet(0, 1, 0, 1), 1, GameObject::ObjectType::SPHERE, 3);
-	
+		&camera, GameObject::ObjectType::SPHERE, 1);
+
+	camera.SwitchToFollowMode(player->position, player->GetMoveDir(), player->radius);
+
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
 	unsigned int frameCount = 0;
@@ -50,6 +58,8 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 
 		player->Update(deltaTime);
+		plane->Update(deltaTime);
+		camera.Update(deltaTime, Matrix::CreateScale(player->scale) * player->mmWorldMatrixrix, player->GetMoveDir(), player->radius);
 
 		float color[] = { 0.0f, 0.1f, 0.5f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
@@ -67,13 +77,37 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 		XMMATRIX projection = XMMatrixIdentity();
 
 		player->Draw(context, projection);
+		plane->Draw(context, projection);
 
 		//if (focusedBody)
 		//{
 		//	//follow to planet
-		//	camera.Update(deltaTime, focusedBody->mWorldMatrix);
+		//	camera.Update(deltaTime, focusedBody->mmWorldMatrixrix);
 		//}
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
 
+}
+
+void StartGame::HandleMoveDown(Keys key)
+{
+	if (key == Keys::W) {
+		player->PushForward(deltaTime * 30);
+	}
+	if (key == Keys::S) {
+		// player->Move(true, -1, deltaTime * 50);
+	}
+	if (key == Keys::A)
+	{
+		player->AddTurn(-1.0f, deltaTime);
+	}
+	if (key == Keys::D)
+	{
+		player->AddTurn(1.0f, deltaTime);
+	}
+}
+
+void StartGame::HandleMouseMove(const InputDevice::MouseMoveEventArgs& args)
+{
+	player->AddTurn(args.Offset.x * 1.0f, deltaTime);
 }

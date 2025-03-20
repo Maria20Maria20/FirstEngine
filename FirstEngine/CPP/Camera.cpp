@@ -2,16 +2,20 @@
 #include <iostream>
 
 
-Camera::Camera()
+Camera::Camera() : Camera(1.0f) {
+
+}
+
+Camera::Camera(float aspectRatio)
     : position(0.0f, 0.0f, -5.0f), target(0.0f, 0.0f, 1.0f), up(0.0f, 1.0f, 0.0f),
-    //: position(0.0f, 5.0f, 0.0f), target(0.0f, 0.0f, 0.0f), up(0.0f, 0.0f, 1.0f),
-    fov(XM_PIDIV4), aspectRatio(1.0f), nearZ(0.1f), farZ(1000.0f),
+    fov(XM_PIDIV4), aspectRatio(aspectRatio), nearZ(0.1f), farZ(1000.0f),
     orthZ(10.0f), isPerspective(true),
-    isOrbitalMode(false), orbitalTarget(0.0f, 0.0f, 0.0f),
-    orbitalDistance(5.0f), defaultOrbitalDistance(5.0f),
+    cameraMode(CAMERA_MODE::FPS), orbitalTarget(0.0f, 0.0f, 0.0f),
+    orbitalDistance(5.0f), minOrbitalDistance(5.0f),
     orbitalPitch(0.0f), orbitalYaw(0.0f),
     spinAxis(0.0f, 1.0f, 0.0f), orbitalAngleSpeed(0.0f)
 {
+
 }
 
 Camera::~Camera()
@@ -53,9 +57,9 @@ void Camera::SetFarZ(float farZ)
     this->farZ = farZ;
 }
 
-void Camera::Update(float deltaTime, const Matrix targetTransform = Matrix::Identity)
+void Camera::Update(float deltaTime, const Matrix targetTransform)
 {
-    if (isOrbitalMode)
+    if (cameraMode == CAMERA_MODE::ORBITAL)
     {
         //orbitalYaw += orbitalAngleSpeed * deltaTime;
 
@@ -69,6 +73,33 @@ void Camera::Update(float deltaTime, const Matrix targetTransform = Matrix::Iden
         target = orbitalTarget;
 
         up = Vector3::Transform(spinAxis, targetTransform) - orbitalTarget;
+    }
+}
+
+void Camera::Update(float deltaTime, const Matrix targetTransform, Vector3 direction)
+{
+    if (cameraMode == CAMERA_MODE::FOLLOW)
+    {
+        //orbitalYaw += orbitalAngleSpeed * deltaTime;
+
+        target = Vector3::Transform(Vector3::Zero, targetTransform);
+
+        float cam2targetDist = 2.0f * referenceLen / tanf(fov * 0.5);
+        position = target - cam2targetDist * (direction + sinf(followPitch) * up);
+    }
+}
+
+void Camera::Update(float deltaTime, const Matrix targetTransform, Vector3 direction, float referenceLen)
+{
+    this->referenceLen = referenceLen;
+    if (cameraMode == CAMERA_MODE::FOLLOW)
+    {
+        //orbitalYaw += orbitalAngleSpeed * deltaTime;
+
+        target = Vector3::Transform(Vector3::Zero, targetTransform);
+
+        float cam2targetDist = 2.0f * referenceLen / tanf(fov * 0.5);
+        position = target - cam2targetDist * (direction + sinf(followPitch) * up);
     }
 }
 
@@ -87,9 +118,9 @@ XMMATRIX Camera::GetProjectionMatrix() const
 
 void Camera::MoveForward(float speed)
 {
-    if (isOrbitalMode)
+    if (cameraMode == CAMERA_MODE::ORBITAL)
     {
-        orbitalDistance = max(orbitalDistance - speed, 0.1f);
+        orbitalDistance = max(orbitalDistance - speed, referenceLen);
     }
     else
     {
@@ -115,10 +146,12 @@ void Camera::MoveBackward(float speed)
 
 void Camera::MoveLeft(float speed)
 {
-    if (isOrbitalMode) {
+    if (cameraMode == CAMERA_MODE::ORBITAL)
+    {
         orbitalYaw -= speed;
     }
-    else {
+    else
+    {
         XMVECTOR right = XMVector3Cross(
             XMVectorSubtract(XMLoadFloat3(&target), XMLoadFloat3(&position)),
             XMLoadFloat3(&up)
@@ -140,10 +173,12 @@ void Camera::MoveRight(float speed)
 
 void Camera::MoveUp(float speed)
 {
-    if (isOrbitalMode) {
-        orbitalPitch = max(-XM_PIDIV2 + 0.01f, min(orbitalPitch - speed, XM_PIDIV2 - 0.01f));
+    if (cameraMode == CAMERA_MODE::ORBITAL)
+    {
+        orbitalPitch += speed;
     }
-    else {
+    else
+    {
         position.y += speed;
         target.y += speed;
     }
@@ -156,7 +191,7 @@ void Camera::MoveDown(float speed)
 
 void Camera::RotateYaw(float angle)
 {
-    if (isOrbitalMode)
+    if (cameraMode == CAMERA_MODE::ORBITAL)
     {
         orbitalYaw += angle;
     }
@@ -170,7 +205,7 @@ void Camera::RotateYaw(float angle)
 
 void Camera::RotatePitch(float angle)
 {
-    if (isOrbitalMode)
+    if (cameraMode == CAMERA_MODE::ORBITAL)
     {
         orbitalPitch += angle;
     }
@@ -179,10 +214,27 @@ void Camera::RotatePitch(float angle)
         Vector3 look_dir = target - position;
         Vector3 _axis = up.Cross(look_dir);
         look_dir = Vector3::Transform(look_dir,
-            Matrix::CreateFromQuaternion(Quaternion::CreateFromAxisAngle(_axis, angle)));
+            Matrix::CreateFromQuaternion(Quaternion::CreateFromAxisAngle(_axis, -angle)));
         target = position + look_dir;
     }
 }
+
+void Camera::SwitchToFPSMode()
+{
+    cameraMode = CAMERA_MODE::FPS;
+}
+
+void Camera::SwitchToFollowMode(Vector3 followTarget, Vector3 direction, float referenceLen)
+{
+    cameraMode = CAMERA_MODE::FOLLOW;
+    followPitch = -XM_PI * 0.166f;
+    target = followTarget;
+    this->referenceLen = referenceLen;
+    up = Vector3(0.0f, 1.0f, 0.0f);
+    float cam2targetDist = 2.0f * referenceLen / tanf(fov * 0.5);
+    position = target - cam2targetDist * (direction + sinf(followPitch) * up);
+}
+
 
 void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget)
 {
@@ -195,9 +247,11 @@ void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis)
 }
 void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis, float referenceLen)
 {
-    isOrbitalMode = true;
+    this->referenceLen = referenceLen;
+    cameraMode = CAMERA_MODE::ORBITAL;
     orbitalAngleSpeed = 0.0f;
-    this->orbitalDistance = 2.0f * referenceLen / tanf(fov * 0.5);
+    orbitalDistance = 2.0f * referenceLen / tanf(fov * 0.5);
+    minOrbitalDistance = orbitalDistance;
     orthZ = 2.0f * referenceLen / tanf(fov * 0.5);
     orbitalYaw = 0.0f;
     orbitalPitch = XM_PIDIV4;
@@ -208,21 +262,17 @@ void Camera::SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis, float 
     //orbitalDistance = XMVectorGetX(XMVector3Length(XMVectorSubtract(XMLoadFloat3(&position), XMLoadFloat3(&target))));
 }
 
-void Camera::SwitchToFPSMode()
-{
-    isOrbitalMode = false;
-}
-
 void Camera::SwitchProjection() {
     isPerspective = !isPerspective;
-    if (isOrbitalMode)
+    if (cameraMode == CAMERA_MODE::ORBITAL)
     {
         if (isPerspective)
             orbitalDistance = orthZ;
         else
             orthZ = orbitalDistance;
     }
-    else {
+    else if (cameraMode == CAMERA_MODE::FPS)
+    {
         if (isPerspective)
             orbitalDistance = orthZ;
         else

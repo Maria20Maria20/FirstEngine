@@ -10,6 +10,8 @@
 #include <chrono>
 #include <SimpleMath.h>
 #include "Camera.h"
+#include <random>
+
 
 using namespace DirectX;
 
@@ -21,6 +23,7 @@ public:
         SPHERE = 1,
         GRID = 2,
         SKYBOX = 3,
+        PLANE = 4
     };
     GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
         ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
@@ -34,6 +37,8 @@ public:
     {
         DirectX::XMFLOAT4 position;
         DirectX::XMFLOAT4 color;
+        DirectX::XMFLOAT2 texCoord;
+        DirectX::XMFLOAT3 normal;
     };
     struct ConstantBuffer
     {
@@ -41,7 +46,7 @@ public:
     };
 
     Vertex* vertices;
-    UINT* indices;
+    int* indices;
     ID3D11VertexShader* mVertexShader;
     ID3D11PixelShader* mPixelShader;
     ID3DBlob* vsBlob;
@@ -52,7 +57,7 @@ public:
     ID3D11RenderTargetView* renderTargetView;
     ID3D11DepthStencilView* depthStencilView;
     LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl";
-    DirectX::XMMATRIX mWorldMatrix = DirectX::XMMatrixIdentity();
+    DirectX::XMMATRIX mmWorldMatrixrix = DirectX::XMMatrixIdentity();
 protected:
     Camera camera = Camera();
     DirectX::XMMATRIX mRotationMatrix = DirectX::XMMatrixIdentity();
@@ -64,12 +69,12 @@ protected:
     void ScalingShape(float scaleFactor);
     XMFLOAT4 gridColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f); // gray color
 private:
-    int verticesNum = 5;
+    float radius = 0.3;
+    UINT verticesNum = 5;
     int sliceCount = 20;
     int elevationCount = 7;
-    int indicesNum = 0;
+    UINT indicesNum = 0;
 
-    float radius = 0.3;
     DirectX::XMFLOAT4 sphere_color_1 = DirectX::XMFLOAT4(0.0f, 0.3f, 0.0f, 1.0f);
     DirectX::XMFLOAT4 sphere_color_2 = DirectX::XMFLOAT4(0.0f, 0.9f, 0.0f, 1.0f);
 
@@ -87,10 +92,16 @@ private:
     void CreateCubeVertexBuffer();
     void CreateCubeIndexBuffer();
 
+    void CreateVertexBuffer();
+    void CreateIndexBuffer();
+
     void CreateGridVertexBuffer();
     void CreateGridIndexBuffer();
     
     void CreateSkyVertexBuffer();
+
+    void CreateRandomHeightPlane(float width, float depth, UINT widthSegments, UINT depthSegments, float maxHeight, DirectX::XMFLOAT4 col,
+        Vertex** vertices, UINT* verticesNum, int** indices, UINT* indicesNum);
 
     void InitializeBuffers();
     void InitializeShaders();

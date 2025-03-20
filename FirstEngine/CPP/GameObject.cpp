@@ -13,7 +13,7 @@ GameObject::GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* ve
 
 void GameObject::InitializeBuffers()
 {
-	mWorldMatrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, 0.3, 0.3);
+	mmWorldMatrixrix = mRotationMatrix; // *DirectX::XMMatrixTranslation(0, 0.3, 0.3);
 	if (currentObject == ObjectType::SPHERE)
 	{
 		CreateSphereVertexBuffer();
@@ -41,7 +41,16 @@ void GameObject::InitializeBuffers()
 	{
 		CreateGridVertexBuffer();
 		CreateGridIndexBuffer();
-		mWorldMatrix = DirectX::XMMatrixIdentity();
+		mmWorldMatrixrix = DirectX::XMMatrixIdentity();
+	}
+	if (currentObject == ObjectType::PLANE) 
+	{
+		CreateRandomHeightPlane(50.0f, 50.0f, 4, 4, 0.05f, 
+			DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f), &vertices, &verticesNum, &indices, &indicesNum);
+
+		CreateVertexBuffer();
+		CreateIndexBuffer();
+		mmWorldMatrixrix = DirectX::XMMatrixIdentity();
 	}
 	CreateConstantBuffer();
 	CreateInputLayout();
@@ -162,7 +171,7 @@ void GameObject::CreateSphereIndexBuffer()
 {
 	indicesNum = 6 * sliceCount + 2 * 6 * elevationCount * sliceCount;
 	//std::cout << *indicesNum << " << \n";
-	indices = (UINT*)malloc(indicesNum * sizeof(UINT));
+	indices = (int*)malloc(indicesNum * sizeof(int));
 
 	size_t indexIndex = 0;
 
@@ -230,14 +239,14 @@ void GameObject::CreateCubeVertexBuffer()
 {
 	vertices = (Vertex*) malloc(8 * sizeof(Vertex));
 	Vertex _vertices[8] = {
-	XMFLOAT4(-0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f),
-	XMFLOAT4(-0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f),
-	XMFLOAT4(+0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f),
-	XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f),
-	XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f),
-	XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f),
-	XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
-	XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f),
+	{ XMFLOAT4(-0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f) },
+	{ XMFLOAT4(-0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f) },
+	{ XMFLOAT4(+0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f) },
+	{ XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f) },
+	{ XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f) },
+	{ XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f) },
+	{ XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f) },
+	{ XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f) },
 	};
 	for (size_t i = 0; i < 8; i++) //8 vertecies (vertex = position + color)
 	{
@@ -264,7 +273,7 @@ void GameObject::CreateCubeVertexBuffer()
 void GameObject::CreateCubeIndexBuffer()
 {
 	indicesNum = 36;
-	indices = (UINT*)malloc(indicesNum * sizeof(UINT));
+	indices = (int*)malloc(indicesNum * sizeof(int));
 	UINT _indices[] = {
 		// Front Face
 		0, 1, 2,
@@ -298,6 +307,41 @@ void GameObject::CreateCubeIndexBuffer()
 
 	D3D11_BUFFER_DESC ibd = {};
 	ibd.ByteWidth = sizeof(UINT) * std::size(_indices);
+	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	ibd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	ibd.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
+	ibd.MiscFlags = 0; //optional parameters
+	ibd.StructureByteStride = 0; //size per element in buffer structure
+
+	D3D11_SUBRESOURCE_DATA iinitData = {};
+	iinitData.pSysMem = indices;
+	iinitData.SysMemPitch = 0;
+	iinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
+}
+void GameObject::CreateVertexBuffer()
+{
+	D3D11_BUFFER_DESC vbd = {};
+	vbd.ByteWidth = sizeof(Vertex) * verticesNum;
+	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vbd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	vbd.CPUAccessFlags = 0; //0 = CPU don't need, D3D11_CPU_ACCESS_WRITE = CPU need
+	vbd.MiscFlags = 0; //optional parameters
+	vbd.StructureByteStride = 0; //size per element in buffer structure
+
+	D3D11_SUBRESOURCE_DATA vinitData = {};
+	//vinitData.pSysMem = vertices;
+	vinitData.pSysMem = vertices;
+	vinitData.SysMemPitch = 0;
+	vinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&vbd, &vinitData, &mVertexBuffer);
+}
+void GameObject::CreateIndexBuffer()
+{
+	D3D11_BUFFER_DESC ibd = {};
+	ibd.ByteWidth = sizeof(UINT) * indicesNum;
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
 	ibd.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
@@ -357,7 +401,7 @@ void GameObject::CreateGridIndexBuffer() {
 	const int gridSize = 30;  
 	indicesNum = (gridSize + 1) * (gridSize + 1) * 2 * 3;
 	//std::cout << *indicesNum << " << \n";
-	indices = (UINT*)malloc(indicesNum * sizeof(UINT));
+	indices = (int*)malloc(indicesNum * sizeof(int));
 
 	size_t indexIndex = 0;
 
@@ -371,8 +415,8 @@ void GameObject::CreateGridIndexBuffer() {
 
 			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 2;
 			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 3;
-indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 4;
-indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 5;
+			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 4;
+			indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 5;
 		}
 	}
 
@@ -392,13 +436,107 @@ indices[indexIndex++] = 6 * (i * (gridSize + 1) + j) + 5;
 
 	device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
 }
+void GameObject::CreateRandomHeightPlane(float width, float depth, UINT widthSegments, UINT depthSegments, float maxHeight, DirectX::XMFLOAT4 col,
+	Vertex** vertices, UINT* verticesNum, int** indices, UINT* indicesNum) {
+
+	// Минимальное количество сегментов
+	widthSegments = max(widthSegments, 1);
+	depthSegments = max(depthSegments, 1);
+
+	// Количество вершин
+	*verticesNum = (widthSegments + 1) * (depthSegments + 1);
+	*vertices = (Vertex*)malloc(*verticesNum * sizeof(Vertex));
+
+	// Количество индексов (по два треугольника на каждый квадрат)
+	*indicesNum = widthSegments * depthSegments * 6;
+	*indices = (int*)malloc(*indicesNum * sizeof(int));
+
+	// Шаг между вершинами
+	float widthStep = width / widthSegments;
+	float depthStep = depth / depthSegments;
+
+	// Генератор случайных чисел
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dis(-maxHeight, maxHeight);
+
+	// Генерация вершин
+	for (UINT i = 0; i <= depthSegments; ++i) {
+		for (UINT j = 0; j <= widthSegments; ++j) {
+			float x = -width / 2.0f + j * widthStep; // Центрируем плоскость по X
+			float z = -depth / 2.0f + i * depthStep; // Центрируем плоскость по Z
+			float y = dis(gen); // Случайное отклонение по Y
+
+			(*vertices)[i * (widthSegments + 1) + j] = {
+				DirectX::XMFLOAT4(x, y, z, 1),
+				((i + j) % 2 ? col : XMFLOAT4(1.0f - col.x, 1.0f - col.y, 1.0f - col.z, 1.0f))
+			};
+		}
+	}
+
+	D3D11_BUFFER_DESC vbd = {};
+	vbd.ByteWidth = sizeof(Vertex) * *verticesNum;
+	vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vbd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	vbd.CPUAccessFlags = 0; //0 = CPU don't need, D3D11_CPU_ACCESS_WRITE = CPU need
+	vbd.MiscFlags = 0; //optional parameters
+	vbd.StructureByteStride = 0; //size per element in buffer structure
+
+
+	D3D11_SUBRESOURCE_DATA vinitData = {};
+	//vinitData.pSysMem = vertices;
+	vinitData.pSysMem = vertices;
+	vinitData.SysMemPitch = 0;
+	vinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&vbd, &vinitData, &mVertexBuffer);
+
+
+	// Генерация индексов
+	UINT index = 0;
+	for (int i = 0; i < depthSegments; ++i) {
+		for (int j = 0; j < widthSegments; ++j) {
+			int topLeft = i * (widthSegments + 1) + j;
+			int topRight = topLeft + 1;
+			int bottomLeft = (i + 1) * (widthSegments + 1) + j;
+			int bottomRight = bottomLeft + 1;
+
+			// Первый треугольник
+			(*indices)[index++] = topLeft;
+			(*indices)[index++] = bottomLeft;
+			(*indices)[index++] = topRight;
+
+			// Второй треугольник
+			(*indices)[index++] = topRight;
+			(*indices)[index++] = bottomLeft;
+			(*indices)[index++] = bottomRight;
+		}
+	}
+
+	D3D11_BUFFER_DESC ibd = {};
+	ibd.ByteWidth = sizeof(UINT) * *indicesNum;
+	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	ibd.Usage = D3D11_USAGE_DEFAULT; //how often does writing and reading to the buffer occur (default = read/write from GPU)
+	ibd.CPUAccessFlags = 0; //0 = CPU don't need, 1 = CPU need
+	ibd.MiscFlags = 0; //optional parameters
+	ibd.StructureByteStride = 0; //size per element in buffer structure
+
+	D3D11_SUBRESOURCE_DATA iinitData = {};
+	iinitData.pSysMem = indices;
+	iinitData.SysMemPitch = 0;
+	iinitData.SysMemSlicePitch = 0;
+
+	device->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
+
+	return;
+}
 void GameObject::Update(float dt)
 {
 
-	//mWorldMatrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, -0.3, 0.3);
+	//mmWorldMatrixrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, -0.3, 0.3);
 
 	//// Обновление константного буфера
-	//cb.worldViewProj = mWorldMatrix; // *viewProj;
+	//cb.worldViewProj = mmWorldMatrixrix; // *viewProj;
 }
 
 void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj)
@@ -407,7 +545,7 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 
 	if (currentObject == ObjectType::GRID)
 	{
-		cb.worldViewProj = mWorldMatrix * viewProj;
+		cb.worldViewProj = mmWorldMatrixrix * viewProj;
 	}
 
 

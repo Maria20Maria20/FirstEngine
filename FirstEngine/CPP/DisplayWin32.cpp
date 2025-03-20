@@ -57,7 +57,7 @@ LRESULT CALLBACK DisplayWin32::WndProc(HWND hwnd, UINT umessage, WPARAM wparam, 
     switch (umessage)
     {
     case WM_KEYDOWN:
-        std::cout << "Key: " << static_cast<unsigned int>(wparam) << std::endl;
+        // std::cout << "Key: " << static_cast<unsigned int>(wparam) << std::endl;
         if (static_cast<unsigned int>(wparam) == 27) PostQuitMessage(0);
         return 0;
     case WM_INPUT:

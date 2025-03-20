@@ -10,20 +10,48 @@ using namespace DirectX::SimpleMath;
 class Player : public GameObject
 {
 public:
+	Player();
 	Player(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 		ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
 		ID3D11DepthStencilView* depthStencilView,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition,
-		Camera* camera,
-		XMVECTOR rotateDirection, float rotateMove, ObjectType objectType,
-		float changedScale = 1, LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl");
+		Camera* camera, ObjectType objectType,
+		float changedScale = 1.0f, LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl");
 	void Update(float deltaTime);
+	void Move(float deltaTime);
+	void AddTurn(float direction, float deltaTime);
+	
+	
 	Camera* camera;
-	float speedRotation = 20;
-private:
-	float moveSpeed = .7f;
-	float changedScale = 1;
 	XMFLOAT3 position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	XMVECTOR rotationDirection;
+
+	Vector3 GetMoveDir();
+	void SlowDown(float deltaTime);
+	void PushForward(float deltaTime);
+
+	// кручение м€чика (как колесо)
+	float spinSpeed = 0.0f;
+	float currentSpin = 0.0f;
+
+	// передвижение м€чика вперЄд
+	float velocity = 0.0f;
+	float maxVelocity = 10.0f;
+	float acceleration = 10.0f;
+
+
+	// дл€ поворота м€чика влево-вправо
+	float rotationSpeed = 0.5f;
+	float currentRotation = 0.0f;
+
+	float radius = 1.0f;
+
+	// увеличение м€чика
+	float scale = 1.0f;
+
+private:
+	Matrix initRandomRotation;
 };
+
+Matrix GetRandomRotateTransform();
+
 #endif

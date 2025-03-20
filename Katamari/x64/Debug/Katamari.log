@@ -1,10 +1,7 @@
-﻿  LoadModel.cpp
+﻿  Item.cpp
+  LoadModel.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(72,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'LoadModel.cpp')
-  
-  Player.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(72,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Player.cpp')
   
   StartGame.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(72,20): warning C4305: 'initializing': truncation from 'double' to 'float'

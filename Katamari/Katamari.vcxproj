@@ -153,12 +153,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="LoadModel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="StartGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Item.h" />
     <ClInclude Include="LoadModel.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="StartGame.h" />
   </ItemGroup>

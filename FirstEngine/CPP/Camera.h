@@ -11,7 +11,12 @@ using namespace DirectX::SimpleMath;
 class Camera
 {
 public:
+    enum class CAMERA_MODE
+    {
+        FPS, ORBITAL, FOLLOW
+    };
     Camera();
+    Camera(float aspectRatio);
     ~Camera();
 
     void SetPosition(Vector3 position);
@@ -24,6 +29,9 @@ public:
     void SetFarZ(float farZ);
 
     void Update(float deltaTime, const Matrix targetTransform);
+    void Update(float deltaTime, const Matrix targetTransform, Vector3 direction);
+    void Update(float deltaTime, const Matrix targetTransform, Vector3 direction, float referenceLen);
+
 
     XMMATRIX GetViewMatrix() const;
     XMMATRIX GetProjectionMatrix() const;
@@ -44,6 +52,8 @@ public:
 
     void SwitchToFPSMode();
 
+    void SwitchToFollowMode(Vector3 followTarget, Vector3 direction, float referenceLen);
+
     void SwitchProjection();
 
 private:
@@ -58,17 +68,22 @@ private:
 
     float orthZ;
 
-    bool isOrbitalMode;
+    float referenceLen;
+
+    CAMERA_MODE cameraMode = CAMERA_MODE::FPS;
+
     Vector3 orbitalTarget;
-    float defaultOrbitalDistance;
+    float minOrbitalDistance;
     float orbitalDistance;
     float orbitalYaw;
     float orbitalPitch;
-
     float orbitalAngleSpeed;
+
     Vector3 spinAxis;
 
     bool isPerspective = true;
+
+    float followPitch;
 };
 
 #endif // CAMERA_H

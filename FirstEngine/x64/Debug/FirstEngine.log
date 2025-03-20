@@ -1,21 +1,16 @@
-﻿  Camera.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Camera.cpp(107,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Camera.cpp(200,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Camera.cpp(201,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  GameObject.cpp
+﻿  GameObject.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(72,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'CPP/GameObject.cpp')
   
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(16,72): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(16,67): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(79,21): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(81,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(129,21): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(131,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(169,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(179,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(182,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(204,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(300,31): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-  Generating Code...
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(88,21): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(90,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(138,21): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(140,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(178,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(188,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(191,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(213,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(309,31): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(497,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(498,21): warning C4018: '<': signed/unsigned mismatch
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib
