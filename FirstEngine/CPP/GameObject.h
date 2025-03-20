@@ -9,6 +9,7 @@
 #include "DisplayWin32.h"
 #include <chrono>
 #include <SimpleMath.h>
+#include "Camera.h"
 
 using namespace DirectX;
 
@@ -53,6 +54,7 @@ public:
     LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl";
     DirectX::XMMATRIX mWorldMatrix = DirectX::XMMatrixIdentity();
 protected:
+    Camera camera = Camera();
     DirectX::XMMATRIX mRotationMatrix = DirectX::XMMatrixIdentity();
     DirectX::XMMATRIX mScaleMatrix = DirectX::XMMatrixIdentity();
     float mRotationAngle;

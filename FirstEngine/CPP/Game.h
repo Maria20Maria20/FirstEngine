@@ -7,6 +7,7 @@
 #include <chrono>
 #include "InputDevice.h"
 #include "Delegates.h"
+#include "Camera.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -30,6 +31,7 @@ protected:
     ID3D11RenderTargetView* rtv;
     ID3D11DepthStencilView* depthStencilView;
     IDXGISwapChain* swapChain;
+    Camera camera = Camera();
 
     int Initialize();
     void WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);

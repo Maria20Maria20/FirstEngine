@@ -3,80 +3,80 @@
   "WorkspaceRootPath": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\SkyBoxShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Shaders\\SkyBoxShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Shaders\\MyVeryFirstShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Shaders\\MyVeryFirstShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\StartGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\StartGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\StartSolarSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\StartSolarSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FIRSTENGINE\\CPP\\GAMEOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FIRSTENGINE\\CPP\\GAMEOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PongGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Planet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Planet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\include\\assimp\\matrix4x4.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:include\\assimp\\matrix4x4.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\LoadModel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\RunSolarSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\RunSolarSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\LoadModel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\CubeShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Shaders\\CubeShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\PlanetSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\PlanetSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FIRSTENGINE\\CPP\\GAME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FIRSTENGINE\\CPP\\GAME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\StartSolarSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\LoadModel.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Planet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Planet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\SkyBoxShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Shaders\\SkyBoxShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PongGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\include\\assimp\\matrix4x4.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:include\\assimp\\matrix4x4.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\CubeShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\Shaders\\CubeShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\PlanetSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PlayerPaddle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -87,16 +87,28 @@
       "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PlayerPaddle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\RunSolarSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{FAC4977C-2F03-4577-AE74-B507F145D34C}|SolarSystem\\SolarSystem.vcxproj|solutionrelative:SolarSystem\\RunSolarSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PongGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Delegates.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Delegates.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -105,10 +117,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Square.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\PongGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -118,136 +126,189 @@
       "DocumentGroups": [
         {
           "DockedWidth": 241,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Game.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.cpp",
-              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Game.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.cpp",
-              "RelativeToolTip": "FirstEngine\\CPP\\Game.cpp",
-              "ViewState": "AgIAANoAAAAAAAAAAAAqwPQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-17T20:30:58.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GameObject.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp",
-              "RelativeDocumentMoniker": "FirstEngine\\CPP\\GameObject.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp",
-              "RelativeToolTip": "FirstEngine\\CPP\\GameObject.cpp",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-09T10:29:32.262Z",
+              "DocumentIndex": 1,
+              "Title": "MyVeryFirstShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Shaders\\MyVeryFirstShader.hlsl",
+              "RelativeDocumentMoniker": "Katamari\\Shaders\\MyVeryFirstShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Shaders\\MyVeryFirstShader.hlsl",
+              "RelativeToolTip": "Katamari\\Shaders\\MyVeryFirstShader.hlsl",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAswAwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-19T20:21:59.546Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "StartGame.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp",
+              "RelativeDocumentMoniker": "Katamari\\StartGame.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp",
+              "RelativeToolTip": "Katamari\\StartGame.cpp",
+              "ViewState": "AgIAABkAAAAAAAAAAAArwDUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-19T19:59:13.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PlanetSystem.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.h",
+              "RelativeDocumentMoniker": "SolarSystem\\PlanetSystem.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.h",
+              "RelativeToolTip": "SolarSystem\\PlanetSystem.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-11T20:27:53.935Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.cpp",
+              "RelativeDocumentMoniker": "Katamari\\Player.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.cpp",
+              "RelativeToolTip": "Katamari\\Player.cpp",
+              "ViewState": "AgIAAAcAAAAAAAAAAAApwBEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-19T19:04:32.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "StartSolarSystem.cpp",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.cpp",
               "RelativeDocumentMoniker": "SolarSystem\\StartSolarSystem.cpp",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.cpp",
               "RelativeToolTip": "SolarSystem\\StartSolarSystem.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-11T12:14:32.848Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-11T12:14:32.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Game.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.cpp",
+              "RelativeToolTip": "FirstEngine\\CPP\\Game.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-17T20:30:58.204Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "StartSolarSystem.h",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.h",
-              "RelativeDocumentMoniker": "SolarSystem\\StartSolarSystem.h",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.h",
-              "RelativeToolTip": "SolarSystem\\StartSolarSystem.h",
-              "ViewState": "AgIAAAgAAAAAAAAAAADwvxcAAAAPAAAAAAAAAA==",
+              "Title": "StartGame.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.h",
+              "RelativeDocumentMoniker": "Katamari\\StartGame.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.h",
+              "RelativeToolTip": "Katamari\\StartGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-07T21:05:11.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-19T19:58:56.935Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "GameObject.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.h",
               "RelativeDocumentMoniker": "FirstEngine\\CPP\\GameObject.h",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.h",
               "RelativeToolTip": "FirstEngine\\CPP\\GameObject.h",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAawBUAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-09T10:37:12.487Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SkyBoxShader.hlsl",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\SkyBoxShader.hlsl",
-              "RelativeDocumentMoniker": "SolarSystem\\Shaders\\SkyBoxShader.hlsl",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\SkyBoxShader.hlsl",
-              "RelativeToolTip": "SolarSystem\\Shaders\\SkyBoxShader.hlsl",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAkwK8AAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-17T19:19:23.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Camera.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Camera.cpp",
-              "RelativeDocumentMoniker": "SolarSystem\\Camera.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Camera.cpp",
-              "RelativeToolTip": "SolarSystem\\Camera.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA9AAAAAAAAAA==",
+              "DocumentIndex": 23,
+              "Title": "GameObject.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\GameObject.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp",
+              "RelativeToolTip": "FirstEngine\\CPP\\GameObject.cpp",
+              "ViewState": "AgIAAAECAAAAAAAAAAAEwAsCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-10T21:49:14.596Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-09T10:29:32.262Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.h",
+              "RelativeDocumentMoniker": "Katamari\\Player.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.h",
+              "RelativeToolTip": "Katamari\\Player.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-19T19:04:18.186Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RunSolarSystem.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\RunSolarSystem.cpp",
+              "RelativeDocumentMoniker": "SolarSystem\\RunSolarSystem.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\RunSolarSystem.cpp",
+              "RelativeToolTip": "SolarSystem\\RunSolarSystem.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-07T22:00:12.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoadModel.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.cpp",
+              "RelativeDocumentMoniker": "Katamari\\LoadModel.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.cpp",
+              "RelativeToolTip": "Katamari\\LoadModel.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-13T16:08:37.056Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "StartSolarSystem.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.h",
+              "RelativeDocumentMoniker": "SolarSystem\\StartSolarSystem.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\StartSolarSystem.h",
+              "RelativeToolTip": "SolarSystem\\StartSolarSystem.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-07T21:05:11.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Planet.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.h",
               "RelativeDocumentMoniker": "SolarSystem\\Planet.h",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.h",
               "RelativeToolTip": "SolarSystem\\Planet.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-10T14:42:50.163Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PongGame.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.cpp",
-              "RelativeDocumentMoniker": "Pong\\PongGame.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.cpp",
-              "RelativeToolTip": "Pong\\PongGame.cpp",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAKMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-07T21:55:29.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Planet.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.cpp",
-              "RelativeDocumentMoniker": "SolarSystem\\Planet.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.cpp",
-              "RelativeToolTip": "SolarSystem\\Planet.cpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAIAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-07T22:00:09.57Z",
-              "EditorCaption": ""
+              "DocumentIndex": 25,
+              "Title": "Game.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.h",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Game.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.h",
+              "RelativeToolTip": "FirstEngine\\CPP\\Game.h",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-11T08:07:21.676Z"
             },
             {
               "$type": "Document",
@@ -263,19 +324,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "LoadModel.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.cpp",
-              "RelativeDocumentMoniker": "Katamari\\LoadModel.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\LoadModel.cpp",
-              "RelativeToolTip": "Katamari\\LoadModel.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "Planet.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.cpp",
+              "RelativeDocumentMoniker": "SolarSystem\\Planet.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Planet.cpp",
+              "RelativeToolTip": "SolarSystem\\Planet.cpp",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAkwEYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-13T16:08:37.056Z"
+              "WhenOpened": "2025-03-07T22:00:09.57Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
+              "Title": "SkyBoxShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\SkyBoxShader.hlsl",
+              "RelativeDocumentMoniker": "SolarSystem\\Shaders\\SkyBoxShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\SkyBoxShader.hlsl",
+              "RelativeToolTip": "SolarSystem\\Shaders\\SkyBoxShader.hlsl",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAkwKYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-17T19:19:23.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PongGame.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.cpp",
+              "RelativeDocumentMoniker": "Pong\\PongGame.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.cpp",
+              "RelativeToolTip": "Pong\\PongGame.cpp",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAKMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-07T21:55:29.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "matrix4x4.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\include\\assimp\\matrix4x4.h",
               "RelativeDocumentMoniker": "include\\assimp\\matrix4x4.h",
@@ -287,19 +372,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Game.h",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.h",
-              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Game.h",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Game.h",
-              "RelativeToolTip": "FirstEngine\\CPP\\Game.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-11T08:07:21.676Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "CubeShader.hlsl",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Shaders\\CubeShader.hlsl",
               "RelativeDocumentMoniker": "SolarSystem\\Shaders\\CubeShader.hlsl",
@@ -311,31 +384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Source.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Source.cpp",
-              "RelativeDocumentMoniker": "Katamari\\Source.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Source.cpp",
-              "RelativeToolTip": "Katamari\\Source.cpp",
-              "ViewState": "AgIAAAAAAABAQGFUp0kQwAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-12T21:22:21.183Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Camera.h",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Camera.h",
-              "RelativeDocumentMoniker": "SolarSystem\\Camera.h",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\Camera.h",
-              "RelativeToolTip": "SolarSystem\\Camera.h",
-              "ViewState": "AgIAACkAAAAAAAAAAAAqwEkAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-10T21:48:53.506Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "PlanetSystem.cpp",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.cpp",
               "RelativeDocumentMoniker": "SolarSystem\\PlanetSystem.cpp",
@@ -344,18 +393,6 @@
               "ViewState": "AgIAAAQAAAAAAAAAAAAcwBoAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-11T20:10:18.178Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "PlanetSystem.h",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.h",
-              "RelativeDocumentMoniker": "SolarSystem\\PlanetSystem.h",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\PlanetSystem.h",
-              "RelativeToolTip": "SolarSystem\\PlanetSystem.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-11T20:27:53.935Z"
             },
             {
               "$type": "Document",
@@ -383,19 +420,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "RunSolarSystem.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\RunSolarSystem.cpp",
-              "RelativeDocumentMoniker": "SolarSystem\\RunSolarSystem.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\SolarSystem\\RunSolarSystem.cpp",
-              "RelativeToolTip": "SolarSystem\\RunSolarSystem.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-07T22:00:12.84Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "Delegates.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Delegates.h",
               "RelativeDocumentMoniker": "FirstEngine\\CPP\\Delegates.h",
@@ -407,7 +432,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 21,
               "Title": "Ball.cpp",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp",
               "RelativeDocumentMoniker": "Pong\\Ball.cpp",
@@ -419,7 +444,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "Square.cpp",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.cpp",
               "RelativeDocumentMoniker": "FirstEngine\\CPP\\Square.cpp",
@@ -431,7 +456,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "Square.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Square.h",
               "RelativeDocumentMoniker": "FirstEngine\\CPP\\Square.h",
@@ -443,7 +468,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 22,
               "Title": "PongGame.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\PongGame.h",
               "RelativeDocumentMoniker": "Pong\\PongGame.h",

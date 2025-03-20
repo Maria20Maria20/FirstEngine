@@ -4,7 +4,7 @@
 #include <random>
 #include <d3d11.h>
 #include <CPP/GameObject.h>
-#include "Camera.h"
+#include <CPP/Camera.h>
 #include "Planet.h"
 
 

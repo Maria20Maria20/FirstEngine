@@ -9,8 +9,6 @@ StartSolarSystem::StartSolarSystem()
 
 int StartSolarSystem::InstanceObjects()
 {
-	camera = Camera();
-
 	sun = new Planet(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 1, GameObject::ObjectType::SPHERE, 3);
 	satellite = new Planet(device, vertexBC, vertexShader,

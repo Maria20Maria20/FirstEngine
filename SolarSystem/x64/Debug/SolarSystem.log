@@ -1,5 +1,1 @@
-﻿  Camera.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\SolarSystem\Camera.cpp(107,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\SolarSystem\Camera.cpp(200,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\SolarSystem\Camera.cpp(201,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  SolarSystem.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SolarSystem.exe
+﻿C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\FirstEngine.vcxproj : error MSB4025: The project file could not be loaded. Root element is missing.

@@ -2,7 +2,7 @@
 #define SUN_H
 #include <CPP/GameObject.h>
 #include "SimpleMath.h"
-#include "Camera.h"
+#include <CPP/Camera.h>
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;

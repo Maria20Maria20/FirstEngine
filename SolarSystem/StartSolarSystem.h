@@ -1,8 +1,8 @@
 #pragma once
 #include <CPP/Game.h>
 #include <CPP/GameObject.h>
+#include <CPP/Camera.h>
 #include "Planet.h"
-#include "Camera.h"
 #include "PlanetSystem.h"
 
 
@@ -26,7 +26,6 @@ public:
 
 	PlanetSystem planetSystem;
 
-	Camera camera;
 private:
 	Planet* focusedBody = nullptr;
 	void SolarSystemWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);

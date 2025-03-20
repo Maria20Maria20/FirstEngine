@@ -39,6 +39,9 @@
     <ClCompile Include="CPP\GameObject.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\Camera.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP\DisplayWin32.h">
@@ -69,6 +72,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="CPP\GameObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\Camera.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
