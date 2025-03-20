@@ -1,5 +1,5 @@
 ﻿  GameObject.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(72,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(77,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'CPP/GameObject.cpp')
   
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(88,21): warning C4018: '<=': signed/unsigned mismatch

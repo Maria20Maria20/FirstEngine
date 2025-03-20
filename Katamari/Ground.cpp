@@ -17,7 +17,7 @@ Ground::Ground(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 void Ground::Update(float deltaTime)
 {
 	//RotateShape(rotationDirection, speedRotation, deltaTime);
-	mmWorldMatrixrix = XMMatrixTranslation(position.x, position.y, position.z);
+	mWorldMatrix = XMMatrixTranslation(position.x, position.y, position.z);
 
 
 	Matrix viewMat = camera->GetViewMatrix();
@@ -25,6 +25,6 @@ void Ground::Update(float deltaTime)
 
 
 	// Update constant buffer
-	cb.worldViewProj = XMMatrixScaling(changedScale, changedScale, changedScale) * mmWorldMatrixrix * (XMMATRIX)(viewMat * projMat);
+	cb.worldViewProj = XMMatrixScaling(changedScale, changedScale, changedScale) * mWorldMatrix * (XMMATRIX)(viewMat * projMat);
 
 }

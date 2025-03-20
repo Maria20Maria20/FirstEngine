@@ -26,13 +26,13 @@ Planet::Planet(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 void Planet::Update(float deltaTime)
 {
 	RotateShape(rotationDirection, speedRotation, deltaTime);
-	mmWorldMatrixrix = mRotationMatrix * XMMatrixTranslation(position.x, position.y, position.z);
+	mWorldMatrix = mRotationMatrix * XMMatrixTranslation(position.x, position.y, position.z);
 
 	if (parentPlanet) //if parentPlanet not nullptr
 	{
 		orbitAngle += moveSpeed * deltaTime;
 		auto _attractredTransform = GetParentTransform();
-		mmWorldMatrixrix *= (XMMATRIX)_attractredTransform;
+		mWorldMatrix *= (XMMATRIX)_attractredTransform;
 	}
 	
 	Matrix viewMat = camera->GetViewMatrix();
@@ -40,7 +40,7 @@ void Planet::Update(float deltaTime)
 
 
 	// Update constant buffer
-	cb.worldViewProj = XMMatrixScaling(changedScale, changedScale, changedScale) * mmWorldMatrixrix * (XMMATRIX)(viewMat * projMat);
+	cb.worldViewProj = XMMatrixScaling(changedScale, changedScale, changedScale) * mWorldMatrix * (XMMATRIX)(viewMat * projMat);
 
 }
 

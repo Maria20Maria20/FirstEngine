@@ -13,6 +13,17 @@ StartGame::StartGame()
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), 
 		&camera, GameObject::ObjectType::SPHERE, 1);
 
+	for (int i = 0; i < 10; ++i)
+	{
+		float rad = 0.3f;
+		float x = (rand() % 100) - 50.0f;
+		float z = (rand() % 100) - 50.0f;
+		items.emplace_back(device, vertexBC, vertexShader,
+			pixelShader, rtv, depthStencilView, context, 
+			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), 1.0f, 1.0f
+		);
+	}
+
 	camera.SwitchToFollowMode(player->position, player->GetMoveDir(), player->radius);
 
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
@@ -56,10 +67,13 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 			frameCount = 0;
 		}
 
-
+		for (Item item : items)
+		{
+			item.Update(deltaTime);
+		}
 		player->Update(deltaTime);
 		plane->Update(deltaTime);
-		camera.Update(deltaTime, Matrix::CreateScale(player->scale) * player->mmWorldMatrixrix, player->GetMoveDir(), player->radius);
+		camera.Update(deltaTime, Matrix::CreateScale(player->scale) * player->mWorldMatrix, player->GetMoveDir(), player->radius);
 
 		float color[] = { 0.0f, 0.1f, 0.5f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
@@ -78,16 +92,21 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 		player->Draw(context, projection);
 		plane->Draw(context, projection);
-
+		for (Item item : items)
+		{
+			//std::cout << item.initialPosition.x << "\n";
+			item.Draw(context, projection);
+		}
 		//if (focusedBody)
 		//{
 		//	//follow to planet
-		//	camera.Update(deltaTime, focusedBody->mmWorldMatrixrix);
+		//	camera.Update(deltaTime, focusedBody->mWorldMatrix);
 		//}
 		swapChain->Present(1, /*DXGI_PRESENT_DO_NOT_WAIT*/ 0);
 	}
 
 }
+
 
 void StartGame::HandleMoveDown(Keys key)
 {

@@ -25,6 +25,7 @@ public:
 	Camera* camera;
 	XMFLOAT3 position = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
+	Vector3 GetCenterLocation();
 	Vector3 GetMoveDir();
 	void SlowDown(float deltaTime);
 	void PushForward(float deltaTime);
@@ -50,8 +51,10 @@ public:
 
 private:
 	Matrix initRandomRotation;
+
+public:
+	// void CreateInputLayout() override;
 };
 
-Matrix GetRandomRotateTransform();
 
 #endif

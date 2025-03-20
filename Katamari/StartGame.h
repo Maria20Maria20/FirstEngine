@@ -2,6 +2,8 @@
 #include "Player.h"
 #include <CPP/Game.h>
 #include "Ground.h"
+#include "Item.h"
+
 class StartGame : public Game 
 {
 public:
@@ -9,6 +11,9 @@ public:
 	Ground* plane;
 	StartGame();
 private:
+
+	std::vector<Item> items;
+
 	float deltaTime;
 	void KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 	void HandleMoveDown(Keys key);

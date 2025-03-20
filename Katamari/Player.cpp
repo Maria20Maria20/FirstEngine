@@ -23,7 +23,7 @@ void Player::Update(float deltaTime)
 	Matrix rotTransform = Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f);
 	Matrix spinTransform = Matrix::CreateFromYawPitchRoll(0.0f, currentSpin, 0.0f);
 
-	mmWorldMatrixrix = Matrix::CreateScale(scale)
+	mWorldMatrix = Matrix::CreateScale(scale)
 		* initRandomRotation
 		* spinTransform * rotTransform
 		* Matrix::CreateTranslation(position);
@@ -32,7 +32,7 @@ void Player::Update(float deltaTime)
 	Matrix projMat = camera->GetProjectionMatrix();
 
 	// Update constant buffer
-	cb.worldViewProj = mmWorldMatrixrix * (XMMATRIX)(viewMat * projMat);
+	cb.worldViewProj = mWorldMatrix * (XMMATRIX)(viewMat * projMat);
 
 }
 
@@ -42,6 +42,12 @@ void Player::Move(float deltaTime)
 	position.y = radius;
 	position = position + deltaTime * velocity * GetMoveDir();
 	currentSpin += spinSpeed * deltaTime;
+}
+
+Vector3 Player::GetCenterLocation()
+{
+	Vector3 center = Vector3(position);
+	return center;
 }
 
 Vector3 Player::GetMoveDir()
@@ -71,22 +77,4 @@ void Player::SlowDown(float deltaTime)
 {
 	velocity = max(0.0, velocity - deltaTime * acceleration);
 	spinSpeed = velocity / radius;
-}
-
-Matrix GetRandomRotateTransform() {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> dis(0.0f, XM_PI * 2);
-
-	float angleX = dis(gen);
-	float angleY = dis(gen);
-	float angleZ = dis(gen);
-
-	Matrix rotationX = Matrix::CreateRotationX(angleX);
-	Matrix rotationY = Matrix::CreateRotationY(angleY);
-	Matrix rotationZ = Matrix::CreateRotationZ(angleZ);
-
-	Matrix rotation = rotationX * rotationY * rotationZ;
-
-	return rotation;
 }

@@ -13,7 +13,7 @@ GameObject::GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* ve
 
 void GameObject::InitializeBuffers()
 {
-	mmWorldMatrixrix = mRotationMatrix; // *DirectX::XMMatrixTranslation(0, 0.3, 0.3);
+	mWorldMatrix = mRotationMatrix; // *DirectX::XMMatrixTranslation(0, 0.3, 0.3);
 	if (currentObject == ObjectType::SPHERE)
 	{
 		CreateSphereVertexBuffer();
@@ -41,7 +41,7 @@ void GameObject::InitializeBuffers()
 	{
 		CreateGridVertexBuffer();
 		CreateGridIndexBuffer();
-		mmWorldMatrixrix = DirectX::XMMatrixIdentity();
+		mWorldMatrix = DirectX::XMMatrixIdentity();
 	}
 	if (currentObject == ObjectType::PLANE) 
 	{
@@ -50,7 +50,7 @@ void GameObject::InitializeBuffers()
 
 		CreateVertexBuffer();
 		CreateIndexBuffer();
-		mmWorldMatrixrix = DirectX::XMMatrixIdentity();
+		mWorldMatrix = DirectX::XMMatrixIdentity();
 	}
 	CreateConstantBuffer();
 	CreateInputLayout();
@@ -533,10 +533,10 @@ void GameObject::CreateRandomHeightPlane(float width, float depth, UINT widthSeg
 void GameObject::Update(float dt)
 {
 
-	//mmWorldMatrixrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, -0.3, 0.3);
+	//mWorldMatrix = mRotationMatrix * DirectX::XMMatrixTranslation(0, -0.3, 0.3);
 
 	//// Обновление константного буфера
-	//cb.worldViewProj = mmWorldMatrixrix; // *viewProj;
+	//cb.worldViewProj = mWorldMatrix; // *viewProj;
 }
 
 void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj)
@@ -545,7 +545,7 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 
 	if (currentObject == ObjectType::GRID)
 	{
-		cb.worldViewProj = mmWorldMatrixrix * viewProj;
+		cb.worldViewProj = mWorldMatrix * viewProj;
 	}
 
 
@@ -661,7 +661,7 @@ D3D11_INPUT_ELEMENT_DESC{
 
 	device->CreateInputLayout(
 		inputElements,
-		2,
+		numInputElements,
 		vsBlob->GetBufferPointer(),
 		vsBlob->GetBufferSize(),
 		&mInputLayout);
@@ -682,4 +682,22 @@ void GameObject::SetupIAStage()
 	UINT offset = 0;
 	context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 	context->IASetVertexBuffers(0, 1, &mVertexBuffer, stride, &offset);
+}
+
+Matrix GetRandomRotateTransform() {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<float> dis(0.0f, XM_PI * 2);
+
+	float angleX = dis(gen);
+	float angleY = dis(gen);
+	float angleZ = dis(gen);
+
+	Matrix rotationX = Matrix::CreateRotationX(angleX);
+	Matrix rotationY = Matrix::CreateRotationY(angleY);
+	Matrix rotationZ = Matrix::CreateRotationZ(angleZ);
+
+	Matrix rotation = rotationX * rotationY * rotationZ;
+
+	return rotation;
 }

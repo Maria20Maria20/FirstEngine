@@ -57,7 +57,12 @@ public:
     ID3D11RenderTargetView* renderTargetView;
     ID3D11DepthStencilView* depthStencilView;
     LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl";
-    DirectX::XMMATRIX mmWorldMatrixrix = DirectX::XMMatrixIdentity();
+    DirectX::XMMATRIX mWorldMatrix = DirectX::XMMatrixIdentity();
+
+    bool hasTexture = false;
+
+    D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements;
+    UINT numInputElements = 2;
 protected:
     Camera camera = Camera();
     DirectX::XMMATRIX mRotationMatrix = DirectX::XMMatrixIdentity();
@@ -105,5 +110,8 @@ private:
 
     void InitializeBuffers();
     void InitializeShaders();
+public:
     void CreateInputLayout();
 };
+
+Matrix GetRandomRotateTransform();
