@@ -31,12 +31,13 @@ protected:
     ID3D11RenderTargetView* rtv;
     ID3D11DepthStencilView* depthStencilView;
     IDXGISwapChain* swapChain;
-    Camera camera = Camera();
 
     int Initialize();
     void WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
 
 public:
+    Camera camera = Camera();
+    float CameraFOV = 3;
     DisplayWin32* display;
 
     // Метод доступа к экземпляру

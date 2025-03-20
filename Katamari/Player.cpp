@@ -20,10 +20,11 @@ void Player::Update(float deltaTime)
 {
 	Move(deltaTime);
 	//RotateShape(rotationDirection, speedRotation, deltaTime);
-	Matrix rotTransform = Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f);
 	Matrix spinTransform = Matrix::CreateFromYawPitchRoll(0.0f, currentSpin, 0.0f);
+	Matrix rotTransform = Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f);
 
-	mWorldMatrix = Matrix::CreateScale(scale)
+	mWorldMatrix = 
+		Matrix::CreateScale(radius)
 		* initRandomRotation
 		* spinTransform * rotTransform
 		* Matrix::CreateTranslation(position);
@@ -46,8 +47,7 @@ void Player::Move(float deltaTime)
 
 Vector3 Player::GetCenterLocation()
 {
-	Vector3 center = Vector3(position);
-	return center;
+	return position;
 }
 
 Vector3 Player::GetMoveDir()

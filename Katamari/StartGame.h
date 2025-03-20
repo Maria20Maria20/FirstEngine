@@ -12,7 +12,7 @@ public:
 	StartGame();
 private:
 
-	std::vector<Item> items;
+	std::vector<Item*> items;
 
 	float deltaTime;
 	void KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);

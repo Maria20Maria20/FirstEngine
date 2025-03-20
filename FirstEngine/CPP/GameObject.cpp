@@ -239,14 +239,14 @@ void GameObject::CreateCubeVertexBuffer()
 {
 	vertices = (Vertex*) malloc(8 * sizeof(Vertex));
 	Vertex _vertices[8] = {
-	{ XMFLOAT4(-0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f) },
-	{ XMFLOAT4(-0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f) },
-	{ XMFLOAT4(+0.1f, +0.1f, -0.1f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f) },
-	{ XMFLOAT4(+0.1f, -0.1f, -0.1f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f) },
-	{ XMFLOAT4(-0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f) },
-	{ XMFLOAT4(-0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f) },
-	{ XMFLOAT4(+0.1f, +0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f) },
-	{ XMFLOAT4(+0.1f, -0.1f, 0.1f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f) },
+	{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT4(+1.0f, 0.0f, 0.0f, 1.0f) },
+	{ XMFLOAT4(-1.0f, +1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, +1.0f, 0.0f, 1.0f) },
+	{ XMFLOAT4(+1.0f, +1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, +1.0f, 1.0f) },
+	{ XMFLOAT4(+1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT4(+0.0f, +1.0f, +1.0f, 1.0f) },
+	{ XMFLOAT4(-1.0f, -1.0f, +1.0f, 1.0f), XMFLOAT4(+1.0f, +0.0f, +1.0f, 1.0f) },
+	{ XMFLOAT4(-1.0f, +1.0f, +1.0f, 1.0f), XMFLOAT4(+1.0f, +1.0f, +0.0f, 1.0f) },
+	{ XMFLOAT4(+1.0f, +1.0f, +1.0f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f) },
+	{ XMFLOAT4(+1.0f, -1.0f, +1.0f, 1.0f), XMFLOAT4(+0.0f, +0.0f, +0.0f, 1.0f) },
 	};
 	for (size_t i = 0; i < 8; i++) //8 vertecies (vertex = position + color)
 	{
@@ -587,10 +587,6 @@ void GameObject::ScalingShape(float scaleFactor)
 	DirectX::XMMATRIX scalingMatrix = DirectX::XMMatrixScaling(scaleFactor, scaleFactor, scaleFactor);
 	cb.worldViewProj *= scalingMatrix;
 }
-
-
-
-
 
 void GameObject::InitializeShaders()
 {

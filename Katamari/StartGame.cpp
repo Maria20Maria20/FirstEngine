@@ -11,16 +11,16 @@ StartGame::StartGame()
 		&camera, GameObject::ObjectType::PLANE, 1);
 	player = new Player(device, vertexBC, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), 
-		&camera, GameObject::ObjectType::SPHERE, 1);
+		&camera, GameObject::ObjectType::SPHERE);
 
 	for (int i = 0; i < 10; ++i)
 	{
-		float rad = 0.3f;
+		float rad = 1.0f;
 		float x = (rand() % 100) - 50.0f;
 		float z = (rand() % 100) - 50.0f;
-		items.emplace_back(device, vertexBC, vertexShader,
+		items.push_back(new Item(device, vertexBC, vertexShader,
 			pixelShader, rtv, depthStencilView, context, 
-			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), 1.0f, 1.0f
+			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), .4f, .4f)
 		);
 	}
 
@@ -29,6 +29,9 @@ StartGame::StartGame()
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
 	float totalTime = 0;
 	unsigned int frameCount = 0;
+
+	std::cout << player->scale << " " << player->radius << ";\n";
+
 	KatamariWindowLoop(PrevTime, totalTime, frameCount);
 }
 
@@ -67,13 +70,26 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 			frameCount = 0;
 		}
 
-		for (Item item : items)
+
+		for (Item* item : items)
 		{
-			item.Update(deltaTime);
+			item->Update(deltaTime);
 		}
 		player->Update(deltaTime);
 		plane->Update(deltaTime);
-		camera.Update(deltaTime, Matrix::CreateScale(player->scale) * player->mWorldMatrix, player->GetMoveDir(), player->radius);
+
+		for (Item* item : items)
+		{
+			if (item->CheckCollision(*player))
+			{
+				std::cout << "COLLISION!\n";
+				item->AttachToBall(player);
+				// play.Grow(obj.radius / deltaTime);
+			}
+		}
+
+		camera.Update(deltaTime, player->mWorldMatrix, player->GetMoveDir(), CameraFOV * player->radius);
+
 
 		float color[] = { 0.0f, 0.1f, 0.5f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
@@ -92,10 +108,10 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 		player->Draw(context, projection);
 		plane->Draw(context, projection);
-		for (Item item : items)
+		for (Item* item : items)
 		{
 			//std::cout << item.initialPosition.x << "\n";
-			item.Draw(context, projection);
+			item->Draw(context, projection);
 		}
 		//if (focusedBody)
 		//{

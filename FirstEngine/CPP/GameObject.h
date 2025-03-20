@@ -42,6 +42,7 @@ public:
     };
     struct ConstantBuffer
     {
+        //DirectX::XMMATRIX world; 
         DirectX::XMMATRIX worldViewProj = DirectX::XMMatrixIdentity();
     };
 
@@ -74,7 +75,7 @@ protected:
     void ScalingShape(float scaleFactor);
     XMFLOAT4 gridColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f); // gray color
 private:
-    float radius = 0.3;
+    float radius = 1.0f;
     UINT verticesNum = 5;
     int sliceCount = 20;
     int elevationCount = 7;

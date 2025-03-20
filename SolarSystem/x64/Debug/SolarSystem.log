@@ -1,5 +1,1 @@
-﻿  StartSolarSystem.cpp
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.h(71,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'StartSolarSystem.cpp')
-  
-  SolarSystem.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SolarSystem.exe
+﻿  SolarSystem.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SolarSystem.exe
