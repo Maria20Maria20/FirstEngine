@@ -14,6 +14,7 @@ Player::Player(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 	position.y = radius;
 	this->scale = changedScale;
 	this->camera = camera;
+
 }
 
 void Player::Update(float deltaTime)

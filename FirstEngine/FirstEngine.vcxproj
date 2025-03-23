@@ -70,18 +70,34 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>C:\Users\123\Desktop\Github Projects\FirstEngine\Libs\Any;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>C:\Users\123\Desktop\Github Projects\FirstEngine\Libs\Any;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>C:\Users\123\Desktop\Github Projects\FirstEngine\Libs\Any;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>C:\Users\123\Desktop\Github Projects\FirstEngine\Libs\Any;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\DirectXTK-main\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\Includes;C:\Users\123\Desktop\Github Projects\FirstEngine\DirectXTK-main\Inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -106,12 +122,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\DirectXTK-main\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\Includes;C:\Users\123\Desktop\Github Projects\FirstEngine\DirectXTK-main\Inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -132,25 +152,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPP\Camera.cpp" />
+    <ClCompile Include="CPP\ColorHelper.cpp" />
     <ClCompile Include="CPP\Delegates.cpp" />
     <ClCompile Include="CPP\DisplayWin32.cpp" />
     <ClCompile Include="CPP\Game.cpp" />
     <ClCompile Include="CPP\InputDevice.cpp" />
     <ClCompile Include="CPP\GameObject.cpp" />
+    <ClCompile Include="CPP\LoadModel.cpp" />
     <ClCompile Include="CPP\Square.cpp" />
+    <ClCompile Include="CPP\StringHelper.cpp" />
+    <ClCompile Include="CPP\Texture.cpp" />
     <ClCompile Include="CPP\Triangle.cpp" />
     <ClCompile Include="CPP\TriangleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP\Camera.h" />
+    <ClInclude Include="CPP\ColorHelper.h" />
     <ClInclude Include="CPP\Delegates.h" />
     <ClInclude Include="CPP\DisplayWin32.h" />
     <ClInclude Include="CPP\Game.h" />
     <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\Keys.h" />
+    <ClInclude Include="CPP\LoadModel.h" />
     <ClInclude Include="CPP\ShapeType.h" />
     <ClInclude Include="CPP\GameObject.h" />
     <ClInclude Include="CPP\Square.h" />
+    <ClInclude Include="CPP\StringHelper.h" />
+    <ClInclude Include="CPP\Texture.h" />
     <ClInclude Include="CPP\Triangle.h" />
     <ClInclude Include="CPP\TriangleComponent.h" />
   </ItemGroup>

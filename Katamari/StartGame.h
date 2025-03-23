@@ -3,6 +3,9 @@
 #include <CPP/Game.h>
 #include "Ground.h"
 #include "Item.h"
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+
 
 class StartGame : public Game 
 {

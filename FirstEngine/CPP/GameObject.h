@@ -11,12 +11,35 @@
 #include <SimpleMath.h>
 #include "Camera.h"
 #include <random>
+#include <assimp/scene.h>
+#include "Texture.h"
 
 
 using namespace DirectX;
 
 class GameObject
 {
+private:
+    D3D11_INPUT_ELEMENT_DESC defaultIALayoutInputElements[2] = {
+        D3D11_INPUT_ELEMENT_DESC{
+            "POSITION",
+            0,
+            DXGI_FORMAT_R32G32B32A32_FLOAT,
+            0,
+            0,
+            D3D11_INPUT_PER_VERTEX_DATA,
+            0 },
+
+        D3D11_INPUT_ELEMENT_DESC{
+            "COLOR",
+            0,
+            DXGI_FORMAT_R32G32B32A32_FLOAT,
+            0,
+            D3D11_APPEND_ALIGNED_ELEMENT,
+            D3D11_INPUT_PER_VERTEX_DATA,
+            0 }
+    };
+
 public:
     enum class ObjectType {
         CUBE = 0, 
@@ -28,7 +51,9 @@ public:
     GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
         ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
         ID3D11DepthStencilView* depthStencilView,
-        Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType planetType, LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl");
+        Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType planetType,
+        LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl", UINT numInputElements = 2, 
+        D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements = nullptr);
     ObjectType currentObject;
     void Update(float dt);
     void Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj);
@@ -60,10 +85,16 @@ public:
     LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl";
     DirectX::XMMATRIX mWorldMatrix = DirectX::XMMatrixIdentity();
 
-    bool hasTexture = false;
-
     D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements;
     UINT numInputElements = 2;
+
+    UINT verticesNum = 5;
+    UINT indicesNum = 0;
+    
+    std::string directoryPath;
+    bool hasTexture = false;
+    std::vector<Texture> textures;
+
 protected:
     Camera camera = Camera();
     DirectX::XMMATRIX mRotationMatrix = DirectX::XMMatrixIdentity();
@@ -76,10 +107,8 @@ protected:
     XMFLOAT4 gridColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f); // gray color
 private:
     float radius = 1.0f;
-    UINT verticesNum = 5;
     int sliceCount = 20;
     int elevationCount = 7;
-    UINT indicesNum = 0;
 
     DirectX::XMFLOAT4 sphere_color_1 = DirectX::XMFLOAT4(0.0f, 0.3f, 0.0f, 1.0f);
     DirectX::XMFLOAT4 sphere_color_2 = DirectX::XMFLOAT4(0.0f, 0.9f, 0.0f, 1.0f);
@@ -112,7 +141,7 @@ private:
     void InitializeBuffers();
     void InitializeShaders();
 public:
-    void CreateInputLayout();
+    void CreateInputLayout(UINT numInputElements, D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements);
 };
 
 Matrix GetRandomRotateTransform();

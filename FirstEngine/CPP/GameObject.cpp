@@ -2,13 +2,16 @@
 
 GameObject::GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
 	ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType objectType, LPCWSTR shaderFilePath)
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType objectType,
+	LPCWSTR shaderFilePath, UINT numInputElements,
+	D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements)
 	: mRotationAngle(0.0f), vsBlob(vertexBC), mVertexShader(vs), mPixelShader(ps),
 	renderTargetView(rtv), depthStencilView(depthStencilView), device(device),
 	context(context), currentObject(objectType), shaderFilePath(shaderFilePath)
 {
 	InitializeBuffers();
 	InitializeShaders();
+	CreateInputLayout(numInputElements, IALayoutInputElements);
 }
 
 void GameObject::InitializeBuffers()
@@ -53,7 +56,6 @@ void GameObject::InitializeBuffers()
 		mWorldMatrix = DirectX::XMMatrixIdentity();
 	}
 	CreateConstantBuffer();
-	CreateInputLayout();
 }
 void GameObject::CreateConstantBuffer()
 {
@@ -543,11 +545,19 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 {
 	SetupIAStage();
 
+	for (int i = 0; i < textures.size(); i++)
+	{
+		if (textures[i].GetType() == aiTextureType_DIFFUSE) {
+			//std::cout << "hasTexture_aiTextureType_DIFFUSE\n";
+			context->PSSetShaderResources(0, 1, textures[i].GetTextureResourceViewAddress());
+			break;
+		}
+	}
+
 	if (currentObject == ObjectType::GRID)
 	{
 		cb.worldViewProj = mWorldMatrix * viewProj;
 	}
-
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	context->Map(mConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -634,30 +644,30 @@ void GameObject::InitializeShaders()
 		nullptr, &mPixelShader);
 }
 
-void GameObject::CreateInputLayout()
+void GameObject::CreateInputLayout(UINT numInputElements,
+	D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements)
 {
-	D3D11_INPUT_ELEMENT_DESC inputElements[] = {
-D3D11_INPUT_ELEMENT_DESC{
-	"POSITION", //parameter name from hlsl file
-	0, //need if we have more one element with same semantic
-	DXGI_FORMAT_R32G32B32A32_FLOAT, //parameter for create 3D object
-	0, //vertex index (between 0 and 15)
-	0, //translation from beginning vertex
-	D3D11_INPUT_PER_VERTEX_DATA, //class input data for input slot (for each vertex or instance)
-	0 },
-	D3D11_INPUT_ELEMENT_DESC{
-	"COLOR",
-	0,
-	DXGI_FORMAT_R32G32B32A32_FLOAT,
-	0,
-	D3D11_APPEND_ALIGNED_ELEMENT,
-	D3D11_INPUT_PER_VERTEX_DATA,
-	0 }
-	};
+	if (IALayoutInputElements == nullptr)
+	{
+		this->numInputElements = 2;
+		this->IALayoutInputElements = (D3D11_INPUT_ELEMENT_DESC*)malloc(this->numInputElements * sizeof(D3D11_INPUT_ELEMENT_DESC));
+		for (size_t i = 0; i < numInputElements; i++)
+		{
+			this->IALayoutInputElements[i] = defaultIALayoutInputElements[i];
+		}
+	}
+	else {
+		this->numInputElements = numInputElements;
+		this->IALayoutInputElements = (D3D11_INPUT_ELEMENT_DESC*)malloc(this->numInputElements * sizeof(D3D11_INPUT_ELEMENT_DESC));
+		for (size_t i = 0; i < numInputElements; i++)
+		{
+			this->IALayoutInputElements[i] = IALayoutInputElements[i];
+		}
+	}
 
 	device->CreateInputLayout(
-		inputElements,
-		numInputElements,
+		this->IALayoutInputElements,
+		this->numInputElements,
 		vsBlob->GetBufferPointer(),
 		vsBlob->GetBufferSize(),
 		&mInputLayout);

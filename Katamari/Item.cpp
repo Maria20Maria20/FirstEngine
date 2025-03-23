@@ -15,6 +15,11 @@ Item::Item(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs, ID3
     this->radius = radius;
     // for loaded model
     appliedScale = radius / modelRadius;
+
+
+    // shaderFilePath = L"./Shaders/PlaneShader.hlsl";
+    // this->textures.push_back(Texture(device, "models\\Textures\\basketballskin.dds", aiTextureType_DIFFUSE));
+    // hasTexture = true;
 }
 
 Vector3 Item::GetCenterLocation()
