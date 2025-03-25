@@ -113,7 +113,7 @@ void Item::Update(float deltaTime)
     }
     else 
     {
-        mWorldMatrix = Matrix::CreateScale(scale) * 
+        mWorldMatrix = Matrix::CreateScale(appliedScale) *
             Matrix::CreateTranslation(initialPosition);
     }
 
@@ -153,7 +153,8 @@ void Item::LoadRandomModel(const std::string& folder)
     std::cout << chosen_model << " :: " << verticesNum << " :: " << StringHelper::GetFileNameWithoutExtension(chosen_model) << "\n";
 
 
-    std::string model_name = StringHelper::GetFileNameWithoutExtension(chosen_model);
+    //std::string model_name = StringHelper::GetFileNameWithoutExtension(chosen_model);
+    std::string model_name = "Flowers";
     std::string texture_name = "..\\Textures\\" + model_name + "_Diffuse.dds";
     this->textures.push_back(Texture(device.Get(), texture_name, aiTextureType_DIFFUSE));
     hasTexture = true;

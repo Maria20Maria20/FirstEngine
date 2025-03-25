@@ -5,14 +5,73 @@ Player::Player(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* 
 	ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition, Camera* camera,
 	ObjectType objectType,
-	float changedScale, LPCWSTR shaderFilePath
-) : GameObject(device, vs, ps, rtv, depthStencilView, context, objectType, shaderFilePath)
+	float changedScale, LPCWSTR shaderFilePath)
+	// : GameObject(device, vs, ps, rtv, depthStencilView, context, objectType, shaderFilePath)
 {
-	initRandomRotation = GetRandomRotateTransform();
+
+	mVertexShader = vs;
+	mPixelShader = ps;
+	renderTargetView = rtv;
+	this->depthStencilView = depthStencilView;
+	this->device = device;
+	this->context = context;
+	currentObject = objectType;
+	this->shaderFilePath = L"./Shaders/FlowersShader.hlsl";
+
+	InitializeBuffers();
+	InitializeShaders();
+
+	{
+		this->numInputElements = 3;
+		this->IALayoutInputElements = (D3D11_INPUT_ELEMENT_DESC*)malloc(this->numInputElements * sizeof(D3D11_INPUT_ELEMENT_DESC));
+		this->IALayoutInputElements[0] =
+			D3D11_INPUT_ELEMENT_DESC{
+				"POSITION",
+				0,
+				DXGI_FORMAT_R32G32B32A32_FLOAT,
+				0,
+				0,
+				D3D11_INPUT_PER_VERTEX_DATA,
+				0 };
+
+		this->IALayoutInputElements[1] =
+			D3D11_INPUT_ELEMENT_DESC{
+				"COLOR",
+				0,
+				DXGI_FORMAT_R32G32B32A32_FLOAT,
+				0,
+				D3D11_APPEND_ALIGNED_ELEMENT,
+				D3D11_INPUT_PER_VERTEX_DATA,
+				0 };
+
+		this->IALayoutInputElements[2] =
+			D3D11_INPUT_ELEMENT_DESC{
+				"TEXCOORD",
+				0,
+				DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT,
+				0,
+				D3D11_APPEND_ALIGNED_ELEMENT,
+				D3D11_INPUT_PER_VERTEX_DATA,
+				0 };
+
+		device->CreateInputLayout(
+			this->IALayoutInputElements,
+			this->numInputElements,
+			vsBlob->GetBufferPointer(),
+			vsBlob->GetBufferSize(),
+			&mInputLayout);
+	}
+
+	initRandomRotation = Matrix::CreateFromYawPitchRoll(XM_PIDIV2,0,0);// GetRandomRotateTransform();
 	position = startPosition;
 	position.y = radius;
 	this->scale = changedScale;
 	this->camera = camera;
+
+	std::string model_name = "Kevin";
+	std::string texture_name = "..\\Textures\\" + model_name + "_Diffuse.dds";
+	this->textures.push_back(Texture(device, texture_name, aiTextureType_DIFFUSE));
+	hasTexture = true;
 
 }
 

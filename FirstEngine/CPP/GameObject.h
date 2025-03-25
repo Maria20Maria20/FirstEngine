@@ -135,10 +135,10 @@ private:
     void CreateRandomHeightPlane(float width, float depth, UINT widthSegments, UINT depthSegments, float maxHeight, DirectX::XMFLOAT4 col,
         Vertex** vertices, UINT* verticesNum, int** indices, UINT* indicesNum);
 
-    void InitializeBuffers();
 public:
     void CreateInputLayout(UINT numInputElements, D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements);
 protected:
+    void InitializeBuffers();
     void InitializeShaders();
     void CreateVertexBuffer();
     void CreateIndexBuffer();

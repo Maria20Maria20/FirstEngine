@@ -79,7 +79,7 @@ void GameObject::CreateSphereVertexBuffer()
 	//sliceCount = max(sliceCount, 4);
 	//elevationCount = max(elevationCount, 1);
 
-	verticesNum = 2 + (2 * elevationCount + 1) * sliceCount;
+	verticesNum = 2 + (2 * elevationCount + 1) * (sliceCount + 1);
 	vertices = (Vertex*)malloc(verticesNum * sizeof(Vertex));
 
 	float sliceStep = DirectX::XM_2PI / sliceCount;
@@ -89,22 +89,23 @@ void GameObject::CreateSphereVertexBuffer()
 	UINT _offsetVertexIdx = 0;
 	// top vertex
 	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, radius, 0.0f, 1.0f),
-		sphere_color_1 };
+		sphere_color_1, XMFLOAT2(0, 0) };
 	// other vertices
 	for (UINT i = 1; i <= 2 * elevationCount + 1; ++i)
 	{
-		for (UINT j = 0; j < sliceCount; ++j) {
+		for (UINT j = 0; j <= sliceCount; ++j) {
 			vertices[_offsetVertexIdx++] =
 			{ DirectX::XMFLOAT4(
 				radius * sinf(elevationStep * i) * cosf(sliceStep * j),
 				radius * cosf(elevationStep * i),
 				radius * sinf(elevationStep * i) * sinf(sliceStep * j),
-				1.0f
-			), (_offsetVertexIdx % 2 == 0 ? sphere_color_1 : sphere_color_2) };
+				1.0f),
+				(_offsetVertexIdx % 2 == 0 ? sphere_color_1 : sphere_color_2),
+				XMFLOAT2(j * 1.0f / sliceCount , (i * 1.0f) / (2 * elevationCount + 2)) };
 		}
 	}
 	// bottom vertex
-	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, -radius, 0.0f, 1.0f), sphere_color_1 };
+	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, -radius, 0.0f, 1.0f), sphere_color_1, XMFLOAT2(1, 1) };
 
 	D3D11_BUFFER_DESC vbd = {};
 	vbd.ByteWidth = sizeof(Vertex) * verticesNum;
@@ -175,9 +176,9 @@ void GameObject::CreateSkyVertexBuffer()
 
 void GameObject::CreateSphereIndexBuffer()
 {
-	indicesNum = 6 * sliceCount + 2 * 6 * elevationCount * sliceCount;
-	//std::cout << *indicesNum << " << \n";
+	indicesNum = 6 * (sliceCount + 1) + 2 * 6 * elevationCount * (sliceCount + 1);
 	indices = (int*)malloc(indicesNum * sizeof(int));
+
 
 	size_t indexIndex = 0;
 
@@ -192,9 +193,9 @@ void GameObject::CreateSphereIndexBuffer()
 	indices[indexIndex++] = sliceCount;
 
 	for (UINT i = 0; i < 2 * elevationCount; ++i) {
-		UINT startIndex = 1 + i * sliceCount;
-		UINT nextStartIndex = startIndex + sliceCount;
-		for (UINT j = 0; j < sliceCount - 1; ++j) {
+		UINT startIndex = 1 + i * (sliceCount + 1);
+		UINT nextStartIndex = startIndex + (sliceCount + 1);
+		for (UINT j = 0; j < sliceCount; ++j) {
 
 			indices[indexIndex++] = startIndex + j;
 			indices[indexIndex++] = startIndex + j + 1;
@@ -205,25 +206,25 @@ void GameObject::CreateSphereIndexBuffer()
 			indices[indexIndex++] = nextStartIndex + j;
 		}
 
-		indices[indexIndex++] = startIndex + sliceCount - 1;
+		indices[indexIndex++] = startIndex + sliceCount;
 		indices[indexIndex++] = startIndex;
-		indices[indexIndex++] = nextStartIndex + sliceCount - 1;
+		indices[indexIndex++] = nextStartIndex + sliceCount;
 
 		indices[indexIndex++] = startIndex;
 		indices[indexIndex++] = nextStartIndex;
-		indices[indexIndex++] = nextStartIndex + sliceCount - 1;
+		indices[indexIndex++] = nextStartIndex + sliceCount;
 	}
-
-	UINT bottomIndex = 2 + (2 * elevationCount + 1) * sliceCount - 1;
-	UINT startIndex = 1 + 2 * elevationCount * sliceCount;
-	for (UINT j = 0; j < sliceCount - 1; ++j) {
+	
+    UINT bottomIndex = verticesNum - 1;
+    UINT startIndex = 1 + 2 * elevationCount * (sliceCount + 1);
+	for (UINT j = 0; j < sliceCount; ++j) {
 		indices[indexIndex++] = bottomIndex;
 		indices[indexIndex++] = startIndex + j;
 		indices[indexIndex++] = startIndex + j + 1;
 	}
 
 	indices[indexIndex++] = bottomIndex;
-	indices[indexIndex++] = startIndex + sliceCount - 1;
+	indices[indexIndex++] = startIndex + sliceCount;
 	indices[indexIndex++] = startIndex;
 
 	D3D11_BUFFER_DESC ibd = {};

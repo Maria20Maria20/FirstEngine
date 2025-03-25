@@ -31,7 +31,7 @@ StartGame::StartGame()
 		float z = (rand() % 100) - 50.0f;
 		items.push_back(new Item(device, vertexBC, vertexShader,
 			pixelShader, rtv, depthStencilView, context, 
-			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), .4f, .4f)
+			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), rad, 1.0f)
 		);
 	}
 
