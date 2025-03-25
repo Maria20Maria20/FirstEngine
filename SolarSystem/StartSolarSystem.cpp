@@ -9,36 +9,36 @@ StartSolarSystem::StartSolarSystem()
 
 int StartSolarSystem::InstanceObjects()
 {
-	sun = new Planet(device, vertexBC, vertexShader,
+	sun = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 1, GameObject::ObjectType::SPHERE, 3);
-	satellite = new Planet(device, vertexBC, vertexShader,
+	satellite = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
 		GameObject::ObjectType::SPHERE, .5f, sun, 1.3f);
-	satellite2 = new Planet(device, vertexBC, vertexShader,
+	satellite2 = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -3,
 		GameObject::ObjectType::SPHERE, .5f, sun, 2.3f);
-	satellite3 = new Planet(device, vertexBC, vertexShader,
+	satellite3 = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
 		GameObject::ObjectType::SPHERE, .5f, sun, 3.3f);
-	satellite4 = new Planet(device, vertexBC, vertexShader,
+	satellite4 = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -3,
 		GameObject::ObjectType::SPHERE, .5f, sun, 4.3f);
-	satellite5 = new Planet(device, vertexBC, vertexShader,
+	satellite5 = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 3,
 		GameObject::ObjectType::SPHERE, .5f, sun, 5.3f);
-	earth = new Planet(device, vertexBC, vertexShader,
+	earth = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 2, 
 		GameObject::ObjectType::CUBE, 2, sun, 2.5f);
-	moon = new Planet(device, vertexBC, vertexShader,
+	moon = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -4,
 		GameObject::ObjectType::CUBE, .7f, earth, 0.5f);
-	cubeEarth = new Planet(device, vertexBC, vertexShader,
+	cubeEarth = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), -2, 
 		GameObject::ObjectType::CUBE, 2, sun, 4.5f);
-	cubeMoon = new Planet(device, vertexBC, vertexShader,
+	cubeMoon = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 4,
 		GameObject::ObjectType::CUBE, .7f, cubeEarth, 0.5f);
-	skyBox = new Planet(device, vertexBC, vertexShader,
+	skyBox = new Planet(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), &camera, DirectX::XMVectorSet(0, 1, 0, 1), 0,
 		GameObject::ObjectType::SKYBOX, 300.0f, nullptr, 0.0f, L"./Shaders/SkyBoxShader.hlsl");
 	skyBox->speedRotation = 0;

@@ -15,7 +15,7 @@
 #include "PlayerPaddle.h"
 #include "Ball.h"
 #include <CPP/Game.h>
-#include <CPP/Cube.h>
+#include <CPP/GameObject.h>
 
 
 #pragma comment(lib, "d3d11.lib")

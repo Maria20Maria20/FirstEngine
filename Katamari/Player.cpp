@@ -1,13 +1,12 @@
 #include "Player.h"
 
 
-Player::Player(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs, ID3D11PixelShader* ps,
+Player::Player(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* ps,
 	ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition, Camera* camera,
 	ObjectType objectType,
 	float changedScale, LPCWSTR shaderFilePath
-) : GameObject(device,
-	vertexBC, vs, ps, rtv, depthStencilView, context, objectType, shaderFilePath)
+) : GameObject(device, vs, ps, rtv, depthStencilView, context, objectType, shaderFilePath)
 {
 	initRandomRotation = GetRandomRotateTransform();
 	position = startPosition;

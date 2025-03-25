@@ -1,11 +1,15 @@
 #include "GameObject.h"
 
-GameObject::GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
+GameObject::GameObject() {
+
+}
+
+GameObject::GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3D11VertexShader* vs,
 	ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType objectType,
 	LPCWSTR shaderFilePath, UINT numInputElements,
 	D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements)
-	: mRotationAngle(0.0f), vsBlob(vertexBC), mVertexShader(vs), mPixelShader(ps),
+	: mRotationAngle(0.0f), mVertexShader(vs), mPixelShader(ps),
 	renderTargetView(rtv), depthStencilView(depthStencilView), device(device),
 	context(context), currentObject(objectType), shaderFilePath(shaderFilePath)
 {

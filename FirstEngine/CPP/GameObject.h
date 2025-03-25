@@ -48,7 +48,8 @@ public:
         SKYBOX = 3,
         PLANE = 4
     };
-    GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
+    GameObject();
+    GameObject(Microsoft::WRL::ComPtr<ID3D11Device> device, ID3D11VertexShader* vs,
         ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
         ID3D11DepthStencilView* depthStencilView,
         Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, ObjectType planetType,
@@ -73,15 +74,10 @@ public:
 
     Vertex* vertices;
     int* indices;
-    ID3D11VertexShader* mVertexShader;
-    ID3D11PixelShader* mPixelShader;
-    ID3DBlob* vsBlob;
     ID3DBlob* psBlob;
     ID3DBlob* errorVertexCode;
     ID3DBlob* errorPixelCode;
     ID3D11InputLayout* mInputLayout;
-    ID3D11RenderTargetView* renderTargetView;
-    ID3D11DepthStencilView* depthStencilView;
     LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl";
     DirectX::XMMATRIX mWorldMatrix = DirectX::XMMatrixIdentity();
 
@@ -95,8 +91,12 @@ public:
     bool hasTexture = false;
     std::vector<Texture> textures;
 
-protected:
     Camera camera = Camera();
+    ID3DBlob* vsBlob = nullptr;
+    ID3D11VertexShader* mVertexShader;
+    ID3D11PixelShader* mPixelShader;
+    ID3D11RenderTargetView* renderTargetView;
+    ID3D11DepthStencilView* depthStencilView;
     DirectX::XMMATRIX mRotationMatrix = DirectX::XMMatrixIdentity();
     DirectX::XMMATRIX mScaleMatrix = DirectX::XMMatrixIdentity();
     float mRotationAngle;
@@ -105,6 +105,8 @@ protected:
     void RotateShape(DirectX::XMVECTOR Axis, FLOAT Angle, float deltaTime);
     void ScalingShape(float scaleFactor);
     XMFLOAT4 gridColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f); // gray color
+    Microsoft::WRL::ComPtr<ID3D11Device> device;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 private:
     float radius = 1.0f;
     int sliceCount = 20;
@@ -116,10 +118,7 @@ private:
     ID3D11Buffer* mVertexBuffer;
     ID3D11Buffer* mIndexBuffer = nullptr;
     ID3D11Buffer* mConstantBuffer;
-    Microsoft::WRL::ComPtr<ID3D11Device> device;
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
 
-    void CreateConstantBuffer();
 
     void CreateSphereVertexBuffer();
     void CreateSphereIndexBuffer();
@@ -127,8 +126,6 @@ private:
     void CreateCubeVertexBuffer();
     void CreateCubeIndexBuffer();
 
-    void CreateVertexBuffer();
-    void CreateIndexBuffer();
 
     void CreateGridVertexBuffer();
     void CreateGridIndexBuffer();
@@ -139,9 +136,13 @@ private:
         Vertex** vertices, UINT* verticesNum, int** indices, UINT* indicesNum);
 
     void InitializeBuffers();
-    void InitializeShaders();
 public:
     void CreateInputLayout(UINT numInputElements, D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements);
+protected:
+    void InitializeShaders();
+    void CreateVertexBuffer();
+    void CreateIndexBuffer();
+    void CreateConstantBuffer();
 };
 
 Matrix GetRandomRotateTransform();

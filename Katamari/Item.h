@@ -1,5 +1,8 @@
 #pragma once
-#include <CPP\GameObject.h>
+#include <filesystem>
+#include <random>
+#include <CPP/GameObject.h>
+#include <CPP/LoadModel.h>
 #include "Player.h"
 
 class Item :
@@ -14,11 +17,11 @@ public:
         float radius, float changedScale, LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl");
 
     void Update(float deltaTime);
+    void LoadRandomModel(const std::string& folder);
+    std::vector<std::string> GetModelList(const std::string& modelsFolder);
     Vector3 GetCenterLocation();
     bool CheckCollision(Player& ball);
     void AttachToBall(Player* ball);
-    //void LoadRandomModel(const std::string& folder);
-    //std::vector<std::string> GetModelList(const std::string& modelsFolder);
 
     float radius;
     float modelRadius = 0.5f;
@@ -26,8 +29,6 @@ public:
     float appliedScale = 1.0f;
 
 private:
-   /* static std::vector<std::string> GetModelList(const std::string& folder);
-    void LoadRandomModel(const std::string& folder);*/
 
     Player* player = nullptr;
     Matrix attachTransform;

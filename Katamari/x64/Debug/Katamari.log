@@ -1,1 +1,8 @@
-﻿  Katamari.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Katamari.exe
+﻿  Item.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Item.cpp(137,60): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Item.cpp(137,60): warning C4267:         with
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Item.cpp(137,60): warning C4267:         [
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Item.cpp(137,60): warning C4267:             _Ty=int
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Item.cpp(137,60): warning C4267:         ]
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Item.cpp(145,23): warning C4018: '<': signed/unsigned mismatch
+  Katamari.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Katamari.exe

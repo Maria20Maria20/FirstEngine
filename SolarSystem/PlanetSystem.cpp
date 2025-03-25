@@ -67,7 +67,6 @@ void PlanetSystem::GenerateRandom(int totalPlanets) {
 void PlanetSystem::CreatePlanet(const PlanetParams& params) {
     m_allPlanets.push_back(std::make_unique<Planet>(
         m_device,
-        m_vertexBC,
         m_vs,
         m_ps,
         m_rtv,

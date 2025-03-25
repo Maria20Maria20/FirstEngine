@@ -11,7 +11,7 @@ class Player : public GameObject
 {
 public:
 	Player();
-	Player(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs,
+	Player(ID3D11Device* device, ID3D11VertexShader* vs,
 		ID3D11PixelShader* ps, ID3D11RenderTargetView* rtv,
 		ID3D11DepthStencilView* depthStencilView,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, XMFLOAT3 startPosition,

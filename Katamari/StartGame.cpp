@@ -17,10 +17,10 @@ StartGame::StartGame()
 	InputDevice::getInstance().OnKeyPressed.AddRaw(this, &StartGame::HandleMoveDown);
 	InputDevice::getInstance().MouseMove.AddRaw(this, &StartGame::HandleMouseMove);
 
-	plane = new Ground(device, vertexBC, vertexShader,
+	plane = new Ground(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f),
 		&camera, GameObject::ObjectType::PLANE, 1);
-	player = new Player(device, vertexBC, vertexShader,
+	player = new Player(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), 
 		&camera, GameObject::ObjectType::SPHERE);
 
