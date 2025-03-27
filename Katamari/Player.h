@@ -29,6 +29,7 @@ public:
 	Vector3 GetMoveDir();
 	void SlowDown(float deltaTime);
 	void PushForward(float deltaTime);
+	void PushBackward(float deltaTime);
 
 	// кручение м€чика (как колесо)
 	float spinSpeed = 0.0f;
@@ -48,6 +49,9 @@ public:
 
 	// увеличение м€чика
 	float scale = 1.0f;
+
+	Vector3 moveDirection;
+	float faceDirection = 1;
 
 private:
 	Matrix initRandomRotation;

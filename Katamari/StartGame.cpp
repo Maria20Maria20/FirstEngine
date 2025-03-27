@@ -19,7 +19,7 @@ StartGame::StartGame()
 
 	plane = new Ground(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f),
-		&camera, GameObject::ObjectType::PLANE, 1);
+		&camera, GameObject::ObjectType::PLANE, 3);
 	player = new Player(device, vertexShader,
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), 
 		&camera, GameObject::ObjectType::SPHERE);
@@ -141,7 +141,7 @@ void StartGame::HandleMoveDown(Keys key)
 		player->PushForward(deltaTime * 30);
 	}
 	if (key == Keys::S) {
-		// player->Move(true, -1, deltaTime * 50);
+		player->PushBackward(deltaTime * 30);
 	}
 	if (key == Keys::A)
 	{

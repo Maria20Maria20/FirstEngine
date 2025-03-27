@@ -88,7 +88,6 @@ public:
     UINT indicesNum = 0;
     
     std::string directoryPath;
-    bool hasTexture = false;
     std::vector<Texture> textures;
 
     Camera camera = Camera();

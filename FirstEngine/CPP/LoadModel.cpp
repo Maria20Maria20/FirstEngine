@@ -19,21 +19,14 @@ LoadModel::LoadModel(const std::string& path, GameObject* gameObject, UINT attrF
 
 	unsigned int meshesNum = 1; // pModel->mNumMeshes;
 
-	gameObject->verticesNum = 0;
-	gameObject->indicesNum = 0;
-
 	gameObject->verticesNum += pModel->mMeshes[0]->mNumVertices;
-	gameObject->indicesNum += pModel->mMeshes[0]->mNumFaces * 3;
+	gameObject->indicesNum += pModel->mMeshes[0]->mNumFaces * 3; //3, because use triangle
 
 	gameObject->vertices = (GameObject::Vertex*)calloc(gameObject->verticesNum, sizeof(GameObject::Vertex));
 	gameObject->indices = (int*)calloc(gameObject->indicesNum, sizeof(int));
 
 	size_t vertexIdx = 0;
 	size_t indexIdx = 0;
-
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> distr(0, 1);
 
 	const auto pMesh = pModel->mMeshes[0];
 
@@ -60,14 +53,8 @@ LoadModel::LoadModel(const std::string& path, GameObject* gameObject, UINT attrF
 	{
 		aiFace face = pMesh->mFaces[i];
 		assert(face.mNumIndices == 3);
-
-		auto col = XMFLOAT4(distr(gen), distr(gen), distr(gen), 1);
-
 		for (unsigned j = 0; j < face.mNumIndices; j++) {
 			(gameObject->indices)[indexIdx++] = face.mIndices[j];
-
-			(gameObject->vertices)[face.mIndices[j]].color = col;
-
 		}
 	}
 	/*

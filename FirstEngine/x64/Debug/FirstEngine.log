@@ -10,5 +10,7 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(316,31): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(504,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(505,21): warning C4018: '<': signed/unsigned mismatch
+  LoadModel.cpp
+  Generating Code...
 LoadModel.obj : warning LNK4006: "public: struct aiScene const * __cdecl Assimp::Importer::ReadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned int)" (?ReadFile@Importer@Assimp@@QEAAPEBUaiScene@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z) already defined in assimp-vc143-mt.lib(assimp-vc143-mt.dll); second definition ignored
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

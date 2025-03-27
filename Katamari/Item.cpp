@@ -157,8 +157,6 @@ void Item::LoadRandomModel(const std::string& folder)
     std::string model_name = "Flowers";
     std::string texture_name = "..\\Textures\\" + model_name + "_Diffuse.dds";
     this->textures.push_back(Texture(device.Get(), texture_name, aiTextureType_DIFFUSE));
-    hasTexture = true;
-
 }
 
 std::vector<std::string> Item::GetModelList(const std::string& modelsFolder)

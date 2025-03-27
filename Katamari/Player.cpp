@@ -71,8 +71,6 @@ Player::Player(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* 
 	std::string model_name = "Kevin";
 	std::string texture_name = "..\\Textures\\" + model_name + "_Diffuse.dds";
 	this->textures.push_back(Texture(device, texture_name, aiTextureType_DIFFUSE));
-	hasTexture = true;
-
 }
 
 void Player::Update(float deltaTime)
@@ -100,7 +98,7 @@ void Player::Move(float deltaTime)
 {
 	SlowDown(deltaTime);
 	position.y = radius;
-	position = position + deltaTime * velocity * GetMoveDir();
+	position = position + deltaTime * velocity * GetMoveDir() * faceDirection;
 	currentSpin += spinSpeed * deltaTime;
 }
 
@@ -111,7 +109,7 @@ Vector3 Player::GetCenterLocation()
 
 Vector3 Player::GetMoveDir()
 {
-	return Vector3::Transform(Vector3(0.0f, 0.0f, 1.0f), Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f));
+	return Vector3::Transform(Vector3(0.0f, 0.0f, faceDirection), Matrix::CreateFromYawPitchRoll(currentRotation, 0.0f, 0.0f));
 }
 
 void Player::AddTurn(float direction, float deltaTime)
@@ -130,6 +128,13 @@ void Player::PushForward(float deltaTime)
 {
 	velocity = min(maxVelocity, velocity + deltaTime * 2 * acceleration);
 	spinSpeed = velocity / radius;
+	faceDirection = 1;
+}
+void Player::PushBackward(float deltaTime)
+{
+	velocity = min(maxVelocity, velocity + deltaTime * 2 * acceleration);
+	spinSpeed = velocity / radius;
+	faceDirection = -1;
 }
 
 void Player::SlowDown(float deltaTime)

@@ -1,2 +1,3 @@
-﻿  StartGame.cpp
+﻿  Player.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Player.cpp(142,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Katamari.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Katamari.exe

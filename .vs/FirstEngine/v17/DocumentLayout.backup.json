@@ -3,20 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\StartGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FIRSTENGINE\\CPP\\GAMEOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FIRSTENGINE\\CPP\\GAMEOBJECT.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\StartGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Texture.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\Texture.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\LoadModel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\CPP\\LoadModel.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Ground.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Ground.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Shaders\\FlowersShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Shaders\\FlowersShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Ground.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{292CF856-FD41-49EF-93CA-16B19978F1EF}|Katamari\\Katamari.vcxproj|solutionrelative:Katamari\\Ground.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,17 +58,66 @@
       "DocumentGroups": [
         {
           "DockedWidth": 353,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.h",
+              "RelativeDocumentMoniker": "Katamari\\Player.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.h",
+              "RelativeToolTip": "Katamari\\Player.h",
+              "ViewState": "AgIAAA0AAAAAAAAAAAArwDUAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-27T08:15:51.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Ground.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Ground.cpp",
+              "RelativeDocumentMoniker": "Katamari\\Ground.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Ground.cpp",
+              "RelativeToolTip": "Katamari\\Ground.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-27T08:11:21.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameObject.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\GameObject.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.cpp",
+              "RelativeToolTip": "FirstEngine\\CPP\\GameObject.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-27T08:10:56.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FlowersShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Shaders\\FlowersShader.hlsl",
+              "RelativeDocumentMoniker": "Katamari\\Shaders\\FlowersShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Shaders\\FlowersShader.hlsl",
+              "RelativeToolTip": "Katamari\\Shaders\\FlowersShader.hlsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-26T07:06:29.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "GameObject.h",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.h",
               "RelativeDocumentMoniker": "FirstEngine\\CPP\\GameObject.h",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\GameObject.h",
               "RelativeToolTip": "FirstEngine\\CPP\\GameObject.h",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAYwIwAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAAuwEcAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-25T21:48:28.841Z",
               "EditorCaption": ""
@@ -49,36 +130,82 @@
               "RelativeDocumentMoniker": "Katamari\\Player.cpp",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Player.cpp",
               "RelativeToolTip": "Katamari\\Player.cpp",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAEAAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAuwIIAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-25T21:46:35.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StartGame.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp",
-              "RelativeDocumentMoniker": "Katamari\\StartGame.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp",
-              "RelativeToolTip": "Katamari\\StartGame.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAABwAAAAPAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "Texture.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Texture.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\Texture.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\Texture.cpp",
+              "RelativeToolTip": "FirstEngine\\CPP\\Texture.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-25T21:46:34.94Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T08:19:21.866Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Item.cpp",
               "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.cpp",
               "RelativeDocumentMoniker": "Katamari\\Item.cpp",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.cpp",
               "RelativeToolTip": "Katamari\\Item.cpp",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAUwJ8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-20T10:49:32.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-20T10:49:32.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StartGame.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp",
+              "RelativeDocumentMoniker": "Katamari\\StartGame.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\StartGame.cpp",
+              "RelativeToolTip": "Katamari\\StartGame.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwCUAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-25T21:46:34.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Ground.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Ground.h",
+              "RelativeDocumentMoniker": "Katamari\\Ground.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Ground.h",
+              "RelativeToolTip": "Katamari\\Ground.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-27T08:14:43.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Item.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.h",
+              "RelativeDocumentMoniker": "Katamari\\Item.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Katamari\\Item.h",
+              "RelativeToolTip": "Katamari\\Item.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-27T08:14:46.799Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoadModel.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\LoadModel.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\CPP\\LoadModel.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\CPP\\LoadModel.cpp",
+              "RelativeToolTip": "FirstEngine\\CPP\\LoadModel.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAuwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-27T08:19:17.209Z"
             }
           ]
         }
