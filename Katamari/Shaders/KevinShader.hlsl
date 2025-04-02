@@ -105,5 +105,5 @@ float4 PSMain(PS_IN input) : SV_Target
         spec = specFactor * mat.Specular * L.Specular;
     }
     
-    return float4(ambient + spec + diffuse) * pixelColor;
+    return float4(((ambient + spec + diffuse) * pixelColor).rgb, 0.3);
 }

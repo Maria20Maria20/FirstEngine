@@ -117,13 +117,79 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 		XMMATRIX projection = XMMatrixIdentity();
 
-		player->Draw(context, projection);
 		plane->Draw(context, projection);
+
+
+
+
+
+
+		ID3D11BlendState* old_blend_state;
+		FLOAT   old_blend_factor[4] = { 0.f };
+		UINT    old_sample_mask = 0;
+
+		context->OMGetBlendState(&old_blend_state, old_blend_factor, &old_sample_mask);
+
+		ID3D11BlendState* _blend_state = nullptr;
+
+		D3D11_BLEND_DESC blendDesc;
+		ZeroMemory(&blendDesc, sizeof(D3D11_BLEND_DESC));
+
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA; //D3D11_BLEND_SRC_ALPHA
+		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA; //D3D11_BLEND_INV_SRC_ALPHA
+		blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		device->CreateBlendState(&blendDesc, &_blend_state);
+		float blend_factor[4] = { 1.f, 1.f, 1.f, 1.f };
+		context->OMSetBlendState(_blend_state, blend_factor, 0xffffffff);
+
+
 		for (Item* item : items)
 		{
 			//std::cout << item.initialPosition.x << "\n";
 			item->Draw(context, projection);
 		}
+		_blend_state->Release();
+
+		ZeroMemory(&blendDesc, sizeof(D3D11_BLEND_DESC));
+
+		blendDesc.RenderTarget[0].BlendEnable = TRUE;
+		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		device->CreateBlendState(&blendDesc, &_blend_state);
+		context->OMSetBlendState(_blend_state, blend_factor, 0xffffffff);
+
+		CD3D11_RASTERIZER_DESC newRastDesc = {};
+		ID3D11RasterizerState* newRastState;
+		newRastDesc.CullMode = D3D11_CULL_BACK; //triangles in the specified direction do not need to be drawn
+		newRastDesc.FillMode = D3D11_FILL_SOLID; //fill mode (solid or wireframe)
+		device->CreateRasterizerState(&newRastDesc, &newRastState);
+		context->RSSetState(newRastState);
+
+		player->Draw(context, projection);
+
+		_blend_state->Release();
+		newRastState->Release();
+		CD3D11_RASTERIZER_DESC oldRastDesc = {};
+		ID3D11RasterizerState* oldRastState;
+		oldRastDesc.CullMode = D3D11_CULL_NONE; //triangles in the specified direction do not need to be drawn
+		oldRastDesc.FillMode = D3D11_FILL_SOLID; //fill mode (solid or wireframe)
+		device->CreateRasterizerState(&oldRastDesc, &oldRastState);
+		context->RSSetState(oldRastState);
+
+		context->OMSetBlendState(old_blend_state, old_blend_factor, old_sample_mask);
+
 		//if (focusedBody)
 		//{
 		//	//follow to planet
