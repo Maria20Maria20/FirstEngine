@@ -1,16 +1,28 @@
-﻿  GameObject.cpp
+﻿  DisplayWin32.cpp
+  Game.cpp
+  GameObject.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(94,21): warning C4018: '<=': signed/unsigned mismatch
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(96,22): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(145,21): warning C4018: '<=': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(147,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(185,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(195,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(198,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(220,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(316,31): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(504,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(505,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(152,21): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(154,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(192,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(202,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(205,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(227,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(323,31): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(513,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\GameObject.cpp(514,21): warning C4018: '<': signed/unsigned mismatch
+  InputDevice.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,53): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(88,48): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\InputDevice.cpp(89,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   LoadModel.cpp
+  Square.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Square.cpp(158,42): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+  Triangle.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Triangle.cpp(117,42): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
   Generating Code...
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Game.cpp(16): warning C4715: 'Game::Initialize': not all control paths return a value
 LoadModel.obj : warning LNK4006: "public: struct aiScene const * __cdecl Assimp::Importer::ReadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned int)" (?ReadFile@Importer@Assimp@@QEAAPEBUaiScene@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z) already defined in assimp-vc143-mt.lib(assimp-vc143-mt.dll); second definition ignored
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib

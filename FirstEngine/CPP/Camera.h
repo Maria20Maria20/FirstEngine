@@ -56,6 +56,8 @@ public:
 
     void SwitchProjection();
 
+    Vector3 GetPosition();
+
 private:
     Vector3 position;
     Vector3 target;

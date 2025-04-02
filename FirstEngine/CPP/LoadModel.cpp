@@ -22,7 +22,7 @@ LoadModel::LoadModel(const std::string& path, GameObject* gameObject, UINT attrF
 	gameObject->verticesNum += pModel->mMeshes[0]->mNumVertices;
 	gameObject->indicesNum += pModel->mMeshes[0]->mNumFaces * 3; //3, because use triangle
 
-	gameObject->vertices = (GameObject::Vertex*)calloc(gameObject->verticesNum, sizeof(GameObject::Vertex));
+	gameObject->vertices = (Vertex*)calloc(gameObject->verticesNum, sizeof(Vertex));
 	gameObject->indices = (int*)calloc(gameObject->indicesNum, sizeof(int));
 
 	size_t vertexIdx = 0;

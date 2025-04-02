@@ -178,6 +178,7 @@
     <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\Keys.h" />
     <ClInclude Include="CPP\LoadModel.h" />
+    <ClInclude Include="CPP\MyStructs.h" />
     <ClInclude Include="CPP\ShapeType.h" />
     <ClInclude Include="CPP\GameObject.h" />
     <ClInclude Include="CPP\Square.h" />

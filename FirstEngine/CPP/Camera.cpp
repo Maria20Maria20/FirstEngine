@@ -280,3 +280,8 @@ void Camera::SwitchProjection() {
     }
 
 }
+
+Vector3 Camera::GetPosition()
+{
+    return this->position;
+}

@@ -101,6 +101,9 @@
     <ClInclude Include="CPP\LoadModel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="CPP\MyStructs.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Pong\Shaders\CubeShader.hlsl">

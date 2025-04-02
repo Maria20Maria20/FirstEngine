@@ -89,7 +89,7 @@ void GameObject::CreateSphereVertexBuffer()
 	UINT _offsetVertexIdx = 0;
 	// top vertex
 	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, radius, 0.0f, 1.0f),
-		sphere_color_1, XMFLOAT2(0, 0) };
+		sphere_color_1, XMFLOAT2(0, 0), XMFLOAT3(0, 1, 0) };
 	// other vertices
 	for (UINT i = 1; i <= 2 * elevationCount + 1; ++i)
 	{
@@ -101,11 +101,18 @@ void GameObject::CreateSphereVertexBuffer()
 				radius * sinf(elevationStep * i) * sinf(sliceStep * j),
 				1.0f),
 				(_offsetVertexIdx % 2 == 0 ? sphere_color_1 : sphere_color_2),
-				XMFLOAT2(j * 1.0f / sliceCount , (i * 1.0f) / (2 * elevationCount + 2)) };
+				XMFLOAT2(j * 1.0f / sliceCount , (i * 1.0f) / (2 * elevationCount + 2)),
+				XMFLOAT3(
+					sinf(elevationStep * i) * cosf(sliceStep * j),
+					cosf(elevationStep * i),
+					sinf(elevationStep * i) * sinf(sliceStep * j)
+				)
+			};
 		}
 	}
 	// bottom vertex
-	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, -radius, 0.0f, 1.0f), sphere_color_1, XMFLOAT2(1, 1) };
+	vertices[_offsetVertexIdx++] = { DirectX::XMFLOAT4(0.0f, -radius, 0.0f, 1.0f),
+		sphere_color_1, XMFLOAT2(1, 1), XMFLOAT3(0, -1, 0) };
 
 	D3D11_BUFFER_DESC vbd = {};
 	vbd.ByteWidth = sizeof(Vertex) * verticesNum;
@@ -476,7 +483,9 @@ void GameObject::CreateRandomHeightPlane(float width, float depth, UINT widthSeg
 
 			(*vertices)[i * (widthSegments + 1) + j] = {
 				DirectX::XMFLOAT4(x, y, z, 1),
-				((i + j) % 2 ? col : XMFLOAT4(1.0f - col.x, 1.0f - col.y, 1.0f - col.z, 1.0f))
+				((i + j) % 2 ? col : XMFLOAT4(1.0f - col.x, 1.0f - col.y, 1.0f - col.z, 1.0f)),
+				XMFLOAT2(i * 1.0f / depthSegments, j * 1.0f / widthSegments),
+				DirectX::XMFLOAT3(0,1,0)
 			};
 		}
 	}
@@ -564,12 +573,15 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 		cb.worldViewProj = mWorldMatrix * viewProj;
 	}
 
+	// cb.cameraPosition = camera.GetPosition();
+
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	context->Map(mConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	memcpy(mappedResource.pData, &cb, sizeof(ConstantBuffer));
 	context->Unmap(mConstantBuffer, 0);
 
 	context->VSSetConstantBuffers(0u, 1u, &mConstantBuffer);
+	context->PSSetConstantBuffers(0u, 1u, &mConstantBuffer);
 
 	// Установка шейдеров и ресурсов
 	context->VSSetShader(mVertexShader, nullptr, 0);

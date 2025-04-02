@@ -8,6 +8,7 @@
 #include "InputDevice.h"
 #include "Delegates.h"
 #include "Camera.h"
+#include "MyStructs.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -39,7 +40,7 @@ public:
     Camera camera = Camera();
     float CameraFOV = 3;
     DisplayWin32* display;
-
+    DirectionalLight* directionalLight;
     // Метод доступа к экземпляру
     static Game& getInstance();
 

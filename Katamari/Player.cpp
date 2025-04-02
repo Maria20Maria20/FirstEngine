@@ -16,13 +16,13 @@ Player::Player(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* 
 	this->device = device;
 	this->context = context;
 	currentObject = objectType;
-	this->shaderFilePath = L"./Shaders/FlowersShader.hlsl";
+	this->shaderFilePath = L"./Shaders/KevinShader.hlsl";
 
 	InitializeBuffers();
 	InitializeShaders();
 
 	{
-		this->numInputElements = 3;
+		this->numInputElements = 4;
 		this->IALayoutInputElements = (D3D11_INPUT_ELEMENT_DESC*)malloc(this->numInputElements * sizeof(D3D11_INPUT_ELEMENT_DESC));
 		this->IALayoutInputElements[0] =
 			D3D11_INPUT_ELEMENT_DESC{
@@ -49,6 +49,15 @@ Player::Player(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* 
 				"TEXCOORD",
 				0,
 				DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT,
+				0,
+				D3D11_APPEND_ALIGNED_ELEMENT,
+				D3D11_INPUT_PER_VERTEX_DATA,
+				0 };
+		this->IALayoutInputElements[3] =
+			D3D11_INPUT_ELEMENT_DESC{
+				"NORMAL",
+				0,
+				DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT,
 				0,
 				D3D11_APPEND_ALIGNED_ELEMENT,
 				D3D11_INPUT_PER_VERTEX_DATA,
@@ -91,7 +100,12 @@ void Player::Update(float deltaTime)
 
 	// Update constant buffer
 	cb.worldViewProj = mWorldMatrix * (XMMATRIX)(viewMat * projMat);
-
+	cb.cameraPosition = camera->GetPosition();
+	cb.worldMat = mWorldMatrix;
+	DirectX::XMMATRIX A = mWorldMatrix;
+	A.r[3] = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+	DirectX::XMVECTOR det = XMMatrixDeterminant(A);
+	cb.worldMatInvTranspose = DirectX::XMMatrixTranspose(XMMatrixInverse(&det, A));
 }
 
 void Player::Move(float deltaTime)

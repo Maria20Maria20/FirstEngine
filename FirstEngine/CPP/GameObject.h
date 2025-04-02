@@ -13,6 +13,7 @@
 #include <random>
 #include <assimp/scene.h>
 #include "Texture.h"
+#include "MyStructs.h"
 
 
 using namespace DirectX;
@@ -59,18 +60,6 @@ public:
     void Update(float dt);
     void Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj);
 
-    struct Vertex
-    {
-        DirectX::XMFLOAT4 position;
-        DirectX::XMFLOAT4 color;
-        DirectX::XMFLOAT2 texCoord;
-        DirectX::XMFLOAT3 normal;
-    };
-    struct ConstantBuffer
-    {
-        //DirectX::XMMATRIX world; 
-        DirectX::XMMATRIX worldViewProj = DirectX::XMMatrixIdentity();
-    };
 
     Vertex* vertices;
     int* indices;
@@ -131,10 +120,10 @@ private:
     
     void CreateSkyVertexBuffer();
 
-    void CreateRandomHeightPlane(float width, float depth, UINT widthSegments, UINT depthSegments, float maxHeight, DirectX::XMFLOAT4 col,
-        Vertex** vertices, UINT* verticesNum, int** indices, UINT* indicesNum);
 
 public:
+    void CreateRandomHeightPlane(float width, float depth, UINT widthSegments, UINT depthSegments, float maxHeight, DirectX::XMFLOAT4 col,
+        Vertex** vertices, UINT* verticesNum, int** indices, UINT* indicesNum);
     void CreateInputLayout(UINT numInputElements, D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements);
 protected:
     void InitializeBuffers();
