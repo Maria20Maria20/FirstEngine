@@ -108,6 +108,11 @@ void Player::Update(float deltaTime)
 	cb.worldMatInvTranspose = DirectX::XMMatrixTranspose(XMMatrixInverse(&det, A));
 }
 
+// For lighting
+Matrix Player::GetRelativeTransform() {
+	return Matrix::CreateFromYawPitchRoll(currentRotation, currentSpin, 0.0f) * Matrix::CreateTranslation(position);
+}
+
 void Player::Move(float deltaTime)
 {
 	SlowDown(deltaTime);

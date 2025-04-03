@@ -10,10 +10,32 @@
 class StartGame : public Game 
 {
 public:
-	Player* player = nullptr;
-	Ground* plane;
 	StartGame();
 private:
+	Player* player = nullptr;
+	Ground* plane;
+
+	// --- Default BlendState (no transparency) ---
+	ID3D11BlendState* defaultBlendState;
+	FLOAT   defaultBlendFactor[4] = { 0.f };
+	UINT    defaultSampleMask = 0;
+
+	// --- Default RastState ---
+	ID3D11RasterizerState* defaultRastState;
+
+	// -- Flowers (items) BlendState ---
+	ID3D11BlendState* flowersBlendState;
+
+	// -- Kevin (items) BlendState ---
+	ID3D11BlendState* KevinBlendState;
+	// -- Kevin (items) RastState ---
+	// CULL (CULL_BACK) other side of Kevin (to get rid of artifacts)
+	ID3D11RasterizerState* KevinRastState;
+
+
+	LightData lightData;
+	ID3D11Buffer* lightConstPixelBuffer;
+	XMFLOAT3 pointLightInitPositions[6];
 
 	std::vector<Item*> items;
 

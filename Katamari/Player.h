@@ -18,6 +18,7 @@ public:
 		Camera* camera, ObjectType objectType,
 		float changedScale = 1.0f, LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl");
 	void Update(float deltaTime);
+	Matrix GetRelativeTransform();
 	void Move(float deltaTime);
 	void AddTurn(float direction, float deltaTime);
 	

@@ -89,14 +89,18 @@ Ground::Ground(ID3D11Device* device, ID3D11VertexShader* vs, ID3D11PixelShader* 
 void Ground::Update(float deltaTime)
 {
 	//RotateShape(rotationDirection, speedRotation, deltaTime);
-	mWorldMatrix = XMMatrixTranslation(position.x, position.y, position.z);
+	mWorldMatrix = XMMatrixScaling(changedScale, changedScale, changedScale) * XMMatrixTranslation(position.x, position.y, position.z);
 
 
 	Matrix viewMat = camera->GetViewMatrix();
 	Matrix projMat = camera->GetProjectionMatrix();
 
+    cb.worldMat = mWorldMatrix;
+    cb.worldMatInvTranspose = mWorldMatrix;
+    
+
 
 	// Update constant buffer
-	cb.worldViewProj = XMMatrixScaling(changedScale, changedScale, changedScale) * mWorldMatrix * (XMMATRIX)(viewMat * projMat);
+	cb.worldViewProj = mWorldMatrix * (XMMATRIX)(viewMat * projMat);
     cb.cameraPosition = camera->GetPosition();
 }

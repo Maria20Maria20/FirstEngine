@@ -30,3 +30,20 @@ struct DirectionalLight
     XMFLOAT3 Direction;
     float Pad;
 };
+
+struct PointLight
+{
+    DirectX::XMFLOAT4 Ambient;
+    DirectX::XMFLOAT4 Diffuse;
+    DirectX::XMFLOAT4 Specular;
+    DirectX::XMFLOAT3 Position;
+    float Range;
+
+    DirectX::XMFLOAT3 Att;
+    float pad;
+};
+
+struct LightData {
+	DirectionalLight dLight;
+	PointLight pointLights[6];
+};

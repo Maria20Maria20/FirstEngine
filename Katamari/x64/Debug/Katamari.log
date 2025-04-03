@@ -1,5 +1,2 @@
-﻿C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Shaders\KevinShader.hlsl(43,5-77): warning X3206: implicit truncation of vector type
-C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\Shaders\KevinShader.hlsl(87,5-69): warning X3206: implicit truncation of vector type
-  
-  compilation object save succeeded; see C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\KevinShader.cso
+﻿  StartGame.cpp
   Katamari.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Katamari.exe

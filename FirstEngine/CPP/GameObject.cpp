@@ -52,7 +52,7 @@ void GameObject::InitializeBuffers()
 	}
 	if (currentObject == ObjectType::PLANE) 
 	{
-		CreateRandomHeightPlane(50.0f, 50.0f, 4, 4, 0.05f, 
+		CreateRandomHeightPlane(50.0f, 50.0f, 10, 10, 0.05f, 
 			DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f), &vertices, &verticesNum, &indices, &indicesNum);
 
 		CreateVertexBuffer();
