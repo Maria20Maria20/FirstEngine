@@ -1,2 +1,4 @@
 ﻿  StartGame.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(102,27): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(124,39): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
   Katamari.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Katamari.exe

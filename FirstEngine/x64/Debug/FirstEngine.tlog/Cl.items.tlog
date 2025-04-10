@@ -1,5 +1,6 @@
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Camera.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\Camera.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\ColorHelper.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\ColorHelper.obj
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\DebugRenderSysImpl.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\DebugRenderSysImpl.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Delegates.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\Delegates.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\DisplayWin32.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\DisplayWin32.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Game.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\Game.obj
@@ -11,3 +12,4 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\StringHelper.cp
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Texture.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\Texture.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\Triangle.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\Triangle.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\TriangleComponent.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\TriangleComponent.obj
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\CPP\VertexPositionColor.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\VertexPositionColor.obj

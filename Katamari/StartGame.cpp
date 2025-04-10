@@ -24,16 +24,22 @@ StartGame::StartGame()
 		pixelShader, rtv, depthStencilView, context, XMFLOAT3(0.0f, 0.0f, 0.0f), 
 		&camera, GameObject::ObjectType::SPHERE);
 
-	for (int i = 0; i < 10; ++i)
+	gameObjects.push_back(plane);
+	gameObjects.push_back(player);
+
+	for (int i = 0; i < 20; ++i)
 	{
 		float rad = 1.0f;
-		float x = (rand() % 100) - 50.0f;
-		float z = (rand() % 100) - 50.0f;
+		float z = (rand() % 30) - 15.0f;
+		float x = (rand() % 30) - 15.0f;
 		items.push_back(new Item(device, vertexBC, vertexShader,
 			pixelShader, rtv, depthStencilView, context, 
 			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), rad, 1.0f)
 		);
+		gameObjects.push_back(items.back());
 	}
+
+
 
 	camera.SwitchToFollowMode(player->position, player->GetMoveDir(), player->radius);
 
@@ -93,24 +99,228 @@ StartGame::StartGame()
 
 	// --- Buffer for lighting (SLOT 1) ---
 
+	Vector3 lightDir = { 0, -0.3, 1 };
+	lightDir.Normalize();
 	// Directional light
 	lightData.dLight = {
 		Vector4(0.1f, 0.1f, 0.1f, 0.0f),
 		Vector4(0.4f, 0.4f, 0.4f, 0.0f),
 		Vector4(0.6f, 0.6f, 0.6f, 0.0f),
-		Vector3(-2.0f, -1.0f, -1.0f) / Vector3(-2.0f, -1.0f, -1.0f).Length(),
+		lightDir,
 		0
 	};
 
+	//light_pcb = new Bind::PixelConstantBuffer<LightData>(renderer.GetDevice(), lightData, 0u);
+	//renderer.AddPerFrameBind(light_pcb);
+
+	//cam_pcb = new Bind::PixelConstantBuffer<Camera_PCB>(renderer.GetDevice(), { renderer.camera.GetPosition() }, 1u);
+	//renderer.AddPerFrameBind(cam_pcb);
+
+
+	// --- Shadow Map stuff ---
+
+	// Camera from light
+	lightPos = -20 * lightDir;
+	lightViewCamera = new Camera(smSizeX / smSizeY);
+	lightViewCamera->SetPosition(lightPos);
+	lightViewCamera->SetTarget(lightPos + lightDir);
+	Vector3 cameraUp = { 0, 1, 0 };
+	cameraUp.Normalize();
+	lightViewCamera->SetUp(cameraUp);
+	lightViewCamera->SwitchProjection();
+	lightViewCamera->SetViewWidth(50.0f);
+	lightViewCamera->SetViewHeight(50.0f);
+	lightViewCamera->SetFarZ(100.0f);
+
+	// Viewport for rendering z-buffer from light
+	smViewport.TopLeftX = 0.0f;
+	smViewport.TopLeftY = 0.0f;
+	smViewport.Width = static_cast<float>(512);
+	smViewport.Height = static_cast<float>(512);
+	smViewport.MinDepth = 0.0f;
+	smViewport.MaxDepth = 1.0f;
+
+	// Texture for depth values (for shadowing)
+	D3D11_TEXTURE2D_DESC depthDesc = {};
+	depthDesc.Width = smSizeX;
+	depthDesc.Height = smSizeY;
+	depthDesc.MipLevels = 1;
+	depthDesc.ArraySize = 1;
+	depthDesc.Format = DXGI_FORMAT_R24G8_TYPELESS;
+	depthDesc.SampleDesc.Count = 1;
+	depthDesc.SampleDesc.Quality = 0;
+	depthDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_DEPTH_STENCIL;
+	depthDesc.MiscFlags = 0;
+
+	device->CreateTexture2D(&depthDesc, nullptr, &shadowTexture);
+
+	// View texture as Depth buffer while rendering from light camera
+	D3D11_DEPTH_STENCIL_VIEW_DESC dViewDesc = { };
+	dViewDesc.Flags = 0;
+	dViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	dViewDesc.Texture2DArray.MipSlice = 0;
+	dViewDesc.Texture2DArray.FirstArraySlice = 0;
+	dViewDesc.Texture2DArray.ArraySize = 1;
+
+	device->CreateDepthStencilView(shadowTexture, &dViewDesc, &depthDSV);
+
+	// View texture as Shader resource while using it for shadowing in pixel shader
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2DArray.MostDetailedMip = 0;
+	srvDesc.Texture2DArray.MipLevels = 1;
+	srvDesc.Texture2DArray.FirstArraySlice = 0;
+	srvDesc.Texture2DArray.ArraySize = 1;
+
+	device->CreateShaderResourceView(shadowTexture, &srvDesc, &depthSRV);
+
+	// Rasterizer for depth bias to get rid of self-shadowing
+	D3D11_RASTERIZER_DESC rastDesc = CD3D11_RASTERIZER_DESC(CD3D11_DEFAULT{});
+	rastDesc.CullMode = D3D11_CULL_BACK;
+	rastDesc.FillMode = D3D11_FILL_SOLID;
+	rastDesc.DepthBias = 50000;
+	rastDesc.DepthBiasClamp = 0.0f;
+	rastDesc.SlopeScaledDepthBias = 2.0f;
+
+	device->CreateRasterizerState(&rastDesc, &pRasterizer);
+
+	// Sampler of texture. It samples values from texture
+	D3D11_SAMPLER_DESC shadowSamplerDesc;
+	shadowSamplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	shadowSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+	shadowSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+	shadowSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+	shadowSamplerDesc.MipLODBias = 0.0f;
+	shadowSamplerDesc.MaxAnisotropy = 1;
+	shadowSamplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	shadowSamplerDesc.BorderColor[0] = 1.0;
+	shadowSamplerDesc.BorderColor[1] = 1.0;
+	shadowSamplerDesc.BorderColor[2] = 1.0;
+	shadowSamplerDesc.BorderColor[3] = 1.0;
+	shadowSamplerDesc.MinLOD = 0;
+	shadowSamplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	device->CreateSamplerState(&shadowSamplerDesc, &pSampler);
+
+	shadowSamplerDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
+	shadowSamplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+	shadowSamplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+	shadowSamplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+	shadowSamplerDesc.MipLODBias = 0.0f;
+	shadowSamplerDesc.MaxAnisotropy = 1;
+	shadowSamplerDesc.ComparisonFunc = D3D11_COMPARISON_LESS;
+	shadowSamplerDesc.BorderColor[0] = 1.0;
+	shadowSamplerDesc.BorderColor[1] = 1.0;
+	shadowSamplerDesc.BorderColor[2] = 1.0;
+	shadowSamplerDesc.BorderColor[3] = 1.0;
+	shadowSamplerDesc.MinLOD = 0;
+	shadowSamplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	device->CreateSamplerState(&shadowSamplerDesc, &pSampler_PCF);
+
+	// Vertex shader for generating Z-buffer from light
+	{
+		LPCWSTR filePath = L"./Shaders/ShadowMapVShader.hlsl";
+
+		ID3DBlob* errorVertexCode = nullptr;
+		HRESULT hr = D3DCompileFromFile(
+			filePath,
+			nullptr,
+			D3D_COMPILE_STANDARD_FILE_INCLUDE,
+			"VSMain",
+			"vs_5_0",
+			D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+			0,
+			&pShadowShaderBytecodeBlob,
+			&errorVertexCode);
+
+		if (FAILED(hr)) {
+			if (errorVertexCode) {
+				char* compileErrors = (char*)(errorVertexCode->GetBufferPointer());
+				std::cout << compileErrors << std::endl;
+			}
+			else {
+				std::cout << filePath << L" - Missing Shader File\n";
+			}
+
+		}
+
+		device->CreateVertexShader(
+			pShadowShaderBytecodeBlob->GetBufferPointer(),
+			pShadowShaderBytecodeBlob->GetBufferSize(),
+			nullptr,
+			&pShadowVertexShader
+		);
+	}
+
+
+	{
+		D3D11_INPUT_ELEMENT_DESC shadowIALayoutInputElements[1] = {
+		D3D11_INPUT_ELEMENT_DESC{
+			"POSITION",
+			0,
+			DXGI_FORMAT_R32G32B32A32_FLOAT,
+			0,
+			0,
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0 },
+		};
+		device->CreateInputLayout(
+			shadowIALayoutInputElements,
+			1,
+			pShadowShaderBytecodeBlob->GetBufferPointer(),
+			pShadowShaderBytecodeBlob->GetBufferSize(),
+			&pShadowInputLayout);
+	}
+
+	// Buffer for transformation respect to light camera
+	{
+		struct ShadowTransformData
+		{
+			DirectX::XMMATRIX LV;
+			DirectX::XMMATRIX LP;
+			DirectX::XMMATRIX SH;
+		} _data;
+
+		_data = {
+			lightViewCamera->GetViewMatrix(),
+			lightViewCamera->GetProjectionMatrix(),
+			DirectX::XMMatrixIdentity()
+		};
+
+		// Transform NDC space [-1,+1]^2 to texture space [0,1]^2 (for XY; Z stays the same)
+		DirectX::XMMATRIX T = {
+			0.5f, 0.0f, 0.0f, 0.0f,
+			0.0f, -0.5f, 0.0f, 0.0f,
+			0.0f, 0.0f, 1.0f, 0.0f,
+			0.5f, 0.5f, 0.0f, 1.0f
+		};
+		_data.SH = _data.LV * _data.LP * T;
+
+		D3D11_BUFFER_DESC cbd;
+		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		cbd.Usage = D3D11_USAGE_DYNAMIC;
+		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		cbd.MiscFlags = 0u;
+		cbd.ByteWidth = sizeof(_data) + (16 - (sizeof(_data) % 16));  // aligned size
+		cbd.StructureByteStride = 0u;
+
+		D3D11_SUBRESOURCE_DATA InitData = {};
+		InitData.pSysMem = &_data;
+		device->CreateBuffer(&cbd, &InitData, &shadowTransformsConstantBuffer);
+	}
 
 	// Point lights
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < pointLightCount; i++)
 	{
 		lightData.pointLights[i].Ambient = { 0, 0, 0, 1 };
 		lightData.pointLights[i].Diffuse = { (i + 1) % 2 * 1.0f, i / 3 * 1.0f, (i + 2) % 6 / 3 * 1.0f, 1 };
 		lightData.pointLights[i].Specular = { (i + 1) % 2 * 1.0f, i / 3 * 1.0f, (i + 2) % 6 / 3 * 1.0f, 1 };
 		
-		float _pLightDist = 2.0f + (rand() % 30) / 10.0f; // 2.0 + rand(0, 3)
+		float _pLightDist = 5.0f + (rand() % 30) / 10.0f; // 2.0 + rand(0, 3)
 		pointLightInitPositions[i] = { _pLightDist, 0.0f, 0.0f };
 		pointLightInitPositions[i] = 
 			Vector3::Transform(
@@ -200,7 +410,7 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 		camera.Update(deltaTime, player->mWorldMatrix, player->GetMoveDir(), CameraFOV * player->radius);
 
 		// --- Update lighting ---
-		for (size_t i = 0; i < 6; i++)
+		for (size_t i = 0; i < pointLightCount; i++)
 		{
 			lightData.pointLights[i].Position =
 				Vector3::Transform(
@@ -210,8 +420,16 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 				);
 		}
 
+		// --- Shadow Map ---
+
+		BindDsvAndSetNullRenderTarget();
+		DrawSceneToShadowMap();
+
 		// --- Draw ---
 
+		// camera.SetFarZ(1000.0f);
+
+		SetBackBufferOutput(1u, &rtv, depthStencilView);
 		float color[] = { 0.0f, 0.1f, 0.5f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
 		context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1, 0);
@@ -237,6 +455,14 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 		// (SLOT, num_of_buffers, data_for_constant buffer)
 		context->PSSetConstantBuffers(1u, 1u, &lightConstPixelBuffer);
+
+		// --- Resources for shadows ---
+
+		context->PSSetSamplers(0u, 1u, pSampler_PCF.GetAddressOf());
+		context->PSSetSamplers(1u, 1u, pSampler.GetAddressOf());
+		context->PSSetShaderResources(1u, 1u, &depthSRV);
+
+		context->PSSetConstantBuffers(2u, 1u, &shadowTransformsConstantBuffer);
 
 		// --- Draw plane ---
 
@@ -279,6 +505,43 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 	}
 
 }
+
+void StartGame::BindDsvAndSetNullRenderTarget()
+{
+	context->RSSetViewports(1, &smViewport);
+	// Set null render target because we are only going to draw
+	// to depth buffer. Setting a null render target will disable
+	// color writes.
+	ID3D11RenderTargetView* renderTargets[1] = { 0 };
+	context->OMSetRenderTargets(1, renderTargets, depthDSV);
+	context->ClearDepthStencilView(depthDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+}
+
+void StartGame::DrawSceneToShadowMap() {
+	
+	// --- Per Frame ---
+
+	context->RSSetState(pRasterizer.Get());
+
+	// --- Per object ---
+
+	for (GameObject* obj : gameObjects) {		
+		// Input Layout (wrong!) + Vertex Buffer + Index Buffer + Topology
+		obj->SetupIAStage(); // Net, nado drugoi nastroit
+
+		// Constant (Transform) buffer
+		obj->UpdateConstantBuffer();
+		context->VSSetConstantBuffers(0u, 1u, &(obj->mConstantBuffer));
+		context->VSSetConstantBuffers(1u, 1u, &shadowTransformsConstantBuffer);
+	
+		context->IASetInputLayout(pShadowInputLayout.Get());
+		context->VSSetShader(pShadowVertexShader.Get(), nullptr, 0u);
+		context->PSSetShader(nullptr, nullptr, 0u);
+		context->DrawIndexed(obj->indicesNum, 0, 0);
+
+	}
+}
+
 
 
 void StartGame::HandleMoveDown(Keys key)

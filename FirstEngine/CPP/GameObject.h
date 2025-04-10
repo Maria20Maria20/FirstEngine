@@ -59,6 +59,7 @@ public:
     ObjectType currentObject;
     void Update(float dt);
     void Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj);
+    void UpdateConstantBuffer();
 
 
     Vertex* vertices;
@@ -95,6 +96,7 @@ public:
     XMFLOAT4 gridColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f); // gray color
     Microsoft::WRL::ComPtr<ID3D11Device> device;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
+    ID3D11Buffer* mConstantBuffer;
 private:
     float radius = 1.0f;
     int sliceCount = 20;
@@ -105,7 +107,6 @@ private:
 
     ID3D11Buffer* mVertexBuffer;
     ID3D11Buffer* mIndexBuffer = nullptr;
-    ID3D11Buffer* mConstantBuffer;
 
 
     void CreateSphereVertexBuffer();

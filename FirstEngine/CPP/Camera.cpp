@@ -27,6 +27,11 @@ void Camera::SetPosition(Vector3 position)
     this->position = position;
 }
 
+Vector3 Camera::GetPosition()
+{
+    return this->position;
+}
+
 void Camera::SetTarget(Vector3 target)
 {
     this->target = target;
@@ -57,6 +62,16 @@ void Camera::SetFarZ(float farZ)
     this->farZ = farZ;
 }
 
+void Camera::SetViewWidth(float viewWidth)
+{
+    this->viewWidth = viewWidth;
+}
+
+void Camera::SetViewHeight(float viewHeight)
+{
+    this->viewHeight = viewHeight;
+}
+
 void Camera::Update(float deltaTime, const Matrix targetTransform)
 {
     if (cameraMode == CAMERA_MODE::ORBITAL)
@@ -83,7 +98,7 @@ void Camera::Update(float deltaTime, const Matrix targetTransform, Vector3 direc
         //orbitalYaw += orbitalAngleSpeed * deltaTime;
 
         target = Vector3::Transform(Vector3::Zero, targetTransform);
-
+        
         float cam2targetDist = 2.0f * referenceLen / tanf(fov * 0.5);
         position = target - cam2targetDist * (direction + sinf(followPitch) * up);
     }
@@ -113,7 +128,7 @@ XMMATRIX Camera::GetProjectionMatrix() const
     if (isPerspective)
         return XMMatrixPerspectiveFovLH(fov, aspectRatio, nearZ, farZ);
     else
-        return XMMatrixOrthographicLH(aspectRatio * 2.0f * tanf(0.5f * fov) * orthZ, 2.0f * tanf(0.5f * fov) * orthZ, nearZ, farZ);
+        return XMMatrixOrthographicLH(viewWidth, viewHeight, nearZ, farZ);
 }
 
 void Camera::MoveForward(float speed)
@@ -135,7 +150,7 @@ void Camera::MoveForward(float speed)
     }
     if (!isPerspective)
     {
-        orthZ = max(orthZ + speed, nearZ * 1.1);
+        orthZ = max(orthZ + speed, nearZ*1.1);
     }
 }
 
@@ -209,6 +224,14 @@ void Camera::RotatePitch(float angle)
     {
         orbitalPitch += angle;
     }
+    else if (cameraMode == CAMERA_MODE::FOLLOW)
+    {
+        followPitch = min(max(-XM_PIDIV2 * 0.9, followPitch + angle), 0);
+        float cam2targetDist = 2.0f * referenceLen / tanf(fov * 0.5);
+        Vector3 direction = (target - position);
+        direction.y = 0; direction.Normalize();
+        position = target - cam2targetDist * (direction + sinf(followPitch) * up);
+    }
     else
     {
         Vector3 look_dir = target - position;
@@ -269,19 +292,22 @@ void Camera::SwitchProjection() {
         if (isPerspective)
             orbitalDistance = orthZ;
         else
+        {
             orthZ = orbitalDistance;
+            SetViewWidth(aspectRatio * 2.0f * tanf(0.5f * fov) * orthZ);
+            SetViewHeight(2.0f * tanf(0.5f * fov) * orthZ);
+        }
     }
     else if (cameraMode == CAMERA_MODE::FPS)
     {
         if (isPerspective)
             orbitalDistance = orthZ;
         else
+        {
             orthZ = (position - target).Length();
+            SetViewWidth(aspectRatio * 2.0f * tanf(0.5f * fov) * orthZ);
+            SetViewHeight(2.0f * tanf(0.5f * fov) * orthZ);
+        }
     }
 
-}
-
-Vector3 Camera::GetPosition()
-{
-    return this->position;
 }

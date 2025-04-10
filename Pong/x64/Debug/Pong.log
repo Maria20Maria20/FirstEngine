@@ -36,9 +36,7 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C43
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'PongGame.cpp')
   
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PongGame.h(18,10): error C1083: Cannot open include file: 'CPP/Cube.h': No such file or directory
-  (compiling source file 'PongGame.cpp')
-  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PongGame.cpp(2,10): error C1083: Cannot open include file: 'CPP/Cube.h': No such file or directory
   MySuper3DApp.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'MySuper3DApp.cpp')
@@ -58,9 +56,7 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(30,19): warning C43
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\Ball.h(31,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'MySuper3DApp.cpp')
   
-C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\PongGame.h(18,10): error C1083: Cannot open include file: 'CPP/Cube.h': No such file or directory
-  (compiling source file 'MySuper3DApp.cpp')
-  
+C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\MySuper3DApp.cpp(5,10): error C1083: Cannot open include file: 'CPP/Cube.h': No such file or directory
   NPCPaddle.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\Pong\NPCPaddle.h(29,19): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'NPCPaddle.cpp')

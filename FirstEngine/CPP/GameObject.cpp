@@ -575,10 +575,7 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 
 	// cb.cameraPosition = camera.GetPosition();
 
-	D3D11_MAPPED_SUBRESOURCE mappedResource;
-	context->Map(mConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
-	memcpy(mappedResource.pData, &cb, sizeof(ConstantBuffer));
-	context->Unmap(mConstantBuffer, 0);
+	UpdateConstantBuffer();
 
 	context->VSSetConstantBuffers(0u, 1u, &mConstantBuffer);
 	context->PSSetConstantBuffers(0u, 1u, &mConstantBuffer);
@@ -589,6 +586,13 @@ void GameObject::Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& vie
 
 	context->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 	context->DrawIndexed(indicesNum, 0, 0);
+}
+
+void GameObject::UpdateConstantBuffer() {
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	context->Map(mConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	memcpy(mappedResource.pData, &cb, sizeof(ConstantBuffer));
+	context->Unmap(mConstantBuffer, 0);
 }
 
 void GameObject::RotateShape(DirectX::XMVECTOR Axis, FLOAT Angle, float deltaTime)

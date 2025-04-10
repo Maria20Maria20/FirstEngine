@@ -4,7 +4,6 @@ Item::Item(ID3D11Device* device, ID3DBlob* vertexBC, ID3D11VertexShader* vs, ID3
     ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* depthStencilView,
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context, Camera* camera,
     ObjectType objectType, const DirectX::XMFLOAT3& startPosition, float radius, float changedScale, LPCWSTR shaderFilePath)
-    // : GameObject(device, vertexBC, vs, ps, rtv, depthStencilView, context, ObjectType::CUBE, shaderFilePath)
 {
     // vsBlob = vertexBC;
     mVertexShader = vs;
@@ -121,6 +120,7 @@ void Item::Update(float deltaTime)
     Matrix projMat = camera->GetProjectionMatrix();
 
     // Update constant buffer
+    cb.worldMat = mWorldMatrix;
     cb.worldViewProj = mWorldMatrix * (XMMATRIX)(viewMat * projMat);
 }
 

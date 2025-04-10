@@ -15,11 +15,13 @@ public:
     {
         FPS, ORBITAL, FOLLOW
     };
+
     Camera();
     Camera(float aspectRatio);
     ~Camera();
 
     void SetPosition(Vector3 position);
+    Vector3 GetPosition();
     void SetTarget(Vector3 target);
     void SetUp(Vector3 up);
 
@@ -27,11 +29,12 @@ public:
     void SetAspectRatio(float aspectRatio);
     void SetNearZ(float nearZ);
     void SetFarZ(float farZ);
+    void SetViewWidth(float viewWidth);
+    void SetViewHeight(float viewHeight);
 
     void Update(float deltaTime, const Matrix targetTransform);
     void Update(float deltaTime, const Matrix targetTransform, Vector3 direction);
     void Update(float deltaTime, const Matrix targetTransform, Vector3 direction, float referenceLen);
-
 
     XMMATRIX GetViewMatrix() const;
     XMMATRIX GetProjectionMatrix() const;
@@ -46,22 +49,22 @@ public:
     void RotateYaw(float angle);
     void RotatePitch(float angle);
 
+    void SwitchToFPSMode();
+    
+    void SwitchToFollowMode(Vector3 followTarget, Vector3 direction, float referenceLen);
+
     void SwitchToOrbitalMode(Vector3 orbitalTarget);
     void SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis);
     void SwitchToOrbitalMode(Vector3 orbitalTarget, Vector3 spinAxis, float referenceLen);
 
-    void SwitchToFPSMode();
-
-    void SwitchToFollowMode(Vector3 followTarget, Vector3 direction, float referenceLen);
-
     void SwitchProjection();
-
-    Vector3 GetPosition();
 
 private:
     Vector3 position;
     Vector3 target;
     Vector3 up;
+
+    bool isPerspective = true;
 
     float fov;
     float aspectRatio;
@@ -72,20 +75,27 @@ private:
 
     float referenceLen;
 
+    // for Orthographic projection
+    float viewWidth;
+    float viewHeight;
+
+
     CAMERA_MODE cameraMode = CAMERA_MODE::FPS;
 
+    // for ORBITAL camera mode
     Vector3 orbitalTarget;
     float minOrbitalDistance;
     float orbitalDistance;
     float orbitalYaw;
     float orbitalPitch;
     float orbitalAngleSpeed;
-
+    //float orbitalAngleSpeed;
     Vector3 spinAxis;
 
-    bool isPerspective = true;
-
+    // for FOLLOW camera mode
     float followPitch;
+
+
 };
 
 #endif // CAMERA_H

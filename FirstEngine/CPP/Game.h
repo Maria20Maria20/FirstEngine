@@ -24,8 +24,6 @@ protected:
 
     static Game* instance;  // Единственный экземпляр
 
-    ID3D11DeviceContext* context;
-    ID3D11Device* device;
     ID3DBlob* vertexBC = nullptr;
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
@@ -35,9 +33,12 @@ protected:
 
     int Initialize();
     void WindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);
+    void SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);
 
 public:
     Camera camera = Camera();
+    ID3D11Device* device;
+    ID3D11DeviceContext* context;
     float CameraFOV = 3;
     DisplayWin32* display;
     DirectionalLight* directionalLight;
@@ -69,6 +70,5 @@ private:
     void GetBackBufferAndCreateRTV();
     int CompileShaders();
     void SetupRasterizerStage();
-    void SetBackBufferOutput(UINT NumViews, ID3D11RenderTargetView* const* ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);
 };
 

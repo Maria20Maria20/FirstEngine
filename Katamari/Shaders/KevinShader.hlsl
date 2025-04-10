@@ -41,7 +41,7 @@ cbuffer ConstantBuffer : register(b0)
 cbuffer LightBuffer : register(b1) // per frame
 {
     DirectionalLight dLight;
-    PointLight pointLights[6];
+    PointLight pointLights[10];
 };
 
 
@@ -159,7 +159,7 @@ float4 PSMain(PS_IN input) : SV_Target
 
     float4 pointLightSum = { 0, 0, 0, 0 };
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 10; i++)
     {
         pointLightSum += calcPointLight(input.wPos, normal, toEye, mat, pointLights[i]);
     }

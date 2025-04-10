@@ -45,5 +45,5 @@ struct PointLight
 
 struct LightData {
 	DirectionalLight dLight;
-	PointLight pointLights[6];
+	PointLight pointLights[10];
 };
