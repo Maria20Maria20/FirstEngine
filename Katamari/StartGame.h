@@ -46,18 +46,37 @@ private:
 	UINT smSizeY = 512;
 	Vector3 lightPos;
 	ID3D11Texture2D* shadowTexture;
-	ID3D11DepthStencilView* depthDSV;
+	ID3D11DepthStencilView* depthDSV[4];
 	ID3D11ShaderResourceView* depthSRV;
 	D3D11_VIEWPORT smViewport;
+	
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> pRasterizer;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> pSampler;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> pSampler_PCF;
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> pShadowInputLayout;
+	UINT currCascade = 0;
 
 	Microsoft::WRL::ComPtr<ID3DBlob> pShadowShaderBytecodeBlob;
 	Microsoft::WRL::ComPtr<ID3D11VertexShader> pShadowVertexShader;
 	ID3D11Buffer* shadowTransformsConstantBuffer;
+	ID3D11Buffer* cascadesConstantBuffer;
 	std::vector<GameObject*> gameObjects;
+
+	struct ShadowTransformData
+	{
+		DirectX::XMMATRIX lightView;
+		DirectX::XMMATRIX lightProjection;
+		DirectX::XMMATRIX shadowTransformFull;
+	};
+	struct CascadesData {
+		ShadowTransformData cascades[4];
+		DirectX::XMFLOAT4 distances[4];
+	} cascadesData;
+
+	//float cascadeBounds[5] = { 0.1f, 10.0f, 30.0f, 10.0f, 40.0f };
+	float cascadeBounds[5] = { 0.1f, 10.0f, 30.0f, 80.0f, 200.0f };
+	float frustrumBias = 8.0f;
+	//float cascadeBounds[5] = { 10.0f, 40.0f, 100.0f, 400.0f, 500.0f };
 
 
 	float deltaTime;

@@ -44,27 +44,33 @@ cbuffer LightBuffer : register(b1) // per frame
     PointLight pointLights[10];
 };
 
-cbuffer ShadowCBuf : register(b2) // per frame
+struct ShadowTransforms
 {
     row_major float4x4 lightView;
     row_major float4x4 lightProj;
     row_major float4x4 shadowTransform;
 };
 
-SamplerComparisonState samShadow : register(s0)
+cbuffer CascadeCBuf : register(b2) // per frame
+{
+    ShadowTransforms shTransforms[4];
+    float4 distances;
+};
+
+
+
+Texture2DArray shadowMap : register(t0);
+SamplerState shadowSampler : register(s0);
+SamplerComparisonState samShadow : register(s1)
 {
     Filter = COMPARISON_MIN_MAG_LINEAR_MIP_POINT;
     AddressU = BORDER;
     AddressV = BORDER;
     AddressW = BORDER;
-    BorderColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    BorderColor = float4(1.0f, 1.0f, 1.0f, 0.0f);
 
     ComparisonFunc = LESS;
 };
-
-Texture2D shadowMap : register(t1);
-SamplerState shadowSampler : register(s1);
-
 
 
 static const float SMAP_SIZE = 512.0f;
@@ -161,8 +167,9 @@ float4 calcPointLight(float3 wPos, float3 normal, float3 toEye, Material mat, Po
 }
 
 float CalcShadowFactor(SamplerComparisonState samShadow,
-                       Texture2D shadowMap,
-                       float4 shadowPosH)
+                       Texture2DArray shadowMap,
+                       float4 shadowPosH,
+                       int layer)
 {
   // Complete projection by doing division by w.
     shadowPosH.xyz /= shadowPosH.w;
@@ -189,7 +196,7 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
     for (int i = 0; i < 9; ++i)
     {
         percentLit += shadowMap.SampleCmpLevelZero(samShadow,
-        shadowPosH.xy + offsets[i], depth).r;
+        float3(shadowPosH.xy + offsets[i], layer), depth).r;
     }
 
     return percentLit /= 9.0f;
@@ -198,6 +205,15 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
 
 float4 PSMain(PS_IN input) : SV_Target
 {
+    /*
+    if (input.pos.x < 0.5 * SMAP_SIZE && input.pos.y < 0.5 * SMAP_SIZE)
+    {
+        float val = shadowMap.Sample(shadowSampler, float3(input.pos.xy, 0)).r;
+        val = shadowMap.Load(float4(input.pos.xy * 2, 1, 0)).r;
+        return float4(val.rrr, 1.0f);
+    }
+    */
+    
     float4 pixelColor = input.col;
     
     Material mat =
@@ -219,32 +235,48 @@ float4 PSMain(PS_IN input) : SV_Target
     
     calcDirectionalLight(input.wPos, normal, toEye, mat, dLight, dl_ambient, dl_diffuse, dl_spec);
 
-    float4 shPos = mul(float4(input.wPos, 1.0), shadowTransform);
+    float4 lightViewPos = mul(float4(input.wPos, 1.0), shTransforms[0].lightView);
+    lightViewPos = lightViewPos / lightViewPos.w;
+    
+    
+    int layer = 1;
+    
+    static float cascadeDistances[4] = (float[4])distances;
+    
+    for (int i = 0; i < 4; ++i)
+    {
+        if (lightViewPos.z < cascadeDistances[i])
+        {
+            layer = i;
+            break;
+        }
+    }
+    
+    float4 shPos = mul(float4(input.wPos, 1.0), shTransforms[layer].shadowTransform);
     shPos = shPos / shPos.w;
+    
+    /*
+    if (input.pos.x < 0.5 * SMAP_SIZE && input.pos.y < 0.5 * SMAP_SIZE)
+    {
+        float val = shadowMap.Sample(shadowSampler, float3(input.pos.xy, 0)).r;
+        val = shadowMap.Load(float4(input.pos.xy * 2, 1, 0)).r;
+        return float4(val.rrr, 1.0f);
+    }
+    */
     
     if ((shPos.x >= 0) && (shPos.y >= 0) && (shPos.z >= 0) && (shPos.x <= 1) && (shPos.y <= 1) && (shPos.z <= 1))
     {
-        float shZ = shadowMap.Sample(shadowSampler, shPos.xy).r;
+        // float shZ = shadowMap.Sample(shadowSampler, shPos.xy, 0).r;
+        //return saturate(float4(float(lightViewPos.z * 1.0f / 200).rrr, 1.0f));
         
-        float shadowFactor = CalcShadowFactor(samShadow, shadowMap, shPos);
+        
+        float shadowFactor = CalcShadowFactor(samShadow, shadowMap, shPos, layer);
         dirLightCol = saturate(dl_ambient + shadowFactor * (dl_diffuse + dl_spec));
-        /*
-        if (shZ < shPos.z)
-        {
-            // For debugging
-            // dirLightCol = float4(((floor(shPos.x * SMAP_SIZE) + floor(shPos.y * SMAP_SIZE)) % 2).xxx, 1.0f);
-
-            dirLightCol = saturate(dl_ambient);
-        }
-        else
-            dirLightCol = saturate(dl_ambient + dl_diffuse + dl_spec);
-        */
     }
     else
         dirLightCol = saturate(dl_ambient + dl_spec + dl_diffuse);
-
     
-    float4 pointLightSum = { 0, 0, 0, 0 };
+        float4 pointLightSum = { 0, 0, 0, 0 };
 
     for (int i = 0; i < 10; i++)
     {

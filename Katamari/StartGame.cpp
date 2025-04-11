@@ -30,8 +30,9 @@ StartGame::StartGame()
 	for (int i = 0; i < 20; ++i)
 	{
 		float rad = 1.0f;
-		float z = (rand() % 30) - 15.0f;
-		float x = (rand() % 30) - 15.0f;
+		int spawnDist = 100;
+		float z = (rand() % spawnDist) - spawnDist / 2;
+		float x = (rand() % spawnDist) - spawnDist / 2;
 		items.push_back(new Item(device, vertexBC, vertexShader,
 			pixelShader, rtv, depthStencilView, context, 
 			&camera, GameObject::ObjectType::CUBE, XMFLOAT3(x, 0.0f, z), rad, 1.0f)
@@ -120,7 +121,7 @@ StartGame::StartGame()
 	// --- Shadow Map stuff ---
 
 	// Camera from light
-	lightPos = -20 * lightDir;
+	lightPos = { 0, 30, -60 };
 	lightViewCamera = new Camera(smSizeX / smSizeY);
 	lightViewCamera->SetPosition(lightPos);
 	lightViewCamera->SetTarget(lightPos + lightDir);
@@ -128,9 +129,10 @@ StartGame::StartGame()
 	cameraUp.Normalize();
 	lightViewCamera->SetUp(cameraUp);
 	lightViewCamera->SwitchProjection();
-	lightViewCamera->SetViewWidth(50.0f);
-	lightViewCamera->SetViewHeight(50.0f);
-	lightViewCamera->SetFarZ(100.0f);
+	lightViewCamera->SetViewWidth(200.0f);
+	lightViewCamera->SetViewHeight(100.0f);
+	lightViewCamera->SetNearZ(cascadeBounds[2]);
+	lightViewCamera->SetFarZ(cascadeBounds[3]);
 
 	// Viewport for rendering z-buffer from light
 	smViewport.TopLeftX = 0.0f;
@@ -145,7 +147,7 @@ StartGame::StartGame()
 	depthDesc.Width = smSizeX;
 	depthDesc.Height = smSizeY;
 	depthDesc.MipLevels = 1;
-	depthDesc.ArraySize = 1;
+	depthDesc.ArraySize = 4;
 	depthDesc.Format = DXGI_FORMAT_R24G8_TYPELESS;
 	depthDesc.SampleDesc.Count = 1;
 	depthDesc.SampleDesc.Quality = 0;
@@ -159,29 +161,33 @@ StartGame::StartGame()
 	D3D11_DEPTH_STENCIL_VIEW_DESC dViewDesc = { };
 	dViewDesc.Flags = 0;
 	dViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DARRAY;
 	dViewDesc.Texture2DArray.MipSlice = 0;
-	dViewDesc.Texture2DArray.FirstArraySlice = 0;
 	dViewDesc.Texture2DArray.ArraySize = 1;
 
-	device->CreateDepthStencilView(shadowTexture, &dViewDesc, &depthDSV);
+	for (size_t i = 0; i < 4; i++)
+	{
+		dViewDesc.Texture2DArray.FirstArraySlice = D3D11CalcSubresource(0, i, 1);
+		device->CreateDepthStencilView(shadowTexture, &dViewDesc, &(depthDSV[i]));
+	}
+
 
 	// View texture as Shader resource while using it for shadowing in pixel shader
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2DARRAY;
 	srvDesc.Texture2DArray.MostDetailedMip = 0;
 	srvDesc.Texture2DArray.MipLevels = 1;
 	srvDesc.Texture2DArray.FirstArraySlice = 0;
-	srvDesc.Texture2DArray.ArraySize = 1;
+	srvDesc.Texture2DArray.ArraySize = 4;
 
 	device->CreateShaderResourceView(shadowTexture, &srvDesc, &depthSRV);
 
 	// Rasterizer for depth bias to get rid of self-shadowing
 	D3D11_RASTERIZER_DESC rastDesc = CD3D11_RASTERIZER_DESC(CD3D11_DEFAULT{});
-	rastDesc.CullMode = D3D11_CULL_BACK;
+	rastDesc.CullMode = D3D11_CULL_NONE;
 	rastDesc.FillMode = D3D11_FILL_SOLID;
-	rastDesc.DepthBias = 50000;
+	rastDesc.DepthBias = 100000;
 	rastDesc.DepthBiasClamp = 0.0f;
 	rastDesc.SlopeScaledDepthBias = 2.0f;
 
@@ -219,7 +225,7 @@ StartGame::StartGame()
 	shadowSamplerDesc.MinLOD = 0;
 	shadowSamplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-	device->CreateSamplerState(&shadowSamplerDesc, &pSampler_PCF);
+	device->CreateSamplerState(&shadowSamplerDesc, &pSampler_PCF);;
 
 	// Vertex shader for generating Z-buffer from light
 	{
@@ -278,19 +284,6 @@ StartGame::StartGame()
 
 	// Buffer for transformation respect to light camera
 	{
-		struct ShadowTransformData
-		{
-			DirectX::XMMATRIX LV;
-			DirectX::XMMATRIX LP;
-			DirectX::XMMATRIX SH;
-		} _data;
-
-		_data = {
-			lightViewCamera->GetViewMatrix(),
-			lightViewCamera->GetProjectionMatrix(),
-			DirectX::XMMatrixIdentity()
-		};
-
 		// Transform NDC space [-1,+1]^2 to texture space [0,1]^2 (for XY; Z stays the same)
 		DirectX::XMMATRIX T = {
 			0.5f, 0.0f, 0.0f, 0.0f,
@@ -298,19 +291,53 @@ StartGame::StartGame()
 			0.0f, 0.0f, 1.0f, 0.0f,
 			0.5f, 0.5f, 0.0f, 1.0f
 		};
-		_data.SH = _data.LV * _data.LP * T;
+
+		for (size_t i = 0; i < 4; i++)
+		{
+			lightViewCamera->SetNearZ(cascadeBounds[i] - (i > 0 ? frustrumBias : 0));
+			lightViewCamera->SetFarZ(cascadeBounds[i + 1]);
+
+			cascadesData.cascades[i] = {
+				lightViewCamera->GetViewMatrix(),
+				lightViewCamera->GetProjectionMatrix(),
+				DirectX::XMMatrixIdentity()
+			};
+
+			cascadesData.cascades[i].shadowTransformFull =
+				cascadesData.cascades[i].lightView
+				* cascadesData.cascades[i].lightProjection
+				* T;
+
+		}
+		cascadesData.distances->x = cascadeBounds[1];
+		cascadesData.distances->y = cascadeBounds[2];
+		cascadesData.distances->z = cascadeBounds[3];
+		cascadesData.distances->w = cascadeBounds[4];
 
 		D3D11_BUFFER_DESC cbd;
 		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		cbd.Usage = D3D11_USAGE_DYNAMIC;
 		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		cbd.MiscFlags = 0u;
-		cbd.ByteWidth = sizeof(_data) + (16 - (sizeof(_data) % 16));  // aligned size
+		cbd.ByteWidth = sizeof(ShadowTransformData) + (16 - (sizeof(ShadowTransformData) % 16));  // aligned size
 		cbd.StructureByteStride = 0u;
 
 		D3D11_SUBRESOURCE_DATA InitData = {};
-		InitData.pSysMem = &_data;
+		InitData.pSysMem = &(cascadesData.cascades[0]);
 		device->CreateBuffer(&cbd, &InitData, &shadowTransformsConstantBuffer);
+
+		// All Cascades (for pixel shader while drawing final scene)
+
+		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		cbd.Usage = D3D11_USAGE_DYNAMIC;
+		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		cbd.MiscFlags = 0u;
+		cbd.ByteWidth = sizeof(CascadesData) + (16 - (sizeof(CascadesData) % 16));  // aligned size
+		cbd.StructureByteStride = 0u;
+
+		InitData.pSysMem = &(cascadesData);
+		device->CreateBuffer(&cbd, &InitData, &cascadesConstantBuffer);
+
 	}
 
 	// Point lights
@@ -421,19 +448,26 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 		}
 
 		// --- Shadow Map ---
-
-		BindDsvAndSetNullRenderTarget();
-		DrawSceneToShadowMap();
-
+		
+		for (currCascade = 0; currCascade < 4; currCascade++)
+		{
+			BindDsvAndSetNullRenderTarget();
+			DrawSceneToShadowMap();
+		}
+		context->OMSetRenderTargets(0, NULL, NULL);
+		
 		// --- Draw ---
 
 		// camera.SetFarZ(1000.0f);
+
 
 		SetBackBufferOutput(1u, &rtv, depthStencilView);
 		float color[] = { 0.0f, 0.1f, 0.5f, 1.0f };
 		context->ClearRenderTargetView(rtv, color);
 		context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1, 0);
-
+		
+		context->RSSetState(defaultRastState);
+		
 		D3D11_VIEWPORT viewport = {};
 		viewport.Width = static_cast<float>(Game::getInstance().display->ScreenWidth);
 		viewport.Height = static_cast<float>(Game::getInstance().display->ScreenHeight);
@@ -458,11 +492,12 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 		// --- Resources for shadows ---
 
-		context->PSSetSamplers(0u, 1u, pSampler_PCF.GetAddressOf());
-		context->PSSetSamplers(1u, 1u, pSampler.GetAddressOf());
-		context->PSSetShaderResources(1u, 1u, &depthSRV);
+		context->PSSetSamplers(0u, 1u, pSampler.GetAddressOf());
+		context->PSSetSamplers(1u, 1u, pSampler_PCF.GetAddressOf());
 
-		context->PSSetConstantBuffers(2u, 1u, &shadowTransformsConstantBuffer);
+		context->PSSetShaderResources(0u, 1u, &depthSRV);
+
+		context->PSSetConstantBuffers(2u, 1u, &cascadesConstantBuffer);
 
 		// --- Draw plane ---
 
@@ -508,13 +543,19 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 void StartGame::BindDsvAndSetNullRenderTarget()
 {
+
+	context->OMSetRenderTargets(0, NULL, NULL);
+	context->PSSetShaderResources(0u, 0u, nullptr);
 	context->RSSetViewports(1, &smViewport);
 	// Set null render target because we are only going to draw
 	// to depth buffer. Setting a null render target will disable
 	// color writes.
-	ID3D11RenderTargetView* renderTargets[1] = { 0 };
-	context->OMSetRenderTargets(1, renderTargets, depthDSV);
-	context->ClearDepthStencilView(depthDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+	ID3D11RenderTargetView* rtvDepth[1] = { 0 };
+	//device->CreateRenderTargetView(shadowTexture, &depthRtvDesc, &rtvDepth[i]);
+
+	context->OMSetRenderTargets(1, rtvDepth, depthDSV[currCascade]);
+	context->ClearDepthStencilView(depthDSV[currCascade], D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void StartGame::DrawSceneToShadowMap() {
@@ -524,6 +565,12 @@ void StartGame::DrawSceneToShadowMap() {
 	context->RSSetState(pRasterizer.Get());
 
 	// --- Per object ---
+
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	context->Map(shadowTransformsConstantBuffer, 0u, D3D11_MAP_WRITE_DISCARD, 0u, &mappedResource);
+	memcpy(mappedResource.pData, &(cascadesData.cascades[currCascade]),
+		sizeof(ShadowTransformData) + (16 - (sizeof(ShadowTransformData) % 16))); // aligned size
+	context->Unmap(shadowTransformsConstantBuffer, 0);
 
 	for (GameObject* obj : gameObjects) {		
 		// Input Layout (wrong!) + Vertex Buffer + Index Buffer + Topology
