@@ -37,9 +37,19 @@ void Camera::SetTarget(Vector3 target)
     this->target = target;
 }
 
+Vector3 Camera::GetTarget()
+{
+    return target;
+}
+
 void Camera::SetUp(Vector3 up)
 {
     this->up = up;
+}
+
+Vector3 Camera::GetUp()
+{
+    return up;
 }
 
 void Camera::SetFOV(float fov)
@@ -57,9 +67,19 @@ void Camera::SetNearZ(float nearZ)
     this->nearZ = nearZ;
 }
 
+float Camera::GetNearZ()
+{
+    return nearZ;
+}
+
 void Camera::SetFarZ(float farZ)
 {
     this->farZ = farZ;
+}
+
+float Camera::GetFarZ()
+{
+    return farZ;
 }
 
 void Camera::SetViewWidth(float viewWidth)
@@ -67,9 +87,19 @@ void Camera::SetViewWidth(float viewWidth)
     this->viewWidth = viewWidth;
 }
 
+float Camera::GetViewWidth()
+{
+    return viewWidth;
+}
+
 void Camera::SetViewHeight(float viewHeight)
 {
     this->viewHeight = viewHeight;
+}
+
+float Camera::GetViewHeight()
+{
+    return viewHeight;
 }
 
 void Camera::Update(float deltaTime, const Matrix targetTransform)
@@ -310,4 +340,67 @@ void Camera::SwitchProjection() {
         }
     }
 
+}
+
+Camera::FrustumPlanes Camera::GetFrustumPlanes()
+{
+    Matrix mat = GetViewMatrix() * GetProjectionMatrix();
+    FrustumPlanes planes;
+
+    // Левая плоскость
+    planes.Left = XMVectorSet(mat._14 + mat._11, mat._24 + mat._21, mat._34 + mat._31, mat._44 + mat._41);
+    planes.Left = DirectX::XMPlaneNormalize(planes.Left);
+
+    // Правая плоскость
+    planes.Right = XMVectorSet(mat._14 - mat._11, mat._24 - mat._21, mat._34 - mat._31, mat._44 - mat._41);
+    planes.Right = DirectX::XMPlaneNormalize(planes.Right);
+
+    // Верхняя плоскость
+    planes.Top = XMVectorSet(mat._14 - mat._12, mat._24 - mat._22, mat._34 - mat._32, mat._44 - mat._42);
+    planes.Top = DirectX::XMPlaneNormalize(planes.Top);
+
+    // Нижняя плоскость
+    planes.Bottom = XMVectorSet(mat._14 + mat._12, mat._24 + mat._22, mat._34 + mat._32, mat._44 + mat._42);
+    planes.Bottom = DirectX::XMPlaneNormalize(planes.Bottom);
+
+    // Ближняя плоскость
+    planes.Near = XMVectorSet(mat._14 + mat._13, mat._24 + mat._23, mat._34 + mat._33, mat._44 + mat._43);
+    planes.Near = DirectX::XMPlaneNormalize(planes.Near);
+
+    // Дальняя плоскость
+    planes.Far = XMVectorSet(mat._14 - mat._13, mat._24 - mat._23, mat._34 - mat._33, mat._44 - mat._43);
+    planes.Far = DirectX::XMPlaneNormalize(planes.Far);
+
+    return planes;
+}
+
+Camera::FrustumCorners Camera::GetFrustumCorners()
+{
+    FrustumCorners corners;
+    
+    Matrix viewProjMatrix = GetViewMatrix() * GetProjectionMatrix();
+    XMMATRIX invViewProj = XMMatrixInverse(nullptr, viewProjMatrix);
+
+    XMVECTOR ndcCorners[8] = {
+        XMVectorSet(-1, -1, 0, 1),
+        XMVectorSet(1, -1, 0, 1),
+        XMVectorSet(-1, 1, 0, 1),
+        XMVectorSet(1, 1, 0, 1),
+        XMVectorSet(-1, -1, 1, 1),
+        XMVectorSet(1, -1, 1, 1),
+        XMVectorSet(-1, 1, 1, 1),
+        XMVectorSet(1, 1, 1, 1)
+    };
+
+    for (int i = 0; i < 8; ++i) {
+        XMVECTOR worldPos = XMVector3TransformCoord(ndcCorners[i], invViewProj);
+        if (i < 4) {
+            corners.Near[i] = worldPos;
+        }
+        else {
+            corners.Far[i - 4] = worldPos;
+        }
+    }
+
+    return corners;
 }

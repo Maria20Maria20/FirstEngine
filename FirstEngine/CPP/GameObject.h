@@ -57,7 +57,7 @@ public:
         LPCWSTR shaderFilePath = L"./Shaders/CubeShader.hlsl", UINT numInputElements = 2, 
         D3D11_INPUT_ELEMENT_DESC* IALayoutInputElements = nullptr);
     ObjectType currentObject;
-    void Update(float dt);
+    virtual void Update(float dt);
     void Draw(ID3D11DeviceContext* context, const DirectX::XMMATRIX& viewProj);
     void UpdateConstantBuffer();
 
@@ -80,7 +80,7 @@ public:
     std::string directoryPath;
     std::vector<Texture> textures;
 
-    Camera camera = Camera();
+    Camera* camera;
     ID3DBlob* vsBlob = nullptr;
     ID3D11VertexShader* mVertexShader;
     ID3D11PixelShader* mPixelShader;
@@ -97,7 +97,8 @@ public:
     Microsoft::WRL::ComPtr<ID3D11Device> device;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
     ID3D11Buffer* mConstantBuffer;
-private:
+
+public:
     float radius = 1.0f;
     int sliceCount = 20;
     int elevationCount = 7;
@@ -107,7 +108,6 @@ private:
 
     ID3D11Buffer* mVertexBuffer;
     ID3D11Buffer* mIndexBuffer = nullptr;
-
 
     void CreateSphereVertexBuffer();
     void CreateSphereIndexBuffer();
@@ -132,6 +132,10 @@ protected:
     void CreateVertexBuffer();
     void CreateIndexBuffer();
     void CreateConstantBuffer();
+
+public:
+    virtual void applyGBufferPass(ID3D11DeviceContext* context) {};
+    virtual void applyLightPass(ID3D11DeviceContext* context) {};
 };
 
 Matrix GetRandomRotateTransform();

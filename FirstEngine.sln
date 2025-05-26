@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SolarSystem", "SolarSystem\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Katamari", "Katamari\Katamari.vcxproj", "{292CF856-FD41-49EF-93CA-16B19978F1EF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KatamariRemastered", "KatamariRemastered\KatamariRemastered.vcxproj", "{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{292CF856-FD41-49EF-93CA-16B19978F1EF}.Release|x64.Build.0 = Release|x64
 		{292CF856-FD41-49EF-93CA-16B19978F1EF}.Release|x86.ActiveCfg = Release|Win32
 		{292CF856-FD41-49EF-93CA-16B19978F1EF}.Release|x86.Build.0 = Release|Win32
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Debug|x64.ActiveCfg = Debug|x64
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Debug|x64.Build.0 = Debug|x64
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Debug|x86.ActiveCfg = Debug|Win32
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Debug|x86.Build.0 = Debug|Win32
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Release|x64.ActiveCfg = Release|x64
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Release|x64.Build.0 = Release|x64
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Release|x86.ActiveCfg = Release|Win32
+		{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

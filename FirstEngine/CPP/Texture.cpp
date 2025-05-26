@@ -1,5 +1,11 @@
 #include "Texture.h"
 
+Texture::Texture(ID3D11Device* device, ID3D11ShaderResourceView* pTextureView)
+{
+	this->pTexture = nullptr;
+	this->pTextureView = pTextureView;
+}
+
 Texture::Texture(ID3D11Device* device, const ColorHelper& color, aiTextureType type)
 {
 	this->Initialize1x1ColorTexture(device, color, type);

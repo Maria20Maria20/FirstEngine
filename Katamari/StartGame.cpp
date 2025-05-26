@@ -40,8 +40,6 @@ StartGame::StartGame()
 		gameObjects.push_back(items.back());
 	}
 
-
-
 	camera.SwitchToFollowMode(player->position, player->GetMoveDir(), player->radius);
 
 	std::chrono::time_point<std::chrono::steady_clock> PrevTime = std::chrono::steady_clock::now();
@@ -60,8 +58,13 @@ StartGame::StartGame()
 	device->CreateRasterizerState(&defaultRastDesc, &defaultRastState);
 	context->RSSetState(defaultRastState);
 
-	// --- Setup flowers BlendState ---
+	// --- Setup default DepthStencilState ---
 
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc = CD3D11_DEPTH_STENCIL_DESC(CD3D11_DEFAULT{});
+	device->CreateDepthStencilState(&depthStencilDesc, &defaultDepthStencilState);
+
+	// --- Setup flowers BlendState ---
+	
 	D3D11_BLEND_DESC blendDesc;
 	ZeroMemory(&blendDesc, sizeof(D3D11_BLEND_DESC));
 
@@ -70,11 +73,17 @@ StartGame::StartGame()
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA; //D3D11_BLEND_INV_SRC_ALPHA
 	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	device->CreateBlendState(&blendDesc, &flowersBlendState);
+
+	// --- Setup flowers DepthStencilState ---
+
+	ZeroMemory(&depthStencilDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
+	depthStencilDesc.DepthEnable = FALSE;
+	device->CreateDepthStencilState(&depthStencilDesc, &kevinDepthStencilState);
 
 	// --- Setup Kevin BlendState ---
 
@@ -84,7 +93,7 @@ StartGame::StartGame()
 	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
 	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
@@ -137,8 +146,8 @@ StartGame::StartGame()
 	// Viewport for rendering z-buffer from light
 	smViewport.TopLeftX = 0.0f;
 	smViewport.TopLeftY = 0.0f;
-	smViewport.Width = static_cast<float>(512);
-	smViewport.Height = static_cast<float>(512);
+	smViewport.Width = static_cast<float>(smSizeX);
+	smViewport.Height = static_cast<float>(smSizeY);
 	smViewport.MinDepth = 0.0f;
 	smViewport.MaxDepth = 1.0f;
 
@@ -170,7 +179,6 @@ StartGame::StartGame()
 		dViewDesc.Texture2DArray.FirstArraySlice = D3D11CalcSubresource(0, i, 1);
 		device->CreateDepthStencilView(shadowTexture, &dViewDesc, &(depthDSV[i]));
 	}
-
 
 	// View texture as Shader resource while using it for shadowing in pixel shader
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
@@ -251,7 +259,6 @@ StartGame::StartGame()
 			else {
 				std::cout << filePath << L" - Missing Shader File\n";
 			}
-
 		}
 
 		device->CreateVertexShader(
@@ -307,7 +314,6 @@ StartGame::StartGame()
 				cascadesData.cascades[i].lightView
 				* cascadesData.cascades[i].lightProjection
 				* T;
-
 		}
 		cascadesData.distances->x = cascadeBounds[1];
 		cascadesData.distances->y = cascadeBounds[2];
@@ -358,8 +364,6 @@ StartGame::StartGame()
 		lightData.pointLights[i].Range = 15.0f; // max distance for light from point light
 		lightData.pointLights[i].Att = { 0.01f, 1.0f, 0.0f }; // attenuation coefficients
 	}
-
-
 
 	D3D11_BUFFER_DESC cbd;
 	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -499,6 +503,12 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 		context->PSSetConstantBuffers(2u, 1u, &cascadesConstantBuffer);
 
+		// --- Return to default settings (RastState, BlendState) ---
+		context->RSSetState(defaultRastState);
+		float blend_factor[4] = { 1.f, 1.f, 1.f, 1.f };
+		context->OMSetBlendState(defaultBlendState, defaultBlendFactor, defaultSampleMask);
+		context->OMSetDepthStencilState(defaultDepthStencilState, 0);
+
 		// --- Draw plane ---
 
 		plane->Draw(context, projection);
@@ -506,8 +516,8 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 		// --- Draw flowers (items) ---
 		// --- Set BlendState for transparent flowers ---
 
-		float blend_factor[4] = { 1.f, 1.f, 1.f, 1.f };
 		context->OMSetBlendState(flowersBlendState, blend_factor, 0xffffffff);
+		context->RSSetState(defaultRastState);
 
 		for (Item* item : items)
 		{
@@ -523,13 +533,8 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 		// --- RastState for Kevin ---
 
 		context->RSSetState(KevinRastState);
+		context->OMSetDepthStencilState(kevinDepthStencilState, 0);
 		player->Draw(context, projection);
-
-
-		// --- Return to default settings (RastState, BlendState) ---
-
-		context->RSSetState(defaultRastState);
-		context->OMSetBlendState(defaultBlendState, defaultBlendFactor, defaultSampleMask);
 
 		//if (focusedBody)
 		//{
@@ -543,7 +548,6 @@ void StartGame::KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTi
 
 void StartGame::BindDsvAndSetNullRenderTarget()
 {
-
 	context->OMSetRenderTargets(0, NULL, NULL);
 	context->PSSetShaderResources(0u, 0u, nullptr);
 	context->RSSetViewports(1, &smViewport);
@@ -585,11 +589,8 @@ void StartGame::DrawSceneToShadowMap() {
 		context->VSSetShader(pShadowVertexShader.Get(), nullptr, 0u);
 		context->PSSetShader(nullptr, nullptr, 0u);
 		context->DrawIndexed(obj->indicesNum, 0, 0);
-
 	}
 }
-
-
 
 void StartGame::HandleMoveDown(Keys key)
 {

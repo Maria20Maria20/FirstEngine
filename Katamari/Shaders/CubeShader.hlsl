@@ -57,8 +57,6 @@ cbuffer CascadeCBuf : register(b2) // per frame
     float4 distances;
 };
 
-
-
 Texture2DArray shadowMap : register(t0);
 SamplerState shadowSampler : register(s0);
 SamplerComparisonState samShadow : register(s1)
@@ -73,7 +71,7 @@ SamplerComparisonState samShadow : register(s1)
 };
 
 
-static const float SMAP_SIZE = 512.0f;
+static const float SMAP_SIZE = 4096.0f;
 static const float SMAP_DX = 1.0f / SMAP_SIZE;
 
 struct VS_IN
@@ -174,11 +172,9 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
   // Complete projection by doing division by w.
     shadowPosH.xyz /= shadowPosH.w;
   
-  // Depth in NDC space.
+    // Depth in NDC space.
     float depth = shadowPosH.z;
 
-    // if (samShadow.Sample())
-  
     //return shadowMap.SampleCmpLevelZero(samShadow, shadowPosH.xy, depth).r;
   
     // Texel size.
@@ -202,6 +198,13 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
     return percentLit /= 9.0f;
 }
 
+static const float4 colorValue[4] =
+{
+    float4(1, 0, 1, 1),
+        float4(0, 1, 0, 1),
+        float4(0, 0, 1, 1),
+        float4(1, 0, 0, 1)
+};
 
 float4 PSMain(PS_IN input) : SV_Target
 {
@@ -281,8 +284,12 @@ float4 PSMain(PS_IN input) : SV_Target
     for (int i = 0; i < 10; i++)
     {
         pointLightSum += calcPointLight(input.wPos, normal, toEye, mat, pointLights[i]);
-    }
+    }    
     
-    return saturate(dirLightCol + pointLightSum);
-    
+    return saturate(dirLightCol + pointLightSum) * colorValue[layer];
+    //return saturate(dirLightCol + pointLightSum) * float4(float(layer * 1.0 / 3).xxx, 1.0f);
+    //layer = layer + 1; // 1, 2, 3, 4
+    //                    // 001, 010, 011, 100
+    //return saturate(dirLightCol + pointLightSum) * float4((layer & 1), (layer & 2) >> 1, (layer & 4) >> 2, 1);
+
 }

@@ -22,7 +22,7 @@ struct ConstantBuffer
     DirectX::XMMATRIX worldMatInvTranspose = DirectX::XMMatrixIdentity();
     DirectX::XMFLOAT3 cameraPosition;
 };
-struct DirectionalLight
+struct DirectionalLight_old
 {
     XMFLOAT4 Ambient;
     XMFLOAT4 Diffuse;
@@ -44,6 +44,13 @@ struct PointLight
 };
 
 struct LightData {
-	DirectionalLight dLight;
+	DirectionalLight_old dLight;
 	PointLight pointLights[10];
+};
+
+struct Transforms
+{
+    DirectX::XMMATRIX wMat;
+    DirectX::XMMATRIX wMatInvTranspose;
+    DirectX::XMMATRIX viewProj;
 };

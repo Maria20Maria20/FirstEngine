@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\KatamariRemastered.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\CubeShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Simple.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SkyBoxShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\TexturedShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\GroundGBufferShaderPS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\GroundGBufferShaderVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\ItemGBufferShaderPS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\ItemGBufferShaderVS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\AmbientLightPShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\AmbientLightVShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\DirectionalLightPShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\DirectionalLightVShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\PointLightPShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\PointLightVShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SpotLightPShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SpotLightVShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\PlayerGBufferShaderPS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\PlayerGBufferShaderVS.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

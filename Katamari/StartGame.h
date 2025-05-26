@@ -23,6 +23,9 @@ private:
 	// --- Default RastState ---
 	ID3D11RasterizerState* defaultRastState;
 
+	// --- Default DepthStencilState --- (for enable depth test)
+	ID3D11DepthStencilState* defaultDepthStencilState;
+
 	// -- Flowers (items) BlendState ---
 	ID3D11BlendState* flowersBlendState;
 
@@ -31,6 +34,9 @@ private:
 	// -- Kevin (items) RastState ---
 	// CULL (CULL_BACK) other side of Kevin (to get rid of artifacts)
 	ID3D11RasterizerState* KevinRastState;
+	// -- Kevin DepthStencilState --- (for disable depth test)
+	ID3D11DepthStencilState* kevinDepthStencilState;
+
 
 
 	LightData lightData;
@@ -42,8 +48,8 @@ private:
 
 	// Shadow
 	Camera* lightViewCamera;
-	UINT smSizeX = 512;
-	UINT smSizeY = 512;
+	UINT smSizeX = 4096;
+	UINT smSizeY = 4096;
 	Vector3 lightPos;
 	ID3D11Texture2D* shadowTexture;
 	ID3D11DepthStencilView* depthDSV[4];
@@ -73,11 +79,8 @@ private:
 		DirectX::XMFLOAT4 distances[4];
 	} cascadesData;
 
-	//float cascadeBounds[5] = { 0.1f, 10.0f, 30.0f, 10.0f, 40.0f };
 	float cascadeBounds[5] = { 0.1f, 10.0f, 30.0f, 80.0f, 200.0f };
 	float frustrumBias = 8.0f;
-	//float cascadeBounds[5] = { 10.0f, 40.0f, 100.0f, 400.0f, 500.0f };
-
 
 	float deltaTime;
 	void KatamariWindowLoop(std::chrono::steady_clock::time_point& PrevTime, float& totalTime, unsigned int& frameCount);

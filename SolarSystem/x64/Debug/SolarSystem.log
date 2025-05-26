@@ -1,4 +1,6 @@
-﻿  PlanetSystem.cpp
-  Planet.cpp
+﻿  Planet.cpp
+  PlanetSystem.cpp
+  RunSolarSystem.cpp
+  StartSolarSystem.cpp
   Generating Code...
   SolarSystem.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SolarSystem.exe

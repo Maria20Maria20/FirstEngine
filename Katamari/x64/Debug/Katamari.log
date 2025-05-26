@@ -1,7 +1,7 @@
 ﻿  StartGame.cpp
 C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(34,11): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(35,11): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(103,27): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(125,39): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
-C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(170,70): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(112,27): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(134,39): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+C:\Users\123\Desktop\Github Projects\FirstEngine\Katamari\StartGame.cpp(179,70): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
   Katamari.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\Katamari.exe

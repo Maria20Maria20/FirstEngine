@@ -26,6 +26,7 @@ enum class TextureStorageType
 class Texture
 {
 public:
+	Texture(ID3D11Device* device, ID3D11ShaderResourceView* pTextureView);
 	Texture(ID3D11Device* device, const ColorHelper& color, aiTextureType type);
 	Texture(ID3D11Device* device, const ColorHelper* colorData, UINT width, UINT height, aiTextureType type);
 	Texture(ID3D11Device* device, const std::string& filePath, aiTextureType type);

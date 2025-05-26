@@ -161,15 +161,24 @@
     <ClCompile Include="CPP\Delegates.cpp" />
     <ClCompile Include="CPP\DisplayWin32.cpp" />
     <ClCompile Include="CPP\Game.cpp" />
+    <ClCompile Include="CPP\GBufferPass.cpp" />
     <ClCompile Include="CPP\InputDevice.cpp" />
     <ClCompile Include="CPP\GameObject.cpp" />
+    <ClCompile Include="CPP\LightPass.cpp" />
     <ClCompile Include="CPP\LoadModel.cpp" />
+    <ClCompile Include="CPP\RenderPass.cpp" />
     <ClCompile Include="CPP\Square.cpp" />
     <ClCompile Include="CPP\StringHelper.cpp" />
     <ClCompile Include="CPP\Texture.cpp" />
     <ClCompile Include="CPP\Triangle.cpp" />
     <ClCompile Include="CPP\TriangleComponent.cpp" />
     <ClCompile Include="CPP\VertexPositionColor.cpp" />
+    <ClCompile Include="DeferredGame.cpp" />
+    <ClCompile Include="DeferredRenderer.cpp" />
+    <ClCompile Include="Light\AmbientLight.cpp" />
+    <ClCompile Include="Light\DirectionalLight.cpp" />
+    <ClCompile Include="Light\LightObject.cpp" />
+    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP\Camera.h" />
@@ -178,10 +187,15 @@
     <ClInclude Include="CPP\Delegates.h" />
     <ClInclude Include="CPP\DisplayWin32.h" />
     <ClInclude Include="CPP\Game.h" />
+    <ClInclude Include="CPP\GBuffer.h" />
+    <ClInclude Include="CPP\GBufferPass.h" />
     <ClInclude Include="CPP\InputDevice.h" />
     <ClInclude Include="CPP\Keys.h" />
+    <ClInclude Include="CPP\LightPass.h" />
     <ClInclude Include="CPP\LoadModel.h" />
     <ClInclude Include="CPP\MyStructs.h" />
+    <ClInclude Include="CPP\RenderingSystem.h" />
+    <ClInclude Include="CPP\RenderPass.h" />
     <ClInclude Include="CPP\ShapeType.h" />
     <ClInclude Include="CPP\GameObject.h" />
     <ClInclude Include="CPP\Square.h" />
@@ -190,6 +204,12 @@
     <ClInclude Include="CPP\Triangle.h" />
     <ClInclude Include="CPP\TriangleComponent.h" />
     <ClInclude Include="CPP\VertexPositionColor.h" />
+    <ClInclude Include="DeferredGame.h" />
+    <ClInclude Include="DeferredRenderer.h" />
+    <ClInclude Include="Light\AmbientLight.h" />
+    <ClInclude Include="Light\DirectionalLight.h" />
+    <ClInclude Include="Light\LightObject.h" />
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DirectXTK-main\DirectXTK_Desktop_2022_Win10.vcxproj">

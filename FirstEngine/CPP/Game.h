@@ -41,7 +41,7 @@ public:
     ID3D11DeviceContext* context;
     float CameraFOV = 3;
     DisplayWin32* display;
-    DirectionalLight* directionalLight;
+    DirectionalLight_old* directionalLight;
     // Метод доступа к экземпляру
     static Game& getInstance();
 

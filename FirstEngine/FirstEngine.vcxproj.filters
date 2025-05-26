@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\Deferred">
+      <UniqueIdentifier>{a13427a7-aef8-4620-815a-26d939a471ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Deferred">
+      <UniqueIdentifier>{2a38c463-d0de-4db1-b6d6-119ff3c95be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DeferredLighting">
+      <UniqueIdentifier>{427e7753-5b13-440d-9e08-7bebd55c71d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPP\DisplayWin32.cpp">
@@ -59,6 +68,33 @@
     </ClCompile>
     <ClCompile Include="CPP\VertexPositionColor.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\RenderPass.cpp">
+      <Filter>Исходные файлы\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\GBufferPass.cpp">
+      <Filter>Исходные файлы\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\LightPass.cpp">
+      <Filter>Исходные файлы\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRenderer.cpp">
+      <Filter>Исходные файлы\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredGame.cpp">
+      <Filter>Исходные файлы\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\AmbientLight.cpp">
+      <Filter>DeferredLighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\LightObject.cpp">
+      <Filter>DeferredLighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\DirectionalLight.cpp">
+      <Filter>DeferredLighting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +151,39 @@
     </ClInclude>
     <ClInclude Include="CPP\VertexPositionColor.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\GBuffer.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\RenderPass.h">
+      <Filter>Файлы заголовков\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\GBufferPass.h">
+      <Filter>Файлы заголовков\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\LightPass.h">
+      <Filter>Файлы заголовков\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP\RenderingSystem.h">
+      <Filter>Файлы заголовков\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRenderer.h">
+      <Filter>Файлы заголовков\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredGame.h">
+      <Filter>Файлы заголовков\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\AmbientLight.h">
+      <Filter>DeferredLighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\LightObject.h">
+      <Filter>DeferredLighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\DirectionalLight.h">
+      <Filter>DeferredLighting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
