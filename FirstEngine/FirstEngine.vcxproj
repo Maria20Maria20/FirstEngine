@@ -178,6 +178,9 @@
     <ClCompile Include="Light\AmbientLight.cpp" />
     <ClCompile Include="Light\DirectionalLight.cpp" />
     <ClCompile Include="Light\LightObject.cpp" />
+    <ClCompile Include="Light\PointLight.cpp" />
+    <ClCompile Include="Light\SpotLight.cpp" />
+    <ClCompile Include="ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +212,9 @@
     <ClInclude Include="Light\AmbientLight.h" />
     <ClInclude Include="Light\DirectionalLight.h" />
     <ClInclude Include="Light\LightObject.h" />
+    <ClInclude Include="Light\PointLight.h" />
+    <ClInclude Include="Light\SpotLight.h" />
+    <ClInclude Include="ParticleSystem\ParticleSystem.h" />
     <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>

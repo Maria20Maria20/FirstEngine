@@ -6,8 +6,7 @@
 #include "GBuffer.h"
 //#include "LightCollection.h"
 
-// temp
-// #include "ParticleSystem.h"
+#include "../ParticleSystem/ParticleSystem.h"
 
 class LightPass :
     public RenderPass
@@ -56,8 +55,8 @@ public:
     //Bind::PixelConstantBuffer<CamPCB>* camPCB;
 
 
-/*
+
 public:
     std::vector<ParticleSystem*> particleSystems;
-*/
+
 };

@@ -76,7 +76,7 @@ struct PS_IN
     float3 wPos : POSITION;
 };
 
-static const float SMAP_SIZE_X = 1000.0f;
+static const float SMAP_SIZE_X = 800.0f;
 static const float SMAP_SIZE_Y = 800.0f;
 
 float4 PSMain(PS_IN input) : SV_Target

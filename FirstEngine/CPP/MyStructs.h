@@ -31,7 +31,7 @@ struct DirectionalLight_old
     float Pad;
 };
 
-struct PointLight
+struct PointLight_old
 {
     DirectX::XMFLOAT4 Ambient;
     DirectX::XMFLOAT4 Diffuse;
@@ -45,7 +45,7 @@ struct PointLight
 
 struct LightData {
 	DirectionalLight_old dLight;
-	PointLight pointLights[10];
+	PointLight_old pointLights[10];
 };
 
 struct Transforms

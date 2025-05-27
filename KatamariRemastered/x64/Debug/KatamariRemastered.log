@@ -1,2 +1,11 @@
-﻿  compilation object save succeeded; see C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\DirectionalLightPShader.cso
+﻿  KatamariRemastered.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\ParticleSystem\ParticleSystem.h(126,65): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'KatamariRemastered.cpp')
+  
+C:\Users\123\Desktop\Github Projects\FirstEngine\KatamariRemastered\KatamariRemastered.cpp(52,8): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\KatamariRemastered\KatamariRemastered.cpp(71,8): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\KatamariRemastered\KatamariRemastered.cpp(72,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\KatamariRemastered\KatamariRemastered.cpp(73,3): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\KatamariRemastered\KatamariRemastered.cpp(106,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\123\Desktop\Github Projects\FirstEngine\KatamariRemastered\KatamariRemastered.cpp(107,10): warning C4305: 'initializing': truncation from 'double' to 'float'
   KatamariRemastered.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\KatamariRemastered.exe

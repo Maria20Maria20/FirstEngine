@@ -55,6 +55,27 @@
       <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SpotLightVShader.cso</FullPath>
     </ContentFile>
     <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\EmitParticlesCShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\InitSimulateDispatchArgsCShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\RenderParticles_GS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\RenderParticles_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\RenderParticles_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\ResetCShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\SimulateParticlesCShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
       <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\PlayerGBufferShaderPS.cso</FullPath>
     </ContentFile>
     <ContentFile>

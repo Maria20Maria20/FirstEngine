@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\LightPass">
       <UniqueIdentifier>{7405ebb7-567b-45ca-8a92-9e98cbbaafa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\ParticleSystem">
+      <UniqueIdentifier>{a1e4b2d9-7e1b-48af-bcac-e70c4d58f6e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KatamariRemastered.h">
@@ -32,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Particles\ParticlesGlobals.h">
+      <Filter>Resource Files\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,27 @@
     </FxCompile>
     <FxCompile Include="Shaders\LightPass\SpotLightVShader.hlsl">
       <Filter>Resource Files\LightPass</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\EmitParticlesCShader.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\InitSimulateDispatchArgsCShader.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\RenderParticles_GS.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\RenderParticles_PS.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\RenderParticles_VS.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\ResetCShader.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\Particles\SimulateParticlesCShader.hlsl">
+      <Filter>Resource Files\ParticleSystem</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

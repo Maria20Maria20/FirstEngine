@@ -30,6 +30,7 @@ public:
         GameTimer() : deltaTime(0.0f)
         {
             lastTime = std::chrono::high_resolution_clock::now();
+            initTime = std::chrono::high_resolution_clock::time_point(lastTime);
         };
 
         void Tick()
@@ -44,7 +45,13 @@ public:
             return deltaTime;
         }
 
+        float _GetCurrentTime() const
+        {
+            return std::chrono::duration<float>(lastTime - initTime).count();
+        }
     private:
+
+        std::chrono::high_resolution_clock::time_point initTime;
         std::chrono::high_resolution_clock::time_point lastTime;
         float deltaTime;
     };

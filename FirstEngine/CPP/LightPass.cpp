@@ -146,11 +146,9 @@ void LightPass::Pass(const Scene& scene)
 	ID3D11ShaderResourceView* nullSRVs[] = { nullptr, nullptr, nullptr, nullptr };
 	context->PSSetShaderResources(0, 4, nullSRVs);
 
-	/*
 	for (auto ps : particleSystems) {
 		ps->Render();
 	}
-	*/
 
 }
 

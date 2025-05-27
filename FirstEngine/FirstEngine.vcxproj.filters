@@ -22,6 +22,9 @@
     <Filter Include="DeferredLighting">
       <UniqueIdentifier>{427e7753-5b13-440d-9e08-7bebd55c71d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ParticleSystem">
+      <UniqueIdentifier>{5ebbdba6-92c2-4659-b05a-8aad3c304975}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPP\DisplayWin32.cpp">
@@ -95,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="Light\DirectionalLight.cpp">
       <Filter>DeferredLighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\PointLight.cpp">
+      <Filter>DeferredLighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\SpotLight.cpp">
+      <Filter>DeferredLighting</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem\ParticleSystem.cpp">
+      <Filter>ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +196,15 @@
     </ClInclude>
     <ClInclude Include="Light\DirectionalLight.h">
       <Filter>DeferredLighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\PointLight.h">
+      <Filter>DeferredLighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\SpotLight.h">
+      <Filter>DeferredLighting</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem\ParticleSystem.h">
+      <Filter>ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,12 @@
-﻿  GBufferPass.cpp
+﻿  LightPass.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\ParticleSystem\ParticleSystem.h(126,65): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'CPP/LightPass.cpp')
+  
+  DeferredGame.cpp
+  ParticleSystem.cpp
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\ParticleSystem\ParticleSystem.h(126,65): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'ParticleSystem/ParticleSystem.cpp')
+  
+  Generating Code...
 LoadModel.obj : warning LNK4006: "public: struct aiScene const * __cdecl Assimp::Importer::ReadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned int)" (?ReadFile@Importer@Assimp@@QEAAPEBUaiScene@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z) already defined in assimp-vc143-mt.lib(assimp-vc143-mt.dll); second definition ignored
   FirstEngine.vcxproj -> C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\FirstEngine.lib
