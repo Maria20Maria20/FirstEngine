@@ -20,6 +20,7 @@ C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\DeferredGame.cpp;C:
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\DeferredRenderer.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\DeferredRenderer.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\Light\AmbientLight.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\AmbientLight.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\Light\DirectionalLight.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\DirectionalLight.obj
+C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\Light\GBufferMaps.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\GBufferMaps.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\Light\LightObject.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\LightObject.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\Light\PointLight.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\PointLight.obj
 C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\Light\SpotLight.cpp;C:\Users\123\Desktop\Github Projects\FirstEngine\FirstEngine\x64\Debug\SpotLight.obj

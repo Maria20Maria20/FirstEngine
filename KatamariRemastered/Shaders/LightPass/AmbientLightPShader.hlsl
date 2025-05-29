@@ -1,8 +1,8 @@
 Texture2D NormalMap : register(t0);
-Texture2D AlbedoMap : register(t1);
+Texture2D DiffuseMap : register(t1);
 Texture2D SpecularMap : register(t2);
-Texture2D WorldPosMap : register(t3);
-SamplerState Sam : register(s0);
+Texture2D PositionMap : register(t3);
+SamplerState Sampler : register(s0);
 
 struct AmbientLight
 {
@@ -37,7 +37,7 @@ void calcAmbientLight(Material mat, AmbientLight ambLight,
     out float4 al_ambient)
 {
     //al_ambient = mat.Ambient * ambientLight.Ambient;
-    al_ambient = mat.Diffuse * ambLight.Ambient * 0.5;
+    al_ambient = mat.Diffuse * ambLight.Ambient;
 }
 
 struct PS_IN
@@ -56,8 +56,8 @@ float4 PSMain(PS_IN input) : SV_Target
     float y = input.pos.y / SMAP_SIZE_Y;
     Material mat =
     {
-        float4(AlbedoMap.Sample(Sam, float2(x, y)).rgb, 1.0f),
-        float2(SpecularMap.Sample(Sam, float2(x, y)).rg)
+        float4(DiffuseMap.Sample(Sampler, float2(x, y)).rgb, 1.0f),
+        float2(SpecularMap.Sample(Sampler, float2(x, y)).rg)
     };
     
     float4 al_ambient;

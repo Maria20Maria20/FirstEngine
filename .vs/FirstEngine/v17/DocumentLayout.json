@@ -3,28 +3,56 @@
   "WorkspaceRootPath": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\KatamariRemastered.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\SimulateParticlesCShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Shaders\\Particles\\SimulateParticlesCShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\ParticleSystem\\ParticleSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\GBufferMapsPShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Shaders\\LightPass\\GBufferMapsPShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\USERS\\123\\DESKTOP\\GITHUB PROJECTS\\FIRSTENGINE\\FIRSTENGINE\\PARTICLESYSTEM\\PARTICLESYSTEM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:FIRSTENGINE\\PARTICLESYSTEM\\PARTICLESYSTEM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{138B6143-CB19-4CF4-9982-116229FDCBC4}|Pong\\Pong.vcxproj|solutionrelative:Pong\\Ball.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\USERS\\123\\DESKTOP\\GITHUB PROJECTS\\FIRSTENGINE\\FIRSTENGINE\\DEFERREDGAME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:FIRSTENGINE\\DEFERREDGAME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\AmbientLightPShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Shaders\\LightPass\\AmbientLightPShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\KatamariRemastered.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\KatamariRemastered.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\GBufferMapsVShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Shaders\\LightPass\\GBufferMapsVShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\EmitParticlesCShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Shaders\\Particles\\EmitParticlesCShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\RenderParticles_GS.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Shaders\\Particles\\RenderParticles_GS.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FirstEngine\\ParticleSystem\\ParticleSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Ground.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Ground.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9A3794A1-CF20-47D1-AFDC-DA3973F1A027}|KatamariRemastered\\KatamariRemastered.vcxproj|solutionrelative:KatamariRemastered\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FIRSTENGINE\\PARTICLESYSTEM\\PARTICLESYSTEM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{485DACBB-E0E9-440A-A7D5-BB3D2E7F7845}|FirstEngine\\FirstEngine.vcxproj|solutionrelative:FIRSTENGINE\\PARTICLESYSTEM\\PARTICLESYSTEM.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,58 +62,85 @@
       "DocumentGroups": [
         {
           "DockedWidth": 2430,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Item.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Item.cpp",
-              "RelativeDocumentMoniker": "KatamariRemastered\\Item.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Item.cpp",
-              "RelativeToolTip": "KatamariRemastered\\Item.cpp",
-              "ViewState": "AgIAAOwAAAAAAAAAAAAAwPgAAAAXAAAAAAAAAA==",
+              "Title": "KatamariRemastered.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.cpp",
+              "RelativeDocumentMoniker": "KatamariRemastered\\KatamariRemastered.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.cpp",
+              "RelativeToolTip": "KatamariRemastered\\KatamariRemastered.cpp",
+              "ViewState": "AgIAALcAAAAAAAAAAAD4v8QAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-27T12:04:53.46Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DeferredGame.h",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\DeferredGame.h",
-              "RelativeDocumentMoniker": "FirstEngine\\DeferredGame.h",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\DeferredGame.h",
-              "RelativeToolTip": "FirstEngine\\DeferredGame.h",
-              "ViewState": "AgIAADQAAAAAAAAAAAAAwD4AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-27T12:03:14.442Z",
+              "WhenOpened": "2025-05-27T11:47:59.039Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ParticleSystem.h",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.h",
-              "RelativeDocumentMoniker": "FirstEngine\\ParticleSystem\\ParticleSystem.h",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.h",
-              "RelativeToolTip": "FirstEngine\\ParticleSystem\\ParticleSystem.h",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAwCQAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-27T11:53:47.903Z",
+              "Title": "Ball.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp",
+              "RelativeDocumentMoniker": "Pong\\Ball.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\Pong\\Ball.cpp",
+              "RelativeToolTip": "Pong\\Ball.cpp",
+              "ViewState": "AgIAAHYAAAAAAAAAAAD4vwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-29T13:27:20.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AmbientLightPShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\AmbientLightPShader.hlsl",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Shaders\\LightPass\\AmbientLightPShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\AmbientLightPShader.hlsl",
+              "RelativeToolTip": "KatamariRemastered\\Shaders\\LightPass\\AmbientLightPShader.hlsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-29T13:25:44.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SimulateParticlesCShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\SimulateParticlesCShader.hlsl",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Shaders\\Particles\\SimulateParticlesCShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\SimulateParticlesCShader.hlsl",
+              "RelativeToolTip": "KatamariRemastered\\Shaders\\Particles\\SimulateParticlesCShader.hlsl",
+              "ViewState": "AgIAAPIAAAAAAAAAAAAIwP0AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-29T10:38:19.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GBufferMapsVShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\GBufferMapsVShader.hlsl",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Shaders\\LightPass\\GBufferMapsVShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\GBufferMapsVShader.hlsl",
+              "RelativeToolTip": "KatamariRemastered\\Shaders\\LightPass\\GBufferMapsVShader.hlsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-29T13:06:41.638Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ParticleSystem.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
-              "RelativeDocumentMoniker": "FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
-              "RelativeToolTip": "FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
-              "ViewState": "AgIAAHcCAAAAAAAAAAAowHsCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-27T11:52:49.755Z",
+              "Title": "GBufferMapsPShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\GBufferMapsPShader.hlsl",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Shaders\\LightPass\\GBufferMapsPShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\LightPass\\GBufferMapsPShader.hlsl",
+              "RelativeToolTip": "KatamariRemastered\\Shaders\\LightPass\\GBufferMapsPShader.hlsl",
+              "ViewState": "AgIAABwAAAAAAAAAAAAIwA8AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-29T12:43:20.52Z",
               "EditorCaption": ""
             },
             {
@@ -96,23 +151,84 @@
               "RelativeDocumentMoniker": "KatamariRemastered\\KatamariRemastered.h",
               "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.h",
               "RelativeToolTip": "KatamariRemastered\\KatamariRemastered.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAC4AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-27T11:48:07.159Z",
+              "WhenOpened": "2025-05-29T10:21:36.805Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "KatamariRemastered.cpp",
-              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.cpp",
-              "RelativeDocumentMoniker": "KatamariRemastered\\KatamariRemastered.cpp",
-              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\KatamariRemastered.cpp",
-              "RelativeToolTip": "KatamariRemastered\\KatamariRemastered.cpp",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAQwJUAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-27T11:47:59.039Z",
+              "DocumentIndex": 7,
+              "Title": "EmitParticlesCShader.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\EmitParticlesCShader.hlsl",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Shaders\\Particles\\EmitParticlesCShader.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\EmitParticlesCShader.hlsl",
+              "RelativeToolTip": "KatamariRemastered\\Shaders\\Particles\\EmitParticlesCShader.hlsl",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-29T13:24:13.868Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RenderParticles_GS.hlsl",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\RenderParticles_GS.hlsl",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Shaders\\Particles\\RenderParticles_GS.hlsl",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Shaders\\Particles\\RenderParticles_GS.hlsl",
+              "RelativeToolTip": "KatamariRemastered\\Shaders\\Particles\\RenderParticles_GS.hlsl",
+              "ViewState": "AgIAABoAAAAAAAAAAAAIwBkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-29T13:24:15.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Ground.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Ground.cpp",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Ground.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Ground.cpp",
+              "RelativeToolTip": "KatamariRemastered\\Ground.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-29T10:43:32.423Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ParticleSystem.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
+              "RelativeDocumentMoniker": "FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
+              "RelativeToolTip": "FirstEngine\\ParticleSystem\\ParticleSystem.cpp",
+              "ViewState": "AgIAACsCAAAAAAAAAAAowDUCAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-29T10:30:28.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Player.cpp",
+              "RelativeDocumentMoniker": "KatamariRemastered\\Player.cpp",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\KatamariRemastered\\Player.cpp",
+              "RelativeToolTip": "KatamariRemastered\\Player.cpp",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAAABcBAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-29T10:19:40.342Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ParticleSystem.h",
+              "DocumentMoniker": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.h",
+              "RelativeDocumentMoniker": "FirstEngine\\ParticleSystem\\ParticleSystem.h",
+              "ToolTip": "C:\\Users\\123\\Desktop\\Github Projects\\FirstEngine\\FirstEngine\\ParticleSystem\\ParticleSystem.h",
+              "RelativeToolTip": "FirstEngine\\ParticleSystem\\ParticleSystem.h",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAAANIAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-29T10:18:11.663Z"
             }
           ]
         }

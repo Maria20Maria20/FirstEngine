@@ -30,7 +30,7 @@ GBufferPass::GBufferPass(ID3D11Device* device, ID3D11DeviceContext* context, ID3
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0u;
 	device->CreateDepthStencilView(pGBuffer->pDepthBuffer.Get(), &descDSV, pGBuffer->pDepthDSV.GetAddressOf());
-	// Depth DSV
+	// Depth SRV
 	D3D11_SHADER_RESOURCE_VIEW_DESC descSRV = {};
 	descSRV.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
 	descSRV.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;

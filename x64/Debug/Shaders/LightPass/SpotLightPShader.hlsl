@@ -1,8 +1,8 @@
 Texture2D NormalMap : register(t0);
-Texture2D AlbedoMap : register(t1);
+Texture2D DiffuseMap : register(t1);
 Texture2D SpecularMap : register(t2);
-Texture2D WorldPosMap : register(t3);
-SamplerState Sam : register(s0);
+Texture2D PositionMap : register(t3);
+SamplerState Sampler : register(s0);
 
 struct SpotLight
 {
@@ -62,7 +62,7 @@ void calcSpotLight(float3 wPos, float3 normal, float3 toEye,
     if (diffuseFactor > 0.0f)
     {
         float3 v = reflect(-lightVec, normal);
-        float specFactor = pow(max(dot(v, toEye), 0.0f), mat.Specular.y);
+        float specFactor = mat.Specular.y == 0 ? 0 : pow(max(dot(v, toEye), 0.0f), mat.Specular.y);
         sl_diffuse = diffuseFactor * mat.Diffuse * spotLight.Diffuse;
         sl_spec = specFactor * float4(mat.Specular.xxx, 1) * spotLight.Specular;
     }
@@ -91,22 +91,22 @@ float4 PSMain(PS_IN input) : SV_Target
     float y = input.pos.y / SMAP_SIZE_Y;
     Material mat =
     {
-        float4(AlbedoMap.Sample(Sam, float2(x, y)).rgb, 1.0f),
-        float2(SpecularMap.Sample(Sam, float2(x, y)).rg)
+        float4(DiffuseMap.Sample(Sampler, float2(x, y)).rgb, 1.0f),
+        float2(SpecularMap.Sample(Sampler, float2(x, y)).rg)
     };
     
     float4 sl_diffuse;
     float4 sl_spec;
     
-    float4 normal = float4(NormalMap.Sample(Sam, float2(x, y)).rgb, 1.0f);
+    float4 normal = float4(NormalMap.Sample(Sampler, float2(x, y)).rgb, 1.0f);
     /*
-    float pixelDepthValue = DepthMap.Sample(Sam, float2(x, y)).r;
+    float pixelDepthValue = DepthMap.Sample(Sampler, float2(x, y)).r;
     float4 pixelViewPos = mul(float4(2 * x - 1, 2 * y - 1, pixelDepthValue, 1.0f),
     camData.pMatInverse);
     pixelViewPos = pixelViewPos / pixelViewPos.w;
     float4 pixelWorldPos = mul(pixelViewPos, camData.vMatInverse);
     */
-    float3 pixelWorldPos = WorldPosMap.Sample(Sam, float2(x, y)).rgb;
+    float3 pixelWorldPos = PositionMap.Sample(Sampler, float2(x, y)).rgb;
     
     
     float3 toEye = normalize(camData.camPos - pixelWorldPos.xyz);

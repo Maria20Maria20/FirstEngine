@@ -7,16 +7,7 @@ PointLight::PointLight(ID3D11Device* device, Vector3 position,
 {
     this->device = device;
     this->ambient;
-
-    if (att.z < 0.0001) {
-        float c = fmax(fmax(diffuse.x, diffuse.y), diffuse.z) / att.y;
-        range = max(range, (256.0f * c)); // range = max(range, (8.0f * sqrtf(c) + 1.0f));
-    }
-    else {
-        float c = fmax(fmax(diffuse.x, diffuse.y), diffuse.z) / att.z;
-        range = max(range, (16.0f * sqrtf(c) + 1.0f)); // range = max(range, (8.0f * sqrtf(c) + 1.0f));
-    }
-
+    
     pointLightData = {
         diffuse, specular, position, range,
         att, 0.0f
@@ -153,7 +144,7 @@ D3D11_RASTERIZER_DESC PointLight::GetRasterizerDesc()
 }
 
 void PointLight::Update(float deltaTime) {
-    mWorldMatrix = Matrix::CreateTranslation(pointLightData.Position);
+    mWorldMatrix = Matrix::CreateScale(pointLightData.Range) * Matrix::CreateTranslation(pointLightData.Position);
     return;
 }
 

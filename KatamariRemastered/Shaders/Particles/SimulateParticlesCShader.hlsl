@@ -158,6 +158,19 @@ float3 curlNoise(float3 p)
     return normalize(float3(x, y, z) * divisor);
 }
 
+// Particle Bounces
+
+Texture2D NormalMap : register(t0);
+Texture2D WorldPosMap : register(t1);
+SamplerState Sam : register(s0);
+
+cbuffer viewProjectionBuffer : register(b3)
+{
+    row_major float4x4 vMat;
+    row_major float4x4 pMat;
+    bool hasBounce;
+}
+
 //256 particles per thread group
 [numthreads(256, 1, 1)]
 void main(uint3 id : SV_DispatchThreadID, uint groupId : SV_GroupIndex) //SV_GroupIndex is a flatenned index
@@ -189,20 +202,75 @@ void main(uint3 id : SV_DispatchThreadID, uint groupId : SV_GroupIndex) //SV_Gro
         {
             p.age -= dt;
         }
-
-        //float4 force = float4(0, -2.0, 0, 0); // tool
+        
         float4 acceleration = force / p.mass;
             
-        //TEMP
-        //float cap = 1.0;
-        //p.velocity.xyz = clamp(p.velocity.xyz, float3(-cap, -cap, -cap), float3(cap, cap, cap));
         
-        p.velocity.xyz += acceleration * dt;
-        p.position.xyz += p.velocity.xyz * dt;
+        //p.velocity.xyz += acceleration * dt;
+        //p.position.xyz += p.velocity.xyz * dt;
         
         p.screenSpin += p.screenSpinSpeed * dt;
-
-        // p.color = normalize(lerp(p.colorStart, p.colorEnd, 1.0 - p.age / p.lifeSpan));
+        
+        
+        float4 p_viewPos_prev = mul(float4(p.position.xyz, 1.0f), vMat);
+        p_viewPos_prev = p_viewPos_prev / p_viewPos_prev.w;
+        float4 p_projPos_prev = mul(p_viewPos_prev, pMat);
+        p_projPos_prev = p_projPos_prev / p_projPos_prev.w;
+        
+        
+        if (abs(p_projPos_prev.x) < 1 && abs(p_projPos_prev.y) < 1
+            && p_projPos_prev.z > 0 && p_projPos_prev.z < 1)
+        {
+            int2 prevPixel = int2(float2(p_projPos_prev.x + 1, 1 - p_projPos_prev.y) * 0.5 * float2(800, 800));
+            float3 worldMapValue_prev = WorldPosMap[prevPixel].xyz;
+            float4 viewValue_prev = mul(float4(worldMapValue_prev, 1.0f), vMat);
+            viewValue_prev = viewValue_prev / viewValue_prev.w;
+        
+            float deltaZ_prev = p_viewPos_prev.z - viewValue_prev.z;
+        
+            p.velocity.xyz += acceleration * dt;
+            p.position.xyz += p.velocity.xyz * dt;
+            float4 p_position_2x = float4(p.position.xyz + p.velocity.xyz * 4 * dt, 1.0f);
+        
+            float4 p_viewPos_next = mul(p_position_2x, vMat);
+            p_viewPos_next = p_viewPos_next / p_viewPos_next.w;
+            float4 p_projPos_next = mul(p_viewPos_next, pMat);
+            p_projPos_next = p_projPos_next / p_projPos_next.w;
+            
+            int2 nextPixel = int2(float2(p_projPos_next.x + 1, 1 - p_projPos_next.y) * 0.5 * float2(800, 800));
+            float3 worldMapValue_next = WorldPosMap[nextPixel].xyz;
+            float4 viewValue_next = mul(float4(worldMapValue_next, 1.0f), vMat);
+            viewValue_next = viewValue_next / viewValue_next.w;
+        
+            float deltaZ_next = p_viewPos_next.z - viewValue_next.z;
+        
+        
+            if ((deltaZ_prev < 0) && (deltaZ_next > 0))
+            {
+                float4 normal = normalize(NormalMap[prevPixel]);
+                if (dot(normal.xyz, p.velocity.xyz) < 0)
+                {
+                    float3 newVelocity = reflect(p.velocity.xyz, normal.xyz);
+                    //newVelocity += 10 * dot(newVelocity, normal.xyz) * normal.xyz;
+                    newVelocity = normal.xyz * length(p.velocity.xyz) * 2;
+                
+                    
+                    float normalizedLifeTime = 1 - smoothstep(0.0, abs(p.lifeSpan), p.age);
+                    float p_size = p.sizeStart + normalizedLifeTime * (p.sizeEnd - p.sizeStart);
+                    
+                    p.position.xyz += newVelocity.xyz * dt + normal.xyz * p_size;
+                    p.velocity = float4(newVelocity, 0);
+                }
+            
+            }
+        }
+        else
+        {
+            p.velocity.xyz += acceleration * dt;
+            p.position.xyz += p.velocity.xyz * dt;
+        }
+        
+        
         
         if (p.age > 0)
         {

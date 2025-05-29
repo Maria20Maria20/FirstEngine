@@ -12,12 +12,12 @@ KatamariRemastered::KatamariRemastered() :
 	renderingSystem->SetMainCamera(gBufferPass->GetCamera());
 	renderingSystem->AddPass(gBufferPass);
 
-	LightPass* lightPass = new LightPass(renderingSystem->GetDevice(),
+	lightPass = new LightPass(renderingSystem->GetDevice(),
 		renderingSystem->GetDeviceContext(), renderingSystem->GetBackBuffer(),
 		winWidth, winHeight, gBufferPass->pGBuffer, gBufferPass->GetCamera());
 	renderingSystem->AddPass(lightPass);
 
-	ground = new Ground(renderingSystem->GetDevice(), { 0, 0, 0 }, 1);
+	ground = new Ground(renderingSystem->GetDevice(), { 0, 0, 0 }, 10);
 	scene.AddGameObject(ground);
 	player = new Player(renderingSystem->GetDevice(), { 0, 0, 0 }, 1);
 	scene.AddGameObject(player);
@@ -31,36 +31,65 @@ KatamariRemastered::KatamariRemastered() :
 	}
 
 
-	scene.AddGameObject(new AmbientLight(renderingSystem->GetDevice(), { 0,0.5,0.5,0 }));
 	scene.AddGameObject(new DirectionalLight(renderingSystem->GetDevice(),
 		{ 5.0f, 5.5f, -5.0f }, { 0.0f, -1.0f, 1.0f },
 		{ 0.1f, 0.1f, 0.1f, 0 }, { 0.3f, 0.3f, 0.3f, 0 }, { 0.5f, 0.5f, 0.5f, 0 }));
-	scene.AddGameObject(new PointLight(
-		renderingSystem->GetDevice(),
-		{ 0, 1.0f, 0 },
-		10.0f,
-		{ 0.01f, 1.0f, 0.0f },
-		{ 0, 0, 0, 1 },
-		// { 0, 0, 0, 1 },
-		// { 0, 0, 0, 1 }
-		{ 1.0f, 0.2f, 0.0f, 1 },
-		{ 1.0f, 0.2f, 0.0f, 1 }
-	));
+	
+	
+
+	// Point lights
+	for (int i = 0; i < pointLightCount; i++)
+	{
+		Vector4 Ambient = { 0, 0, 0, 1 };
+		Vector4 Diffuse = { (i + 1) % 2 * 1.0f, i / 3 * 1.0f, (i + 2) % 6 / 3 * 1.0f, 1 };
+		Vector4 Specular = { (i + 1) % 2 * 1.0f, i / 3 * 1.0f, (i + 2) % 6 / 3 * 1.0f, 1 };
+
+		float _pLightDist = 5.0f + (rand() % 30) / 10.0f; // 2.0 + rand(0, 3)
+		pointLightInitPositions[i] = {_pLightDist, 0.0f, 0.0f};
+		pointLightInitPositions[i] =
+			Vector3::Transform(
+				pointLightInitPositions[i],
+				GetRandomRotateTransform()
+			);
+		//pointLightInitPositions[i].y = 1;
+
+		float Range = 32.0f; // max distance for light from point light
+		Vector3 Att = { 0.01f, 1.0f, 0.0f }; // attenuation coefficients
+
+		pointLights.push_back(new PointLight(
+			renderingSystem->GetDevice(),
+			pointLightInitPositions[i],
+			Range,
+			Att,
+			Ambient,
+			Diffuse,
+			Specular
+		));
+		scene.AddGameObject(pointLights.back());
+	}
+	
+
 	spotLight = new SpotLight(renderingSystem->GetDevice(),
 		{ 0.0f, 4.0f, 0.0f }, 5.0f, { 0.0f, -1.0f, 0.0f },
 		10, { 0.01f, 0.05f, 0.0f },
 		{ 0, 0.1, 0, 1 }, { 1, 1, 0, 1 }, { 1, 1, 0, 1 });
 	scene.AddGameObject(spotLight);
+	scene.AddGameObject(new AmbientLight(renderingSystem->GetDevice(), { 0,0.5,0.5,0 }));
+
+	gbm = new GBufferMaps(renderingSystem->GetDevice());
+	scene.AddGameObject(gbm);
+	
 
 
 	for (auto gameObject : scene.gameObjects) {
 		gameObject->camera = renderingSystem->GetMainCamera();
 	}
 
+
 	renderingSystem->GetMainCamera()->SwitchToFollowMode(player->position, player->GetMoveDir(), player->radius);
 
 
-	// Stars Particles
+	// Leafs Particles
 	ParticleSystem::EmitterPointConstantBuffer emitterDesc =
 	{
 		Matrix::Identity,
@@ -75,10 +104,10 @@ KatamariRemastered::KatamariRemastered() :
 	ParticleSystem::SimulateParticlesConstantBuffer simulatorDesc = {
 		{ 0, 0, 0, 0 }
 	};
-	starParticleSystem =
+	leafParticleSystem =
 		new ParticleSystem(renderingSystem->GetDevice(), renderingSystem->GetDeviceContext(), emitterDesc, simulatorDesc);
-	lightPass->particleSystems.push_back(starParticleSystem);
-	starParticleSystem->camera = lightPass->GetCamera();
+	lightPass->particleSystems.push_back(leafParticleSystem);
+	leafParticleSystem->camera = lightPass->GetCamera();
 
 	D3D11_BLEND_DESC particleBlendDesc = CD3D11_BLEND_DESC(CD3D11_DEFAULT{});
 	particleBlendDesc.RenderTarget[0].BlendEnable = TRUE;
@@ -89,19 +118,19 @@ KatamariRemastered::KatamariRemastered() :
 	particleBlendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 	particleBlendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	particleBlendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	starParticleSystem->SetBlendState(particleBlendDesc);
-	starParticleSystem->SetTexture(
+	leafParticleSystem->SetBlendState(particleBlendDesc);
+	leafParticleSystem->SetTexture(
 		new Texture(renderingSystem->GetDevice(), "./Leaf.dds", aiTextureType_DIFFUSE));
-	starParticleSystem->SetEmissionRate(0);
+	leafParticleSystem->SetEmissionRate(0);
 
-	// Bubble Particles
+	// Snowflakes Particles
 	emitterDesc =
 	{
 		Matrix::Identity,
-		{ 0, 40, 0, 1 },
+		{ 0, 10, 0, 1 },
 		{ 1, 1, 1, 1 },
 		{ 1, 1, 1, 0 },
-		100, 8, 8, 1,
+		80, 8, 8, 1,
 		0.5, 0.5,
 		0, 3.1415 * 2,
 		3.1415 / 10, 0, { 0, 0 }
@@ -109,10 +138,10 @@ KatamariRemastered::KatamariRemastered() :
 	simulatorDesc = {
 		{ 0, -5, 0, 0 }
 	};
-	bubbleParticleSystem =
+	snowParticleSystem =
 		new ParticleSystem(renderingSystem->GetDevice(), renderingSystem->GetDeviceContext(), emitterDesc, simulatorDesc);
-	lightPass->particleSystems.push_back(bubbleParticleSystem);
-	bubbleParticleSystem->camera = lightPass->GetCamera();
+	lightPass->particleSystems.push_back(snowParticleSystem);
+	snowParticleSystem->camera = lightPass->GetCamera();
 
 	particleBlendDesc = CD3D11_BLEND_DESC(CD3D11_DEFAULT{});
 	particleBlendDesc.RenderTarget[0].BlendEnable = TRUE;
@@ -123,10 +152,53 @@ KatamariRemastered::KatamariRemastered() :
 	particleBlendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 	particleBlendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	particleBlendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	bubbleParticleSystem->SetBlendState(particleBlendDesc);
-	bubbleParticleSystem->SetTexture(
+	snowParticleSystem->SetBlendState(particleBlendDesc);
+	snowParticleSystem->SetTexture(
 		new Texture(renderingSystem->GetDevice(), "./Snowflake.dds", aiTextureType_DIFFUSE));
-	bubbleParticleSystem->SetEmissionRate(40);
+	snowParticleSystem->SetEmissionRate(40);
+
+
+	// Particle Bounces
+
+	normalMap = new Texture(renderingSystem->GetDevice(), gBufferPass->pGBuffer->pNormalSRV.Get());
+	worldPosMap = new Texture(renderingSystem->GetDevice(), gBufferPass->pGBuffer->pWorldPosSRV.Get());
+	
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	samplerDesc.MipLODBias = 0.0f;
+	samplerDesc.MaxAnisotropy = 1;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	samplerDesc.BorderColor[0] = 0;
+	samplerDesc.BorderColor[1] = 0;
+	samplerDesc.BorderColor[2] = 0;
+	samplerDesc.BorderColor[3] = 0;
+	samplerDesc.MinLOD = 0;
+	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	renderingSystem->GetDevice()->CreateSamplerState(&samplerDesc, &pSampler);
+
+	// ConstantBuffer
+	D3D11_BUFFER_DESC cbd;
+	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	cbd.Usage = D3D11_USAGE_DYNAMIC;
+	cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	cbd.MiscFlags = 0u;
+	cbd.ByteWidth = sizeof(ViewProjectionBuffer) + (16 - (sizeof(ViewProjectionBuffer) % 16));  // aligned size
+	cbd.StructureByteStride = 0u;
+
+	renderingSystem->GetDevice()->CreateBuffer(&cbd, nullptr, &particlesViewProjMat);
+
+
+	for (auto partSys : lightPass->particleSystems)
+	{
+		partSys->hasBounces = true;
+		partSys->normalMap = normalMap;
+		partSys->worldPosMap = worldPosMap;
+		partSys->pSampler = pSampler;
+		partSys->particlesViewProjMat = particlesViewProjMat;
+	}
 }
 
 KatamariRemastered::~KatamariRemastered()
@@ -142,14 +214,17 @@ void KatamariRemastered::Render()
 
 void KatamariRemastered::Update(float deltaTime)
 {
-	starParticleSystem->SetEmitPosition(Vector4(Vector3(player->position)));
-	float dt = 5 - min(max(0, timer._GetCurrentTime() - lastTimeGrowth), 5);
-	starParticleSystem->SetEmissionRate(20 * dt);
-	starParticleSystem->Update(deltaTime);
+	// DEPTHMAP777
+	gbm->UpdateBuffers(renderingSystem->GetDeviceContext());
 
-	bubbleFlowDirection = Vector3::Transform(bubbleFlowDirection, Matrix::CreateRotationY(10 * deltaTime));
-	bubbleParticleSystem->SetEmitDir(bubbleFlowDirection);
-	bubbleParticleSystem->Update(deltaTime);
+	leafParticleSystem->SetEmitPosition(Vector4(Vector3(player->position)));
+	float dt = 5 - min(max(0, timer._GetCurrentTime() - lastTimeGrowth), 5);
+	leafParticleSystem->SetEmissionRate(20 * dt);
+	leafParticleSystem->Update(deltaTime);
+
+	snowFlowDirection = Vector3::Transform(snowFlowDirection, Matrix::CreateRotationY(10 * deltaTime));
+	snowParticleSystem->SetEmitDir(snowFlowDirection);
+	snowParticleSystem->Update(deltaTime);
 
 	{
 		float curr_angle = XM_PIDIV4 * sin(10*timer._GetCurrentTime());
@@ -169,6 +244,16 @@ void KatamariRemastered::Update(float deltaTime)
 			item->AttachToBall(player);
 			lastTimeGrowth = timer._GetCurrentTime();
 		}
+	}
+
+	for (size_t i = 0; i < pointLightCount; i++)
+	{
+		pointLights[i]->pointLightData.Position =
+			Vector3::Transform(
+				pointLightInitPositions[i],
+				//Matrix::CreateRotationY(deltaTime * 1.0f)
+				player->GetRelativeTransform()
+			);
 	}
 
 	renderingSystem->GetMainCamera()->Update(deltaTime, player->mWorldMatrix, player->GetMoveDir(), CameraFOV * player->radius);
@@ -197,5 +282,6 @@ void KatamariRemastered::HandleMoveDown(Keys key)
 
 void KatamariRemastered::HandleMouseMove(const InputDevice::MouseMoveEventArgs& args)
 {
+	renderingSystem->GetMainCamera()->RotatePitch(-deltaTime * args.Offset.y * 1.0);
 	player->AddTurn(args.Offset.x * 1.0f, deltaTime);
 }

@@ -177,6 +177,7 @@
     <ClCompile Include="DeferredRenderer.cpp" />
     <ClCompile Include="Light\AmbientLight.cpp" />
     <ClCompile Include="Light\DirectionalLight.cpp" />
+    <ClCompile Include="Light\GBufferMaps.cpp" />
     <ClCompile Include="Light\LightObject.cpp" />
     <ClCompile Include="Light\PointLight.cpp" />
     <ClCompile Include="Light\SpotLight.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="DeferredRenderer.h" />
     <ClInclude Include="Light\AmbientLight.h" />
     <ClInclude Include="Light\DirectionalLight.h" />
+    <ClInclude Include="Light\GBufferMaps.h" />
     <ClInclude Include="Light\LightObject.h" />
     <ClInclude Include="Light\PointLight.h" />
     <ClInclude Include="Light\SpotLight.h" />

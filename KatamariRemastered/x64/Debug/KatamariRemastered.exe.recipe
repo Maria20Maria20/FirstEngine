@@ -43,6 +43,12 @@
       <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\DirectionalLightVShader.cso</FullPath>
     </ContentFile>
     <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\GBufferMapsPShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\GBufferMapsVShader.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
       <FullPath>C:\Users\123\Desktop\Github Projects\FirstEngine\x64\Debug\PointLightPShader.cso</FullPath>
     </ContentFile>
     <ContentFile>

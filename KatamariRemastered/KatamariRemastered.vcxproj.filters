@@ -121,5 +121,11 @@
     <FxCompile Include="Shaders\Particles\SimulateParticlesCShader.hlsl">
       <Filter>Resource Files\ParticleSystem</Filter>
     </FxCompile>
+    <FxCompile Include="Shaders\LightPass\GBufferMapsPShader.hlsl">
+      <Filter>Resource Files\LightPass</Filter>
+    </FxCompile>
+    <FxCompile Include="Shaders\LightPass\GBufferMapsVShader.hlsl">
+      <Filter>Resource Files\LightPass</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

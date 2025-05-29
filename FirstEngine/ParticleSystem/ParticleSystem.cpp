@@ -446,7 +446,7 @@ void ParticleSystem::UpdateEmitter(float deltaTime)
 
 		m_d3dContext->CopyStructureCount(m_deadListCountConstantBuffer.Get(), 0, m_deadListUAV.Get());
 		m_d3dContext->CopyResource(m_deadListCountConstantBuffer_2.Get(), m_deadListCountConstantBuffer.Get());
-		//m_deadLi\=stCountConstantBuffer.
+		//m_deadListCountConstantBuffer.adasd
 		D3D11_MAPPED_SUBRESOURCE mappedData;
 		m_d3dContext->Map(m_deadListCountConstantBuffer_2.Get(), 0, D3D11_MAP_READ, 0, &mappedData);
 		DeadListCountConstantBuffer* dataView = reinterpret_cast<DeadListCountConstantBuffer*>(mappedData.pData);
@@ -492,7 +492,7 @@ void ParticleSystem::Emit()
 		//copy the deadList counter to a constantBuffer
 		m_d3dContext->CopyStructureCount(m_deadListCountConstantBuffer.Get(), 0, m_deadListUAV.Get());
 
-		//global constant buffers
+		//constant buffers
 
 		m_d3dContext->CSSetConstantBuffers(0, 1, m_sceneConstantBuffer.GetAddressOf());
 		m_d3dContext->CSSetConstantBuffers(1, 1, m_deadListCountConstantBuffer.GetAddressOf());
@@ -502,7 +502,7 @@ void ParticleSystem::Emit()
 		m_d3dContext->CSSetConstantBuffers(2, 1, m_emitterConstantBuffer.GetAddressOf());
 		
 		m_d3dContext->CSSetShader(m_emitParticlesCShader.Get(), nullptr, 0);
-		//maxSpawn / 256 as group max so and in shader it's 256 so we spawn maxspawn aligned to 256 threads
+		
 		m_d3dContext->Dispatch(align(m_emitterConstantBufferData.maxSpawn, 256) / 256, 1, 1);
 		m_d3dContext->CSSetShader(nullptr, nullptr, 0);
 	}
@@ -513,7 +513,7 @@ void ParticleSystem::Emit()
 
 void ParticleSystem::Simulate()
 {
-	//init indirect dispatch args (align)
+	//init indirect dispatch args (aligned)
 	m_initSimulateDispatchArgsData.nbThreadGroupX = 256.0f;
 	m_d3dContext->UpdateSubresource(m_initSimulateDispatchArgsBuffer.Get(), 0, nullptr, &m_initSimulateDispatchArgsData, 0, 0);
 
@@ -527,12 +527,6 @@ void ParticleSystem::Simulate()
 	m_d3dContext->CSSetUnorderedAccessViews(0, 1, uavs, nullptr);
 
 	//simulation
-
-
-	// m_d3dContext->UpdateSubresource(m_simulateParticlesBuffer.Get(), 0, nullptr, &m_simulateParticlesBufferData, 0, 0);
-
-	//m_d3dContext->CSSetConstantBuffers(4, 1, m_simulateParticlesBuffer.GetAddressOf());
-
 
 	m_d3dContext->CSSetConstantBuffers(0, 1, m_sceneConstantBuffer.GetAddressOf());
 
@@ -550,27 +544,29 @@ void ParticleSystem::Simulate()
 
 	initialCount[0] = 0;
 	m_d3dContext->CSSetUnorderedAccessViews(1, 1, m_aliveIndexUAV[(m_currentAliveBuffer + 1) % 2].GetAddressOf(), initialCount);
-	/*
-	m_d3dContext->CSSetShaderResources(0, 1, m_attractorsSRV.GetAddressOf());
-	m_d3dContext->CSSetShaderResources(1, 1, m_noiseTextureSRV.GetAddressOf());
-	m_d3dContext->CSSetShaderResources(2, 1, m_forceFieldTextureSRV.GetAddressOf());
-	switch (m_forceFieldSampleMode)
-	{
-	case 0:
-		m_d3dContext->CSSetSamplers(0, 1, RenderStatesHelper::LinearWrap().GetAddressOf());
-		break;
-	case 1:
-		m_d3dContext->CSSetSamplers(0, 1, RenderStatesHelper::LinearBorder().GetAddressOf());
-		break;
-	case 2:
-		m_d3dContext->CSSetSamplers(0, 1, RenderStatesHelper::LinearClamp().GetAddressOf());
-		break;
-	default:
-		break;
-	}
-	*/
+
 	m_d3dContext->CSSetShader(m_simulateParticlesCShader.Get(), nullptr, 0);
-	// 
+
+
+	if (hasBounces) {
+		m_d3dContext->CSSetSamplers(0u, 1u, pSampler.GetAddressOf());
+		m_d3dContext->CSSetShaderResources(0u, 1, normalMap->GetTextureResourceViewAddress());
+		m_d3dContext->CSSetShaderResources(1u, 1, worldPosMap->GetTextureResourceViewAddress());
+
+		const viewProjectionBuffer vpcb =
+		{
+			camera->GetViewMatrix(),
+			camera->GetProjectionMatrix(),
+			true
+		};
+		D3D11_MAPPED_SUBRESOURCE mappedResource;
+		m_d3dContext->Map(particlesViewProjMat.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &mappedResource);
+		memcpy(mappedResource.pData, &vpcb, sizeof(vpcb) + (16 - (sizeof(vpcb) % 16))); // aligned size
+		m_d3dContext->Unmap(particlesViewProjMat.Get(), 0);
+		m_d3dContext->CSSetConstantBuffers(3u, 1u, particlesViewProjMat.GetAddressOf());
+	}
+
+
 	m_d3dContext->DispatchIndirect(m_indirectDispatchArgsBuffer[m_currentAliveBuffer].Get(), 0);
 	m_d3dContext->CSSetShader(nullptr, nullptr, 0);
 

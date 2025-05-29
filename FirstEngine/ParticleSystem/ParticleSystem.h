@@ -194,5 +194,21 @@ private:
     Texture* m_texture;    // tool
     ID3D11SamplerState* textureSampler;
 
+public:
+    bool hasBounces;
+
+    Texture* normalMap;
+    Texture* worldPosMap;
+
+    Microsoft::WRL::ComPtr<ID3D11SamplerState> pSampler;
+
+    struct viewProjectionBuffer
+    {
+        Matrix vMat;
+        Matrix pMat;
+        bool hasBounces;
+    };
+    Microsoft::WRL::ComPtr<ID3D11Buffer> particlesViewProjMat;
+
 };
 
