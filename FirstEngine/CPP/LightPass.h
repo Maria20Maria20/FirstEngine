@@ -41,7 +41,7 @@ public:
     } cameraData;
     
     Texture* pNormalMap;
-    Texture* pAlbedoMap;
+    Texture* pDiffuseMap;
     Texture* pSpecularMap;
     Texture* pWorldPosMap;
     // Sampler for maps

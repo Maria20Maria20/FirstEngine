@@ -127,10 +127,10 @@ KatamariRemastered::KatamariRemastered() :
 	emitterDesc =
 	{
 		Matrix::Identity,
-		{ 0, 10, 0, 1 },
+		{ 0, 3, 0, 1 },
 		{ 1, 1, 1, 1 },
-		{ 1, 1, 1, 0 },
-		80, 8, 8, 1,
+		{ 1, 1, 1, 1 },
+		80, 8, 15, 1,
 		0.5, 0.5,
 		0, 3.1415 * 2,
 		3.1415 / 10, 0, { 0, 0 }
@@ -222,7 +222,7 @@ void KatamariRemastered::Update(float deltaTime)
 	leafParticleSystem->SetEmissionRate(20 * dt);
 	leafParticleSystem->Update(deltaTime);
 
-	snowFlowDirection = Vector3::Transform(snowFlowDirection, Matrix::CreateRotationY(10 * deltaTime));
+	snowFlowDirection = Vector3::Transform(snowFlowDirection, Matrix::CreateRotationZ(13 * deltaTime));
 	snowParticleSystem->SetEmitDir(snowFlowDirection);
 	snowParticleSystem->Update(deltaTime);
 

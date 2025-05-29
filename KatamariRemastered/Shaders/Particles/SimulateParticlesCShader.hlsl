@@ -252,7 +252,7 @@ void main(uint3 id : SV_DispatchThreadID, uint groupId : SV_GroupIndex) //SV_Gro
                 {
                     float3 newVelocity = reflect(p.velocity.xyz, normal.xyz);
                     //newVelocity += 10 * dot(newVelocity, normal.xyz) * normal.xyz;
-                    newVelocity = normal.xyz * length(p.velocity.xyz) * 2;
+                    newVelocity = (newVelocity + normal.xyz * length(p.velocity.xyz)) * 2;
                 
                     
                     float normalizedLifeTime = 1 - smoothstep(0.0, abs(p.lifeSpan), p.age);

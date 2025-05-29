@@ -27,7 +27,7 @@ LightPass::LightPass(ID3D11Device* device, ID3D11DeviceContext* context,
 	viewport.MaxDepth = 1.0f;
 
 	pNormalMap = new Texture(device, pGBuffer->pNormalSRV.Get());
-	pAlbedoMap = new Texture(device, pGBuffer->pAlbedoSRV.Get());
+	pDiffuseMap = new Texture(device, pGBuffer->pAlbedoSRV.Get());
 	pSpecularMap = new Texture(device, pGBuffer->pSpecularSRV.Get());
 	pWorldPosMap = new Texture(device, pGBuffer->pWorldPosSRV.Get());
 
@@ -123,7 +123,7 @@ void LightPass::StartFrame()
 	context->PSSetConstantBuffers(0u, 1u, &pCameraDataPixelConstantConstantBuffer);
 
 	context->PSSetShaderResources(0u, 1, pNormalMap->GetTextureResourceViewAddress());
-	context->PSSetShaderResources(1u, 1, pAlbedoMap->GetTextureResourceViewAddress());
+	context->PSSetShaderResources(1u, 1, pDiffuseMap->GetTextureResourceViewAddress());
 	context->PSSetShaderResources(2u, 1, pSpecularMap->GetTextureResourceViewAddress());
 	context->PSSetShaderResources(3u, 1, pWorldPosMap->GetTextureResourceViewAddress());
 	context->PSSetSamplers(0u, 1u, pSampler.GetAddressOf());
